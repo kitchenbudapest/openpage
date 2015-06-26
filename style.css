@@ -1,0 +1,55 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
+
+html
+{
+    font-family: 'Source Code Pro';
+    font-size: 9pt;
+}
+
+body
+{
+    line-height: 1.35;
+    letter-spacing: 0.75pt;
+    background: #181818;
+    color: #e0e0e0;
+}
+
+#main
+{
+    display: block;
+    width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lang-comment
+{
+    color: #606060;
+}
+
+.lang-function
+{
+    color: #9217E8;
+}
+
+.lang-class
+{
+    color: #E89217;
+}
+
+.lang-string
+{
+    color: #17E892;
+}
+
+.lang-const
+{
+    color: #E817D6;
+}
+
+.lang-member
+{
+    color: #17D6E8;
+}
+
+// 5088AA
