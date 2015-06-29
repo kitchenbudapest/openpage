@@ -1,0 +1,109 @@
+body,
+pre,
+code {
+  font-family: "Lucide Console", monospace;
+  font-size: 10pt;
+  line-height: 1.2;
+  white-space: pre;
+  color: #E8E8E8;
+  background: #181818;
+}
+
+#main {
+  display: block;
+  width: 80ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+#main::selection {
+  color: #181818;
+  background: #E8E8E8;
+}
+#main::-moz-selection {
+  color: #181818;
+  background: #E8E8E8;
+}
+
+.lang-comment {
+  color: #585858;
+}
+.lang-comment::selection {
+  color: #181818;
+  background: #585858;
+}
+.lang-comment::-moz-selection {
+  color: #181818;
+  background: #585858;
+}
+
+.lang-entity {
+  color: #9217E8;
+}
+.lang-entity::selection {
+  color: #181818;
+  background: #9217E8;
+}
+.lang-entity::-moz-selection {
+  color: #181818;
+  background: #9217E8;
+}
+
+.lang-class {
+  color: #E89217;
+}
+.lang-class::selection {
+  color: #181818;
+  background: #E89217;
+}
+.lang-class::-moz-selection {
+  color: #181818;
+  background: #E89217;
+}
+
+.lang-string {
+  color: #17E892;
+}
+.lang-string::selection {
+  color: #181818;
+  background: #17E892;
+}
+.lang-string::-moz-selection {
+  color: #181818;
+  background: #17E892;
+}
+
+.lang-const {
+  color: #E817D6;
+}
+.lang-const::selection {
+  color: #181818;
+  background: #E817D6;
+}
+.lang-const::-moz-selection {
+  color: #181818;
+  background: #E817D6;
+}
+
+.lang-member {
+  color: #17D6E8;
+}
+.lang-member::selection {
+  color: #181818;
+  background: #17D6E8;
+}
+.lang-member::-moz-selection {
+  color: #181818;
+  background: #17D6E8;
+}
+
+.lang-operator {
+  color: #E0E817;
+}
+.lang-operator::selection {
+  color: #181818;
+  background: #E0E817;
+}
+.lang-operator::-moz-selection {
+  color: #181818;
+  background: #E0E817;
+}

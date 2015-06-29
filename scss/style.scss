@@ -1,0 +1,70 @@
+
+// Global variables
+$main-foreground: #E8E8E8;
+$main-background: #181818;
+
+$lang-foregrounds:
+(
+    comment  : #585858,
+    entity   : #9217E8,
+    class    : #E89217,
+    string   : #17E892,
+    const    : #E817D6,
+    member   : #17D6E8,
+    operator : #E0E817,
+);
+
+// Mixins
+@mixin prefixed-selection($foreground,
+                          $background)
+{
+    &::selection
+    {
+        color      : $foreground;
+        background : $background;
+    }
+    &::-moz-selection
+    {
+        color      : $foreground;
+        background : $background;
+    }
+}
+
+
+//----------------------------------------------------------------------------//
+// Style
+body,
+pre,
+code
+{
+    font-family : "Lucide Console", monospace;
+    font-size   : 10pt;
+    line-height : 1.2;
+    white-space : pre;
+    color       : #E8E8E8;
+    background  : #181818;
+}
+
+
+//----------------------------------------------------------------------------//
+#main
+{
+    display      : block;
+    width        : 80ch;
+    margin-left  : auto;
+    margin-right : auto;
+    @include prefixed-selection($main-background,
+                                $main-foreground);
+}
+
+
+//----------------------------------------------------------------------------//
+@each $scope-name, $foreground in $lang-foregrounds
+{
+    .lang-#{$scope-name}
+    {
+        color: $foreground;
+        @include prefixed-selection($main-background,
+                                    $foreground);
+    }
+}
