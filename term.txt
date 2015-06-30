@@ -1,0 +1,18 @@
+[root@kibu ~] # hackathon --about
+
+##########
+##      ##  KITCHEN
+##      ##  BUDAPEST
+##      ##  Powered by *T**
+##########
+
+[root@kibu ~] # hackathon --next-event
+==> date      : 31th July - 1st August
+==> location  : 1092 Budapest Raday utca 30
+==> topic     : Home Sweet Home
+
+[root@kibu ~] # hackathon --links
+==> github    : http://www.github.com/kitchenbudapest/hackathon
+==> author    : http://www.kibu.hu
+
+[root@kibu ~] # poweroff
