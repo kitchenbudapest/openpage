@@ -1,121 +1,166 @@
+@import url(http://fonts.googleapis.com/css?family=Inconsolata:400,700&subset=latin,latin-ext});
+body {
+  background: #0E0E0E;
+}
+
 body,
 pre,
 code {
-  font-family: "Lucide Console", monospace;
+  font-family: "Inconsolata", monospace;
+  text-shadow: 0 0 1.5pt #E8E8E8;
   font-size: 10pt;
-  line-height: 1.2;
+  line-height: 1.05;
   white-space: pre;
-  color: #E8E8E8;
-  background: #181818;
 }
 
 #main {
+  padding: 4pt;
   display: block;
   width: 80ch;
+  height: 100vh;
   margin-left: auto;
   margin-right: auto;
+  color: #E8E8E8;
+  background: #181818;
 }
 #main::selection {
   color: #181818;
   background: #E8E8E8;
+  text-shadow: 0 0 1.5pt #181818;
 }
 #main::-moz-selection {
   color: #181818;
   background: #E8E8E8;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-comment {
+  text-shadow: 0 0 1.5pt #585858;
   color: #585858;
 }
 .lang-comment::selection {
   color: #181818;
   background: #585858;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-comment::-moz-selection {
   color: #181818;
   background: #585858;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-entity {
+  text-shadow: 0 0 1.5pt #9217E8;
   color: #9217E8;
+  font-weight: 700;
 }
 .lang-entity::selection {
   color: #181818;
   background: #9217E8;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-entity::-moz-selection {
   color: #181818;
   background: #9217E8;
+  text-shadow: 0 0 1.5pt #181818;
+}
+.lang-entity::selection {
+  color: #181818;
+  background: 700;
+  text-shadow: 0 0 1.5pt #181818;
+}
+.lang-entity::-moz-selection {
+  color: #181818;
+  background: 700;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-class {
+  text-shadow: 0 0 1.5pt #E89217;
   color: #E89217;
 }
 .lang-class::selection {
   color: #181818;
   background: #E89217;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-class::-moz-selection {
   color: #181818;
   background: #E89217;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-string {
+  text-shadow: 0 0 1.5pt #17E892;
   color: #17E892;
 }
 .lang-string::selection {
   color: #181818;
   background: #17E892;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-string::-moz-selection {
   color: #181818;
   background: #17E892;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-const {
+  text-shadow: 0 0 1.5pt #E817D6;
   color: #E817D6;
 }
 .lang-const::selection {
   color: #181818;
   background: #E817D6;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-const::-moz-selection {
   color: #181818;
   background: #E817D6;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-member {
+  text-shadow: 0 0 1.5pt #17D6E8;
   color: #17D6E8;
 }
 .lang-member::selection {
   color: #181818;
   background: #17D6E8;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-member::-moz-selection {
   color: #181818;
   background: #17D6E8;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-operator {
+  text-shadow: 0 0 1.5pt #E0E817;
   color: #E0E817;
 }
 .lang-operator::selection {
   color: #181818;
   background: #E0E817;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-operator::-moz-selection {
   color: #181818;
   background: #E0E817;
+  text-shadow: 0 0 1.5pt #181818;
 }
 
 .lang-decorator {
-  color: #E8D917;
+  text-shadow: 0 0 1.5pt #CA7E07;
+  color: #CA7E07;
 }
 .lang-decorator::selection {
   color: #181818;
-  background: #E8D917;
+  background: #CA7E07;
+  text-shadow: 0 0 1.5pt #181818;
 }
 .lang-decorator::-moz-selection {
   color: #181818;
-  background: #E8D917;
+  background: #CA7E07;
+  text-shadow: 0 0 1.5pt #181818;
 }

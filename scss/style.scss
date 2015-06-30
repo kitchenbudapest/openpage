@@ -1,71 +1,122 @@
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Functions
+@function join-list($list, $separator:'')
+{
+    $string: '';
+    @for $i from 1 through length($list)
+    {
+        @if ($i != 1)
+        {
+            $string: $string + $separator + nth($list, $i);
+        }
+        @else
+        {
+            $string: $string + nth($list, $i);
+        }
+    }
+    @return $string;
+}
 
-// Global variables
-$main-foreground: #E8E8E8;
-$main-background: #181818;
 
-$lang-foregrounds:
-(
-    comment  : #585858,
-    entity   : #9217E8,
-    class    : #E89217,
-    string   : #17E892,
-    const    : #E817D6,
-    member   : #17D6E8,
-    operator : #E0E817,
-    decorator: #E8D917,
-);
-
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 // Mixins
 @mixin prefixed-selection($foreground,
                           $background)
 {
     &::selection
     {
-        color      : $foreground;
-        background : $background;
+        color       : $foreground;
+        background  : $background;
+        text-shadow : 0 0 $main-glow-blur $foreground;
     }
     &::-moz-selection
     {
-        color      : $foreground;
-        background : $background;
+        color       : $foreground;
+        background  : $background;
+        text-shadow : 0 0 $main-glow-blur $foreground;
     }
 }
 
 
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+// Globals
+// $font-name           : 'Source', 'Code', 'Pro'; // 300, 900
+// $font-name           : 'Anonymous', 'Pro'; // 300, 700
+$font-name           : 'Inconsolata'; // 400, 700
+$font-weight-regular : 400;
+$font-weight-bold    : 700;
+$font-weights        : $font-weight-regular, $font-weight-bold;
+$font-name-as-str    : join-list($font-name, ' ');
+$font-name-as-expr   : join-list($font-name, '+');
+$font-weights-as-str : join-list($font-weights, ',');
+$main-glow-blur      : 1.5pt;
+$main-foreground     : #E8E8E8;
+$main-background     : #181818;
+$lang-foregrounds    :
+(
+    comment  : (color: #585858),
+    entity   : (color: #9217E8, font-weight: $font-weight-bold),
+    class    : (color: #E89217),
+    string   : (color: #17E892),
+    const    : (color: #E817D6),
+    member   : (color: #17D6E8),
+    operator : (color: #E0E817),
+    decorator: (color: #CA7E07),
+);
+
+
 //----------------------------------------------------------------------------//
 // Style
+@import url(http://fonts.googleapis.com/css?family=#{$font-name-as-expr}:#{$font-weights-as-str}&subset=latin,latin-ext});
+
+//----------------------------------------------------------------------------//
+body
+{
+    background: #0E0E0E;
+}
+
 body,
 pre,
 code
 {
-    font-family : "Lucide Console", monospace;
+    font-family : $font-name-as-str, monospace;
+    text-shadow : 0 0 $main-glow-blur $main-foreground;
     font-size   : 10pt;
-    line-height : 1.2;
+    line-height : 1.05;
     white-space : pre;
-    color       : #E8E8E8;
-    background  : #181818;
 }
 
 
 //----------------------------------------------------------------------------//
 #main
 {
+    padding      : 4pt;
     display      : block;
     width        : 80ch;
+    height       : 100vh;
     margin-left  : auto;
     margin-right : auto;
+    color        : $main-foreground;
+    background   : $main-background;
     @include prefixed-selection($main-background,
                                 $main-foreground);
 }
 
 
 //----------------------------------------------------------------------------//
-@each $scope-name, $foreground in $lang-foregrounds
+@each $scope-name, $properties in $lang-foregrounds
 {
     .lang-#{$scope-name}
     {
-        color: $foreground;
-        @include prefixed-selection($main-background,
-                                    $foreground);
+        @each $property, $value in $properties
+        {
+            @if ($property == "color")
+            {
+                text-shadow: 0 0 $main-glow-blur $value;
+            }
+            @include prefixed-selection($main-background,
+                                        $value);
+            #{$property}: $value;
+        }
     }
 }
