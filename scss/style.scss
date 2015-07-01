@@ -113,9 +113,9 @@ code
             @if ($property == "color")
             {
                 text-shadow: 0 0 $main-glow-blur $value;
+                @include prefixed-selection($main-background,
+                                            $value);
             }
-            @include prefixed-selection($main-background,
-                                        $value);
             #{$property}: $value;
         }
     }

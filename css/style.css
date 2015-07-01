@@ -64,16 +64,6 @@ code {
   background: #9217E8;
   text-shadow: 0 0 1.5pt #181818;
 }
-.lang-entity::selection {
-  color: #181818;
-  background: 700;
-  text-shadow: 0 0 1.5pt #181818;
-}
-.lang-entity::-moz-selection {
-  color: #181818;
-  background: 700;
-  text-shadow: 0 0 1.5pt #181818;
-}
 
 .lang-class {
   text-shadow: 0 0 1.5pt #E89217;
