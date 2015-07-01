@@ -75,9 +75,23 @@ function barrelDistortion(frontBuffer,
     return backBuffer;
 }
 
+function onKeyDown(event)
+{
+    console.log(String.fromCharCode(event.keyCode);
+}
 
 function main()
 {
+    var fontLoader   = document.createElement('script');
+    fontLoader.src   = ('https:' === document.location.protocol ? 'https' : 'http') +
+                       '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    fontLoader.type  = 'text/javascript';
+    fontLoader.async = 'true';
+    var script = document.getElementsByTagName('script')[0];
+    script.parentNode.insertBefore(fontLoader, script);
+
+    window.addEventListener('keydown', onKeyDown, false);
+
     var width   = 640,
         height  = 480,
         canvas  = document.createElement('canvas');
@@ -85,12 +99,14 @@ function main()
     canvas.height = height;
     var context = canvas.getContext('2d');
 
-    context.fillStyle = '#181818';
+    context.fillStyle = '#222222';
     context.fillRect(0, 0, width, height);
 
-    context.fillStyle = '#e8e8e8';
-    context.font = '10pt monospace';
-    multiLineText(context, 20, 30, 17,
+    context.fillStyle = '#7FF29F';
+    context.font = '17pt VT323';
+    context.shadowBlur = 4;
+    context.shadowColor = '#C2FFD3';
+    multiLineText(context, 20, 30, 23,
     [
         '[visitor@kibu ~] # hackathon --about',
         '',
@@ -119,6 +135,7 @@ function main()
             width,
             height),
         0, 0);
+
     document.body.appendChild(canvas);
     console.log('[DONE]');
 }

@@ -3,3 +3,4 @@
 *.pyc
 
 .sass-cache
+__blendercache__
