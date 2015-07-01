@@ -17,50 +17,62 @@ function multiLineText(context,
         context.fillText(lines[i], x, y + height*i);
 }
 
-function getAngle(x, centerX, y, centerY)
+function barrelDistortion(frontBuffer,
+                          backBuffer,
+                          width,
+                          height)
 {
-    var xDiff = x - centerX,
-        yDiff = y - centerY,
-        alpha = Math.atan2(-yDiff, -)
-}
-
-function barrelDistortion(pixels, width, height)
-{
-    var data = pixels.data,
-        newImageData = new Array(data.length),
-        centerX = width/2,
-        centerY = height/2,
-        rMax = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2)),
-        pix2D = new Array(height);
+    /* Based on: http://stackoverflow.com/a/28137140/2188562 */
+    var frontBufferData = frontBuffer.data,
+        backBufferData  = backBuffer.data,
+        centerX = width/2.0,
+        centerY = height/2.0,
+        rMax = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
 
     var i,
         x,
-        y;
+        y,
+        r,
+        gr,
+        tx,
+        ty,
+        newR,
+        newX,
+        newY,
+        alpha,
+        index,
+        scale,
+        counter = 0;
     for (y=0; y<height; y++)
-    {
-        pix2D[y] = new Array(width);
         for (x=0; x<width; x++)
         {
-            i = x*4 + y*4*width,
-                rf = data[i],
-                g = data[i + 1],
-                b = data[i + 2],
-                a = data[i + 3],
-                r = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2)),
-                newR = 0.022*Math.pow(r, 2),
-                alpha = Math.atan2(-(x - centerX), -(y - centerY)),
-                newX = Math.abs(Math.cos(alpha)*newR - centerX),
-                newY = Math.abs(Math.sin(alpha)*newR - centerY);
-            pix2D[y][x] = {
-                rf: data[i],
-                g : data[i + 1],
-                b : data[i + 2],
-                a : data[i + 3],
+            alpha = Math.atan2(-(y - centerY), -(x - centerX));
+            r = Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2));
+            scale = r/rMax;
+            newR = r*(0.1*Math.pow(scale, 4) + 0.1*Math.pow(scale, 2) + 1);
+            newX = Math.abs(Math.cos(alpha)*newR - centerX);
+            newY = Math.abs(Math.sin(alpha)*newR - centerY);
+            gr = Math.sqrt(Math.pow(centerX - newX, 2) + Math.pow(centerY - newY, 2));
+            tx = Math.round(newX);
+            ty = Math.round(newY);
 
-                [rf, g, b, a, newX, newY, x, y, tr, newR, alpha];
+            if (Math.floor(newR) === Math.floor(gr) &&
+                tx >= 0                             &&
+                tx < width                          &&
+                ty >= 0                             &&
+                ty < height)
+            {
+                index = tx*4 + ty*4*width;
+                for (i=0; i<4; i++)
+                    backBufferData[counter++] = frontBufferData[index++];
+            }
+            /* The pixel should be transparent */
+            else
+                for (i=0; i<4; i++)
+                    backBufferData[counter++] = 0;
+
         }
-    }
-
+    return backBuffer;
 }
 
 
@@ -78,7 +90,7 @@ function main()
 
     context.fillStyle = '#e8e8e8';
     context.font = '10pt monospace';
-    multiLineText(context, 10, 10, 15,
+    multiLineText(context, 20, 30, 17,
     [
         '[visitor@kibu ~] # hackathon --about',
         '',
@@ -103,8 +115,10 @@ function main()
     context.putImageData(
         barrelDistortion(
             context.getImageData(0, 0, width, height),
+            context.createImageData(width, height),
             width,
             height),
         0, 0);
     document.body.appendChild(canvas);
+    console.log('[DONE]');
 }
