@@ -77,7 +77,7 @@ function barrelDistortion(frontBuffer,
 
 function onKeyDown(event)
 {
-    console.log(String.fromCharCode(event.keyCode);
+    console.log(String.fromCharCode(event.keyCode));
 }
 
 function main()
@@ -99,7 +99,14 @@ function main()
     canvas.height = height;
     var context = canvas.getContext('2d');
 
-    context.fillStyle = '#222222';
+    var centerX = width/2.0,
+        centerY = height/2.0;
+    var gradient = context.createRadialGradient(centerX, centerY, 0.0,
+                                                centerX, centerY, Math.max(centerX,
+                                                                           centerY)*1.6);
+    gradient.addColorStop(0, '#282828');
+    gradient.addColorStop(1, '#191919');
+    context.fillStyle = gradient;
     context.fillRect(0, 0, width, height);
 
     context.fillStyle = '#7FF29F';
