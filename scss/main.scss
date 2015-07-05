@@ -1,12 +1,36 @@
 // INFO //
 // INFO //
 
+@import 'compass';
+
 @import url(http://fonts.googleapis.com/css?family=VT323);
 
 body
 {
-    font-family: 'VT323';
-    background : #181818;
+    width: 100%;
+    height: 100%;
+    font-family : 'VT323';
+    @include background-image(linear-gradient(#E0E0E0, #FFFFFF));
+    background-attachment: fixed;
+}
+
+#vt100-frame
+{
+    display  : block;
+    float    : left;
+    z-index  : 999;
+    position : absolute;
+    top      : 0;
+    left     : 0;
+}
+
+#terminal-display
+{
+    display  : block;
+    position : absolute;
+    top      : 90px;
+    left     : 155px;
+    z-index  : 1;
 }
 
 // @font-face

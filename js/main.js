@@ -49,7 +49,7 @@ function barrelDistortion(frontBuffer,
             alpha = Math.atan2(-(y - centerY), -(x - centerX));
             r = Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2));
             scale = r/rMax;
-            newR = r*(0.1*Math.pow(scale, 4) + 0.1*Math.pow(scale, 2) + 1);
+            newR = r*(0.25*Math.pow(scale, 4) + 0.1*Math.pow(scale, 2) + 1);
             newX = Math.abs(Math.cos(alpha)*newR - centerX);
             newY = Math.abs(Math.sin(alpha)*newR - centerY);
             gr = Math.sqrt(Math.pow(centerX - newX, 2) + Math.pow(centerY - newY, 2));
@@ -92,11 +92,12 @@ function main()
 
     window.addEventListener('keydown', onKeyDown, false);
 
-    var width   = 640,
+    var width   = 690,
         height  = 480,
         canvas  = document.createElement('canvas');
     canvas.width  = width;
     canvas.height = height;
+    canvas.id     = 'terminal-display';
     var context = canvas.getContext('2d');
 
     var centerX = width/2.0,
@@ -104,8 +105,8 @@ function main()
     var gradient = context.createRadialGradient(centerX, centerY, 0.0,
                                                 centerX, centerY, Math.max(centerX,
                                                                            centerY)*1.6);
-    gradient.addColorStop(0, '#282828');
-    gradient.addColorStop(1, '#191919');
+    gradient.addColorStop(0, '#303030');
+    gradient.addColorStop(1, '#121212');
     context.fillStyle = gradient;
     context.fillRect(0, 0, width, height);
 
@@ -113,7 +114,7 @@ function main()
     context.font = '17pt VT323';
     context.shadowBlur = 4;
     context.shadowColor = '#C2FFD3';
-    multiLineText(context, 20, 30, 23,
+    multiLineText(context, 25, 35, 23,
     [
         '[visitor@kibu ~] # hackathon --about',
         '',
@@ -144,5 +145,13 @@ function main()
         0, 0);
 
     document.body.appendChild(canvas);
+
+    /* Create frame */
+    var image = document.createElement('img');
+    image.width  = 1280;
+    image.height = 900;
+    image.src = 'img/vt100_as_frame_shadowed.png';
+    image.id  = 'vt100-frame';
+    document.body.appendChild(image);
     console.log('[DONE]');
 }
