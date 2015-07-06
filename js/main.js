@@ -92,6 +92,8 @@ function main()
 
     window.addEventListener('keydown', onKeyDown, false);
 
+    var div = document.getElementById('terminal');
+
     var width   = 690,
         height  = 480,
         canvas  = document.createElement('canvas');
@@ -144,14 +146,15 @@ function main()
             height),
         0, 0);
 
-    document.body.appendChild(canvas);
 
     /* Create frame */
     var image = document.createElement('img');
     image.width  = 1280;
     image.height = 900;
     image.src = 'img/vt100_as_frame_shadowed.png';
-    image.id  = 'vt100-frame';
-    document.body.appendChild(image);
+    image.id  = 'terminal-frame';
+
+    div.appendChild(canvas);
+    div.appendChild(image);
     console.log('[DONE]');
 }

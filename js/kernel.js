@@ -5,7 +5,7 @@ var g = g || {};
 
 (function ()
 {
-
+    'use strict';
     function Kernel()
     {
         /* Create file system */
@@ -27,7 +27,7 @@ var g = g || {};
         fs.makeFile(['etc', 'vt100.conf']);
         fs.makeFile(['home', 'visitor', 'documents', 'README']);
         fs.makeFile(['home', 'visitor', '.config', 'vt100.conf']);
-        fs.makeFile(['home', 'visitor', '.bashrc']);
+        fs.makeFile(['home', 'visitor', '.shellrc']);
 
         /* Run shell */
         var sh = this._sh = g.sh.Shell('visitor');

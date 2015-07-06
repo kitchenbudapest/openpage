@@ -5,7 +5,7 @@ var g = g || {};
 
 (function ()
 {
-
+    'use strict';
     var i     = 0;
         enums =
     {

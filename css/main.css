@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=VT323);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic);
 body {
   width: 100%;
   height: 100%;
@@ -12,7 +13,58 @@ body {
   background-attachment: fixed;
 }
 
-#vt100-frame {
+#main {
+  display: block;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+#help {
+  display: block;
+  width: 400px;
+  margin: 16px auto;
+  line-height: 1.2;
+  text-align: justify;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 12pt;
+  font-weight: 300;
+  color: #383838;
+  background: #F0F0F0;
+  padding: 16px;
+  border: 1px solid #F8F8F8;
+  border-radius: 4px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+#help > i {
+  font-style: italic;
+  font-weight: 300;
+}
+#help > a {
+  text-decoration: none;
+  color: #AA0000;
+}
+#help > a:visited {
+  color: #880000;
+}
+#help > a:hover {
+  color: #CC0000;
+}
+#help > hr {
+  border: 0;
+  height: 1px;
+  background: #D0D0D0;
+}
+#help > del {
+  border: 0;
+  height: 2px;
+  background: #383838;
+}
+
+#terminal {
+  position: relative;
+}
+
+#terminal-frame {
   display: block;
   float: left;
   z-index: 999;

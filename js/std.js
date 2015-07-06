@@ -5,7 +5,19 @@ var g = g || {};
 
 (function ()
 {
-    var os = {};
+    'use strict';
+    var std = {};
+
+    (function ()
+    {
+        var i   = 0;
+        std.lib =
+        {
+            EXIT_SUCCESS  : i++,
+            EXIT_FAILURE  : i++,
+            CMD_NOT_FOUND : i++,
+        };
+    })();
 
     (function ()
     {
@@ -104,7 +116,7 @@ var g = g || {};
 
         }
 
-        os.stdio =
+        std.io =
         {
             enums  : enums,
             stdin  : stdin,
@@ -120,5 +132,5 @@ var g = g || {};
 
 
 
-    g.os = os;
+    g.std = std;
 })();
