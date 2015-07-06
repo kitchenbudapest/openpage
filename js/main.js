@@ -154,6 +154,14 @@ function main()
     image.src = 'img/vt100_as_frame_shadowed.png';
     image.id  = 'terminal-frame';
 
+    /* Add wikipedia reference */
+    var wiki = document.getElementById('terminal-logo');
+    wiki.addEventListener('click', function ()
+    {
+        window.open('https://en.wikipedia.org/wiki/VT100',
+                    'Wikipedia-VT100-article');
+    });
+
     div.appendChild(canvas);
     div.appendChild(image);
     console.log('[DONE]');

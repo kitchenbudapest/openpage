@@ -66,8 +66,7 @@ body {
 
 #terminal-frame {
   display: block;
-  float: left;
-  z-index: 999;
+  z-index: 100;
   position: absolute;
   top: 0;
   left: 0;
@@ -79,4 +78,16 @@ body {
   top: 90px;
   left: 155px;
   z-index: 1;
+  cursor: text;
+}
+
+#terminal-logo {
+  display: block;
+  position: absolute;
+  width: 210px;
+  height: 46px;
+  top: 503px;
+  left: 968px;
+  z-index: 200;
+  cursor: pointer;
 }
