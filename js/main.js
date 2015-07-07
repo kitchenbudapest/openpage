@@ -152,21 +152,21 @@ function main()
                                 foregroundGlowColor  : '#C2FFD3',
                                 foregroundGlowRadius : 4,});
 
-    var RETURN     = 13,
-        PRINTABLES = '0123456789'                 +
-                     'abcdefghijklmnopqrstuvwxyz' +
-                     'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
-                     '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t';
+    // var RETURN     = 13,
+    //     PRINTABLES = '0123456789'                 +
+    //                  'abcdefghijklmnopqrstuvwxyz' +
+    //                  'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+    //                  '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t';
 
     function onKeyDown(event)
     {
         var code = event.keyCode;
-        if (code === RETURN)
+        if (code === g.kb.code.Return)
             return scr.newLine();
         else
         {
-            var char = event.key;
-            if (PRINTABLES.indexOf(char) === -1)
+            var char = g.kb.map[code];
+            if (char === undefined)
                 return;
             scr.write(char);
         }
@@ -179,7 +179,6 @@ function main()
                 height),
             0, 0);
     }
-    window.addEventListener('keydown', onKeyDown, false);
 
     /* Print default welcome message */
     var msg =
@@ -205,6 +204,11 @@ function main()
             width,
             height),
         0, 0);
+
+    if (window.addEventListener)
+        window.addEventListener('keydown', onKeyDown, false);
+    else
+        window.attachEvent('onkeydown', onKeyDown);
 
     /* Create frame */
     var image = document.createElement('img');

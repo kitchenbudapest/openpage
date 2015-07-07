@@ -89,6 +89,8 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.render = function ()
     {
+        /* TODO: refactor => if buffer changed, pre-wrap all lines in buffer,
+                 and work only on the last one */
         /* If new characters needs to be rendered */
         if (this._isBufferChanged)
         {
