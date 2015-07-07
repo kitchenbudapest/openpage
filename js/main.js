@@ -151,7 +151,6 @@ function main()
                                 foregroundColor      : '#7FF29F',
                                 foregroundGlowColor  : '#C2FFD3',
                                 foregroundGlowRadius : 4,});
-    scr.render();
 
     var RETURN     = 13,
         PRINTABLES = '0123456789'                 +
@@ -181,6 +180,31 @@ function main()
             0, 0);
     }
     window.addEventListener('keydown', onKeyDown, false);
+
+    /* Print default welcome message */
+    var msg =
+    [
+        '##########',
+        '##      ##  KITCHEN',
+        '##      ##  BUDAPEST',
+        '##      ##  Powered by *T**',
+        '##########',
+        '',
+    ];
+    for (var i=0; i<msg.length; i++)
+    {
+        scr.write(msg[i]);
+        scr.newLine();
+    }
+    scr.write('[visitor@kibu ~] $ ');
+    scr.render();
+    context.putImageData(
+        barrelDistortion(
+            context.getImageData(0, 0, width, height),
+            context.createImageData(width, height),
+            width,
+            height),
+        0, 0);
 
     /* Create frame */
     var image = document.createElement('img');

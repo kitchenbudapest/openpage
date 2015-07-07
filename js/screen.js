@@ -34,7 +34,8 @@ var g = g || {};
         this._fgGlowRadius = args.foregroundGlowRadius;
 
         /* Create buffer */
-        this._buffer = [''];
+        this._rowCount = 0;
+        this._buffer   = [''];
         this._isBufferChanged = true;
 
         /* Create screen background */
@@ -53,11 +54,13 @@ var g = g || {};
         this._bgColor = gradient;
     }
 
+
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.newLine = function ()
     {
         this._buffer.push('');
     };
+
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.write = function (text)
@@ -94,14 +97,15 @@ var g = g || {};
                 j,
                 row,
                 line,
-                hOff    = this._hOffset,
-                vOff    = this._vOffset,
-                chrW    = this._charWidth,
-                chrH    = this._charHeight,
-                scrW    = this._screenWidth,
-                scrH    = this._screenHeight,
-                buffer  = this._buffer,
-                context = this._context;
+                rowCount = this._rowCount,
+                hOff     = this._hOffset,
+                vOff     = this._vOffset,
+                chrW     = this._charWidth,
+                chrH     = this._charHeight,
+                scrW     = this._screenWidth,
+                scrH     = this._screenHeight,
+                buffer   = this._buffer,
+                context  = this._context;
 
             /* Set styles of context */
             this._prepareContext(context);
@@ -109,33 +113,38 @@ var g = g || {};
             /* Start rendering text */
             for (i=0; i<buffer.length; i++)
             {
-                /* If this line hit the bottom edge of the screen */
-                if (i >= scrH)
-                {
-                    /* Remove first line */
-                    i = 0;
-                    buffer.shift();
-                    /* Set styles of context */
-                    this._prepareContext(context);
-                }
-
                 /* Get next line from buffer */
-                row  = (i + hOff)*chrH;
+                row  = (rowCount + hOff)*chrH;
                 line = buffer[i];
                 for (j=0; j<line.length; j++)
                 {
                     /* If this character hit the right edge of the screen */
                     if (j >= scrW)
                     {
+                        rowCount++;
                         line = line.slice(j);
                         row += chrH;
                         j = 0;
+                    }
 
+                    /* If this line hit the bottom edge of the screen */
+                    if (rowCount >= scrH)
+                    {
+                        /* Limit counter */
+                        rowCount = 0;
+                        /* Remove first line from buffer */
+                        buffer.shift();
+                        i = 0;
+                        /* Get first line */
+                        line = buffer[0];
+                        /* Set styles of context */
+                        this._prepareContext(context);
                     }
 
                     /* Draw character */
                     context.fillText(line[j], (j + vOff)*chrW, row);
                 }
+                rowCount++;
             }
             this._isBufferChanged = false;
         }
