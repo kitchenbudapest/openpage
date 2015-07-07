@@ -1,0 +1,152 @@
+/* INFO **
+** INFO */
+
+var g = g || {};
+
+(function ()
+{
+    'use strict';
+
+    /*------------------------------------------------------------------------*/
+    function Screen(args) /* context,
+                             charWidth,
+                             charHeight,
+                             screenWidth,
+                             screenHeight,
+                             horizontalOffset,
+                             verticalOffset
+                             backgroundColor0,
+                             backgroundColor1,
+                             foregroundColor,
+                             foregroundGlowColor,
+                             foregroundGlowRadius, */
+    {
+        /* Store static values */
+        this._context      = args.context;
+        this._charWidth    = args.charWidth;
+        this._charHeight   = args.charHeight;
+        this._screenWidth  = args.screenWidth;
+        this._screenHeight = args.screenHeight;
+        this._hOffset      = args.horizontalOffset;
+        this._vOffset      = args.verticalOffset;
+        this._fgColor      = args.foregroundColor;
+        this._fgGlow       = args.foregroundGlowColor;
+        this._fgGlowRadius = args.foregroundGlowRadius;
+
+        /* Create buffer */
+        this._buffer = [''];
+        this._isBufferChanged = true;
+
+        /* Create screen background */
+        var width    = (args.screenWidth + args.horizontalOffset*2)*args.charWidth,
+            height   = (args.screenHeight + args.verticalOffset*2)*args.charHeight,
+            centerX  = width/2.0,
+            centerY  = height/2.0,
+            radius   = Math.max(centerX, centerY)*1.6,
+            gradient = args.context.createRadialGradient(centerX, centerY, 0.0,
+                                                         centerX, centerY, radius);
+        gradient.addColorStop(0, args.backgroundColor0);
+        gradient.addColorStop(1, args.backgroundColor1);
+
+        this._width   = width;
+        this._height  = height;
+        this._bgColor = gradient;
+    }
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.newLine = function ()
+    {
+        this._buffer.push('');
+    };
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.write = function (text)
+    {
+        var len = this._buffer.length ,
+            i = len ? len - 1 : 0;
+        this._buffer[i] = this._buffer[i] + text;
+        this._isBufferChanged = true;
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype._prepareContext = function (context)
+    {
+        /* Create background */
+        context.fillStyle = this._bgColor;
+        context.fillRect(0, 0, this._width, this._height);
+
+        /* Set font style */
+        context.fillStyle   = this._fgColor;
+        context.shadowBlur  = this._fgGlowRadius;
+        context.shadowColor = this._fgGlow;
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.render = function ()
+    {
+        /* If new characters needs to be rendered */
+        if (this._isBufferChanged)
+        {
+            /* Create variables and local references */
+            var i,
+                j,
+                row,
+                line,
+                hOff    = this._hOffset,
+                vOff    = this._vOffset,
+                chrW    = this._charWidth,
+                chrH    = this._charHeight,
+                scrW    = this._screenWidth,
+                scrH    = this._screenHeight,
+                buffer  = this._buffer,
+                context = this._context;
+
+            /* Set styles of context */
+            this._prepareContext(context);
+
+            /* Start rendering text */
+            for (i=0; i<buffer.length; i++)
+            {
+                /* If this line hit the bottom edge of the screen */
+                if (i >= scrH)
+                {
+                    /* Remove first line */
+                    i = 0;
+                    buffer.shift();
+                    /* Set styles of context */
+                    this._prepareContext(context);
+                }
+
+                /* Get next line from buffer */
+                row  = (i + hOff)*chrH;
+                line = buffer[i];
+                for (j=0; j<line.length; j++)
+                {
+                    /* If this character hit the right edge of the screen */
+                    if (j >= scrW)
+                    {
+                        line = line.slice(j);
+                        row += chrH;
+                        j = 0;
+
+                    }
+
+                    /* Draw character */
+                    context.fillText(line[j], (j + vOff)*chrW, row);
+                }
+            }
+            this._isBufferChanged = false;
+        }
+        console.log('[DONE] screen rendered', buffer);
+    };
+
+
+    /*------------------------------------------------------------------------*/
+    /* Export objects */
+    g.scr =
+    {
+        Screen : Screen,
+    }
+})();

@@ -75,10 +75,6 @@ function barrelDistortion(frontBuffer,
     return backBuffer;
 }
 
-function onKeyDown(event)
-{
-    console.log(String.fromCharCode(event.keyCode));
-}
 
 function main()
 {
@@ -90,8 +86,6 @@ function main()
     var script = document.getElementsByTagName('script')[0];
     script.parentNode.insertBefore(fontLoader, script);
 
-    window.addEventListener('keydown', onKeyDown, false);
-
     var div = document.getElementById('terminal');
 
     var width   = 690,
@@ -102,50 +96,91 @@ function main()
     canvas.id     = 'terminal-display';
     var context = canvas.getContext('2d');
 
-    var centerX = width/2.0,
-        centerY = height/2.0;
-    var gradient = context.createRadialGradient(centerX, centerY, 0.0,
-                                                centerX, centerY, Math.max(centerX,
-                                                                           centerY)*1.6);
-    gradient.addColorStop(0, '#303030');
-    gradient.addColorStop(1, '#121212');
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, width, height);
+    // var centerX = width/2.0,
+    //     centerY = height/2.0;
+    // var gradient = context.createRadialGradient(centerX, centerY, 0.0,
+    //                                             centerX, centerY, Math.max(centerX,
+    //                                                                        centerY)*1.6);
+    // gradient.addColorStop(0, '#303030');
+    // gradient.addColorStop(1, '#121212');
+    // context.fillStyle = gradient;
+    // context.fillRect(0, 0, width, height);
 
-    context.fillStyle = '#7FF29F';
-    context.font = '17pt VT323';
-    context.shadowBlur = 4;
-    context.shadowColor = '#C2FFD3';
-    multiLineText(context, 25, 35, 23,
-    [
-        '[visitor@kibu ~] # hackathon --about',
-        '',
-        '##########',
-        '##      ##  KITCHEN',
-        '##      ##  BUDAPEST',
-        '##      ##  Powered by *T**',
-        '##########',
-        '',
-        '[visitor@kibu ~] # hackathon --next-event',
-        '==> date     :: 31th July - 1st August',
-        '==> location :: 1092 Budapest Raday utca 30',
-        '==> topic    :: Home Sweet Home',
-        '',
-        '[visitor@kibu ~] # hackathon --links',
-        '==> github   :: http://git.kibu.hu',
-        '==> author   :: http://www.kibu.hu',
-        '',
-        '[visitor@kibu ~] # poweroff',
-    ]);
+    // context.fillStyle = '#7FF29F';
+    // context.font = '17pt VT323';
+    // context.shadowBlur = 4;
+    // context.shadowColor = '#C2FFD3';
+    // multiLineText(context, 25, 35, 23,
+    // [
+    //     '[visitor@kibu ~] # hackathon --about',
+    //     '',
+    //     '##########',
+    //     '##      ##  KITCHEN',
+    //     '##      ##  BUDAPEST',
+    //     '##      ##  Powered by *T**',
+    //     '##########',
+    //     '',
+    //     '[visitor@kibu ~] # hackathon --next-event',
+    //     '==> date     :: 31th July - 1st August',
+    //     '==> location :: 1092 Budapest Raday utca 30',
+    //     '==> topic    :: Home Sweet Home',
+    //     '',
+    //     '[visitor@kibu ~] # hackathon --links',
+    //     '==> github   :: http://git.kibu.hu',
+    //     '==> author   :: http://www.kibu.hu',
+    //     '',
+    //     '[visitor@kibu ~] # poweroff',
+    // ]);
 
-    context.putImageData(
-        barrelDistortion(
-            context.getImageData(0, 0, width, height),
-            context.createImageData(width, height),
-            width,
-            height),
-        0, 0);
+    // (function drawCursor()
+    // {
 
+    //     window.requestAnimationFrame(drawCursor);
+    // })();
+
+    context.font = '17pt monospace';
+    var scr = new g.scr.Screen({context              : context,
+                                charWidth            : 15,
+                                charHeight           : 30,
+                                screenWidth          : 43,
+                                screenHeight         : 14,
+                                horizontalOffset     : 2,
+                                verticalOffset       : 2,
+                                backgroundColor0     : '#303030',
+                                backgroundColor1     : '#121212',
+                                foregroundColor      : '#7FF29F',
+                                foregroundGlowColor  : '#C2FFD3',
+                                foregroundGlowRadius : 4,});
+    scr.render();
+
+    var RETURN     = 13,
+        PRINTABLES = '0123456789'                 +
+                     'abcdefghijklmnopqrstuvwxyz' +
+                     'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+                     '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t';
+
+    function onKeyDown(event)
+    {
+        var code = event.keyCode;
+        if (code === RETURN)
+            return scr.newLine();
+        else
+        {
+            var char = event.key;
+            if (PRINTABLES.indexOf(char) === -1)
+                return;
+            scr.write(char);
+        }
+        scr.render();
+        context.putImageData(
+            barrelDistortion(
+                context.getImageData(0, 0, width, height),
+                context.createImageData(width, height),
+                width,
+                height),
+            0, 0);
+    }
+    window.addEventListener('keydown', onKeyDown, false);
 
     /* Create frame */
     var image = document.createElement('img');
