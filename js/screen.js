@@ -19,7 +19,8 @@ var g = g || {};
                              backgroundColor1,
                              foregroundColor,
                              foregroundGlowColor,
-                             foregroundGlowRadius, */
+                             foregroundGlowRadius,
+                             postProcessor, */
     {
         /* Store static values */
         this._context      = args.context;
@@ -32,6 +33,7 @@ var g = g || {};
         this._fgColor      = args.foregroundColor;
         this._fgGlow       = args.foregroundGlowColor;
         this._fgGlowRadius = args.foregroundGlowRadius;
+        this._postProcess  = args.postProcessor;
 
         /* Create buffer */
         this._rowCount = 0;
@@ -66,8 +68,21 @@ var g = g || {};
     Screen.prototype.write = function (text)
     {
         var len = this._buffer.length ,
-            i = len ? len - 1 : 0;
+            i   = len ? len - 1 : 0;
         this._buffer[i] = this._buffer[i] + text;
+        this._isBufferChanged = true;
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.pop = function (lastNChar)
+    {
+        var len = this._buffer.length,
+            i   = len ? len - 1 : 0;
+        this._buffer[i] = this._buffer[i].slice(0, -lastNChar) || '';
+        if (!this._buffer[i] &&
+            len !== 1)
+            this._buffer.pop();
         this._isBufferChanged = true;
     };
 
@@ -148,9 +163,12 @@ var g = g || {};
                 }
                 rowCount++;
             }
+            /* Use psot-processor if there is any */
+            if (this._postProcess)
+                this._postProcess();
             this._isBufferChanged = false;
         }
-        console.log('[DONE] screen rendered', buffer);
+        // console.log('[DONE] screen rendered', buffer);
     };
 
 
