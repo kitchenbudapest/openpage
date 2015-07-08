@@ -75,7 +75,7 @@ body {
 #terminal-display {
   display: block;
   position: absolute;
-  top: 90px;
+  top: 95px;
   left: 155px;
   z-index: 1;
   cursor: text;

@@ -1183,7 +1183,7 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
-    function VT220()
+    function VT220(fillColor)
     {
         this._canvas  = document.createElement('canvas');
         this._context = this._canvas.getContext('2d');
@@ -1194,6 +1194,9 @@ var g = g || {};
             _,
             i,
             j,
+            r = fillColor[0],
+            g = fillColor[1],
+            b = fillColor[2],
             image,
             bitmap,
             pixels,
@@ -1216,9 +1219,9 @@ var g = g || {};
             {
                 if (data[i])
                 {
-                    pixels[j]     = 0;
-                    pixels[j + 1] = 255;
-                    pixels[j + 2] = 0;
+                    pixels[j]     = r;
+                    pixels[j + 1] = g;
+                    pixels[j + 2] = b;
                     pixels[j + 3] = 255;
                 }
 
@@ -1246,10 +1249,22 @@ var g = g || {};
                                             dx,
                                             dy)
     {
+        /* Turn off anti-aliasing */
+        context.mozImageSmoothingEnabled    = false;
+        context.webkitImageSmoothingEnabled = false;
+        context.msImageSmoothingEnabled     = false;
+        context.imageSmoothingEnabled       = false;
+
         var sx = this._offsets[char];
         context.save();
         context.drawImage(this._canvas, sx, 0, W, H*2, dx, dy, 2*W, 2*H*2);
         context.restore();
+
+        /* Turn anti-aliasing back on */
+        context.mozImageSmoothingEnabled    = true;
+        context.webkitImageSmoothingEnabled = true;
+        context.msImageSmoothingEnabled     = true;
+        context.imageSmoothingEnabled       = true;
     };
 
 

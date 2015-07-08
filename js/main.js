@@ -41,19 +41,20 @@ function main()
     }
 
     // context.font = '17pt monospace';
+    var fg = [194, 255, 206];
     var scr = new g.scr.Screen({context              : context,
-                                fontFace             : new g.font.VT220(),
+                                fontFace             : new g.font.VT220(fg),
                                 charWidth            : 2*g.font.VT220.charWidth,
                                 charHeight           : 2*g.font.VT220.charHeight,
-                                screenWidth          : 43,
-                                screenHeight         : 14,
-                                horizontalOffset     : 1,
-                                verticalOffset       : 2,
+                                screenWidth          : 41,
+                                screenHeight         : 10,
+                                horizontalOffset     : 1.5,
+                                verticalOffset       : 0.85,
                                 backgroundColor0     : '#303030',
-                                backgroundColor1     : '#121212',
-                                foregroundColor      : '#7FF29F',
-                                foregroundGlowColor  : '#C2FFD3',
-                                foregroundGlowRadius : 2,
+                                backgroundColor1     : '#080808',
+                                foregroundColor      : fg,
+                                foregroundGlowColor  : [154, 254, 174],
+                                foregroundGlowRadius : 3,
                                 postProcessor        : distort});
 
     function onKeyDown(event)
