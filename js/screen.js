@@ -53,6 +53,7 @@ var g = g || {};
 
         /* Create buffer */
         this._rowCount = 0;
+        this._colCount = 0;
         this._buffer   = [''];
         this._isBufferChanged = true;
 
@@ -83,6 +84,49 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.write = function (text)
     {
+        var i = 0,
+            line,
+            colLeft,
+            buffer      = this._buffer,
+            colCount    = this._colCount,
+            rwoCount    = this._rowCount,
+            screenWidth = this._screenWidth;
+
+        /* If text will overflow from the current line */
+        colNeeded = text.length;
+        colLeft   = screenWidth - colCount;
+        if (colNeeded > colLeft)
+        {
+            line = buffer[rowCount] += text.slice(i, colLeft);
+            /* MOve to next line */
+            colCount = 0;
+            rowCount++;
+        }
+        else
+        {
+            buffer[rowCount] += text;
+            colCount += colNeeded;
+        }
+
+        /* Update colCount */
+        this._colCount = colCount;
+
+
+
+
+
+
+        /* Add lines to buffer */
+        do
+        {
+            /* ??? Isn't this behaviour undefined? */
+            line = text.slice(i++, i*screenWidth);
+            this._buffer.push(line);
+        } while (line);
+
+        this._colCount = line.length;
+
+
         var len = this._buffer.length ,
             i   = len ? len - 1 : 0;
         this._buffer[i] = this._buffer[i] + text;
@@ -91,14 +135,21 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Screen.prototype.pop = function (lastNChar)
+    Screen.prototype.popChar = function (count)
     {
         var len = this._buffer.length,
             i   = len ? len - 1 : 0;
-        this._buffer[i] = this._buffer[i].slice(0, -lastNChar) || '';
+        this._buffer[i] = this._buffer[i].slice(0, -count) || '';
         if (!this._buffer[i] &&
             len !== 1)
             this._buffer.pop();
+        this._isBufferChanged = true;
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.popLine = function (count)
+    {
         this._isBufferChanged = true;
     };
 
@@ -180,6 +231,10 @@ var g = g || {};
                 }
                 rowCount++;
             }
+
+            /* Place cursor */
+            // fontFace.renderCharAt('block', context, )
+
             /* Use psot-processor if there is any */
             if (this._postProcess)
                 this._postProcess();

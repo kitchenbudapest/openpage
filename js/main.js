@@ -18,14 +18,14 @@ function main()
     var width   = 690,
         height  = 480,
         canvas  = document.createElement('canvas');
-    canvas.width  = width;
-    canvas.height = height;
-    canvas.id     = 'terminal-display';
+    canvas.width    = width;
+    canvas.height   = height;
+    canvas.id       = 'terminal-display';
+    canvas.tabIndex = 1;
     var context = canvas.getContext('2d');
 
     // (function drawCursor()
     // {
-
     //     window.requestAnimationFrame(drawCursor);
     // })();
 
@@ -59,15 +59,15 @@ function main()
 
     function onKeyDown(event)
     {
-        // event.preventDefault();
         var code = event.which || event.keyCode;
         if (code === g.kb.code.Return)
             scr.newLine();
         else if (code === g.kb.code.BackSpace)
         {
-            scr.pop(1);
+            scr.popChar(1);
             scr.render();
         }
+        // event.preventDefault();
     }
 
     var PRINTABLES = g.font.VT220.printables;
@@ -81,16 +81,14 @@ function main()
         scr.render();
     }
 
-    window.addEventListener('keypress', onKeyPress, false);
-
     /* Print default welcome message */
     var msg =
     [
-        '##########',
-        '##      ##  KITCHEN',
-        '##      ##  BUDAPEST',
-        '##      ##  Powered by *T**',
-        '##########',
+        '  ##########',
+        '  ##      ##  KITCHEN',
+        '  ##      ##  BUDAPEST',
+        '  ##      ##  Powered by *T**',
+        '  ##########',
         '',
     ];
     for (var i=0; i<msg.length; i++)
@@ -101,10 +99,17 @@ function main()
     scr.write('[visitor@kibu ~] $ ');
     scr.render();
 
+    /* Set event listeners */
     if (window.addEventListener)
+    {
         window.addEventListener('keydown', onKeyDown, false);
+        window.addEventListener('keypress', onKeyPress, false);
+    }
     else
+    {
         window.attachEvent('onkeydown', onKeyDown);
+        window.attachEvent('onkeypress', onKeyPress);
+    }
 
     /* Create frame */
     var image = document.createElement('img');
