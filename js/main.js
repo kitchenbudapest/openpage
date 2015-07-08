@@ -31,29 +31,29 @@ function main()
 
     function distort()
     {
-        // context.putImageData(
-        //     g.distortion.barrel(
-        //         context.getImageData(0, 0, width, height),
-        //         context.createImageData(width, height),
-        //         width,
-        //         height),
-        //     0, 0);
+        context.putImageData(
+            g.distortion.barrel(
+                context.getImageData(0, 0, width, height),
+                context.createImageData(width, height),
+                width,
+                height),
+            0, 0);
     }
 
     // context.font = '17pt monospace';
     var scr = new g.scr.Screen({context              : context,
                                 fontFace             : new g.font.VT220(),
-                                charWidth            : g.font.VT220.charWidth,
-                                charHeight           : g.font.VT220.charHeight,
+                                charWidth            : 2*g.font.VT220.charWidth,
+                                charHeight           : 2*g.font.VT220.charHeight,
                                 screenWidth          : 43,
                                 screenHeight         : 14,
-                                horizontalOffset     : 2,
+                                horizontalOffset     : 1,
                                 verticalOffset       : 2,
                                 backgroundColor0     : '#303030',
                                 backgroundColor1     : '#121212',
                                 foregroundColor      : '#7FF29F',
                                 foregroundGlowColor  : '#C2FFD3',
-                                foregroundGlowRadius : 4,
+                                foregroundGlowRadius : 2,
                                 postProcessor        : distort});
 
     function onKeyDown(event)
@@ -111,7 +111,6 @@ function main()
     image.height = 900;
     image.src = 'img/vt100_as_frame_shadowed.png';
     image.id  = 'terminal-frame';
-    image.style.opacity = 0;
 
     /* Add wikipedia reference */
     var wiki = document.getElementById('terminal-logo');

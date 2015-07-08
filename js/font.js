@@ -1189,7 +1189,9 @@ var g = g || {};
         this._context = this._canvas.getContext('2d');
         this._offsets = {};
 
-        var WH = W*H,
+        var WH  = W*H,
+            WH2 = W*H*2,
+            _,
             i,
             j,
             image,
@@ -1200,17 +1202,18 @@ var g = g || {};
             offsets = this._offsets;
 
         canvas.width  = W*(data.length/WH);
-        canvas.height = H;
+        canvas.height = H*2;
 
         /* Process each glyph's data */
         for (var di=0, ci=0; di<data.length; di+=WH, ci++)
         {
             /* Creat buffer for glyph */
-            bitmap = context.createImageData(W, H/* *2*/);
+            bitmap = context.createImageData(W, H*2);
             pixels = bitmap.data;
 
             /* Draw pixels */
             for (i=di, j=0; i<di+WH; i++, j+=4)
+            {
                 if (data[i])
                 {
                     pixels[j]     = 0;
@@ -1218,6 +1221,11 @@ var g = g || {};
                     pixels[j + 2] = 0;
                     pixels[j + 3] = 255;
                 }
+
+                /* After each line, skip the next line */
+                if (!((i + 1)%W))
+                    j += W*4;
+            }
 
             /* Store glyph */
             context.putImageData(bitmap, ci*W, 0);
@@ -1228,7 +1236,7 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /* Static variables */
     VT220.charWidth  = W;
-    VT220.charHeight = H;
+    VT220.charHeight = H*2;
     VT220.printables = char;
 
 
@@ -1240,7 +1248,7 @@ var g = g || {};
     {
         var sx = this._offsets[char];
         context.save();
-        context.drawImage(this._canvas, sx, 0, W, H, dx, dy, W, H);
+        context.drawImage(this._canvas, sx, 0, W, H*2, dx, dy, 2*W, 2*H*2);
         context.restore();
     };
 
