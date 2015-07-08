@@ -31,19 +31,20 @@ function main()
 
     function distort()
     {
-        context.putImageData(
-            g.distortion.barrel(
-                context.getImageData(0, 0, width, height),
-                context.createImageData(width, height),
-                width,
-                height),
-            0, 0);
+        // context.putImageData(
+        //     g.distortion.barrel(
+        //         context.getImageData(0, 0, width, height),
+        //         context.createImageData(width, height),
+        //         width,
+        //         height),
+        //     0, 0);
     }
 
-    context.font = '17pt monospace';
+    // context.font = '17pt monospace';
     var scr = new g.scr.Screen({context              : context,
-                                charWidth            : 15,
-                                charHeight           : 30,
+                                bitmaps              : g.font.vt220.generate(context),
+                                charWidth            : g.font.vt220.charWidth,
+                                charHeight           : g.font.vt220.charHeight,
                                 screenWidth          : 43,
                                 screenHeight         : 14,
                                 horizontalOffset     : 2,
@@ -54,6 +55,8 @@ function main()
                                 foregroundGlowColor  : '#C2FFD3',
                                 foregroundGlowRadius : 4,
                                 postProcessor        : distort});
+
+    console.log(scr._bitmaps);
 
     function onKeyDown(event)
     {
@@ -76,7 +79,7 @@ function main()
     function onKeyPress(event)
     {
         var char = String.fromCharCode(event.which || event.keyCode);
-        if (PRINTABLES.indexOf(char) === -1)
+        if (g.font.vt220.printables.indexOf(char) === -1)
             return;
         scr.write(char);
         scr.render();
@@ -85,21 +88,22 @@ function main()
     window.addEventListener('keypress', onKeyPress, false);
 
     /* Print default welcome message */
-    var msg =
-    [
-        '##########',
-        '##      ##  KITCHEN',
-        '##      ##  BUDAPEST',
-        '##      ##  Powered by *T**',
-        '##########',
-        '',
-    ];
-    for (var i=0; i<msg.length; i++)
-    {
-        scr.write(msg[i]);
-        scr.newLine();
-    }
-    scr.write('[visitor@kibu ~] $ ');
+    // var msg =
+    // [
+    //     '##########',
+    //     '##      ##  KITCHEN',
+    //     '##      ##  BUDAPEST',
+    //     '##      ##  Powered by *T**',
+    //     '##########',
+    //     '',
+    // ];
+    // for (var i=0; i<msg.length; i++)
+    // {
+    //     scr.write(msg[i]);
+    //     scr.newLine();
+    // }
+    // scr.write('[visitor@kibu ~] $ ');
+    scr.write(g.font.vt220.printables);
     scr.render();
 
     if (window.addEventListener)
@@ -113,6 +117,7 @@ function main()
     image.height = 900;
     image.src = 'img/vt100_as_frame_shadowed.png';
     image.id  = 'terminal-frame';
+    image.style.opacity = 0;
 
     /* Add wikipedia reference */
     var wiki = document.getElementById('terminal-logo');
