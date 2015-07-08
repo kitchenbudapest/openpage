@@ -42,9 +42,9 @@ function main()
 
     // context.font = '17pt monospace';
     var scr = new g.scr.Screen({context              : context,
-                                bitmaps              : g.font.vt220.generate(context),
-                                charWidth            : g.font.vt220.charWidth,
-                                charHeight           : g.font.vt220.charHeight,
+                                fontFace             : new g.font.VT220(),
+                                charWidth            : g.font.VT220.charWidth,
+                                charHeight           : g.font.VT220.charHeight,
                                 screenWidth          : 43,
                                 screenHeight         : 14,
                                 horizontalOffset     : 2,
@@ -55,8 +55,6 @@ function main()
                                 foregroundGlowColor  : '#C2FFD3',
                                 foregroundGlowRadius : 4,
                                 postProcessor        : distort});
-
-    console.log(scr._bitmaps);
 
     function onKeyDown(event)
     {
@@ -71,15 +69,12 @@ function main()
         }
     }
 
-    var PRINTABLES = '0123456789'                 +
-                     'abcdefghijklmnopqrstuvwxyz' +
-                     'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
-                     '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t';
+    var PRINTABLES = g.font.VT220.printables;
 
     function onKeyPress(event)
     {
         var char = String.fromCharCode(event.which || event.keyCode);
-        if (g.font.vt220.printables.indexOf(char) === -1)
+        if (PRINTABLES.indexOf(char) === -1)
             return;
         scr.write(char);
         scr.render();
@@ -88,22 +83,21 @@ function main()
     window.addEventListener('keypress', onKeyPress, false);
 
     /* Print default welcome message */
-    // var msg =
-    // [
-    //     '##########',
-    //     '##      ##  KITCHEN',
-    //     '##      ##  BUDAPEST',
-    //     '##      ##  Powered by *T**',
-    //     '##########',
-    //     '',
-    // ];
-    // for (var i=0; i<msg.length; i++)
-    // {
-    //     scr.write(msg[i]);
-    //     scr.newLine();
-    // }
-    // scr.write('[visitor@kibu ~] $ ');
-    scr.write(g.font.vt220.printables);
+    var msg =
+    [
+        '##########',
+        '##      ##  KITCHEN',
+        '##      ##  BUDAPEST',
+        '##      ##  Powered by *T**',
+        '##########',
+        '',
+    ];
+    for (var i=0; i<msg.length; i++)
+    {
+        scr.write(msg[i]);
+        scr.newLine();
+    }
+    scr.write('[visitor@kibu ~] $ ');
     scr.render();
 
     if (window.addEventListener)

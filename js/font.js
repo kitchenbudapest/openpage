@@ -14,6 +14,31 @@ var g = g || {};
                'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
                'abcdefghijklmnopqrstuvwxyz' +
                '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ ',//\t',
+        spec =
+        [
+            _,_,_,_,_,_,_,_,
+            8,_,_,8,_,_,8,_,
+            _,8,_,_,_,8,_,_,
+            8,_,_,8,_,_,8,_,
+            _,8,_,_,_,8,_,_,
+            8,_,_,8,_,_,8,_,
+            _,8,_,_,_,8,_,_,
+            8,_,_,8,_,_,8,_,
+            _,_,_,_,_,_,_,_,
+            _,_,_,_,_,_,_,_,
+
+
+            _,_,_,_,_,_,_,_,
+            _,8,8,8,8,8,_,_,
+            8,_,_,_,_,_,8,_,
+            _,8,8,_,_,_,_,_,
+            _,_,_,8,_,_,_,_,
+            _,_,_,8,_,_,_,_,
+            _,_,_,_,_,_,_,_,
+            _,_,_,8,_,_,_,_,
+            _,_,_,_,_,_,_,_,
+            _,_,_,_,_,_,_,_,
+        ],
         data =
         [
             _,_,_,_,_,_,_,_,
@@ -1156,14 +1181,26 @@ var g = g || {};
             _,_,_,_,_,_,_,_,
         ];
 
-    function VT220Font(context)
+
+    /*------------------------------------------------------------------------*/
+    function VT220()
     {
+        this._canvas  = document.createElement('canvas');
+        this._context = this._canvas.getContext('2d');
+        this._offsets = {};
+
         var WH = W*H,
             i,
             j,
+            image,
             bitmap,
             pixels,
-            bitmaps = {};
+            canvas  = this._canvas,
+            context = this._context,
+            offsets = this._offsets;
+
+        canvas.width  = W*(data.length/WH);
+        canvas.height = H;
 
         /* Process each glyph's data */
         for (var di=0, ci=0; di<data.length; di+=WH, ci++)
@@ -1177,26 +1214,41 @@ var g = g || {};
                 if (data[i])
                 {
                     pixels[j]     = 0;
-                    pixels[j + 1] = 0;
+                    pixels[j + 1] = 255;
                     pixels[j + 2] = 0;
                     pixels[j + 3] = 255;
                 }
 
             /* Store glyph */
-            bitmaps[char[ci]] = bitmap;
+            context.putImageData(bitmap, ci*W, 0);
+            offsets[char[ci]] = ci*W;
         }
-        return bitmaps;
     }
 
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    /* Static variables */
+    VT220.charWidth  = W;
+    VT220.charHeight = H;
+    VT220.printables = char;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    VT220.prototype.renderCharAt = function(char,
+                                            context,
+                                            dx,
+                                            dy)
+    {
+        var sx = this._offsets[char];
+        context.save();
+        context.drawImage(this._canvas, sx, 0, W, H, dx, dy, W, H);
+        context.restore();
+    };
+
+
+    /*------------------------------------------------------------------------*/
     /* Export objects */
     g.font =
     {
-        vt220:
-        {
-            generate   : VT220Font,
-            charWidth  : W,
-            charHeight : H,
-            printables : char,
-        }
+        VT220: VT220,
     };
 })();

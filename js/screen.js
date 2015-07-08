@@ -9,7 +9,7 @@ var g = g || {};
 
     /*------------------------------------------------------------------------*/
     function Screen(args) /* context,
-                             bitmaps,
+                             fontFace,
                              charWidth,
                              charHeight,
                              screenWidth,
@@ -25,7 +25,7 @@ var g = g || {};
     {
         /* Store static values */
         this._context      = args.context;
-        this._bitmaps      = args.bitmaps;
+        this._fontFace     = args.fontFace;
         this._charWidth    = args.charWidth;
         this._charHeight   = args.charHeight;
         this._screenWidth  = args.screenWidth;
@@ -125,7 +125,7 @@ var g = g || {};
                 scrH     = this._screenHeight,
                 buffer   = this._buffer,
                 context  = this._context,
-                bitmaps  = this._bitmaps;
+                fontFace = this._fontFace;
 
             /* Set styles of context */
             this._prepareContext(context);
@@ -162,10 +162,7 @@ var g = g || {};
                     }
 
                     /* Draw character */
-                    // context.fillText(line[j], (j + vOff)*chrW, row);
-                    context.putImageData(bitmaps[line[j]],
-                                         (j + vOff)*chrW,
-                                         row);
+                    fontFace.renderCharAt(line[j], context, (j + vOff)*chrW, row);
                 }
                 rowCount++;
             }
