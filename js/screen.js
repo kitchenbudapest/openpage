@@ -78,10 +78,11 @@ var g = g || {};
     Screen.prototype.newLine = function ()
     {
         this._colIndex = 0;
-        this._rowIndex++;
         this._buffer.push('');
         if (this._rowIndex >= this._screenHeight)
             this._buffer.shift();
+        else
+            this._rowIndex++;
         /* Indicate the buffer was changed */
         this._isBufferChanged = true;
     };
@@ -155,15 +156,19 @@ var g = g || {};
             this.popLine(lineCount);
 
         line = this._buffer[this._rowIndex];
-        line = line.slice(0, line.length - charCount);
-        if (!line)
+        if (line !== undefined)
         {
-            this._buffer.pop();
-            --this._rowIndex;
-        }
-        else
-            this._buffer[this._rowIndex] = line;
+            line = line.slice(0, line.length - charCount);
+            if (!line &&
+                this._buffer.length > 1)
+            {
+                this._buffer.pop();
+                --this._rowIndex;
+            }
+            else
+                this._buffer[this._rowIndex] = line;
 
+        }
         this._isBufferChanged = true;
     };
 
@@ -217,6 +222,8 @@ var g = g || {};
 
             /* Set styles of context */
             this._prepareContext(context);
+
+            console.log(buffer);
 
             for (i=0; i<buffer.length; i++)
             {
