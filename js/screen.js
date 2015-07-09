@@ -52,10 +52,7 @@ var g = g || {};
         this._postProcess  = args.postProcessor;
 
         /* Create buffer */
-        this._rowIndex = 0;
-        this._colIndex = 0;
-        this._buffer   = [''];
-        this._isBufferChanged = true;
+        this.reset();
 
         /* Create screen background */
         var width    = (args.screenWidth + args.horizontalOffset*2)*args.charWidth,
@@ -72,6 +69,16 @@ var g = g || {};
         this._height  = height;
         this._bgColor = gradient;
     }
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.reset = function ()
+    {
+        this._rowIndex = 0;
+        this._colIndex = 0;
+        this._buffer   = [''];
+        this._isBufferChanged = true;
+    };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -143,18 +150,15 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.popChar = function (count)
     {
-        // var len = this._buffer.length,
-        //     i   = len ? len - 1 : 0;
-        // this._buffer[i] = this._buffer[i].slice(0, -count) || '';
-        // if (!this._buffer[i] &&
-        //     len !== 1)
-        //     this._buffer.pop();
         var line,
             lineCount = Math.floor(count/this._screenWidth),
             charCount = count%this._screenWidth;
+
+        /* If popping a whole line */
         if (lineCount)
             this.popLine(lineCount);
 
+        /* Remove `count` number of chars from the end */
         line = this._buffer[this._rowIndex];
         if (line !== undefined)
         {
@@ -169,6 +173,7 @@ var g = g || {};
                 this._buffer[this._rowIndex] = line;
 
         }
+        /* Indicate the buffer was changed */
         this._isBufferChanged = true;
     };
 
@@ -178,6 +183,7 @@ var g = g || {};
     {
         this._buffer   = this._buffer.slice(0, -count);
         this._rowIndex = this._buffer.length ? this._buffer.length - 1 : 0;
+        /* Indicate the buffer was changed */
         this._isBufferChanged = true;
     };
 
@@ -223,8 +229,7 @@ var g = g || {};
             /* Set styles of context */
             this._prepareContext(context);
 
-            console.log(buffer);
-
+            /* Render all characters of all lines in the buffer */
             for (i=0; i<buffer.length; i++)
             {
                 line = buffer[i];
