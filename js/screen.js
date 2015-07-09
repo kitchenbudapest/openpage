@@ -52,8 +52,8 @@ var g = g || {};
         this._postProcess  = args.postProcessor;
 
         /* Create buffer */
-        this._rowCount = 0;
-        this._colCount = 0;
+        this._rowIndex = 0;
+        this._colIndex = 0;
         this._buffer   = [''];
         this._isBufferChanged = true;
 
@@ -77,7 +77,13 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.newLine = function ()
     {
+        this._colIndex = 0;
+        this._rowIndex++;
         this._buffer.push('');
+        if (this._rowIndex >= this._screenHeight)
+            this._buffer.shift();
+        /* Indicate the buffer was changed */
+        this._isBufferChanged = true;
     };
 
 
@@ -87,49 +93,48 @@ var g = g || {};
         var i = 0,
             line,
             colLeft,
-            buffer      = this._buffer,
-            colCount    = this._colCount,
-            rwoCount    = this._rowCount,
-            screenWidth = this._screenWidth;
+            buffer       = this._buffer,
+            colIndex     = this._colIndex,
+            rowIndex     = this._rowIndex,
+            screenWidth  = this._screenWidth,
+            screenHeight = this._screenHeight;
 
-        /* If text will overflow from the current line */
-        colNeeded = text.length;
-        colLeft   = screenWidth - colCount;
-        if (colNeeded > colLeft)
-        {
-            line = buffer[rowCount] += text.slice(i, colLeft);
-            /* MOve to next line */
-            colCount = 0;
-            rowCount++;
-        }
-        else
-        {
-            buffer[rowCount] += text;
-            colCount += colNeeded;
-        }
-
-        /* Update colCount */
-        this._colCount = colCount;
-
-
-
-
-
-
-        /* Add lines to buffer */
+        /* Wrap lines and extend buffer */
         do
         {
-            /* ??? Isn't this behaviour undefined? */
-            line = text.slice(i++, i*screenWidth);
-            this._buffer.push(line);
-        } while (line);
+            /* Get remaining columns of the current line */
+            colLeft = screenWidth - colIndex;
+            /* If row does not exist */
+            if (buffer[rowIndex] === undefined)
+                buffer[rowIndex] = '';
+            /* Get line as a slice from the input text */
+            line = text.slice(i, colLeft);
+            /* If line is empty (nothing to add to existing line) */
+            if (!line)
+                break;
+            /* Fill remaining spaces from the input text */
+            buffer[rowIndex] += line;
+            /* Update values */
+            i += colLeft;
+            colIndex += line.length;
+            /* If reached the left edge of the screen */
+            if (colIndex >= screenWidth)
+            {
+                /* If reached the bottom edge of the screen */
+                if (rowIndex >= screenHeight)
+                    buffer.shift();
+                else
+                    rowIndex++;
+                colIndex = 0;
+            }
+        }
+        while (i < text.length);
 
-        this._colCount = line.length;
+        /* Update position values */
+        this._rowIndex = rowIndex;
+        this._colIndex = colIndex;
 
-
-        var len = this._buffer.length ,
-            i   = len ? len - 1 : 0;
-        this._buffer[i] = this._buffer[i] + text;
+        /* Indicate the buffer was changed */
         this._isBufferChanged = true;
     };
 
@@ -137,12 +142,28 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.popChar = function (count)
     {
-        var len = this._buffer.length,
-            i   = len ? len - 1 : 0;
-        this._buffer[i] = this._buffer[i].slice(0, -count) || '';
-        if (!this._buffer[i] &&
-            len !== 1)
+        // var len = this._buffer.length,
+        //     i   = len ? len - 1 : 0;
+        // this._buffer[i] = this._buffer[i].slice(0, -count) || '';
+        // if (!this._buffer[i] &&
+        //     len !== 1)
+        //     this._buffer.pop();
+        var line,
+            lineCount = Math.floor(count/this._screenWidth),
+            charCount = count%this._screenWidth;
+        if (lineCount)
+            this.popLine(lineCount);
+
+        line = this._buffer[this._rowIndex];
+        line = line.slice(0, line.length - charCount);
+        if (!line)
+        {
             this._buffer.pop();
+            --this._rowIndex;
+        }
+        else
+            this._buffer[this._rowIndex] = line;
+
         this._isBufferChanged = true;
     };
 
@@ -150,6 +171,8 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.popLine = function (count)
     {
+        this._buffer   = this._buffer.slice(0, -count);
+        this._rowIndex = this._buffer.length ? this._buffer.length - 1 : 0;
         this._isBufferChanged = true;
     };
 
@@ -181,7 +204,7 @@ var g = g || {};
                 j,
                 row,
                 line,
-                rowCount = this._rowCount,
+                rowIndex = this._rowIndex,
                 hOff     = this._hOffset,
                 vOff     = this._vOffset,
                 chrW     = this._charWidth,
@@ -195,45 +218,16 @@ var g = g || {};
             /* Set styles of context */
             this._prepareContext(context);
 
-            /* Start rendering text */
             for (i=0; i<buffer.length; i++)
             {
-                /* Get next line from buffer */
-                row  = (rowCount + vOff)*chrH;
                 line = buffer[i];
+                row = (i + vOff)*chrH;
                 for (j=0; j<line.length; j++)
-                {
-                    /* If this character hit the right edge of the screen */
-                    if (j >= scrW)
-                    {
-                        rowCount++;
-                        line = line.slice(j);
-                        row += chrH;
-                        j = 0;
-                    }
-
-                    /* If this line hit the bottom edge of the screen */
-                    if (rowCount >= scrH)
-                    {
-                        /* Limit counter */
-                        rowCount = 0;
-                        /* Remove first line from buffer */
-                        buffer.shift();
-                        i = 0;
-                        /* Get first line */
-                        line = buffer[0];
-                        /* Set styles of context */
-                        this._prepareContext(context);
-                    }
-
-                    /* Draw character */
                     fontFace.renderCharAt(line[j], context, (j + hOff)*chrW, row);
-                }
-                rowCount++;
             }
 
             /* Place cursor */
-            // fontFace.renderCharAt('block', context, )
+            fontFace.renderCharAt('block', context, (j + hOff)*chrW, row);
 
             /* Use psot-processor if there is any */
             if (this._postProcess)

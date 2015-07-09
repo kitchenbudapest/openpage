@@ -18,11 +18,10 @@ function main()
     var width   = 690,
         height  = 480,
         canvas  = document.createElement('canvas');
-    canvas.width    = width;
-    canvas.height   = height;
-    canvas.id       = 'terminal-display';
-    canvas.tabIndex = 1;
-    var context = canvas.getContext('2d');
+    canvas.width  = width;
+    canvas.height = height;
+    canvas.id     = 'terminal-display';
+    var context   = canvas.getContext('2d');
 
     // (function drawCursor()
     // {
@@ -59,15 +58,21 @@ function main()
 
     function onKeyDown(event)
     {
-        var code = event.which || event.keyCode;
-        if (code === g.kb.code.Return)
-            scr.newLine();
-        else if (code === g.kb.code.BackSpace)
+        switch (event.which || event.keyCode)
         {
-            scr.popChar(1);
-            scr.render();
+            case g.kb.code.Return:
+                scr.newLine();
+                break;
+
+            case g.kb.code.BackSpace:
+                scr.popChar(1);
+                break;
+
+            default:
+                return;
         }
-        // event.preventDefault();
+        scr.render();
+        event.preventDefault();
     }
 
     var PRINTABLES = g.font.VT220.printables;
