@@ -11,7 +11,9 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
-    function Shell(context, distort)
+    function Shell(frame,
+                   context,
+                   distort)
     {
         /* Welcome message after 'boot' */
         this._INTRO =
@@ -29,22 +31,6 @@ var g = g || {};
         /* Set shell buffer */
         this._index   = 0;
         this._history = [''];
-
-        /* Create help message */
-        this._HELP =
-        [
-                  /* 0123456789012345678901234567890123456789 */
-            /* 0 */ 'clear  - clear terminal screen',
-            /* 1 */ 'reboot - reboot the machine',
-            /* 2 */ 'exit   - switch to static page',
-            /* 3 */ 'help   - print all commands available',
-            /* 4 */ 'apply  - send application for hackathon',
-            /* 5 */ 'doc    - open hackathon documentation',
-            /* 6 */ 'date   - date of the hackathon',
-            /* 7 */ 'addr   - location of the hackathon',
-            /* 8 */ 'award  - price of the hackathon ',
-            /* 9 => PS1 */
-        ];
 
         /* Define distortion function */
 
@@ -65,7 +51,73 @@ var g = g || {};
                                       foregroundGlowColor  : [154, 254, 174],
                                       foregroundGlowRadius : 3,
                                       postProcessor        : distort});
-        this._clear();
+
+        /* Create standard input/output operations */
+        this._stdio =
+        {
+            write     : this._scr.write.bind(this._scr),
+            /* The reader function should return `true` if the program
+               still waiting for inputs from teh user */
+            setReader : (function (reader)
+            {
+                this._readerHistory = '';
+                this._reader        = reader;
+            }).bind(this),
+            writeLine : (function (text)
+            {
+                this._scr.write(text);
+                this._scr.newLine();
+            }).bind(this),
+            yesOrNo   : (function (input)
+            {
+                switch (input)
+                {
+                    case '':
+                    case 'y':
+                    case 'Y':
+                    case 'yes':
+                    case 'Yes':
+                        return true;
+
+                    case 'n':
+                    case 'N':
+                    case 'no':
+                    case 'No':
+                        return false;
+
+                    default:
+                        this._scr.write('Invalid input: ' + input);
+                        this._scr.newLine();
+                        return null;
+                }
+            }).bind(this),
+            openPopUp : (function (url)
+            {
+                var urlOpener = function ()
+                {
+                    window.open(url);
+                    /* TODO: make it work with `attachEvent` as well */
+                    frame.removeEventListener('click', urlOpener, false);
+                    this._urlOpener = undefined;
+                }
+                /* If there's already an event listener */
+                if (this._urlOpener)
+                    frame.removeEventListener('click', this._urlOpener, false);
+                frame.addEventListener('click', urlOpener, false);
+                this._urlOpener = urlOpener;
+
+                /* Write instructions on the screen */
+                this._scr.newLine();
+                this._scr.write('==> CLICK HERE TO OPEN LINK!');
+                this._scr.newLine();
+                this._scr.newLine();
+            }).bind(this),
+            // lock    : ,
+            // release : ,
+        };
+
+        /* Prompt to the user for the first time */
+        this._resetAndWriteMultiLine(this._INTRO);
         this._scr.write(this._PS1);
         this._scr.render();
     }
@@ -79,8 +131,26 @@ var g = g || {};
         {
             case g.kb.code.Return:
                 this._scr.newLine();
-                this._execute(this._history[this._index++]);
-                this._history[this._index] = '';
+                /* If a program is running */
+                if (this._reader)
+                {
+                    /* If user did not set a new reader callback */
+                    if (!this._reader(this._stdio, this._readerHistory))
+                    {
+                        /* Remove callback and return to prompt */
+                        this._reader = undefined;
+                        this._scr.write(this._PS1);
+                    }
+                    /* Clear input history */
+                    this._readerHistory = '';
+                }
+                /* If only the shell is running */
+                else
+                {
+                    /* Execute program, and create a new entry in history */
+                    this._execute(this._history[this._index++]);
+                    this._history[this._index] = '';
+                }
                 break;
 
             case g.kb.code.BackSpace:
@@ -112,20 +182,16 @@ var g = g || {};
 
         if (PRINTABLES.indexOf(char) === -1)
             return;
-        this._history[this._index] += char;
+
+        /* If a program is running and waiting for input */
+        if (this._reader)
+            this._readerHistory += char;
+        else
+            this._history[this._index] += char;
+
+        /* Write the written character */
         scr.write(char);
         scr.render();
-    };
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype._poweroff = function (argv)
-    {
-        var scr = this._scr;
-        scr.write('VT100 is rebooting now...');
-        scr.newLine();
-        scr.write('See you on the other side!');
-        this._clear();
     };
 
 
@@ -143,15 +209,12 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype._help = function (argv)
+    Shell.prototype._poweroff = function (argv)
     {
-        this._resetAndWriteMultiLine(this._HELP);
-    };
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype._clear = function (argv)
-    {
+        var scr = this._scr;
+        scr.write('VT100 is rebooting now...');
+        scr.newLine();
+        scr.write('See you on the other side!');
         this._resetAndWriteMultiLine(this._INTRO);
     };
 
@@ -160,7 +223,8 @@ var g = g || {};
     Shell.prototype._execute = function (input)
     {
         /* Separate command name and arguments */
-        var argv    = input.split(' '),
+        var program,
+            argv    = input.split(' '),
             command = argv[0];
         argv.shift();
 
@@ -176,7 +240,7 @@ var g = g || {};
             case 'clean':
             case 'clear':
             case 'reset':
-                this._clear(argv);
+                this._scr.reset();
                 break;
 
             /* If (fake) reboot system */
@@ -185,7 +249,7 @@ var g = g || {};
             case 'reboot':
             case 'shutdown':
             case 'poweroff':
-                this._poweroff(argv);
+                program = this._poweroff.bind(this);
                 break;
 
             /* If change from interactive mode to static text */
@@ -197,43 +261,69 @@ var g = g || {};
             case 'leave':
                 break;
 
-            /* If looking for a manual */
-            case 'man':
-                g.bin.man(argv);
-                break;
-
             /* If looking for available commands */
             case 'ls':
             case 'help':
             case 'info':
             case 'more':
-                this._help(argv);
+                program = g.bin.help;
                 break;
 
+            /* Apply to the hackathon */
             case 'join':
             case 'apply':
-                g.bin.apply(argv);
+            case 'register':
+                program = g.bin.apply;
                 break;
 
+            /* Read the documentation of the hackathon */
             case 'doc':
             case 'docs':
             case 'wiki':
             case 'document':
             case 'documents':
             case 'hackathon':
-                g.bin.doc(argv);
+                program = g.bin.doc;
+                break;
+
+            /* Get the address of the hackathon */
+            case 'addr':
+            case 'address':
+            case 'location':
+                program = g.bin.addr;
+                break;
+
+            /* Get the date of the hackathon */
+            case 'date':
+            case 'time':
+            case 'calendar':
+                program = g.bin.date;
+                break;
+
+            /* What will be the prize */
+            case 'award':
+            case 'prize':
+            case 'winner':
+            case 'victory':
+                program = g.bin.award;
+                break;
+
+
+
+            /* Easter-eggs */
+            case '_':
+            case 'hidden':
+                program = g.bin.hidden;
+                break;
+
+            case 'man':
+                program = g.bin.man;
                 break;
 
             case 'kibu':
             case 'kitchen':
             case 'kitchenbudapest':
-                g.bin.kibu(argv);
-                break;
-
-            case 'addr':
-            case 'address':
-            case 'location':
-                g.bin.addr(argv);
+                program = g.bin.kibu;
                 break;
 
             case 'git':
@@ -241,36 +331,39 @@ var g = g || {};
             case 'github':
             case 'repository':
             case 'opensource':
-                g.bin.git(argv);
+                program = g.bin.git;
                 break;
 
-            /* Easter-eggs */
             case 'what':
             case 'vt100':
             case 'VT100':
-                g.bin.what(argv);
+                program = g.bin.what;
+                break;
+
+            case 'get':
+            case 'fork':
+            case 'patch':
+                program = g.bin.fork;
                 break;
 
             case 'su':
             case 'sudo':
             case 'author':
-                g.bin.su(argv);
+                program = g.bin.su;
                 break;
 
             case '42':
-                g.bin.fortytwo(argv);
-                'the answer to life the universe and everything'
+            case 'fortytwo':
+                program = g.bin.fortytwo;
                 break;
 
             case 'zoom':
-                g.bin.zoom(argv);
-                'in', 'out', '0'
+                program = g.bin.zoom;
                 break;
 
             case 'line':
-                /* Line height */
-                g.bin.line(argv);
-                '1', '2'
+            case 'height':
+                program = g.bin.line;
                 break;
 
             /* Command is not listed above */
@@ -279,8 +372,18 @@ var g = g || {};
                 this._scr.newLine();
                 break;
         }
-        this._scr.write(this._PS1);
-        this._scr.render();
+
+        /* Run program is program is a function */
+        if (program)
+            program(this._stdio, argv);
+
+        /* If no program is waiting for user input */
+        if (!this._reader)
+        {
+            /* Return to the command prompt */
+            this._scr.write(this._PS1);
+            this._scr.render();
+        }
     };
 
 

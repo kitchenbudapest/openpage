@@ -8,36 +8,39 @@ var g = g || {};
     'use strict';
 
     /*------------------------------------------------------------------------*/
-    function main(argv)
+    function visitVT100Manual(stdio, input)
     {
-        argv = argv[0];
+        if (stdio.yesOrNo(input))
+            stdio.openPopUp('http://vt100.net/docs/vt100-ug/contents.html');
+    }
+
+
+    /*------------------------------------------------------------------------*/
+    function main(stdio, argv)
+    {
         switch (argv[0])
         {
             case 'VT100':
             case 'vt100':
-
-                // write
-
-                window.open('http://vt100.net/docs/vt100-ug/contents.html',
-                            'VT100-User-Manual');
+                stdio.writeLine("Do you want to jump to the VT100's");
+                stdio.writeLine('online user manual page [Y/n]?');
+                stdio.setReader(visitVT100Manual);
                 break;
 
             case '':
             case undefined:
-                g.bin.help([]);
+                g.bin.help(stdio, []);
                 break;
 
             default:
-
-                // write
-
+                stdio.writeLine('No manual entry for: ' + argv[0]);
                 break;
         }
     }
 
     /*------------------------------------------------------------------------*/
     /* Export program */
-    if (g.bin instanceof Object)
+    if (g.bin)
         g.bin.man = main;
     else
         g.bin =
