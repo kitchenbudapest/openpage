@@ -13,7 +13,7 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function man(std)
     {
-        std.io.writeLine(NAME + ' [PROGRAM|SPECIAL]');
+        std.io.writeLine(NAME + ' [PROGRAM] or [SPECIAL]');
         std.io.writeLine('  ' + DESC);
         std.io.writeLine('PROGRAM:');
         std.io.writeLine('  Any available program name');
@@ -50,8 +50,9 @@ var g = g || {};
 
             default:
                 var program = g.bin(argv);
-                if (program)
-                    program.man(std);
+                if (program &&
+                    program.man)
+                        program.man(std);
                 else
                     std.io.writeLine('No manual entry for: ' + argv);
                 break;

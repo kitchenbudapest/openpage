@@ -27,7 +27,7 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
-    function main(stdio, argv)
+    function main(std, argv)
     {
                        /* 0123456789012345678901234567890123456789 */
         std.io.writeLine('Kibu is passionate about Free and Open');
@@ -45,5 +45,11 @@ var g = g || {};
         main : main,
         man  : man,
         desc : DESC,
-    }, true);
+    },
+    [
+        'repo',
+        'github',
+        'repository',
+        'opensource',
+    ], true);
 })();

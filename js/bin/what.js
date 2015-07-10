@@ -27,14 +27,14 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
-    function main(stdio, argv)
+    function main(std, argv)
     {                 /* 0123456789012345678901234567890123456789 */
-        stdio.writeLine('The VT100 is a video terminal,');
-        stdio.writeLine('introduced in August 1978 by Digital');
-        stdio.writeLine('Equipment Corporation (DEC).');
-        stdio.writeLine('...');
-        stdio.writeLine('Do you want to read more about it [Y/n]?');
-        stdio.setReader(visitWikipedia);
+        std.io.writeLine('The VT100 is a video terminal,');
+        std.io.writeLine('introduced in August 1978 by Digital');
+        std.io.writeLine('Equipment Corporation (DEC).');
+        std.io.writeLine('...');
+        std.io.writeLine('Do you want to read more about it [Y/n]?');
+        std.io.setReader(visitWikipedia);
     }
 
 
@@ -45,5 +45,9 @@ var g = g || {};
         main : main,
         man  : man,
         desc : DESC,
-    }, true);
+    },
+    [
+        'vt100',
+        'VT100',
+    ], true);
 })();

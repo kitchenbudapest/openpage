@@ -58,6 +58,7 @@ var g = g || {};
                     this._readerHistory = '';
                     this._reader        = reader;
                 }).bind(this),
+                clear      : this._scr.reset.bind(this._scr),
                 write      : this._scr.write.bind(this._scr),
                 writeLine  : (function (text)
                 {
@@ -124,6 +125,89 @@ var g = g || {};
                 }).bind(this),
             },
         };
+
+        /* Install built-in programs */
+        var name = 'clear',
+        desc = 'clear the terminal screen';
+        g.install(name,
+        {
+            main : this._scr.reset.bind(this._scr),
+            desc : desc,
+            man  : (function ()
+            {
+                this._scr.write(name);
+                this._scr.newLine();
+                this._scr.write('  ' + desc);
+                this._scr.newLine();
+            }).bind(this),
+        },
+        [
+            'del',
+            'clean',
+            'reset',
+        ]);
+
+        name = 'reboot';
+        desc = 'reboot the machine';
+        g.install(name,
+        {
+            main : this._poweroff.bind(this),
+            desc : desc,
+            man  : (function ()
+            {
+                this._scr.write(name);
+                this._scr.newLine();
+                this._scr.write('  ' + desc);
+                this._scr.newLine();
+            }).bind(this),
+        },
+        [
+            'kill',
+            'halt',
+            'poweroff',
+            'shutdown',
+        ], true);
+
+        // name = 'exit';
+        // desc = '';
+        // g.install(name,
+        // {
+        //     main : ,
+        //     desc : desc,
+        //     man  : (function ()
+        //     {
+        //         this._scr.write(name);
+        //         this._scr.newLine();
+        //         this._scr.write('  ' + desc);
+        //         this._scr.newLine();
+        //     }).bind(this),
+        // },
+        // [
+        //     'skip',
+        //     'quit',
+        //     'close',
+        //     'break',
+        //     'leave',
+        // ]);
+
+        // name = 'apply';
+        // desc = '';
+        // g.install(name,
+        // {
+        //     main : ,
+        //     desc : desc,
+        //     man  : (function ()
+        //     {
+        //         this._scr.write(name);
+        //         this._scr.newLine();
+        //         this._scr.write('  ' + desc);
+        //         this._scr.newLine();
+        //     }).bind(this),
+        // },
+        // [
+        //     'join',
+        //     'register',
+        // ]);
 
         /* Prompt to the user for the first time */
         this._resetAndWriteMultiLine(this._INTRO);
@@ -237,155 +321,20 @@ var g = g || {};
             command = argv[0];
         argv.shift();
 
-        /* Execute command or alias of command */
-        switch (command)
+        /* If not empty string */
+        if (command)
         {
-            /* If no input */
-            case '':
-                break;
-
-            /* If clear screen */
-            case 'del':
-            case 'clean':
-            case 'clear':
-            case 'reset':
-                this._scr.reset();
-                break;
-
-            /* If (fake) reboot system */
-            case 'kill':
-            case 'halt':
-            case 'reboot':
-            case 'shutdown':
-            case 'poweroff':
-                program = this._poweroff.bind(this);
-                break;
-
-            /* If change from interactive mode to static text */
-            case 'skip':
-            case 'exit':
-            case 'quit':
-            case 'close':
-            case 'break':
-            case 'leave':
-                break;
-
-            /* If looking for available commands */
-            case 'ls':
-            case 'help':
-            case 'info':
-            case 'more':
-                program = g.bin('help').main;
-                break;
-
-            /* Apply to the hackathon */
-            case 'join':
-            case 'apply':
-            case 'register':
-                program = g.bin('apply').main;
-                break;
-
-            /* Read the documentation of the hackathon */
-            case 'doc':
-            case 'docs':
-            case 'wiki':
-            case 'document':
-            case 'documents':
-            case 'hackathon':
-                program = g.bin('doc').main;
-                break;
-
-            /* Get the address of the hackathon */
-            case 'addr':
-            case 'address':
-            case 'location':
-                program = g.bin('addr').main;
-                break;
-
-            /* Get the date of the hackathon */
-            case 'date':
-            case 'time':
-            case 'calendar':
-                program = g.bin('date').main;
-                break;
-
-            /* What will be the prize */
-            case 'award':
-            case 'prize':
-            case 'winner':
-            case 'victory':
-                program = g.bin('award').main;
-                break;
-
-
-
-            /* Easter-eggs */
-            case '_':
-            case '.help':
-            case 'hidden':
-                program = g.bin('hidden').main;
-                break;
-
-            case 'man':
-                program = g.bin('man').main;
-                break;
-
-            case 'kibu':
-            case 'kitchen':
-            case 'kitchenbudapest':
-                program = g.bin('kibu').main;
-                break;
-
-            case 'git':
-            case 'repo':
-            case 'github':
-            case 'repository':
-            case 'opensource':
-                program = g.bin('git').main;
-                break;
-
-            case 'what':
-            case 'vt100':
-            case 'VT100':
-                program = g.bin('what').main;
-                break;
-
-            case 'get':
-            case 'fork':
-            case 'patch':
-                program = g.bin('fork').main;
-                break;
-
-            case 'su':
-            case 'sudo':
-            case 'author':
-                program = g.bin('su').main;
-                break;
-
-            case '42':
-            case 'fortytwo':
-                program = g.bin('42').main;
-                break;
-
-            case 'zoom':
-                program = g.bin('zoom').main;
-                break;
-
-            case 'span':
-            case 'line':
-                program = g.bin('line').main;
-                break;
-
-            /* Command is not listed above */
-            default:
+            program = g.bin(command).main;
+            /* If command is a valid program, run it */
+            if (program instanceof Function)
+                program(this._std, argv);
+            /* If program does not exist */
+            else
+            {
                 this._scr.write('shell: ' + command + ': command not found');
                 this._scr.newLine();
-                break;
+            }
         }
-
-        /* Run program is program is a function */
-        if (program)
-            program(this._std, argv);
 
         /* If no program is waiting for user input */
         if (!this._reader)

@@ -21,8 +21,8 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-        std.io.writeLine('42 is the answer to life the');
-        std.io.writeLine('universe and everything');
+        std.io.writeLine('  42 is the answer to life the');
+        std.io.writeLine('  universe and everything');
     }
 
 
@@ -33,5 +33,9 @@ var g = g || {};
         main : main,
         man  : man,
         desc : DESC,
-    }, true);
+    },
+    [
+        'answer',
+        'fortytwo',
+    ], true);
 })();

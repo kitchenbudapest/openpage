@@ -2,5 +2,6 @@
 *.pyo
 *.pyc
 
+README.html
 .sass-cache
 __blendercache__

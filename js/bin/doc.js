@@ -47,5 +47,15 @@ var g = g || {};
         main : main,
         man  : man,
         desc : DESC,
-    });
+    },
+    [
+        'docs',
+        'wiki',
+        'manual',
+        'document',
+        'devtools',
+        'documents',
+        'hackathon',
+        'framework',
+    ]);
 })();

@@ -12,10 +12,13 @@ var g = g || {};
         SORTED_HIDDEN_NAMES = [];
 
     /*------------------------------------------------------------------------*/
-    g.install = function (name, program, hidden)
+    g.install = function (name,
+                          program,
+                          aliases,
+                          hidden)
     {
         if (name in BINS)
-            throw 'Error: program `' + name + '` already installed';
+            return;
 
         /* If this is a hidden feature */
         if (hidden)
@@ -25,6 +28,15 @@ var g = g || {};
 
         /* Store program */
         BINS[name] = program;
+
+        /* Store aliases */
+        if (aliases instanceof Array)
+            for (var i=0; i<aliases.length; i++)
+            {
+                name = aliases[i];
+                if (!(name in BINS))
+                    BINS[name] = program;
+            }
     };
 
 
@@ -45,6 +57,6 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     g.bin = function (name)
     {
-        return BINS[name];
+        return BINS[name] || {};
     };
 })();

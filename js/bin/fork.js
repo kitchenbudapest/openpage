@@ -42,5 +42,11 @@ var g = g || {};
         main : main,
         man  : man,
         desc : DESC,
-    }, true);
+    },
+    [
+        'get',
+        'fork',
+        'patch',
+        'download',
+    ], true);
 })();

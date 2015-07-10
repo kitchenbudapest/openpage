@@ -54,5 +54,8 @@ var g = g || {};
         main : main,
         man  : man,
         desc : DESC,
-    }, true);
+    },
+    [
+        'scale',
+    ], true);
 })();

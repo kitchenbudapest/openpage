@@ -47,5 +47,10 @@ var g = g || {};
         main : main,
         man  : man,
         desc : DESC,
-    });
+    },
+    [
+        'kibu',
+        'kitchen',
+        'kitchenbudapest',
+    ], true);
 })();

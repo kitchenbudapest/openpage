@@ -2,6 +2,7 @@
 
 # Define folders
 FOLDERS=(js js/bin);
+COUNTER=0
 
 # For each folder
 for folder in ${FOLDERS[@]};
@@ -18,7 +19,10 @@ do
         dest=$folder/min/${base%.js}.min.js;
 
         # Print prettified status message
-        printf "\033[1;32m==>\033[37m Hinting file: \033[0;33m$srcfile\033[0m\n";
+        printf "\033[1;32m==>\033[37m Processing file: \033[0;33m$srcfile\n";
+
+        # Print prettified status message
+        printf "    \033[34m:: \033[37mHinting file...\n";
         # Hint input source code
         jshint $srcfile;
         # If hint wasn't successful
@@ -29,10 +33,17 @@ do
         fi;
 
         # Print prettified status message
-        printf "\033[1;32m==>\033[37m Uglifying file: \033[0;33m$srcfile \033[1;37m-> \033[0;33m$dest\033[0m\n";
+        printf "    \033[34m:: \033[37mUglifying file as \033[0;33m$dest\n";
         # Uglify input source code
         uglifyjs $srcfile -o $dest;
+
+        # Increase counter
+        let COUNTER+=1;
+        # New line separator
+        printf "\n";
     done;
 done;
 
+# Reset colors
+printf "\033[1;32m==> \033[37mNumber of processed files: \033[33m$COUNTER\033[0m\n\n";
 exit 0;

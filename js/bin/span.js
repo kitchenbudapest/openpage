@@ -7,26 +7,26 @@ var g = g || {};
 {
     'use strict';
 
-    var NAME = 'award',
-        DESC = 'prize of the hackathon';
+    var NAME = 'span',
+        DESC = 'set character stretching';
 
     /*------------------------------------------------------------------------*/
     function man(std)
     {
-        std.io.writeLine(NAME);
+        std.io.writeLine(NAME + ' [OPTIONS]');
         std.io.writeLine('  ' + DESC);
+        std.io.writeLine('OPTIONS:');
+        std.io.writeLine("  0 : characters' height normal");
+        std.io.writeLine("  1 : characters' height doubled");
     }
 
 
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-                      /* 0123456789012345678901234567890123456789 */
-        std.io.writeLine('At this very moment, the prize itself is');
-        std.io.writeLine('a huge surprise even for us.. but trust');
-        std.io.writeLine('us, it will be awesome!');
+                       /* 0123456789012345678901234567890123456789 */
+        std.io.writeLine('');
     }
-
 
     /*------------------------------------------------------------------------*/
     /* Export program */
@@ -37,8 +37,7 @@ var g = g || {};
         desc : DESC,
     },
     [
-        'prize',
-        'winner',
-        'victory',
-    ]);
+        'height',
+        'stretch',
+    ], true);
 })();

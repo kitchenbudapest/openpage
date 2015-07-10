@@ -8,8 +8,7 @@ var g = g || {};
 (function ()
 {
     'use strict';
-    var MODULE_NAME = 'distortion';
-
+    var MODULE_NAME = 'prep';
 
     /*------------------------------------------------------------------------*/
     function barrel(frontBuffer,

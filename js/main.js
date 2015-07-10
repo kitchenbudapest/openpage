@@ -35,7 +35,7 @@ function main()
     function distort()
     {
         context.putImageData(
-            g.distortion.barrel(
+            g.prep.barrel(
                 context.getImageData(0, 0, width, height),
                 context.createImageData(width, height),
                 width,
