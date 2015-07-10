@@ -35,10 +35,16 @@ var g = g || {};
         /* Define distortion function */
 
 
-        /* Create screen */
+        /* Create fonts */
         var fg = [194, 255, 206];
+        this._fontTight = new g.font.VT220({fillColor  : fg,
+                                             charHeight : 0});
+        this._fontLoose = new g.font.VT220({fillColor  : fg,
+                                             charHeight : 1});
+
+        /* Create screen */
         this._scr = new g.scr.Screen({context              : context,
-                                      fontFace             : new g.font.VT220(fg),
+                                      fontFace             : this._fontLoose,
                                       charWidth            : 2*g.font.VT220.charWidth,
                                       charHeight           : 2*g.font.VT220.charHeight,
                                       screenWidth          : 41,
@@ -77,12 +83,14 @@ var g = g || {};
                     case 'Y':
                     case 'yes':
                     case 'Yes':
+                    case 'YES':
                         return true;
 
                     case 'n':
                     case 'N':
                     case 'no':
                     case 'No':
+                    case 'NO':
                         return false;
 
                     default:
@@ -99,7 +107,7 @@ var g = g || {};
                     /* TODO: make it work with `attachEvent` as well */
                     frame.removeEventListener('click', urlOpener, false);
                     this._urlOpener = undefined;
-                }
+                };
                 /* If there's already an event listener */
                 if (this._urlOpener)
                     frame.removeEventListener('click', this._urlOpener, false);
@@ -392,5 +400,5 @@ var g = g || {};
     g.shell =
     {
         Shell : Shell,
-    }
+    };
 })();

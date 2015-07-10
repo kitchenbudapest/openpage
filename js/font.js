@@ -1184,7 +1184,9 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
-    function VT220(fillColor)
+    function VT220(args) /* fillColor  => [r, g, b] array,
+                            charHeight => tight: 0 or loose: 1,
+                            charSize   => 1px == 1px: 1 or 1px == 2px: 2, */
     {
         this._canvas  = document.createElement('canvas');
         this._context = this._canvas.getContext('2d');
@@ -1192,15 +1194,15 @@ var g = g || {};
 
         var WH  = W*H,
             WH2 = W*H*2,
-            _,
             i,
             j,
-            r = fillColor[0],
-            g = fillColor[1],
-            b = fillColor[2],
+            r = args.fillColor[0],
+            g = args.fillColor[1],
+            b = args.fillColor[2],
             image,
             bitmap,
             pixels,
+            AddExtraLine = args.charHeight,
             canvas  = this._canvas,
             context = this._context,
             offsets = this._offsets;
@@ -1227,8 +1229,11 @@ var g = g || {};
                 }
 
                 /* After each line, skip the next line */
-                if (!((i + 1)%W))
-                    j += W*4;
+                if (AddExtraLine &&
+                    /* jshint -W018 */
+                    !((i + 1)%W))
+                    /* jshint +W018 */
+                        j += W*4;
             }
 
             /* Store glyph */

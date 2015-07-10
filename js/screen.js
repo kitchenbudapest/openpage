@@ -19,7 +19,7 @@ var g = g || {};
             hex += cmp.length === 1 ? '0' + cmp : cmp;
         }
         return hex;
-    };
+    }
 
     /*------------------------------------------------------------------------*/
     function Screen(args) /* context,
@@ -255,5 +255,5 @@ var g = g || {};
     g.scr =
     {
         Screen : Screen,
-    }
+    };
 })();
