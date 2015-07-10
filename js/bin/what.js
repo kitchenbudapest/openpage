@@ -7,11 +7,24 @@ var g = g || {};
 {
     'use strict';
 
-    function visitWikipedia(stdio, input)
+    var NAME = 'what',
+        DESC = 'info about the VT100';
+
+    /*------------------------------------------------------------------------*/
+    function man(std)
     {
-        if (stdio.yesOrNo(input))
-            stdio.openPopUp('https://en.wikipedia.org/wiki/VT100');
+        std.io.writeLine(NAME);
+        std.io.writeLine('  ' + DESC);
     }
+
+
+    /*------------------------------------------------------------------------*/
+    function visitWikipedia(std, input)
+    {
+        if (std.lib.yesOrNo(input))
+            std.lib.openPopUp('https://en.wikipedia.org/wiki/VT100');
+    }
+
 
     /*------------------------------------------------------------------------*/
     function main(stdio, argv)
@@ -24,13 +37,13 @@ var g = g || {};
         stdio.setReader(visitWikipedia);
     }
 
+
     /*------------------------------------------------------------------------*/
     /* Export program */
-    if (g.bin)
-        g.bin.what = main;
-    else
-        g.bin =
-        {
-            what : main,
-        };
+    g.install(NAME,
+    {
+        main : main,
+        man  : man,
+        desc : DESC,
+    }, true);
 })();

@@ -7,44 +7,64 @@ var g = g || {};
 {
     'use strict';
 
+    var NAME = 'man',
+        DESC = 'show reference manual';
+
     /*------------------------------------------------------------------------*/
-    function visitVT100Manual(stdio, input)
+    function man(std)
     {
-        if (stdio.yesOrNo(input))
-            stdio.openPopUp('http://vt100.net/docs/vt100-ug/contents.html');
+        std.io.writeLine(NAME + ' [PROGRAM|SPECIAL]');
+        std.io.writeLine('  ' + DESC);
+        std.io.writeLine('PROGRAM:');
+        std.io.writeLine('  Any available program name');
+        std.io.writeLine('SPECIAL:');
+        std.io.writeLine('  vt100 : link to online manual');
     }
 
 
     /*------------------------------------------------------------------------*/
-    function main(stdio, argv)
+    function visitVT100Manual(std, input)
     {
-        switch (argv[0])
+        if (std.lib.yesOrNo(input))
+            std.lib.openPopUp('http://vt100.net/docs/vt100-ug/contents.html');
+    }
+
+
+    /*------------------------------------------------------------------------*/
+    function main(std, argv)
+    {
+        argv = argv[0];
+        switch (argv)
         {
             case 'VT100':
             case 'vt100':
-                stdio.writeLine("Do you want to jump to the VT100's");
-                stdio.writeLine('online user manual page [Y/n]?');
-                stdio.setReader(visitVT100Manual);
+                std.io.writeLine("Do you want to jump to the VT100's");
+                std.io.writeLine('online user manual page [Y/n]?');
+                std.io.setReader(visitVT100Manual);
                 break;
 
             case '':
             case undefined:
-                g.bin.help(stdio, []);
+                g.bin('help').main(std, []);
                 break;
 
             default:
-                stdio.writeLine('No manual entry for: ' + argv[0]);
+                var program = g.bin(argv);
+                if (program)
+                    program.man(std);
+                else
+                    std.io.writeLine('No manual entry for: ' + argv);
                 break;
         }
     }
 
+
     /*------------------------------------------------------------------------*/
     /* Export program */
-    if (g.bin)
-        g.bin.man = main;
-    else
-        g.bin =
-        {
-            man : main,
-        };
+    g.install(NAME,
+    {
+        main : main,
+        man  : man,
+        desc : DESC,
+    });
 })();

@@ -1184,13 +1184,16 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
-    function VT220(args) /* fillColor  => [r, g, b] array,
-                            charHeight => tight: 0 or loose: 1,
-                            charSize   => 1px == 1px: 1 or 1px == 2px: 2, */
+    function VT220(args) /* fillColor => [r, g, b] array,
+                            charSpan  => tight: 0 or loose: 1,
+                            charZoom => 1px == 1px: 1 or 1px == 2px: 2, */
     {
         this._canvas  = document.createElement('canvas');
         this._context = this._canvas.getContext('2d');
         this._offsets = {};
+
+        this._zoom = args.charZoom;
+        this._span = args.charSpan;
 
         var WH  = W*H,
             WH2 = W*H*2,
@@ -1202,7 +1205,7 @@ var g = g || {};
             image,
             bitmap,
             pixels,
-            AddExtraLine = args.charHeight,
+            AddExtraLine = args.charSpan,
             canvas  = this._canvas,
             context = this._context,
             offsets = this._offsets;
@@ -1247,6 +1250,13 @@ var g = g || {};
     VT220.charWidth  = W;
     VT220.charHeight = H*2;
     VT220.printables = char;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    VT220.prototype.setCharZoom = function(factor)
+    {
+        this._zoom = factor;
+    };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

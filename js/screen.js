@@ -24,8 +24,6 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function Screen(args) /* context,
                              fontFace,
-                             charWidth,
-                             charHeight,
                              screenWidth,
                              screenHeight,
                              horizontalOffset,
@@ -37,11 +35,20 @@ var g = g || {};
                              foregroundGlowRadius,
                              postProcessor, */
     {
+        /* Create and store characters */
+        this._zoom = 2;
+        this._fontTight = new args.fontFace({fillColor : args.foregroundColor,
+                                             charSpan  : 0,
+                                             charZoom  : this._zoom});
+        this._fontLoose = new args.fontFace({fillColor : args.foregroundColor,
+                                             charSpan  : 1,
+                                             charZoom  : this._zoom});
+
         /* Store static values */
         this._context      = args.context;
-        this._fontFace     = args.fontFace;
-        this._charWidth    = args.charWidth;
-        this._charHeight   = args.charHeight;
+        this._fontFace     = this._fontLoose;
+        this._charWidth    = this._zoom*args.fontFace.charWidth;
+        this._charHeight   = this._zoom*args.fontFace.charHeight;
         this._screenWidth  = args.screenWidth;
         this._screenHeight = args.screenHeight;
         this._hOffset      = args.horizontalOffset;
@@ -55,10 +62,10 @@ var g = g || {};
         this.reset();
 
         /* Create screen background */
-        var width    = (args.screenWidth + args.horizontalOffset*2)*args.charWidth,
-            height   = (args.screenHeight + args.verticalOffset*2)*args.charHeight,
-            centerX  = width/2.0,
-            centerY  = height/2.0,
+        var width    = (args.screenWidth + args.horizontalOffset*2)*this._charWidth*2,
+            height   = (args.screenHeight + args.verticalOffset*2)*this._charHeight*2,
+            centerX  = width*0.5,
+            centerY  = height*0.85,
             radius   = Math.max(centerX, centerY)*1.6,
             gradient = args.context.createRadialGradient(centerX, centerY, 0.0,
                                                          centerX, centerY, radius);

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define folders
-FOLDERS=(js js/bin)
+FOLDERS=(js js/bin);
 
 # For each folder
 for folder in ${FOLDERS[@]};
@@ -16,15 +16,18 @@ do
         base=${srcfile##*/};
         # Format outptu file name
         dest=$folder/min/${base%.js}.min.js;
+
         # Print prettified status message
         printf "\033[1;32m==>\033[37m Hinting file: \033[0;33m$srcfile\033[0m\n";
         # Hint input source code
         jshint $srcfile;
+        # If hint wasn't successful
         result=$?;
         if [ $result != 0 ];
         then
             exit 1;
         fi;
+
         # Print prettified status message
         printf "\033[1;32m==>\033[37m Uglifying file: \033[0;33m$srcfile \033[1;37m-> \033[0;33m$dest\033[0m\n";
         # Uglify input source code

@@ -45,6 +45,10 @@ function main()
 
     var shell = new g.shell.Shell(image, context, distort);
 
+    /* FOR DEBUGGING */
+    g.SH = shell;
+    /* END DEBUGGING */
+
     /* Set event listeners */
     if (window.addEventListener)
     {
@@ -60,6 +64,4 @@ function main()
     /* Add elements to the DOM */
     div.appendChild(canvas);
     div.appendChild(image);
-
-    console.log('[DONE] Scene built');
 }

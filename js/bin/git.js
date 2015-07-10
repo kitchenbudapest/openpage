@@ -7,33 +7,43 @@ var g = g || {};
 {
     'use strict';
 
+    var NAME = 'git',
+        DESC = 'central github repo of Kibu';
+
     /*------------------------------------------------------------------------*/
-    function visitKibuRepo(stdio, input)
+    function man(std)
     {
-        if (stdio.yesOrNo(input))
-            stdio.openPopUp('https://github.com/kitchenbudapest');
+        std.io.writeLine(NAME);
+        std.io.writeLine('  ' + DESC);
+    }
+
+
+    /*------------------------------------------------------------------------*/
+    function visitKibuRepo(std, input)
+    {
+        if (std.lib.yesOrNo(input))
+            std.lib.openPopUp('https://github.com/kitchenbudapest');
     }
 
 
     /*------------------------------------------------------------------------*/
     function main(stdio, argv)
     {
-                      /* 0123456789012345678901234567890123456789 */
-        stdio.writeLine('Kibu is passionate about Free and Open');
-        stdio.writeLine('Source projects. It even has its own');
-        stdio.writeLine('repository, hosted on GitHub.');
-        stdio.writeLine('...');
-        stdio.writeLine("Do you want to visit Kibu's repo [Y/n]?");
-        stdio.setReader(visitKibuRepo);
+                       /* 0123456789012345678901234567890123456789 */
+        std.io.writeLine('Kibu is passionate about Free and Open');
+        std.io.writeLine('Source projects. It even has its own');
+        std.io.writeLine('repository, hosted on GitHub.');
+        std.io.writeLine('...');
+        std.io.writeLine("Do you want to visit Kibu's repo [Y/n]?");
+        std.io.setReader(visitKibuRepo);
     }
 
     /*------------------------------------------------------------------------*/
     /* Export program */
-    if (g.bin)
-        g.bin.git = main;
-    else
-        g.bin =
-        {
-            git : main,
-        };
+    g.install(NAME,
+    {
+        main : main,
+        man  : man,
+        desc : DESC,
+    }, true);
 })();

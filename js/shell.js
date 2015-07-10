@@ -32,96 +32,97 @@ var g = g || {};
         this._index   = 0;
         this._history = [''];
 
-        /* Define distortion function */
-
-
-        /* Create fonts */
-        var fg = [194, 255, 206];
-        this._fontTight = new g.font.VT220({fillColor  : fg,
-                                             charHeight : 0});
-        this._fontLoose = new g.font.VT220({fillColor  : fg,
-                                             charHeight : 1});
-
         /* Create screen */
         this._scr = new g.scr.Screen({context              : context,
-                                      fontFace             : this._fontLoose,
-                                      charWidth            : 2*g.font.VT220.charWidth,
-                                      charHeight           : 2*g.font.VT220.charHeight,
+                                      fontFace             : g.font.VT220,
                                       screenWidth          : 41,
                                       screenHeight         : 10,
                                       horizontalOffset     : 1.5,
                                       verticalOffset       : 0.85,
                                       backgroundColor0     : '#303030',
                                       backgroundColor1     : '#080808',
-                                      foregroundColor      : fg,
+                                      foregroundColor      : [194, 255, 206],
                                       foregroundGlowColor  : [154, 254, 174],
                                       foregroundGlowRadius : 3,
                                       postProcessor        : distort});
 
         /* Create standard input/output operations */
-        this._stdio =
+        this._std =
         {
-            write     : this._scr.write.bind(this._scr),
-            /* The reader function should return `true` if the program
-               still waiting for inputs from teh user */
-            setReader : (function (reader)
+            io:
             {
-                this._readerHistory = '';
-                this._reader        = reader;
-            }).bind(this),
-            writeLine : (function (text)
-            {
-                this._scr.write(text);
-                this._scr.newLine();
-            }).bind(this),
-            yesOrNo   : (function (input)
-            {
-                switch (input)
+                /* The reader function should return `true` if the program
+                   still waiting for inputs from teh user */
+                setReader  : (function (reader)
                 {
-                    case '':
-                    case 'y':
-                    case 'Y':
-                    case 'yes':
-                    case 'Yes':
-                    case 'YES':
-                        return true;
-
-                    case 'n':
-                    case 'N':
-                    case 'no':
-                    case 'No':
-                    case 'NO':
-                        return false;
-
-                    default:
-                        this._scr.write('Invalid input: ' + input);
-                        this._scr.newLine();
-                        return null;
-                }
-            }).bind(this),
-            openPopUp : (function (url)
-            {
-                var urlOpener = function ()
+                    this._readerHistory = '';
+                    this._reader        = reader;
+                }).bind(this),
+                write      : this._scr.write.bind(this._scr),
+                writeLine  : (function (text)
                 {
-                    window.open(url);
-                    /* TODO: make it work with `attachEvent` as well */
-                    frame.removeEventListener('click', urlOpener, false);
-                    this._urlOpener = undefined;
-                };
-                /* If there's already an event listener */
-                if (this._urlOpener)
-                    frame.removeEventListener('click', this._urlOpener, false);
-                frame.addEventListener('click', urlOpener, false);
-                this._urlOpener = urlOpener;
+                    this._scr.write(text);
+                    this._scr.newLine();
+                }).bind(this),
+                // lock    : ,
+                // release : ,
+            },
+            lib:
+            {
+                yesOrNo    : (function (input)
+                {
+                    switch (input)
+                    {
+                        case '':
+                        case 'y':
+                        case 'Y':
+                        case 'yes':
+                        case 'Yes':
+                        case 'YES':
+                            return true;
 
-                /* Write instructions on the screen */
-                this._scr.newLine();
-                this._scr.write('==> CLICK HERE TO OPEN LINK!');
-                this._scr.newLine();
-                this._scr.newLine();
-            }).bind(this),
-            // lock    : ,
-            // release : ,
+                        case 'n':
+                        case 'N':
+                        case 'no':
+                        case 'No':
+                        case 'NO':
+                            return false;
+
+                        default:
+                            this._scr.write('Invalid input: ' + input);
+                            this._scr.newLine();
+                            return null;
+                    }
+                }).bind(this),
+                invalidArg : (function (command, option)
+                {
+                    this._scr.write(command + ": unrecognized option '" + option + "'");
+                    this._scr.newLine();
+                    this._scr.write("Try 'man " + command + "' for more information");
+                    this._scr.newLine();
+                }).bind(this),
+                openPopUp  : (function (url)
+                {
+                    var urlOpener = function ()
+                    {
+                        window.open(url);
+                        /* TODO: make it work with `attachEvent` as well */
+                        frame.removeEventListener('click', urlOpener, false);
+                        this._urlOpener = undefined;
+                    };
+                    /* If there's already an event listener */
+                    if (this._urlOpener)
+                        frame.removeEventListener('click', this._urlOpener, false);
+                    frame.addEventListener('click', urlOpener, false);
+                    this._urlOpener = urlOpener;
+
+                    /* Write instructions on the screen */
+                    this._scr.newLine();
+                    this._scr.write('==> CLICK HERE TO OPEN LINK!');
+                    this._scr.newLine();
+                    this._scr.newLine();
+                }).bind(this),
+            },
         };
 
         /* Prompt to the user for the first time */
@@ -143,7 +144,7 @@ var g = g || {};
                 if (this._reader)
                 {
                     /* If user did not set a new reader callback */
-                    if (!this._reader(this._stdio, this._readerHistory))
+                    if (!this._reader(this._std, this._readerHistory))
                     {
                         /* Remove callback and return to prompt */
                         this._reader = undefined;
@@ -274,14 +275,14 @@ var g = g || {};
             case 'help':
             case 'info':
             case 'more':
-                program = g.bin.help;
+                program = g.bin('help').main;
                 break;
 
             /* Apply to the hackathon */
             case 'join':
             case 'apply':
             case 'register':
-                program = g.bin.apply;
+                program = g.bin('apply').main;
                 break;
 
             /* Read the documentation of the hackathon */
@@ -291,21 +292,21 @@ var g = g || {};
             case 'document':
             case 'documents':
             case 'hackathon':
-                program = g.bin.doc;
+                program = g.bin('doc').main;
                 break;
 
             /* Get the address of the hackathon */
             case 'addr':
             case 'address':
             case 'location':
-                program = g.bin.addr;
+                program = g.bin('addr').main;
                 break;
 
             /* Get the date of the hackathon */
             case 'date':
             case 'time':
             case 'calendar':
-                program = g.bin.date;
+                program = g.bin('date').main;
                 break;
 
             /* What will be the prize */
@@ -313,25 +314,26 @@ var g = g || {};
             case 'prize':
             case 'winner':
             case 'victory':
-                program = g.bin.award;
+                program = g.bin('award').main;
                 break;
 
 
 
             /* Easter-eggs */
             case '_':
+            case '.help':
             case 'hidden':
-                program = g.bin.hidden;
+                program = g.bin('hidden').main;
                 break;
 
             case 'man':
-                program = g.bin.man;
+                program = g.bin('man').main;
                 break;
 
             case 'kibu':
             case 'kitchen':
             case 'kitchenbudapest':
-                program = g.bin.kibu;
+                program = g.bin('kibu').main;
                 break;
 
             case 'git':
@@ -339,39 +341,39 @@ var g = g || {};
             case 'github':
             case 'repository':
             case 'opensource':
-                program = g.bin.git;
+                program = g.bin('git').main;
                 break;
 
             case 'what':
             case 'vt100':
             case 'VT100':
-                program = g.bin.what;
+                program = g.bin('what').main;
                 break;
 
             case 'get':
             case 'fork':
             case 'patch':
-                program = g.bin.fork;
+                program = g.bin('fork').main;
                 break;
 
             case 'su':
             case 'sudo':
             case 'author':
-                program = g.bin.su;
+                program = g.bin('su').main;
                 break;
 
             case '42':
             case 'fortytwo':
-                program = g.bin.fortytwo;
+                program = g.bin('42').main;
                 break;
 
             case 'zoom':
-                program = g.bin.zoom;
+                program = g.bin('zoom').main;
                 break;
 
+            case 'span':
             case 'line':
-            case 'height':
-                program = g.bin.line;
+                program = g.bin('line').main;
                 break;
 
             /* Command is not listed above */
@@ -383,7 +385,7 @@ var g = g || {};
 
         /* Run program is program is a function */
         if (program)
-            program(this._stdio, argv);
+            program(this._std, argv);
 
         /* If no program is waiting for user input */
         if (!this._reader)

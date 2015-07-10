@@ -6,28 +6,41 @@ var g = g || {};
 (function ()
 {
     'use strict';
-    function forkThis(stdio, input)
+
+    var NAME = 'fork',
+        DESC = 'fork this project on GitHub';
+
+    /*------------------------------------------------------------------------*/
+    function man(std)
     {
-        if (stdio.yesOrNo(input))
-            stdio.openPopUp('https://github.com/kitchenbudapest/openpage');
+        std.io.writeLine(NAME);
+        std.io.writeLine('  ' + DESC);
     }
 
     /*------------------------------------------------------------------------*/
-    function main(stdio, argv)
+    function forkThis(std, input)
     {
-                      /* 0123456789012345678901234567890123456789 */
-        stdio.writeLine('Do you want to fork this VT100 project');
-        stdio.writeLine('on GitHub [Y/n]?');
-        stdio.setReader(forkThis);
+        if (std.lib.yesOrNo(input))
+            std.lib.openPopUp('https://github.com/kitchenbudapest/openpage');
     }
+
+
+    /*------------------------------------------------------------------------*/
+    function main(std, argv)
+    {
+                       /* 0123456789012345678901234567890123456789 */
+        std.io.writeLine('Do you want to fork this VT100 project');
+        std.io.writeLine('on GitHub [Y/n]?');
+        std.io.setReader(forkThis);
+    }
+
 
     /*------------------------------------------------------------------------*/
     /* Export program */
-    if (g.bin)
-        g.bin.fork = main;
-    else
-        g.bin =
-        {
-            fork : main,
-        };
+    g.install(NAME,
+    {
+        main : main,
+        man  : man,
+        desc : DESC,
+    }, true);
 })();

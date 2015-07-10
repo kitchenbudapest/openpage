@@ -6,22 +6,34 @@ var g = g || {};
 (function ()
 {
     'use strict';
+
+    var NAME = 'award',
+        DESC = 'prize of the hackathon';
+
     /*------------------------------------------------------------------------*/
-    function main(stdio, argv)
+    function man(std)
+    {
+        std.io.writeLine(NAME);
+        std.io.writeLine('  ' + DESC);
+    }
+
+
+    /*------------------------------------------------------------------------*/
+    function main(std, argv)
     {
                       /* 0123456789012345678901234567890123456789 */
-        stdio.writeLine('At this very moment, the prize itself is');
-        stdio.writeLine('a huge surprise even for us.. but trust');
-        stdio.writeLine('us, it will be awesome!');
+        std.io.writeLine('At this very moment, the prize itself is');
+        std.io.writeLine('a huge surprise even for us.. but trust');
+        std.io.writeLine('us, it will be awesome!');
     }
+
 
     /*------------------------------------------------------------------------*/
     /* Export program */
-    if (g.bin)
-        g.bin.award = main;
-    else
-        g.bin =
-        {
-            award : main,
-        };
+    g.install(NAME,
+    {
+        main : main,
+        man  : man,
+        desc : DESC,
+    });
 })();

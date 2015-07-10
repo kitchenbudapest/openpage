@@ -6,20 +6,32 @@ var g = g || {};
 (function ()
 {
     'use strict';
+
+    var NAME = '42',
+        DESC = 'the ultimate answer';
+
     /*------------------------------------------------------------------------*/
-    function main(stdio, argv)
+    function man(std)
     {
-        stdio.writeLine('42 is the answer to life the');
-        stdio.writeLine('universe and everything');
+        std.io.writeLine(NAME);
+        std.io.writeLine('  ' + DESC);
     }
+
+
+    /*------------------------------------------------------------------------*/
+    function main(std, argv)
+    {
+        std.io.writeLine('42 is the answer to life the');
+        std.io.writeLine('universe and everything');
+    }
+
 
     /*------------------------------------------------------------------------*/
     /* Export program */
-    if (g.bin)
-        g.bin.fortytwo = main;
-    else
-        g.bin =
-        {
-            fortytwo : main,
-        };
+    g.install(NAME,
+    {
+        main : main,
+        man  : man,
+        desc : DESC,
+    }, true);
 })();
