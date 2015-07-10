@@ -97,7 +97,8 @@ var g = g || {};
                 }).bind(this),
                 invalidArg : (function (command, option)
                 {
-                    this._scr.write(command + ": unrecognized option '" + option + "'");
+                    this._scr.write(command + ": unrecognized option '" +
+                                    (option || '') + "'");
                     this._scr.newLine();
                     this._scr.write("Try 'man " + command + "' for more information");
                     this._scr.newLine();
@@ -247,9 +248,21 @@ var g = g || {};
                 break;
 
             case g.kb.code.BackSpace:
-                var line = this._history[this._index];
-                line = line.slice(0, line.length - 1);
-                this._history[this._index] = line;
+                var line;
+                /* If a program is running */
+                if (this._reader)
+                {
+                    line = this._readerHistory;
+                    this._readerHistory = line.slice(0, line.length - 1);
+                }
+                /* If only the shell is running */
+                else
+                {
+                    line = this._history[this._index];
+                    line = line.slice(0, line.length - 1);
+                    this._history[this._index] = line;
+                }
+                /* Remove character from teh screen */
                 this._scr.popChar(1);
                 break;
 

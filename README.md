@@ -99,8 +99,9 @@ The input/output functions:
 - `std.io.writeLine(String)`: write something on the screen and insert a new
   line after it,
 - `std.io.setReader(Function)`: set a function, which will process the user
-  input. (The callback function takes a single `String` argument). If this
-  function schedules another *reader* function, then it must return `true`
+  input. (The callback function takes two arguments, the `std` `Object` and the
+  user's input `String`). If this function schedules another *reader* function,
+  then it must return `true`
 
 The library functions:
 
