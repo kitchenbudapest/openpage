@@ -32,6 +32,9 @@ var g = g || {};
         this._index   = 0;
         this._history = [''];
 
+        /* Store clickable area */
+        this._frame = frame;
+
         /* Create screen */
         this._scr = new g.scr.Screen({context              : context,
                                       fontFace             : g.font.VT220,
@@ -65,8 +68,6 @@ var g = g || {};
                     this._scr.write(text);
                     this._scr.newLine();
                 }).bind(this),
-                // lock    : ,
-                // release : ,
             },
             lib:
             {
@@ -109,13 +110,13 @@ var g = g || {};
                     {
                         window.open(url);
                         /* TODO: make it work with `attachEvent` as well */
-                        frame.removeEventListener('click', urlOpener, false);
+                        this._frame.removeEventListener('click', urlOpener, false);
                         this._urlOpener = undefined;
                     };
                     /* If there's already an event listener */
                     if (this._urlOpener)
-                        frame.removeEventListener('click', this._urlOpener, false);
-                    frame.addEventListener('click', urlOpener, false);
+                        this._frame.removeEventListener('click', this._urlOpener, false);
+                    this._frame.addEventListener('click', urlOpener, false);
                     this._urlOpener = urlOpener;
 
                     /* Write instructions on the screen */
@@ -129,7 +130,7 @@ var g = g || {};
 
         /* Install built-in programs */
         var name = 'clear',
-        desc = 'clear the terminal screen';
+            desc = 'clear the terminal screen';
         g.install(name,
         {
             main : this._scr.reset.bind(this._scr),
@@ -165,6 +166,7 @@ var g = g || {};
         [
             'kill',
             'halt',
+            'reset',
             'poweroff',
             'shutdown',
         ], true);
@@ -220,6 +222,7 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Shell.prototype.onKeyDown = function (event)
     {
+        var line;
         /* Handle special keys */
         switch (event.which || event.keyCode)
         {
@@ -248,22 +251,26 @@ var g = g || {};
                 break;
 
             case g.kb.code.BackSpace:
-                var line;
                 /* If a program is running */
                 if (this._reader)
-                {
-                    line = this._readerHistory;
-                    this._readerHistory = line.slice(0, line.length - 1);
-                }
+                    this._readerHistory =
+                        this._popCharFrom(this._readerHistory);
                 /* If only the shell is running */
                 else
-                {
-                    line = this._history[this._index];
-                    line = line.slice(0, line.length - 1);
-                    this._history[this._index] = line;
-                }
-                /* Remove character from teh screen */
-                this._scr.popChar(1);
+                    this._history[this._index] =
+                        this._popCharFrom(this._history[this._index]);
+                break;
+
+            case g.kb.code.Up:
+                /* If no program is running, move back in history */
+                if (!this._reader)
+                    this._moveInHistory(-1);
+                break;
+
+            case g.kb.code.Down:
+                /* If no program is running, move forward in history */
+                if (!this._reader)
+                    this._moveInHistory(+1);
                 break;
 
             default:
@@ -271,6 +278,58 @@ var g = g || {};
         }
         this._scr.render();
         event.preventDefault();
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype._moveInHistory = function (steps)
+    {
+        /* Get steps-th line from current position */
+        var line = this._history[this._index + steps];
+        /* If steps-th line in history */
+        if (line !== undefined)
+        {
+            /* Remove current line from the screen */
+            console.log(this._history[this._index],
+                        this._history[this._index].length);
+            this._scr.popChar(this._history[this._index].length);
+            /* Write steps-th line on the screen */
+            this._scr.write(line);
+            /* Update line index */
+            this._index += steps;
+        }
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype._popCharFrom = function (line)
+    {
+        /* If line has characters in it */
+        if (line.length)
+        {
+            /* Remove characters from the screen */
+            this._scr.popChar(1);
+            /* Update line */
+            line = line.slice(0, line.length - 1);
+        }
+        return line;
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype.run = function (element)
+    {
+        /* Set event listeners */
+        if (element.addEventListener)
+        {
+            element.addEventListener('keydown', this.onKeyDown.bind(this), false);
+            element.addEventListener('keypress', this.onKeyPress.bind(this), false);
+        }
+        else
+        {
+            element.attachEvent('onkeydown', this.onKeyDown.bind(this));
+            element.attachEvent('onkeypress', this.onKeyPress.bind(this));
+        }
     };
 
 
@@ -318,9 +377,19 @@ var g = g || {};
     Shell.prototype._poweroff = function (argv)
     {
         var scr = this._scr;
+
+        /* Shutting down */
         scr.write('VT100 is rebooting now...');
         scr.newLine();
         scr.write('See you on the other side!');
+
+        /* Restore default settings, clear cache */
+        this._index   = 0;
+        this._history = [''];
+        if (this._urlOpener)
+            this._frame.removeEventListener('click', this._urlOpener, false);
+
+        /* Boot */
         this._resetAndWriteMultiLine(this._INTRO);
     };
 

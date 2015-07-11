@@ -15,6 +15,7 @@ Table of Content
 - [Writing an Application](#writing-an-application)
 - [Standard Functions](#standard-functions)
 - [Visit Page](#visit-page)
+- [Development](#development)
 
 
 
@@ -120,3 +121,14 @@ Visit Page
 ----------
 
 Try it for yourself, by [clicking here](http://open.kibu.hu)!
+
+
+
+Development
+-----------
+
+The development of this project has only two minor dependencies, because these
+tools are called in the `pre-commit` hook of git, by a bash script.
+
+- [`UglifyJS2`](https://github.com/mishoo/UglifyJS2) (node)
+- [`JSHint`](https://github.com/jshint/jshint) (node)

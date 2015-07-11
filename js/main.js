@@ -24,6 +24,7 @@ function main()
         window.open('https://en.wikipedia.org/wiki/VT100');
     });
 
+    /* Create on-screen canvas and context */
     var width   = 690,
         height  = 480,
         canvas  = document.createElement('canvas');
@@ -43,23 +44,8 @@ function main()
             0, 0);
     }
 
-    var shell = new g.shell.Shell(image, context, distort);
-
-    /* FOR DEBUGGING */
-    g.SH = shell;
-    /* END DEBUGGING */
-
-    /* Set event listeners */
-    if (window.addEventListener)
-    {
-        window.addEventListener('keydown', shell.onKeyDown.bind(shell), false);
-        window.addEventListener('keypress', shell.onKeyPress.bind(shell), false);
-    }
-    else
-    {
-        window.attachEvent('onkeydown', shell.onKeyDown.bind(shell));
-        window.attachEvent('onkeypress', shell.onKeyPress.bind(shell));
-    }
+    /* Create shell and run it */
+    (new g.shell.Shell(image, context, distort)).run(window);
 
     /* Add elements to the DOM */
     div.appendChild(canvas);

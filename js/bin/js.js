@@ -7,7 +7,9 @@ var g = g || {};
 {
     'use strict';
 
-    var NAME = 'js',
+    var VARS,
+        LINE = '>>> ',
+        NAME = 'js',
         DESC = 'evaluate javascript expressions';
 
     /*------------------------------------------------------------------------*/
@@ -21,23 +23,51 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function repl(std, input)
     {
+        /* built-in functions */
+        var vars  = VARS,
+            clear = std.io.clear;
+        function print(input)
+        {
+            std.io.write(input.toString());
+        }
+
+        function println(input)
+        {
+            std.io.writeLine(input.toString());
+        }
+
         try
         {
-            eval(input); // jshint ignore:line
+            /* Stop the REPL */
+            if (input === 'exit()')
+                return;
+
+            /* Evaluate the user input */
+            /* jshint -W061 */
+            eval(input);
+            /* jshint +W061 */
         }
         catch (exception)
         {
             std.io.writeLine('An exception occured:');
             std.io.writeLine(exception.toString());
         }
+
+        /* Start a new REPL cycle */
+        std.io.write(LINE);
+        std.io.setReader(repl);
+        return true;
     }
 
 
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-                       /* 0123456789012345678901234567890123456789 */
-        std.io.write('>>> ');
+        VARS = {};
+        std.io.writeLine('JavaScript REPL (Read Eval Print Line)');
+        std.io.writeLine('  built-in functions:');
+        std.io.writeLine('  print(), println(), clear(), exit()');
+        std.io.write(LINE);
         std.io.setReader(repl);
     }
 
@@ -53,6 +83,7 @@ var g = g || {};
     [
         'cc',
         'exec',
+        'eval',
         'repl',
         'compile',
         'javascript',

@@ -107,31 +107,33 @@ var g = g || {};
     {
         var i = 0,
             line,
-            colLeft,
+            length,
+            textLength   = text.length,
             buffer       = this._buffer,
             colIndex     = this._colIndex,
             rowIndex     = this._rowIndex,
             screenWidth  = this._screenWidth,
-            screenHeight = this._screenHeight;
+            screenHeight = this._screenHeight,
+            colLeft      = screenWidth - colIndex;
 
         /* Wrap lines and extend buffer */
         do
         {
-            /* Get remaining columns of the current line */
-            colLeft = screenWidth - colIndex;
+            /* Get line as a slice from the input text */
+            line   = text.slice(i, colLeft);
+            length = line.length;
+            /* If line is empty (nothing to add to existing line) */
+            if (!length)
+                break;
             /* If row does not exist */
             if (buffer[rowIndex] === undefined)
                 buffer[rowIndex] = '';
-            /* Get line as a slice from the input text */
-            line = text.slice(i, colLeft);
-            /* If line is empty (nothing to add to existing line) */
-            if (!line)
-                break;
             /* Fill remaining spaces from the input text */
             buffer[rowIndex] += line;
             /* Update values */
-            i += colLeft;
-            colIndex += line.length;
+            i        += length;
+            colLeft  += length;
+            colIndex += length;
             /* If reached the left edge of the screen */
             if (colIndex >= screenWidth)
             {
@@ -143,7 +145,7 @@ var g = g || {};
                 colIndex = 0;
             }
         }
-        while (i < text.length);
+        while (i < textLength);
 
         /* Update position values */
         this._rowIndex = rowIndex;
@@ -157,37 +159,47 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.popChar = function (count)
     {
-        var line,
-            lineCount = Math.floor(count/this._screenWidth),
+        /* If there is nothing to pop */
+        if (!count)
+            return;
+
+        var lineCount = Math.floor(count/this._screenWidth),
             charCount = count%this._screenWidth;
 
-        /* If popping a whole line */
+        /* If popping whole line(s) */
         if (lineCount)
             this.popLine(lineCount);
 
-        /* Remove `count` number of chars from the end */
-        line = this._buffer[this._rowIndex];
+        /* Get current line */
+        var line = this._buffer[this._rowIndex];
+        /* If line is valid */
         if (line !== undefined)
         {
+            /* Remove chars from the end of the line */
             line = line.slice(0, line.length - charCount);
-            if (!line &&
-                this._buffer.length > 1)
+            /* If there are characters in the line */
+            if (line.length)
+                this._buffer[this._rowIndex] = line;
+            /* If there are no characters in the line and
+               this is not the only line in the buffer */
+            else if (this._buffer.length > 1)
             {
                 this._buffer.pop();
                 --this._rowIndex;
             }
-            else
-                this._buffer[this._rowIndex] = line;
-
         }
-        /* Indicate the buffer was changed */
-        this._isBufferChanged = true;
+        /* Indicate if the buffer changed */
+        this._isBufferChanged = Boolean(lineCount || line);
     };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.popLine = function (count)
     {
+        /* If there is nothing to pop */
+        if (!count)
+            return;
+
         this._buffer   = this._buffer.slice(0, -count);
         this._rowIndex = this._buffer.length ? this._buffer.length - 1 : 0;
         /* Indicate the buffer was changed */

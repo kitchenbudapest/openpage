@@ -24,7 +24,7 @@ do
         # Print prettified status message
         printf "    \033[34m:: \033[37mHinting file...\n";
         # Hint input source code
-        jshint $srcfile;
+        jshint --verbose $srcfile;
         # If hint wasn't successful
         result=$?;
         if [ $result != 0 ];
