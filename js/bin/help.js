@@ -66,6 +66,8 @@ var g = g || {};
         'ls',
         'info',
         'more',
+        'HELP',
+        'Help',
     ]);
     g.install(HIDDEN_NAME,
     {

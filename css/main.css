@@ -1,9 +1,8 @@
-@import url(http://fonts.googleapis.com/css?family=VT323);
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic);
 body {
   width: 100%;
   height: 100%;
-  font-family: 'VT323';
   background-attachment: fixed;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UwZTBlMCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -13,63 +12,33 @@ body {
   background-image: linear-gradient(#e0e0e0, #ffffff);
 }
 
-#main {
+#logo {
+  margin: 16px auto;
+}
+
+#primary {
   display: block;
   width: 1280px;
   margin: 0 auto;
-}
-
-#help {
-  display: block;
-  width: 400px;
-  margin: 16px auto;
-  line-height: 1.2;
-  text-align: justify;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 12pt;
-  font-weight: 300;
-  color: #383838;
-  background: #F0F0F0;
-  padding: 16px;
-  border: 1px solid #F8F8F8;
-  border-radius: 4px;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-}
-#help > i {
-  font-style: italic;
-  font-weight: 300;
-}
-#help > a {
-  text-decoration: none;
-  color: #AA0000;
-}
-#help > a:visited {
-  color: #880000;
-}
-#help > a:hover {
-  color: #CC0000;
-}
-#help > hr {
-  border: 0;
-  height: 1px;
-  background: #D0D0D0;
-}
-#help > del {
-  border: 0;
-  height: 2px;
-  background: #383838;
 }
 
 #terminal {
   position: relative;
 }
 
+#terminal-logo,
 #terminal-frame,
 #terminal-display,
 #terminal-clicker,
-#terminal-logo {
+#terminal-post-it {
   display: block;
   position: absolute;
+}
+
+#terminal-display {
+  z-index: 100;
+  top: 95px;
+  left: 155px;
 }
 
 #terminal-frame {
@@ -78,10 +47,13 @@ body {
   left: 0;
 }
 
-#terminal-display {
-  z-index: 100;
-  top: 95px;
-  left: 155px;
+#terminal-logo {
+  z-index: 300;
+  width: 210px;
+  height: 46px;
+  top: 503px;
+  left: 968px;
+  cursor: pointer;
 }
 
 #terminal-clicker {
@@ -92,11 +64,64 @@ body {
   height: 440px;
 }
 
-#terminal-logo {
-  z-index: 300;
-  width: 210px;
-  height: 46px;
-  top: 503px;
-  left: 968px;
-  cursor: pointer;
+#terminal-post-it {
+  top: 90px;
+  left: 880px;
+  line-height: 1.2;
+  text-align: justify;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 12pt;
+  font-weight: 400;
+  padding: 16px 32px 32px;
+  overflow: auto;
+}
+
+#terminal-post-it-shadow {
+  -moz-transform: rotate(1deg);
+  -ms-transform: rotate(1deg);
+  -webkit-transform: rotate(1deg);
+  transform: rotate(1deg);
+  z-index: 490;
+  display: block;
+  position: absolute;
+  content: "";
+  top: 88px;
+  left: 62px;
+  width: 67%;
+  height: 58%;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 18px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+#terminal-post-it-paper {
+  z-index: 500;
+  display: block;
+  position: relative;
+  padding: 40px 16px 24px;
+  width: 256px;
+  color: #2b2a08;
+  border: 1px solid #e8e37d;
+  border-bottom-left-radius: 120px 30px;
+  -moz-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  -webkit-transform: rotate(3deg);
+  transform: rotate(3deg);
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuODQxNTA2IiB5MT0iLTAuMDkxNTA2IiB4Mj0iMC4xNTg0OTQiIHkyPSIxLjA5MTUwNiI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y0ZjFiZSIvPjxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSIjZWNlNzkzIi8+PHN0b3Agb2Zmc2V0PSI3NSUiIHN0b3AtY29sb3I9IiNlY2U3OTMiLz48c3RvcCBvZmZzZXQ9IjkwJSIgc3RvcC1jb2xvcj0iI2Y0ZjFiZSIvPjxzdG9wIG9mZnNldD0iOTUlIiBzdG9wLWNvbG9yPSIjZjdmNmQ0Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background-size: 100%;
+  background-image: -moz-linear-gradient(240deg, #f4f1be 0%, #ece793 55%, #ece793 75%, #f4f1be 90%, #f7f6d4 95%);
+  background-image: -webkit-linear-gradient(240deg, #f4f1be 0%, #ece793 55%, #ece793 75%, #f4f1be 90%, #f7f6d4 95%);
+  background-image: linear-gradient(-150deg, #f4f1be 0%, #ece793 55%, #ece793 75%, #f4f1be 90%, #f7f6d4 95%);
+}
+#terminal-post-it-paper > h1 {
+  font-size: 22pt;
+}
+#terminal-post-it-paper > p > a {
+  text-decoration: none;
+  color: #AA0000;
+}
+#terminal-post-it-paper > p > a:visited {
+  color: #880000;
+}
+#terminal-post-it-paper > p > a:hover {
+  color: #CC0000;
 }
