@@ -8,7 +8,7 @@ var g = g || {};
 (function ()
 {
     'use strict';
-    var MODULE_NAME = 'prep';
+    var MODULE_NAME = 'postp';
 
     /*------------------------------------------------------------------------*/
     function barrel(frontBuffer,

@@ -29,11 +29,11 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-        std.io.writeLine('Kitchen Budapest was founded in 2007');
-        std.io.writeLine('with the support of Hungarian Telekom.');
-        std.io.writeLine('Our team consists of talented young');
-        std.io.writeLine('designers, artists and specialists in');
-        std.io.writeLine('different fields of technology.');
+        std.io.writeLine('Kitchen Budapest was founded in 2007 '   +
+                         'with the support of Hungarian Telekom. ' +
+                         'Our team consists of talented young '    +
+                         'designers, artists and specialists in '  +
+                         'different fields of technology.');
         std.io.writeLine('...');
         std.io.writeLine("Do you want to visit Kibu's site [Y/n]?");
         std.io.setReader(visitKibuSite);

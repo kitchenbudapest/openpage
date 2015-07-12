@@ -7,7 +7,7 @@ var g = g || {};
 {
     'use strict';
 
-    var NAME = 'zoom',
+    var NAME = 'dw',
         DESC = 'change characters span';
 
     /*------------------------------------------------------------------------*/
@@ -16,10 +16,8 @@ var g = g || {};
         std.io.writeLine(NAME + ' [OPTIONS]');
         std.io.writeLine('  ' + DESC);
         std.io.writeLine('OPTIONS:');
-        std.io.writeLine('  + : increase zoom level');
-        std.io.writeLine('  - : decrease zoom level');
-        std.io.writeLine('  1 : set zoom level to 1x');
-        std.io.writeLine('  2 : set zoom level to 2x');
+        std.io.writeLine('  9, 10, 11');
+        std.io.writeLine('  dalek, daleks ');
     }
 
 
@@ -28,16 +26,21 @@ var g = g || {};
     {
         switch (argv[0])
         {
-            case '+':
+            case '9':
+                std.io.writeLine('FANTASTIC!');
                 break;
 
-            case '-':
+            case '10':
+                std.io.writeLine('ALLONS-Y!');
                 break;
 
-            case '1':
+            case '11':
+                std.io.writeLine('GERONIMO!');
                 break;
 
-            case '2':
+            case 'dalek':
+            case 'daleks':
+                std.io.writeLine('EXTERMINATE!');
                 break;
 
             default:
@@ -56,6 +59,7 @@ var g = g || {};
         desc : DESC,
     },
     [
-        'scale',
+        'doctor',
+        'doctorwho',
     ], true);
 })();

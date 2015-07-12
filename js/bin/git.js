@@ -30,9 +30,9 @@ var g = g || {};
     function main(std, argv)
     {
                        /* 0123456789012345678901234567890123456789 */
-        std.io.writeLine('Kibu is passionate about Free and Open');
-        std.io.writeLine('Source projects. It even has its own');
-        std.io.writeLine('repository, hosted on GitHub.');
+        std.io.writeLine('Kibu is passionate about Free and Open ' +
+                         'Source projects. It even has its own '   +
+                         'repository, hosted on GitHub.');
         std.io.writeLine('...');
         std.io.writeLine("Do you want to visit Kibu's repo [Y/n]?");
         std.io.setReader(visitKibuRepo);

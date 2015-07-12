@@ -22,8 +22,8 @@ var g = g || {};
     function main(std, argv)
     {
                        /* 0123456789012345678901234567890123456789 */
-        std.io.writeLine('This emulator was designed, 3D modeled,');
-        std.io.writeLine('rendered and implemented by:');
+        std.io.writeLine('This emulator was designed, 3D modeled, ' +
+                         'rendered and implemented by:');
         std.io.writeLine('    Peter Varo');
         std.io.writeLine('    Kitchen Budapest');
         std.io.writeLine('    (c) 2015');

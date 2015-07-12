@@ -21,10 +21,9 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-                      /* 0123456789012345678901234567890123456789 */
-        std.io.writeLine('At this very moment, the prize itself is');
-        std.io.writeLine('a huge surprise even for us.. but trust');
-        std.io.writeLine('us, it will be awesome!');
+        std.io.writeLine('At this very moment, the prize itself is '   +
+                         'kind of a surprise even for us.. but hey, '  +
+                         'you can trust our taste, it will be awesome! :)');
     }
 
 

@@ -38,8 +38,8 @@ var g = g || {};
         {
             case 'VT100':
             case 'vt100':
-                std.io.writeLine("Do you want to jump to the VT100's");
-                std.io.writeLine('online user manual page [Y/n]?');
+                std.io.writeLine("Do you want to jump to the VT100's " +
+                                 'online user manual page [Y/n]?');
                 std.io.setReader(visitVT100Manual);
                 break;
 

@@ -7,8 +7,8 @@ var g = g || {};
 {
     'use strict';
 
-    var W    = 8,
-        H    = 10,
+    var CHAR_WIDTH    = 8,
+        CHAR_HEIGHT   = 10,
         _    = 0,
         // TODO: \t === 4*space
         char = ('0123456789'                 +
@@ -1185,43 +1185,46 @@ var g = g || {};
 
     /*------------------------------------------------------------------------*/
     function VT220(args) /* fillColor => [r, g, b] array,
-                            charSpan  => tight: 0 or loose: 1,
+                            charSpan  => tight: 1 or loose: 2,
                             charZoom => 1px == 1px: 1 or 1px == 2px: 2, */
     {
+        /* Create off-screen image buffer */
         this._canvas  = document.createElement('canvas');
         this._context = this._canvas.getContext('2d');
+
+        /* Create container for index-offsets */
         this._offsets = {};
 
-        this._zoom = args.charZoom;
-        this._span = args.charSpan;
-
-        var WH  = W*H,
-            WH2 = W*H*2,
-            i,
+        var i,
             j,
-            r = args.fillColor[0],
-            g = args.fillColor[1],
-            b = args.fillColor[2],
             image,
             bitmap,
             pixels,
-            AddExtraLine = args.charSpan,
             canvas  = this._canvas,
             context = this._context,
-            offsets = this._offsets;
+            offsets = this._offsets,
+            span    = args.charSpan,
+            r       = args.fillColor[0],
+            g       = args.fillColor[1],
+            b       = args.fillColor[2],
+            width   = CHAR_WIDTH,
+            height  = CHAR_HEIGHT*span,
+            area    = width*CHAR_HEIGHT;
 
-        canvas.width  = W*(data.length/WH);
-        canvas.height = H*2;
+        /* Make off-screen buffer large enough
+           to store all the render glyphs */
+        canvas.width  = width*(data.length/area);
+        canvas.height = height;
 
         /* Process each glyph's data */
-        for (var di=0, ci=0; di<data.length; di+=WH, ci++)
+        for (var di=0, ci=0; di<data.length; di+=area, ci++)
         {
             /* Creat buffer for glyph */
-            bitmap = context.createImageData(W, H*2);
+            bitmap = context.createImageData(width, height);
             pixels = bitmap.data;
 
             /* Draw pixels */
-            for (i=di, j=0; i<di+WH; i++, j+=4)
+            for (i=di, j=0; i<di+area; i++, j+=4)
             {
                 if (data[i])
                 {
@@ -1232,30 +1235,36 @@ var g = g || {};
                 }
 
                 /* After each line, skip the next line */
-                if (AddExtraLine &&
+                if (span === 2 &&
                     /* jshint -W018 */
-                    !((i + 1)%W))
+                    !((i + 1)%width))
                     /* jshint +W018 */
-                        j += W*4;
+                        j += width*4;
             }
 
             /* Store glyph */
-            context.putImageData(bitmap, ci*W, 0);
-            offsets[char[ci]] = ci*W;
+            context.putImageData(bitmap, ci*width, 0);
+            offsets[char[ci]] = ci*width;
         }
+
+        /* Set public static values */
+        this.nativeCharWidth  = width;
+        this.nativeCharHeight = height;
+        this.zoomedCharWidth  = args.charZoom*width;
+        this.zoomedCharHeight = args.charZoom*height;
     }
 
+
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    /* Static variables */
-    VT220.charWidth  = W;
-    VT220.charHeight = H*2;
+    /* Public static variables */
     VT220.printables = char;
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     VT220.prototype.setCharZoom = function(factor)
     {
-        this._zoom = factor;
+        this.zoomedCharWidth  = factor*this.nativeCharWidth;
+        this.zoomedCharHeight = factor*this.nativeCharHeight;
     };
 
 
@@ -1266,21 +1275,23 @@ var g = g || {};
                                             dy)
     {
         /* Turn off anti-aliasing */
+        context.imageSmoothingEnabled       = false;
         context.mozImageSmoothingEnabled    = false;
         context.webkitImageSmoothingEnabled = false;
         context.msImageSmoothingEnabled     = false;
-        context.imageSmoothingEnabled       = false;
 
         var sx = this._offsets[char];
         context.save();
-        context.drawImage(this._canvas, sx, 0, W, H*2, dx, dy, 2*W, 2*H*2);
+        context.drawImage(this._canvas,
+                          sx,  0, this.nativeCharWidth, this.nativeCharHeight,
+                          dx, dy, this.zoomedCharWidth, this.zoomedCharHeight);
         context.restore();
 
         /* Turn anti-aliasing back on */
+        context.imageSmoothingEnabled       = true;
         context.mozImageSmoothingEnabled    = true;
         context.webkitImageSmoothingEnabled = true;
         context.msImageSmoothingEnabled     = true;
-        context.imageSmoothingEnabled       = true;
     };
 
 

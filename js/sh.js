@@ -7,14 +7,20 @@ var g = g || {};
 {
     'use strict';
 
-    var PRINTABLES = g.font.VT220.printables;
+    var BOOT_TIME  = 1500;
 
 
     /*------------------------------------------------------------------------*/
-    function Shell(frame,
-                   context,
-                   distort)
+    function Shell(screen,
+                   frame)
     {
+        /* Store static values */
+        this._scr   = screen;
+        this._frame = frame;
+
+        /* Set frame's cursor style */
+        this._frame.style.cursor = 'text';
+
         /* Welcome message after 'boot' */
         this._INTRO =
         [
@@ -32,22 +38,8 @@ var g = g || {};
         this._index   = 0;
         this._history = [''];
 
-        /* Store clickable area */
-        this._frame = frame;
-
-        /* Create screen */
-        this._scr = new g.scr.Screen({context              : context,
-                                      fontFace             : g.font.VT220,
-                                      screenWidth          : 41,
-                                      screenHeight         : 10,
-                                      horizontalOffset     : 1.5,
-                                      verticalOffset       : 0.85,
-                                      backgroundColor0     : '#303030',
-                                      backgroundColor1     : '#080808',
-                                      foregroundColor      : [194, 255, 206],
-                                      foregroundGlowColor  : [154, 254, 174],
-                                      foregroundGlowRadius : 3,
-                                      postProcessor        : distort});
+        /* Fake booting process indicator */
+        this._booting = false;
 
         /* Create standard input/output operations */
         this._std =
@@ -106,22 +98,24 @@ var g = g || {};
                 }).bind(this),
                 openPopUp  : (function (url)
                 {
-                    var urlOpener = function ()
+                    var urlOpener = (function ()
                     {
                         window.open(url);
                         /* TODO: make it work with `attachEvent` as well */
                         this._frame.removeEventListener('click', urlOpener, false);
+                        this._frame.style.cursor = 'text';
                         this._urlOpener = undefined;
-                    };
+                    }).bind(this);
                     /* If there's already an event listener */
                     if (this._urlOpener)
                         this._frame.removeEventListener('click', this._urlOpener, false);
                     this._frame.addEventListener('click', urlOpener, false);
+                    this._frame.style.cursor = 'pointer';
                     this._urlOpener = urlOpener;
 
                     /* Write instructions on the screen */
                     this._scr.newLine();
-                    this._scr.write('==> CLICK HERE TO OPEN LINK!');
+                    this._scr.write('> click on the screen to open link <');
                     this._scr.newLine();
                     this._scr.newLine();
                 }).bind(this),
@@ -171,6 +165,83 @@ var g = g || {};
             'shutdown',
         ], true);
 
+        name = 'conf';
+        desc = 'configure the terminal';
+        g.install(name,
+        {
+            main : (function (std, argv)
+            {
+                switch (argv[0])
+                {
+                    case 'zoom':
+                        switch (argv[1])
+                        {
+                            case '1':
+                                this._scr.setZoom(1);
+                                break;
+
+                            case '2':
+                                this._scr.setZoom(2);
+                                break;
+
+                            default:
+                                std.lib.invalidArg(name, 'zoom ' + argv[1]);
+                                break;
+                        }
+                        break;
+
+                    case 'span':
+                        switch (argv[1])
+                        {
+                            case '0':
+                                this._scr.setSpan(0);
+                                break;
+
+                            case '1':
+                                this._scr.setSpan(1);
+                                break;
+
+                            default:
+                                std.lib.invalidArg(name, 'span ' + argv[1]);
+                                break;
+                        }
+                        break;
+
+                    default:
+                        std.lib.invalidArg(name, argv[0]);
+                        break;
+                }
+            }).bind(this),
+            desc : desc,
+            man  : (function ()
+            {
+                this._scr.write(name + ' [zoom ZOOM] or ' +
+                                name + ' [span SPAN]');
+                this._scr.newLine();
+                this._scr.write('  ' + desc);
+                this._scr.newLine();
+                this._scr.write('ZOOM:');
+                this._scr.newLine();
+                this._scr.write('  1 : 1 pixel == 1 pixel');
+                this._scr.newLine();
+                this._scr.write('  2 : 1 pixel == 4 pixel');
+                this._scr.newLine();
+                this._scr.write('SPAN:');
+                this._scr.newLine();
+                this._scr.write('  0 : native character height');
+                this._scr.newLine();
+                this._scr.write('  1 : double character height');
+                this._scr.newLine();
+            }).bind(this),
+        },
+        [
+            'pref',
+            'prefs',
+            'config',
+            'settings',
+            'configure',
+        ], true);
+
         // name = 'exit';
         // desc = '';
         // g.install(name,
@@ -217,6 +288,23 @@ var g = g || {};
         this._scr.write(this._PS1);
         this._scr.render();
     }
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype.run = function (element)
+    {
+        /* Set event listeners */
+        if (element.addEventListener)
+        {
+            element.addEventListener('keydown', this.onKeyDown.bind(this), false);
+            element.addEventListener('keypress', this.onKeyPress.bind(this), false);
+        }
+        else
+        {
+            element.attachEvent('onkeydown', this.onKeyDown.bind(this));
+            element.attachEvent('onkeypress', this.onKeyPress.bind(this));
+        }
+    };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -282,6 +370,46 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype.onKeyPress = function (event)
+    {
+        var scr  = this._scr,
+            char = String.fromCharCode(event.which || event.keyCode);
+
+        /* If no modifiers pressed */
+        if (!(event.ctrlKey ||
+              event.altKey  ||
+              event.metaKey))
+                event.preventDefault();
+
+        if (this._scr.printables.indexOf(char) === -1)
+            return;
+
+        /* If a program is running and waiting for input */
+        if (this._reader)
+            this._readerHistory += char;
+        else
+            this._history[this._index] += char;
+
+        /* Write the written character */
+        scr.write(char);
+        scr.render();
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype._resetAndWriteMultiLine = function (msg)
+    {
+        var scr = this._scr;
+        scr.reset();
+        for (var i=0; i<msg.length; i++)
+        {
+            scr.write(msg[i]);
+            scr.newLine();
+        }
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Shell.prototype._moveInHistory = function (steps)
     {
         /* Get steps-th line from current position */
@@ -317,80 +445,57 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype.run = function (element)
-    {
-        /* Set event listeners */
-        if (element.addEventListener)
-        {
-            element.addEventListener('keydown', this.onKeyDown.bind(this), false);
-            element.addEventListener('keypress', this.onKeyPress.bind(this), false);
-        }
-        else
-        {
-            element.attachEvent('onkeydown', this.onKeyDown.bind(this));
-            element.attachEvent('onkeypress', this.onKeyPress.bind(this));
-        }
-    };
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype.onKeyPress = function (event)
-    {
-        var scr  = this._scr,
-            char = String.fromCharCode(event.which || event.keyCode);
-
-        /* If no modifiers pressed */
-        if (!(event.ctrlKey ||
-              event.altKey  ||
-              event.metaKey))
-                event.preventDefault();
-
-        if (PRINTABLES.indexOf(char) === -1)
-            return;
-
-        /* If a program is running and waiting for input */
-        if (this._reader)
-            this._readerHistory += char;
-        else
-            this._history[this._index] += char;
-
-        /* Write the written character */
-        scr.write(char);
-        scr.render();
-    };
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype._resetAndWriteMultiLine = function (msg)
-    {
-        var scr = this._scr;
-        scr.reset();
-        for (var i=0; i<msg.length; i++)
-        {
-            scr.write(msg[i]);
-            scr.newLine();
-        }
-    };
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Shell.prototype._poweroff = function (argv)
     {
-        var scr = this._scr;
+        /* Start fake process */
+        this._booting = true;
 
-        /* Shutting down */
-        scr.write('VT100 is rebooting now...');
-        scr.newLine();
-        scr.write('See you on the other side!');
+        /* Command recieved */
+        this._scr.newLine();
+        this._scr.write('VT100 is rebooting now...');
+        this._scr.newLine();
+        this._scr.render();
 
-        /* Restore default settings, clear cache */
-        this._index   = 0;
-        this._history = [''];
-        if (this._urlOpener)
-            this._frame.removeEventListener('click', this._urlOpener, false);
+        var reboot = (function ()
+        {
+            /* Restore default settings, clear cache */
+            this._index   = 0;
+            this._history = [''];
+            if (this._urlOpener)
+                this._frame.removeEventListener('click', this._urlOpener, false);
 
-        /* Boot */
-        this._resetAndWriteMultiLine(this._INTRO);
+            /* Boot */
+            this._resetAndWriteMultiLine(this._INTRO);
+            this._scr.write(this._PS1);
+            this._scr.render();
+
+            /* Stop fake process */
+            this._booting = false;
+        }).bind(this);
+
+        var deadbeef = (function ()
+        {
+            /* Clear screen */
+            this._scr.reset();
+            this._scr.render();
+
+            /* Schedule reboot */
+            window.setTimeout(reboot, BOOT_TIME);
+        }).bind(this);
+
+        var poweroff = (function ()
+        {
+            /* Shutting down */
+            this._scr.write('See you on the other side!');
+            this._scr.newLine();
+            this._scr.render();
+
+            /* Schedule reboot */
+            window.setTimeout(deadbeef, BOOT_TIME);
+        }).bind(this);
+
+        /* Schedule poweroff */
+        window.setTimeout(poweroff, BOOT_TIME);
     };
 
 
@@ -418,8 +523,10 @@ var g = g || {};
             }
         }
 
-        /* If no program is waiting for user input */
-        if (!this._reader)
+        /* If no program is waiting for user input and
+           the machine is not fake-rebooting */
+        if (!this._reader &&
+            !this._booting)
         {
             /* Return to the command prompt */
             this._scr.write(this._PS1);

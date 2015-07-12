@@ -10,7 +10,7 @@ var g = g || {};
     var VARS,
         LINE = '>>> ',
         NAME = 'js',
-        DESC = 'evaluate javascript expressions';
+        DESC = 'javascript REPL';
 
     /*------------------------------------------------------------------------*/
     function man(std)
@@ -23,6 +23,8 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function repl(std, input)
     {
+        /* TODO: Add `system()` => to execute built-in programs */
+
         /* built-in functions */
         var vars  = VARS,
             clear = std.io.clear;

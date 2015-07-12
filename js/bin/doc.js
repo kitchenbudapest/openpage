@@ -30,10 +30,10 @@ var g = g || {};
     function main(std, argv)
     {
                        /* 0123456789012345678901234567890123456789 */
-        std.io.writeLine('This hackathon comes with "batteries');
-        std.io.writeLine('included", as we created a nice wiki');
-        std.io.writeLine('and an easy to use framework, to make');
-        std.io.writeLine('hacking even more fun.');
+        std.io.writeLine('This hackathon comes with "batteries '  +
+                         'included", as we created a nice wiki '  +
+                         'and an easy to use framework, to make ' +
+                         'hacking even more fun.');
         std.io.writeLine('...');
         std.io.writeLine('Do you want to visit the repo [Y/n]?');
         std.io.setReader(visitHackathonRepo);

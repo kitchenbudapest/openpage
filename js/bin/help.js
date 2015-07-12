@@ -74,7 +74,8 @@ var g = g || {};
         desc : HIDDEN_DESC,
     },
     [
-        '_',
+        '.ls',
+        '.info',
         '.help',
     ], true);
 })();

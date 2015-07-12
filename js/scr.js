@@ -22,7 +22,7 @@ var g = g || {};
     }
 
     /*------------------------------------------------------------------------*/
-    function Screen(args) /* context,
+    function Screen(args) /* canvas,
                              fontFace,
                              screenWidth,
                              screenHeight,
@@ -35,20 +35,21 @@ var g = g || {};
                              foregroundGlowRadius,
                              postProcessor, */
     {
+        /* Store rendering properties */
+        this._zoom = 1;
+        this._span = 1;
+
         /* Create and store characters */
-        this._zoom = 2;
         this._fontTight = new args.fontFace({fillColor : args.foregroundColor,
-                                             charSpan  : 0,
-                                             charZoom  : this._zoom});
-        this._fontLoose = new args.fontFace({fillColor : args.foregroundColor,
                                              charSpan  : 1,
-                                             charZoom  : this._zoom});
+                                             charZoom  : 2});
+        this._fontLoose = new args.fontFace({fillColor : args.foregroundColor,
+                                             charSpan  : 2,
+                                             charZoom  : 2});
 
         /* Store static values */
-        this._context      = args.context;
+        this._context      = args.canvas.getContext('2d');
         this._fontFace     = this._fontLoose;
-        this._charWidth    = this._zoom*args.fontFace.charWidth;
-        this._charHeight   = this._zoom*args.fontFace.charHeight;
         this._screenWidth  = args.screenWidth;
         this._screenHeight = args.screenHeight;
         this._hOffset      = args.horizontalOffset;
@@ -62,19 +63,25 @@ var g = g || {};
         this.reset();
 
         /* Create screen background */
-        var width    = (args.screenWidth + args.horizontalOffset*2)*this._charWidth*2,
-            height   = (args.screenHeight + args.verticalOffset*2)*this._charHeight*2,
+        var width    = (this._screenWidth  + this._hOffset*2)*this._fontFace.zoomedCharWidth,
+            height   = (this._screenHeight + this._vOffset*2)*this._fontFace.zoomedCharHeight,
             centerX  = width*0.5,
             centerY  = height*0.85,
             radius   = Math.max(centerX, centerY)*1.6,
-            gradient = args.context.createRadialGradient(centerX, centerY, 0.0,
-                                                         centerX, centerY, radius);
+            gradient = this._context.createRadialGradient(centerX, centerY, 0.0,
+                                                          centerX, centerY, radius);
         gradient.addColorStop(0, args.backgroundColor0);
         gradient.addColorStop(1, args.backgroundColor1);
-
-        this._width   = width;
-        this._height  = height;
         this._bgColor = gradient;
+
+        /* Set canvas size */
+        args.canvas.width  = width;
+        args.canvas.height = height;
+
+        /* Store public static values */
+        this.printables = args.fontFace.printables;
+        this.width  = width;
+        this.height = height;
     }
 
 
@@ -89,14 +96,62 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.setZoom = function (value)
+    {
+        /* If 1px == 1px */
+        if (value === 1)
+        {
+            this._zoom = 2;
+            this._fontFace.setCharZoom(1);
+        }
+        /* If 1px == 2px */
+        else if (value === 2)
+        {
+            this._zoom = 1;
+            this._fontFace.setCharZoom(2);
+        }
+        /* If invalid value */
+        else
+            return;
+
+        /* Since the buffer has been reconfigured, reset everything */
+        this.reset();
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Screen.prototype.setSpan = function (value)
+    {
+        /* If add extra lines after each line */
+        if (value)
+        {
+            this._span = 1;
+            this._fontFace = this._fontLoose;
+        }
+        /* If don't add extra lines */
+        else
+        {
+            this._span = 2;
+            this._fontFace = this._fontTight;
+        }
+
+        /* Set current zoom settings as well */
+        this._fontFace.setCharZoom(this._zoom === 1 ? 2 : 1);
+
+        /* Since the buffer has been reconfigured, reset everything */
+        this.reset();
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.newLine = function ()
     {
         this._colIndex = 0;
         this._buffer.push('');
-        if (this._rowIndex >= this._screenHeight)
-            this._buffer.shift();
-        else
+        if ((this._rowIndex + 1) < this._screenHeight*this._zoom*this._span)
             this._rowIndex++;
+        else
+            this._buffer.shift();
         /* Indicate the buffer was changed */
         this._isBufferChanged = true;
     };
@@ -112,8 +167,8 @@ var g = g || {};
             buffer       = this._buffer,
             colIndex     = this._colIndex,
             rowIndex     = this._rowIndex,
-            screenWidth  = this._screenWidth,
-            screenHeight = this._screenHeight,
+            screenWidth  = this._screenWidth*this._zoom,
+            screenHeight = this._screenHeight*this._zoom*this._span,
             colLeft      = screenWidth - colIndex;
 
         /* Wrap lines and extend buffer */
@@ -138,10 +193,10 @@ var g = g || {};
             if (colIndex >= screenWidth)
             {
                 /* If reached the bottom edge of the screen */
-                if (rowIndex >= screenHeight)
-                    buffer.shift();
-                else
+                if ((rowIndex + 1) < screenHeight)
                     rowIndex++;
+                else
+                    buffer.shift();
                 colIndex = 0;
             }
         }
@@ -163,8 +218,8 @@ var g = g || {};
         if (!count)
             return;
 
-        var lineCount = Math.floor(count/this._screenWidth),
-            charCount = count%this._screenWidth;
+        var lineCount = Math.floor(count/(this._screenWidth*this._zoom)),
+            charCount = count%(this._screenWidth*this._zoom);
 
         /* If popping whole line(s) */
         if (lineCount)
@@ -212,7 +267,7 @@ var g = g || {};
     {
         /* Create background */
         context.fillStyle = this._bgColor;
-        context.fillRect(0, 0, this._width, this._height);
+        context.fillRect(0, 0, this.width, this.height);
 
         /* Set font style */
         // context.fillStyle   = this._fgColor;
@@ -234,16 +289,16 @@ var g = g || {};
                 j,
                 row,
                 line,
-                rowIndex = this._rowIndex,
                 hOff     = this._hOffset,
                 vOff     = this._vOffset,
-                chrW     = this._charWidth,
-                chrH     = this._charHeight,
-                scrW     = this._screenWidth,
-                scrH     = this._screenHeight,
+                rowIndex = this._rowIndex,
                 buffer   = this._buffer,
                 context  = this._context,
-                fontFace = this._fontFace;
+                fontFace = this._fontFace,
+                chrW     = fontFace.zoomedCharWidth,
+                chrH     = fontFace.zoomedCharHeight,
+                scrW     = this._screenWidth*this._zoom,
+                scrH     = this._screenHeight*this._zoom*this._span;
 
             /* Set styles of context */
             this._prepareContext(context);
@@ -262,7 +317,17 @@ var g = g || {};
 
             /* Use psot-processor if there is any */
             if (this._postProcess)
-                this._postProcess();
+            {
+                context.putImageData(
+                    this._postProcess(
+                        context.getImageData(0, 0, this.width, this.height),
+                        context.createImageData(this.width, this.height),
+                        this.width,
+                        this.height),
+                    0, 0);
+            }
+
+            /* Update buffer change indicator */
             this._isBufferChanged = false;
         }
         // console.log('[DONE] screen rendered', buffer);
