@@ -6,6 +6,13 @@
 @import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic);
 
+$post-it-width        : 256px;
+$post-it-color        : hsl(57deg, 70%, 75%);
+$post-it-font-color   : darken($post-it-color, 65%);
+$post-it-shadow-color : rgba(0, 0, 0, 0.20);
+
+
+/*----------------------------------------------------------------------------*/
 body
 {
     width                 : 100%;
@@ -14,28 +21,61 @@ body
     @include background-image(linear-gradient(#E0E0E0, #FFFFFF));
 }
 
+
+/*----------------------------------------------------------------------------*/
+#main
+{
+    display  : block;
+    position : relative;
+    width    : 1280px;
+    margin   : 0 auto;
+}
+
+
+/*----------------------------------------------------------------------------*/
 #logo
 {
+    display : block;
     margin  : 16px auto;
 }
 
-#primary
+
+/*----------------------------------------------------------------------------*/
+#static
 {
-    display : block;
-    width   : 1280px;
-    margin  : 0 auto;
+    display     : none;
+    opacity     : 0.0;
+    margin      : 8px auto;
+    width       : 700px;
+    font-family : 'Source Sans Pro', sans-serif;
+    font-weight : 300;
+    line-height : 1.3;
+    text-align  : justify;
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    & > h1
+    {
+        font-size     : 24pt;
+        margin-bottom : 16pt;
+    }
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    & > i
+    {
+        font-variant : italic;
+    }
 }
 
-#secondary
-{
-    // pass
-}
 
+/*----------------------------------------------------------------------------*/
 #terminal
 {
-    position : relative;
+    position : absolute;
+    top      : 0;
 }
 
+
+/*----------------------------------------------------------------------------*/
 #terminal-logo,
 #terminal-frame,
 #terminal-display,
@@ -46,6 +86,8 @@ body
     position : absolute;
 }
 
+
+/*----------------------------------------------------------------------------*/
 #terminal-display
 {
     z-index : 100;
@@ -53,14 +95,17 @@ body
     left    : 155px;
 }
 
+
+/*----------------------------------------------------------------------------*/
 #terminal-frame
 {
     z-index  : 200;
     top      : 0;
     left     : 0;
-    // opacity  : 0.15;
 }
 
+
+/*----------------------------------------------------------------------------*/
 #terminal-logo
 {
     z-index  : 300;
@@ -71,6 +116,8 @@ body
     cursor   : pointer;
 }
 
+
+/*----------------------------------------------------------------------------*/
 #terminal-clicker
 {
     z-index : 400;
@@ -80,11 +127,8 @@ body
     height  : 440px;
 }
 
-$post-it-width        : 256px;
-$post-it-color        : hsl(57deg, 70%, 75%);
-$post-it-font-color   : darken($post-it-color, 65%);
-$post-it-shadow-color : rgba(0, 0, 0, 0.20);
 
+/*----------------------------------------------------------------------------*/
 #terminal-post-it
 {
     top            : 90px;
@@ -98,9 +142,10 @@ $post-it-shadow-color : rgba(0, 0, 0, 0.20);
     overflow       : auto;
 }
 
+
+/*----------------------------------------------------------------------------*/
 #terminal-post-it-shadow
 {
-    @include rotate(1deg);
     z-index    : 490;
     display    : block;
     position   : absolute;
@@ -111,8 +156,11 @@ $post-it-shadow-color : rgba(0, 0, 0, 0.20);
     height     : 58%;
     background : $post-it-shadow-color;
     box-shadow : 0 18px 8px 20px $post-it-shadow-color;
+    @include rotate(1deg);
 }
 
+
+/*----------------------------------------------------------------------------*/
 #terminal-post-it-paper
 {
     // opacity: 0.25;
@@ -131,11 +179,14 @@ $post-it-shadow-color : rgba(0, 0, 0, 0.20);
                                               $post-it-color 75%,
                                               lighten($post-it-color, 10%) 90%,
                                               lighten($post-it-color, 15%) 95%));
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > h1
     {
         font-size: 22pt;
     }
 
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > p > a
     {
         text-decoration: none;
@@ -150,4 +201,3 @@ $post-it-shadow-color : rgba(0, 0, 0, 0.20);
         }
     }
 }
-

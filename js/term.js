@@ -8,7 +8,7 @@ var g = g || {};
     'use strict';
 
     /*------------------------------------------------------------------------*/
-    function VT100()
+    function VT100(onExitCallback)
     {
         /* Create canvas */
         this._canvas     = document.createElement('canvas');
@@ -43,7 +43,8 @@ var g = g || {};
 
         /* Create shell */
         this._shell  = new g.shell.Shell(this._screen,
-                                         this._clicker);
+                                         this._clicker,
+                                         onExitCallback);
     }
 
 

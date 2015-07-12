@@ -12,7 +12,8 @@ var g = g || {};
 
     /*------------------------------------------------------------------------*/
     function Shell(screen,
-                   frame)
+                   frame,
+                   exiter)
     {
         /* Store static values */
         this._scr   = screen;
@@ -242,27 +243,29 @@ var g = g || {};
             'configure',
         ], true);
 
-        // name = 'exit';
-        // desc = '';
-        // g.install(name,
-        // {
-        //     main : ,
-        //     desc : desc,
-        //     man  : (function ()
-        //     {
-        //         this._scr.write(name);
-        //         this._scr.newLine();
-        //         this._scr.write('  ' + desc);
-        //         this._scr.newLine();
-        //     }).bind(this),
-        // },
-        // [
-        //     'skip',
-        //     'quit',
-        //     'close',
-        //     'break',
-        //     'leave',
-        // ]);
+        name = 'exit';
+        desc = 'show the static page';
+        g.install(name,
+        {
+            main : exiter,
+            desc : desc,
+            man  : (function ()
+            {
+                this._scr.write(name);
+                this._scr.newLine();
+                this._scr.write('  ' + desc);
+                this._scr.newLine();
+            }).bind(this),
+        },
+        [
+            'EXIT',
+            'Exit',
+            'skip',
+            'quit',
+            'close',
+            'break',
+            'leave',
+        ]);
 
         // name = 'apply';
         // desc = '';
