@@ -17,7 +17,8 @@ function main()
     /* HACK: Is this really the "most elegant" solution to this problem??? */
     term.style.top = (logo.offsetTop + logo.offsetHeight).toString() + 'px';
 
-    var topMax      = 0,
+    var isOpen      = false,
+        topMax      = 0,
         topStep     = 5,
         opacityMax  = 1.0,
         opacityStep = 0.0;
@@ -27,7 +28,10 @@ function main()
     {
         var top = term.offsetTop;
         if (top >= topMax)
+        {
+            isOpen = true;
             return;
+        }
 
         term.style.top     = (top + topStep).toString() + 'px';
         stat.style.opacity = (parseFloat(stat.style.opacity) + opacityStep).toString();
@@ -39,14 +43,17 @@ function main()
     /* Create exit callback function for terminal */
     function onExit(event)
     {
-        stat.style.display = 'block';
-        stat.style.opacity = '0.0';
+        if (!isOpen)
+        {
+            stat.style.display = 'block';
+            stat.style.opacity = '0.0';
 
-        topMax = stat.offsetTop + stat.offsetHeight;
-        opacityStep = opacityMax/(topMax/topStep);
+            topMax = stat.offsetTop + stat.offsetHeight;
+            opacityStep = opacityMax/(topMax/topStep);
 
-        /* Start animation */
-        window.requestAnimationFrame(moveAndFade);
+            /* Start animation */
+            window.requestAnimationFrame(moveAndFade);
+        }
     }
 
     /* Assign exit callback to the post-it element */
