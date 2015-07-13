@@ -49,6 +49,7 @@ var g = g || {};
         desc : DESC,
     },
     [
+        'rtfm',
         'docs',
         'wiki',
         'manual',

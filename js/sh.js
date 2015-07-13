@@ -55,11 +55,22 @@ var g = g || {};
                     this._reader        = reader;
                 }).bind(this),
                 clear      : this._scr.reset.bind(this._scr),
+                newLine    : this._scr.newLine.bind(this._scr),
                 write      : this._scr.write.bind(this._scr),
                 writeLine  : (function (text)
                 {
                     this._scr.write(text);
                     this._scr.newLine();
+                }).bind(this),
+                lock       : (function ()
+                {
+                    this._locked = true;
+                }).bind(this),
+                release    : (function ()
+                {
+                    delete this._locked;
+                    this._scr.write(this._PS1);
+                    this._scr.render();
                 }).bind(this),
             },
             lib:
@@ -105,7 +116,7 @@ var g = g || {};
                         /* TODO: make it work with `attachEvent` as well */
                         this._frame.removeEventListener('click', urlOpener, false);
                         this._frame.style.cursor = 'text';
-                        this._urlOpener = undefined;
+                        delete this._urlOpener;
                     }).bind(this);
                     /* If there's already an event listener */
                     if (this._urlOpener)
@@ -267,25 +278,6 @@ var g = g || {};
             'leave',
         ]);
 
-        // name = 'apply';
-        // desc = '';
-        // g.install(name,
-        // {
-        //     main : ,
-        //     desc : desc,
-        //     man  : (function ()
-        //     {
-        //         this._scr.write(name);
-        //         this._scr.newLine();
-        //         this._scr.write('  ' + desc);
-        //         this._scr.newLine();
-        //     }).bind(this),
-        // },
-        // [
-        //     'join',
-        //     'register',
-        // ]);
-
         /* Prompt to the user for the first time */
         this._resetAndWriteMultiLine(this._INTRO);
         this._scr.write(this._PS1);
@@ -318,6 +310,10 @@ var g = g || {};
         switch (event.which || event.keyCode)
         {
             case g.kb.code.Return:
+                /* If a program locked the I/O */
+                if (this._locked)
+                    break;
+                /* Add new line */
                 this._scr.newLine();
                 /* If a program is running */
                 if (this._reader)
@@ -326,7 +322,10 @@ var g = g || {};
                     if (!this._reader(this._std, this._readerHistory))
                     {
                         /* Remove callback and return to prompt */
-                        this._reader = undefined;
+                        delete this._reader;
+                        /* If reader did not lock the I/O */
+                        if (this._locked)
+                            return;
                         this._scr.write(this._PS1);
                     }
                     /* Clear input history */
@@ -342,8 +341,10 @@ var g = g || {};
                 break;
 
             case g.kb.code.BackSpace:
+                /* If a program locked the I/O */
+                if (this._locked);
                 /* If a program is running */
-                if (this._reader)
+                else if (this._reader)
                     this._readerHistory =
                         this._popCharFrom(this._readerHistory);
                 /* If only the shell is running */
@@ -353,14 +354,18 @@ var g = g || {};
                 break;
 
             case g.kb.code.Up:
-                /* If no program is running, move back in history */
-                if (!this._reader)
+                /* If no program is running and the I/O is not
+                   locked, move back in history */
+                if (!this._reader &&
+                    !this._locked)
                     this._moveInHistory(-1);
                 break;
 
             case g.kb.code.Down:
-                /* If no program is running, move forward in history */
-                if (!this._reader)
+                /* If no program is running and the I/O is not,
+                   move forward in history */
+                if (!this._reader &&
+                    !this._locked)
                     this._moveInHistory(+1);
                 break;
 
@@ -375,6 +380,10 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Shell.prototype.onKeyPress = function (event)
     {
+        /* If a program locked the I/O */
+        if (this._locked)
+            return;
+
         var scr  = this._scr,
             char = String.fromCharCode(event.which || event.keyCode);
 
@@ -453,7 +462,7 @@ var g = g || {};
         /* Start fake process */
         this._booting = true;
 
-        /* Command recieved */
+        /* Command received */
         this._scr.newLine();
         this._scr.write('VT100 is rebooting now...');
         this._scr.newLine();
@@ -528,8 +537,9 @@ var g = g || {};
 
         /* If no program is waiting for user input and
            the machine is not fake-rebooting */
-        if (!this._reader &&
-            !this._booting)
+        if (!this._reader  &&
+            !this._booting &&
+            !this._locked)
         {
             /* Return to the command prompt */
             this._scr.write(this._PS1);
