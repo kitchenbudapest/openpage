@@ -1,0 +1,86 @@
+// INFO //
+// INFO //
+
+/* Blocks naming reference:
+
+    +---------------------+
+    |  +---------------+  |====> header
+    |  |               |  |
+    |  |               |=======> header-img
+    |  |               |  |
+    |  +---------------+  |
+    +---------------------+
+    |  +------+           |====> logo
+    |  |      |================> logo-img
+    |  +------+           |
+    +---------------------+
+    |                     |====> info
+    |  +------+ +------+  |
+    |  |      | |      |=======> info-date
+    |  |      | +------+  |
+    |  |      |================> info-intro
+    |  |      | +------+  |
+    |  |      | |      |=======> info-location
+    |  +------+ +------+  |
+    +---------------------+
+    |                     |====> detail
+*/
+
+
+/*----- CONSTANTS ------------------------------------------------------------*/
+$HEADER-IMG-WIDTH : 1280px;
+
+
+
+/*----- FONT-SIZES -----------------------------------------------------------*/
+$info-intro-font-size       : 13pt;
+$info-intro-title-font-size : 32pt;
+
+
+
+/*----- DIMENSIONS -----------------------------------------------------------*/
+$header-height                    : 700px;
+$header-img-top-distance          : 50px;
+$header-img-scale                 : 0.75;
+
+$logo-height                      : 150px;
+$logo-img-bottom-distance         : 28px;
+
+$paragraph-width                  : 445px;
+
+$info-intro-top-bottom-distance   : 50px;
+$info-intro-title-bottom-distance : 30px;
+
+
+
+/*----- COLORS ---------------------------------------------------------------*/
+$text-base-color : #512417;
+
+$header-color-10 : #433934;
+$header-color-20 : #FEF6DF;
+$header-gradient-colors:
+(
+    (
+        stop  : 10%,
+        color : $header-color-10,
+    ),
+    (
+        stop  : 100%,
+        color : $header-color-20,
+    ),
+);
+$footer-gradient-colors:
+(
+    (
+        stop  : 0%,
+        color : $header-color-10,
+    ),
+    (
+        stop  : 100%,
+        color : $header-color-20,
+    ),
+);
+$header-logo-separator-color : #EF7219;
+
+$info-date-background   : #F9EDD0;
+$info-date-border-color : #D7C5AB;

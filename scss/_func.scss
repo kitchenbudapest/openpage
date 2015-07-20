@@ -1,0 +1,18 @@
+// INFO //
+// INFO //
+
+/*----------------------------------------------------------------------------*/
+@function process-gradient-def($gradient-def)
+{
+    $arguments: ();
+    @each $component in $gradient-def
+    {
+        $arguments: append($arguments,
+                          (
+                            map-get($component, color),
+                            map-get($component, stop)
+                          ),
+                          comma);
+    }
+    @return $arguments;
+}
