@@ -16,7 +16,7 @@ var g = g || {};
 
         /* Create image-frame */
         this._frame      = document.createElement('img');
-        this._frame.src  = 'img/vt100_as_frame.002.png';
+        this._frame.src  = 'img/vt100_as_frame.002.001.png';
         this._frame.id   = 'terminal-frame';
 
         /* Create logo-button */

@@ -28,7 +28,11 @@
 
 
 /*----- CONSTANTS ------------------------------------------------------------*/
-$HEADER-IMG-WIDTH : 1280px;
+$HEADER-IMG-WIDTH    : 1300px;
+$HEADER-IMG-HEIGHT   : 731px;
+$DESKTOP-WIDTH       : 960px;
+$MOBILE-WIDTH        : 480px;
+$HEADER-CANVAS-SCALE : 0.75;
 
 
 
@@ -40,8 +44,7 @@ $info-intro-title-font-size : 32pt;
 
 /*----- DIMENSIONS -----------------------------------------------------------*/
 $header-height                    : 700px;
-$header-img-top-distance          : 50px;
-$header-img-scale                 : 0.75;
+$header-img-top-distance          : 15px;
 
 $logo-height                      : 150px;
 $logo-img-bottom-distance         : 28px;

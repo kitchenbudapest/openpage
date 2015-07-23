@@ -135,17 +135,17 @@ var g = g || {};
         };
 
         /* Install built-in programs */
-        var name = 'clear',
-            desc = 'clear the terminal screen';
-        g.install(name,
+        var name1 = 'clear',
+            desc1 = 'clear the terminal screen';
+        g.install(name1,
         {
             main : this._scr.reset.bind(this._scr),
-            desc : desc,
+            desc : desc1,
             man  : (function ()
             {
-                this._scr.write(name);
+                this._scr.write(name1);
                 this._scr.newLine();
-                this._scr.write('  ' + desc);
+                this._scr.write('  ' + desc1);
                 this._scr.newLine();
             }).bind(this),
         },
@@ -155,17 +155,17 @@ var g = g || {};
             'reset',
         ]);
 
-        name = 'reboot';
-        desc = 'reboot the machine';
-        g.install(name,
+        var name2 = 'reboot',
+            desc2 = 'reboot the machine';
+        g.install(name2,
         {
             main : this._poweroff.bind(this),
-            desc : desc,
+            desc : desc2,
             man  : (function ()
             {
-                this._scr.write(name);
+                this._scr.write(name2);
                 this._scr.newLine();
-                this._scr.write('  ' + desc);
+                this._scr.write('  ' + desc2);
                 this._scr.newLine();
             }).bind(this),
         },
@@ -177,9 +177,9 @@ var g = g || {};
             'shutdown',
         ], true);
 
-        name = 'conf';
-        desc = 'configure the terminal';
-        g.install(name,
+        var name3 = 'conf',
+            desc3 = 'configure the terminal';
+        g.install(name3,
         {
             main : (function (std, argv)
             {
@@ -224,13 +224,13 @@ var g = g || {};
                         break;
                 }
             }).bind(this),
-            desc : desc,
+            desc : desc3,
             man  : (function ()
             {
-                this._scr.write(name + ' [zoom ZOOM] or ' +
-                                name + ' [span SPAN]');
+                this._scr.write(name3 + ' [zoom ZOOM] or ' +
+                                name3 + ' [span SPAN]');
                 this._scr.newLine();
-                this._scr.write('  ' + desc);
+                this._scr.write('  ' + desc3);
                 this._scr.newLine();
                 this._scr.write('ZOOM:');
                 this._scr.newLine();
@@ -254,17 +254,17 @@ var g = g || {};
             'configure',
         ], true);
 
-        name = 'exit';
-        desc = 'show the static page';
-        g.install(name,
+        var name4 = 'exit',
+            desc4 = 'show the static page';
+        g.install(name4,
         {
             main : exiter,
-            desc : desc,
+            desc : desc4,
             man  : (function ()
             {
-                this._scr.write(name);
+                this._scr.write(name4);
                 this._scr.newLine();
-                this._scr.write('  ' + desc);
+                this._scr.write('  ' + desc4);
                 this._scr.newLine();
             }).bind(this),
         },

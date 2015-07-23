@@ -29,7 +29,7 @@
 /*----- FONT-SIZES -----------------------------------------------------------*/
 /*----- DIMENSIONS -----------------------------------------------------------*/
 /*----- COLORS ---------------------------------------------------------------*/
-@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 /*----------------------------------------------------------------------------*/
 body {
@@ -49,7 +49,7 @@ body {
   display: block;
   position: relative;
   width: 100%;
-  height: 700px;
+  height: 746px;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIxMCUiIHN0b3AtY29sb3I9IiM0MzM5MzQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZWY2ZGYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(10%, #433934), color-stop(100%, #fef6df));
@@ -59,24 +59,14 @@ body {
 }
 
 /*----------------------------------------------------------------------------*/
-#header-frame {
+#terminal {
   display: block;
   position: relative;
+  top: 0;
+  left: 0;
   width: 960px;
   height: 100%;
   margin: 0 auto;
-}
-
-/*----------------------------------------------------------------------------*/
-#terminal {
-  display: block;
-  position: absolute;
-  top: 24.5px;
-  left: 0;
-  -moz-transform: scale(0.75, 0.75);
-  -ms-transform: scale(0.75, 0.75);
-  -webkit-transform: scale(0.75, 0.75);
-  transform: scale(0.75, 0.75);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -92,101 +82,67 @@ body {
 /*----------------------------------------------------------------------------*/
 #terminal-display {
   z-index: 100;
-  top: 95px;
-  left: 155px;
+  position: relative;
+  top: 45px;
+  left: 30px;
+  -moz-transform: scale(0.75, 0.75);
+  -ms-transform: scale(0.75, 0.75);
+  -webkit-transform: scale(0.75, 0.75);
+  transform: scale(0.75, 0.75);
 }
 
 /*----------------------------------------------------------------------------*/
 #terminal-frame {
   z-index: 200;
+  position: absolute;
   top: 0;
-  left: 0;
+  left: -170px;
+  padding: 15px 0 15px;
 }
 
 /*----------------------------------------------------------------------------*/
 #terminal-logo {
   z-index: 300;
-  width: 210px;
-  height: 46px;
-  top: 503px;
-  left: 968px;
+  top: 408px;
+  left: 715px;
+  width: 151px;
+  height: 33px;
   cursor: pointer;
 }
 
 /*----------------------------------------------------------------------------*/
 #terminal-clicker {
   z-index: 400;
-  top: 110px;
-  left: 194px;
-  width: 610px;
-  height: 440px;
+  top: 100px;
+  left: 110px;
+  width: 525px;
+  height: 360px;
 }
 
 /*----------------------------------------------------------------------------*/
 #terminal-post-it {
-  display: none;
-  top: 90px;
-  left: 880px;
+  z-index: 500;
+  width: 180px;
+  top: 175px;
+  left: 717px;
   line-height: 1.2;
   text-align: justify;
-  font-family: 'Permanent Marker', cursive;
-  font-size: 12pt;
-  font-weight: 400;
-  padding: 16px 32px 32px;
-  overflow: auto;
-}
-
-/*----------------------------------------------------------------------------*/
-#terminal-post-it-shadow {
-  z-index: 490;
-  display: block;
-  position: absolute;
-  content: "";
-  top: 88px;
-  left: 62px;
-  width: 67%;
-  height: 58%;
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 18px 8px 20px rgba(0, 0, 0, 0.2);
-  -moz-transform: rotate(1deg);
-  -ms-transform: rotate(1deg);
-  -webkit-transform: rotate(1deg);
-  transform: rotate(1deg);
-}
-
-/*----------------------------------------------------------------------------*/
-#terminal-post-it-paper {
-  z-index: 500;
-  display: block;
-  position: relative;
-  padding: 40px 16px 24px;
-  width: 256px;
-  color: #2b2a08;
-  border: 1px solid #e8e37d;
-  border-bottom-left-radius: 120px 30px;
-  -moz-transform: rotate(3deg);
-  -ms-transform: rotate(3deg);
-  -webkit-transform: rotate(3deg);
-  transform: rotate(3deg);
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuODQxNTA2IiB5MT0iLTAuMDkxNTA2IiB4Mj0iMC4xNTg0OTQiIHkyPSIxLjA5MTUwNiI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y0ZjFiZSIvPjxzdG9wIG9mZnNldD0iNTUlIiBzdG9wLWNvbG9yPSIjZWNlNzkzIi8+PHN0b3Agb2Zmc2V0PSI3NSUiIHN0b3AtY29sb3I9IiNlY2U3OTMiLz48c3RvcCBvZmZzZXQ9IjkwJSIgc3RvcC1jb2xvcj0iI2Y0ZjFiZSIvPjxzdG9wIG9mZnNldD0iOTUlIiBzdG9wLWNvbG9yPSIjZjdmNmQ0Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background-size: 100%;
-  background-image: -moz-linear-gradient(240deg, #f4f1be 0%, #ece793 55%, #ece793 75%, #f4f1be 90%, #f7f6d4 95%);
-  background-image: -webkit-linear-gradient(240deg, #f4f1be 0%, #ece793 55%, #ece793 75%, #f4f1be 90%, #f7f6d4 95%);
-  background-image: linear-gradient(-150deg, #f4f1be 0%, #ece793 55%, #ece793 75%, #f4f1be 90%, #f7f6d4 95%);
-  /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+  font-family: 'Architects Daughter', cursive;
+  font-size: 10.5pt;
+  -moz-transform: rotate(-8.5deg);
+  -ms-transform: rotate(-8.5deg);
+  -webkit-transform: rotate(-8.5deg);
+  transform: rotate(-8.5deg);
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 }
-#terminal-post-it-paper > h1 {
-  font-size: 22pt;
-}
-#terminal-post-it-paper > p > a {
+#terminal-post-it > p > a {
   text-decoration: none;
   color: #AA0000;
 }
-#terminal-post-it-paper > p > a:visited {
+#terminal-post-it > p > a:visited {
   color: #880000;
 }
-#terminal-post-it-paper > p > a:hover {
+#terminal-post-it > p > a:hover {
   color: #CC0000;
 }
 

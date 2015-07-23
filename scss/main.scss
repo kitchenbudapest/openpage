@@ -8,8 +8,8 @@
 @import 'func';
 @import 'config';
 
-@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
-// @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic);
+// @import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 
 $post-it-width        : 256px;
@@ -17,8 +17,6 @@ $post-it-color        : hsl(57deg, 70%, 75%);
 $post-it-font-color   : darken($post-it-color, 65%);
 $post-it-shadow-color : rgba(0, 0, 0, 0.20);
 
-
-$SCALED-MAX-WIDTH: $HEADER-IMG-WIDTH*$header-img-scale;
 
 /*----------------------------------------------------------------------------*/
 body
@@ -44,7 +42,7 @@ body
     display  : block;
     position : relative;
     width    : 100%;
-    height   : $header-height;
+    height   : $HEADER-IMG-HEIGHT + $header-img-top-distance;
     @include background-image(
         linear-gradient(to bottom,
                         process-gradient-def($header-gradient-colors)));
@@ -52,23 +50,15 @@ body
 
 
 /*----------------------------------------------------------------------------*/
-#header-frame
-{
-    display  : block;
-    position : relative;
-    width    : $SCALED-MAX-WIDTH;
-    height   : 100%;
-    margin   : 0 auto;
-}
-
-/*----------------------------------------------------------------------------*/
 #terminal
 {
     display  : block;
-    position : absolute;
-    top      : $header-img-top-distance - $header-img-scale*34px;
+    position : relative;
+    top      : 0;
     left     : 0;
-    @include scale($header-img-scale);
+    width    : $DESKTOP-WIDTH;
+    height   : 100%;
+    margin   : 0 auto;
 }
 
 
@@ -87,9 +77,11 @@ body
 /*----------------------------------------------------------------------------*/
 #terminal-display
 {
-    z-index : 100;
-    top     : 95px;
-    left    : 155px;
+    z-index  : 100;
+    position : relative;
+    top      : $header-img-top-distance + 30px;
+    left     : 30px;
+    @include scale($HEADER-CANVAS-SCALE);
 }
 
 
@@ -97,8 +89,10 @@ body
 #terminal-frame
 {
     z-index  : 200;
+    position : absolute;
     top      : 0;
-    left     : 0;
+    left     : -170px;
+    padding  : $header-img-top-distance 0 $header-img-top-distance;
 }
 
 
@@ -106,10 +100,10 @@ body
 #terminal-logo
 {
     z-index  : 300;
-    width    : 210px;
-    height   : 46px;
-    top      : 503px;
-    left     : 968px;
+    top      : 408px;
+    left     : 715px;
+    width    : 151px;
+    height   : 33px;
     cursor   : pointer;
 }
 
@@ -118,71 +112,25 @@ body
 #terminal-clicker
 {
     z-index : 400;
-    top     : 110px;
-    left    : 194px;
-    width   : 610px;
-    height  : 440px;
+    top     : 100px;
+    left    : 110px;
+    width   : 525px;
+    height  : 360px;
 }
 
 
 /*----------------------------------------------------------------------------*/
 #terminal-post-it
 {
-    display: none;
-    top            : 90px;
-    left           : 880px;
+    z-index        : 500;
+    width          : 180px;
+    top            : 175px;
+    left           : 717px;
     line-height    : 1.2;
     text-align     : justify;
-    font-family    : 'Permanent Marker', cursive;
-    font-size      : 12pt;
-    font-weight    : 400;
-    padding        : 16px 32px 32px;
-    overflow       : auto;
-}
-
-
-/*----------------------------------------------------------------------------*/
-#terminal-post-it-shadow
-{
-    z-index    : 490;
-    display    : block;
-    position   : absolute;
-    content    : "";
-    top        : 88px;
-    left       : 62px;
-    width      : 67%;
-    height     : 58%;
-    background : $post-it-shadow-color;
-    box-shadow : 0 18px 8px 20px $post-it-shadow-color;
-    @include rotate(1deg);
-}
-
-
-/*----------------------------------------------------------------------------*/
-#terminal-post-it-paper
-{
-    // opacity: 0.25;
-    z-index        : 500;
-    display        : block;
-    position       : relative;
-    padding        : 40px 16px 24px;
-    width          : $post-it-width;
-    color          : $post-it-font-color;
-    border         : 1px solid darken($post-it-color, 5%);
-    border-bottom-left-radius: 120px 30px;
-    @include rotate(3deg);
-    @include background-image(linear-gradient(-150deg,
-                                              lighten($post-it-color, 10%) 0%,
-                                              $post-it-color 55%,
-                                              $post-it-color 75%,
-                                              lighten($post-it-color, 10%) 90%,
-                                              lighten($post-it-color, 15%) 95%));
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    & > h1
-    {
-        font-size: 22pt;
-    }
+    font-family    : 'Architects Daughter', cursive;
+    font-size      : 10.5pt;
+    @include rotate(-8.5deg);
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > p > a
@@ -227,7 +175,7 @@ body
 {
     display    : block;
     position   : relative;
-    width      : $SCALED-MAX-WIDTH;
+    width      : $DESKTOP-WIDTH;
     height     : $logo-height;
     margin     : 0 auto;
     border-bottom : 1px solid $header-logo-separator-color;
@@ -253,11 +201,11 @@ body
 {
     display  : table;
     position : relative;
-    width    : $SCALED-MAX-WIDTH;
+    width    : $DESKTOP-WIDTH;
     margin   : 0 auto;
     padding  : $info-intro-top-bottom-distance 0;
 
-    @media all and (min-width: $SCALED-MAX-WIDTH)
+    @media all and (min-width: $DESKTOP-WIDTH)
     {
         @include column-count(2);
     }

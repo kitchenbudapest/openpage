@@ -8,7 +8,7 @@ var g = g || {};
     'use strict';
 
     var NAME = 'dw',
-        DESC = 'change characters span';
+        DESC = 'fun with the time lord';
 
     /*------------------------------------------------------------------------*/
     function man(std)
