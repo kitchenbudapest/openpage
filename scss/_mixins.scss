@@ -1,0 +1,13 @@
+// INFO //
+// INFO //
+
+/*----------------------------------------------------------------------------*/
+@mixin desktop-paragraph($direction,
+                         $min-width)
+{
+    @media all and (min-width: $min-width)
+    {
+        float   : $direction;
+        padding : 0;
+    }
+}
