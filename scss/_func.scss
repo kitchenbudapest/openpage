@@ -1,6 +1,20 @@
 // INFO //
 // INFO //
 
+$_directions:
+(
+    top    : 'bottom',
+    bottom : 'top',
+    left   : 'right',
+    right  : 'left',
+);
+
+/*----------------------------------------------------------------------------*/
+@function opposite-direction($direction)
+{
+    @return map-get($_directions, $direction);
+}
+
 /*----------------------------------------------------------------------------*/
 @function process-gradient-def($gradient-def)
 {

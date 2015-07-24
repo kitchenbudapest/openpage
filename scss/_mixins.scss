@@ -1,13 +1,17 @@
 // INFO //
 // INFO //
 
+@import 'func';
+
 /*----------------------------------------------------------------------------*/
-@mixin desktop-paragraph($direction,
-                         $min-width)
+@mixin media-desktop-paragraph($direction,
+                               $min-width)
 {
+    $opposite: opposite-direction($direction);
     @media all and (min-width: $min-width)
     {
+        display : block;
         float   : $direction;
-        padding : 0;
+        margin  : 0;
     }
 }
