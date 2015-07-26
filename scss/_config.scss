@@ -24,7 +24,39 @@
     |  +------+ +------+  |
     +---------------------+
     |                     |====> detail
+    |  +------+ +------+  |
+    |  |      | |      |=======> detail-prizes
+    |  |      | +------+  |
+    |  |      |================> detail-info
+    |  |      | +------+  |
+    |  |      | |      |=======> detail-schedule
+    |  +------+ +------+  |
+    +---------------------+
+    |                     |====> registartion
+    +---------------------+
+    |                     |====> footer
+    +---------------------+
 */
+
+// Rename files:
+//     func   => functions
+//     config => variables
+//
+// Refactor it as:
+//     COLORS:
+//          $BUTTER:;
+//          $CHOCOLATE:;
+//          $ORANGE:;
+//          $WHITE:;
+//
+//     VAR-COLORS:
+//         $header-top-color: $CHOCOLATE;
+//
+//     DIMENSIONS:
+//         $BORDER-RADIUS: 10px;
+//
+//     VAR-DIMENSIONS:
+//         $header-bg-radius: $BORDER-RADIUS;
 
 
 /*----- CONSTANTS ------------------------------------------------------------*/
@@ -76,11 +108,11 @@ $header-gradient-colors:
 $footer-gradient-colors:
 (
     (
-        stop  : 0%,
+        stop  : 25%,
         color : $header-color-10,
     ),
     (
-        stop  : 100%,
+        stop  : 93%,
         color : $header-color-20,
     ),
 );
@@ -88,3 +120,25 @@ $header-logo-separator-color : #EF7219;
 
 $info-date-background   : #F9EDD0;
 $info-date-border-color : #D7C5AB;
+
+$detail-color-10 : #E9DAB6;
+$detail-color-20 : #EDE3C5;
+$detail-gradient-colors:
+(
+    (
+        stop  : 0%,
+        color : $detail-color-10,
+    ),
+    (
+        stop  : 5%,
+        color : $detail-color-20,
+    ),
+    (
+        stop  : 95%,
+        color : $detail-color-20,
+    ),
+    (
+        stop  : 100%,
+        color : $detail-color-10,
+    ),
+);

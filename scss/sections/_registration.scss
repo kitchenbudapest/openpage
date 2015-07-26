@@ -1,0 +1,307 @@
+// INFO //
+// INFO //
+
+/* Include compass moduless */
+@import 'compass';
+
+/* Include openpage modules */
+@import '../config';
+@import '../utils/func';
+@import '../utils/mixins';
+
+
+/*----------------------------------------------------------------------------*/
+#registration
+{
+    display       : table;
+    position      : relative;
+    width         : 100%;
+    background    : $header-color-20;
+    border-bottom : 10px solid $header-logo-separator-color;
+    @include box-sizing(border-box);
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-frame
+    {
+        display  : table;
+        position : relative;
+        width    : $DESKTOP-WIDTH;
+        margin   : 0 auto;
+        padding  : 60px 0;
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-title
+        {
+            color          : $header-logo-separator-color;
+            text-transform : uppercase;
+            font-weight    : 600;
+            font-size      : 26pt;
+            letter-spacing : -1pt;
+            padding-bottom : 45px;
+        }
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-profession
+        {
+            margin-bottom: 35px;
+            background: #FFFFFF;
+            border-radius : 10px;
+            border: 1px solid #D7C5AB;
+            font-size: 15.5pt;
+            @include box-sizing(border-box);
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-frame
+            {
+                position : relative;
+                top      : 0;
+                left     : 0;
+                width    : 100%;
+                height   : 100%;
+                padding  : 30px 25px;
+                @include box-sizing(border-box);
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > span
+                {
+                    color : $header-logo-separator-color;
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &::before,
+                &::after
+                {
+                    position : absolute;
+                    content  : '';
+                    width    : 0;
+                    height   : 0;
+                    left     : 100%;
+                    top      : 50%;
+                    border: solid transparent;
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    @media all and (max-width: $DESKTOP-WIDTH)
+                    {
+                        display : none;
+                    }
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &::before
+                {
+                    border-left-color : #D7C5AB;
+                    border-width      : 16px;
+                    margin-top        : -16px;
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &::after
+                {
+                    border-left-color : #FFFFFF;
+                    margin-left       : -1.05px;
+                    border-width      : 15px;
+                    margin-top        : -15px;
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > input[type='radio']
+                {
+                    display : none;
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & + label
+                    {
+                        color       : #512417;
+                        margin-left : 15px;
+                    }
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & + label > span
+                    {
+                        display       : inline-block;
+                        margin-left   : 4px;
+                        margin-bottom : -3px;
+                        width         : 16px;
+                        height        : 16px;
+                        cursor        : pointer;
+                        border-radius : 50%;
+                        background    : $header-color-20;
+                        border        : 1px solid #D7C5AB;
+                    }
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &:checked + label > span::after
+                    {
+                        display       : block;
+                        position      : relative;
+                        top           : 5px;
+                        left          : 5px;
+                        content       : '';
+                        width         : 6px;
+                        height        : 6px;
+                        border-radius : 50%;
+                        background    : $header-logo-separator-color;
+                    }
+                }
+            }
+        }
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-info
+        {
+            color     : #512417;
+            font-size : 13pt;
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > p
+            {
+                margin-bottom: 26px;
+                & > span
+                {
+                    font-weight : 700;
+                }
+            }
+        }
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-data
+        {
+            color     : #512417;
+            font-size : 15.5pt;
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-name
+            {
+                margin: 80px 0 14px;
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-mail
+            {
+                margin-bottom: 25px;
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-name,
+            &-mail
+            {
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > div,
+                & > span
+                {
+                    display : block;
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > div
+                {
+                    float : left;
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & span:first-child
+                    {
+                        color : $header-logo-separator-color;
+                    }
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > span
+                {
+                    padding-left : 5px;
+                    overflow     : hidden;
+                }
+            }
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-name,
+            &-mail,
+            &-lang-frame
+            {
+                width         : 100%;
+                border-radius : 10px;
+                border        : 1px solid #D7C5AB;
+                background    : #FFFFFF;
+                padding       : 7px;
+                overflow      : hidden;
+                outline       : none;
+                @include box-sizing(border-box);
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &-input
+                {
+                    width       : 100%;
+                    border      : none;
+                    background  : #FFFFFF;
+                    color       : #D7C5AB;
+                    font-weight : 200;
+                    font-size   : 13pt;
+                    padding     : 0;
+                    line-height : 1.2;
+                }
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-lang
+            {
+                margin-bottom : 30px;
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > div:first-child
+                {
+                    margin-bottom: 10px;
+
+                    & > span:first-child
+                    {
+                        color : $header-logo-separator-color;
+                        font-size: 10pt;
+                        vertical-align: super;
+                    }
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &-frame-input
+                {
+                    max-width     : 100%;
+                    min-width     : 100%;
+                    min-height    : 35px;
+                    resize        : vertical;
+                    outline       : none;
+                    overflow      : hidden;
+                    background    : #FFFFFF;
+                    @include box-sizing(border-box);
+                }
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-send
+            {
+                display  : table;
+                position : relative;
+                width    : 100%;
+                cursor   : pointer;
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & div:first-child
+                {
+                    font-size : 13pt;
+                    float     : left;
+                    position  : absolute;
+                    // HACK: Figure out how to align it vertically to the middle
+                    top       : 30%;
+                }
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &-button
+                {
+                    float : right;
+                    background     : $header-logo-separator-color;
+                    padding        : 11px 48px;
+                    border-radius  : 10px;
+                    text-transform : uppercase;
+                    color          : #FDF5DD;
+                    font-size      : 18pt;
+                    font-weight    : 300;
+                }
+            }
+        }
+    }
+}

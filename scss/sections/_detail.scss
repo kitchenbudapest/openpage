@@ -1,0 +1,269 @@
+// INFO //
+// INFO //
+
+/* Include compass moduless */
+@import 'compass';
+
+/* Include openpage modules */
+@import '../config';
+@import '../utils/func';
+@import '../utils/mixins';
+
+
+/*----------------------------------------------------------------------------*/
+#detail
+{
+    display    : table;
+    position   : relative;
+    width      : 100%;
+    border-top : 4px solid $header-color-20;
+    @include box-sizing(border-box);
+    @include background-image(
+        linear-gradient(to bottom,
+                        process-gradient-def($detail-gradient-colors)));
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-frame
+    {
+        display       : block;
+        position      : relative;
+        width         : $DESKTOP-WIDTH;
+        margin        : 0 auto;
+        @include box-sizing(border-box);
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-apply
+        {
+            display    : block;
+            position   : relative;
+            top        : -4px;
+            width      : 200px;
+            height     : 44px;
+            background : $header-logo-separator-color;
+            padding-top: 6px;
+            color : #FDF5DD;
+            font-size: 22pt;
+            margin-bottom : 75px;
+            text-align : center;
+            text-transform : uppercase;
+            border-bottom-left-radius  : 10px;
+            border-bottom-right-radius : 10px;
+        }
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-prizes
+        {
+            position      : relative;
+            display       : table;
+            width         : 100%;
+            padding       : 29px 35px;
+            background    : #FDF5DD;
+            border        : 1px solid #D7C5AB;
+            border-radius : 10px;
+            @include box-sizing(border-box);
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-head
+            {
+                display        : table;
+                width          : 100%;
+                padding-bottom : 26px;
+                margin-bottom  : 24px;
+                border-bottom  : 3px solid #F0761D;
+                color          : #512417;
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &-title
+                {
+                    display        : inline-block;
+                    line-height    : 0.90;
+                    letter-spacing : -2pt;
+                    margin-left    : 12px;
+                    text-transform : uppercase;
+
+                    & > span:first-child
+                    {
+                        font-size   : 31pt;
+                        font-weight : 200;
+                    }
+
+                    & > span:last-child
+                    {
+                        font-size   : 34.5pt;
+                        font-weight : 700;
+                    }
+                }
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-info
+            {
+                width         : 100%;
+                padding-left  : 65px;
+                padding-right : 25px;
+                @include box-sizing(border-box);
+            }
+        }
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-schedule
+        {
+            position : relative;
+            margin   : 40px 0 60px;
+            display  : table;
+            width    : 100%;
+            padding  : 29px 35px;
+            background: #F0761D;
+            border-radius: 10px;
+            @include box-sizing(border-box);
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-head
+            {
+                width: 100%;
+                color: #FDF5DD;
+                text-transform: uppercase;
+                line-height: 0.90;
+                letter-spacing: -2pt;
+                border-bottom: 3px solid #FDF5DD;
+                @include box-sizing(border-box);
+                padding-bottom: 26px;
+                margin-bottom: 38px;
+
+                & > span:first-child
+                {
+                    font-size : 31pt;
+                    font-weight: 200;
+                }
+
+                & > span:last-child
+                {
+                    font-size : 34.5pt;
+                    font-weight: 700;
+                }
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-spec
+            {
+                font-size: 14pt;
+                font-weight: 300;
+                padding: 12px 0 24px;
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &::before
+                {
+                    display:inline-block;
+                    position: relative;
+                    vertical-align: middle;
+                    width: 68px;
+                    content: '';
+                    border-bottom: 1px solid #512417;
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+.detail-frame-info
+{
+    margin-bottom : 32px;
+    text-align    : justify;
+    color         : $text-base-color;
+    font-family   : 'Source Serif Pro', serif;
+    line-height: 1.375;
+    font-size:12pt;
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    & > div:first-child
+    {
+        font-family    : 'Source Sans Pro', sans-serif;
+        text-align     : left;
+        letter-spacing : -0.65pt;
+        line-height: 1;
+        font-size      : 24pt;
+        font-weight    : 600;
+        margin-bottom  : 19px;
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &::after
+        {
+            display    : block;
+            position   : relative;
+            bottom     : -8px;
+            left       : 0;
+            content    : '';
+            width      : 70px;
+            border-top : 1px solid $header-logo-separator-color;
+        }
+    }
+}
+
+
+/*----------------------------------------------------------------------------*/
+.detail-frame-prizes-info-text
+{
+    color:  #512417;
+    padding-bottom: 25px;
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    & > div:first-child
+    {
+        color          : #F0812E;
+        font-size      : 18.5pt;
+        font-weight    : 600;
+        line-height    : 1.15;
+        text-transform : uppercase;
+        padding-bottom : 5px;
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &::before
+        {
+            position   : relative;
+            display    : block;
+            content    : '';
+            top        : 20px;
+            left       : -38px;
+            width      : 12px;
+            height     : 12px;
+            background : #F0761D;
+        }
+    }
+}
+
+
+/*----------------------------------------------------------------------------*/
+.detail-frame-schedule-timing
+{
+    font-size   : 14pt;
+    color       : #512012;
+    font-weight: 700;
+    margin-bottom : 9px;
+
+    & > span:first-child
+    {
+        font-weight : 600;
+        color: #FDF5DD;
+        margin-right: 41px;
+    }
+}
+
+
+/*----------------------------------------------------------------------------*/
+.detail-frame-schedule-timing-spec
+{
+    & > span:first-child
+    {
+        border-bottom: 1px solid #FDF5DD;
+    }
+
+    & > span:last-child
+    {
+        border-bottom: 1px solid #512012;
+    }
+}

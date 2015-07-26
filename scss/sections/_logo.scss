@@ -1,0 +1,43 @@
+// INFO //
+// INFO //
+
+/* Include compass moduless */
+@import 'compass';
+
+/* Include openpage modules */
+@import '../config';
+@import '../utils/func';
+@import '../utils/mixins';
+
+
+/*----------------------------------------------------------------------------*/
+#logo
+{
+    display    : block;
+    position   : relative;
+    width      : 100%;
+    height     : $logo-height;
+    background : $header-color-20;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-img
+    {
+        position : absolute;
+        left     : 0;
+        bottom   : $logo-img-bottom-distance;
+    }
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-frame
+    {
+        display       : block;
+        position      : relative;
+        width         : $DESKTOP-WIDTH;
+        height        : $logo-height;
+        margin        : 0 auto;
+        border-bottom : 1px solid $header-logo-separator-color;
+        @include box-sizing(border-box);
+    }
+}

@@ -1,0 +1,101 @@
+// INFO //
+// INFO //
+
+/* Include compass moduless */
+@import 'compass';
+
+/* Include openpage modules */
+@import '../config';
+@import '../utils/func';
+@import '../utils/mixins';
+
+
+/*----------------------------------------------------------------------------*/
+#footer
+{
+    display    : table;
+    position   : relative;
+    width      : 100%;
+    height     : 784px;
+    border-top : 4px solid $header-color-20;
+    @include box-sizing(border-box);
+    @include background-image(
+        linear-gradient(to bottom,
+                        process-gradient-def($footer-gradient-colors)));
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-frame
+    {
+        display   : table;
+        position  : relative;
+        width     : $DESKTOP-WIDTH;
+        margin    : 0 auto;
+        padding   : 60px 0;
+        color     : #FEF5DF;
+        font-size : 14pt;
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-title
+        {
+            width          : 100%;
+            font-size      : 28pt;
+            font-weight    : 600;
+            letter-spacing : -1pt;
+            text-transform : uppercase;
+            border-bottom  : 1px solid #FEF5DF;
+            padding-bottom : 15px;
+            margin-bottom  : 35px;
+        }
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-info
+        {
+            line-height: 1.2;
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > img:first-of-type
+            {
+                margin-top    : 6px;
+                margin-bottom : 30px;
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > p:first-of-type
+            {
+                color : $header-logo-separator-color;
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > p:last-of-type
+            {
+                margin-bottom : 28px;
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > img:last-of-type
+            {
+                margin-left : 12px;
+            }
+        }
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-links
+        {
+            line-height: 1.2;
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > p::before
+            {
+                display      : inline-block;
+                position     : relative;
+                content      : '';
+                width        : 4px;
+                height       : 4px;
+                background   : #FEF5DF;
+                margin-left  : 6px;
+                margin-right : 16px;
+                bottom       : 3px;
+            }
+        }
+    }
+}
