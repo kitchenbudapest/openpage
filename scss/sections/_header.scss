@@ -13,111 +13,105 @@
 /*----------------------------------------------------------------------------*/
 #header
 {
-    display  : block;
-    position : relative;
+    display  : table;
     width    : 100%;
-    height   : $HEADER-IMG-HEIGHT + $header-img-top-distance;
     @include background-image(
         linear-gradient(to bottom,
                         process-gradient-def($header-gradient-colors)));
-}
 
-
-
-/*----------------------------------------------------------------------------*/
-#terminal
-{
-    display  : block;
-    position : relative;
-    top      : 0;
-    left     : 0;
-    width    : $DESKTOP-WIDTH;
-    height   : 100%;
-    margin   : 0 auto;
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-logo,
-    &-frame,
-    &-display,
-    &-clicker,
-    &-post-it,
+    &-terminal
     {
         display  : block;
-        position : absolute;
-    }
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-display
-    {
-        z-index  : 100;
         position : relative;
-        top      : $header-img-top-distance + 30px;
-        left     : 30px;
-        @include scale($HEADER-CANVAS-SCALE);
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-frame
-    {
-        z-index  : 200;
-        position : absolute;
         top      : 0;
-        left     : -170px;
-        padding  : $header-img-top-distance 0 $header-img-top-distance;
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-logo
-    {
-        z-index  : 300;
-        top      : 408px;
-        left     : 715px;
-        width    : 151px;
-        height   : 33px;
-        cursor   : pointer;
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-clicker
-    {
-        z-index : 400;
-        top     : 100px;
-        left    : 110px;
-        width   : 525px;
-        height  : 360px;
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-post-it
-    {
-        z-index        : 500;
-        width          : 140px;
-        top            : 175px;
-        left           : 735px;
-        line-height    : 1.2;
-        text-align     : left;
-        font-family    : 'Architects Daughter', cursive;
-        font-size      : 12pt;
-        @include rotate(-9deg);
+        left     : 0;
+        width    : $header-terminal-width;
+        height   : $header-terminal-height;
+        margin   : 0 auto;
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        & > p > a
+        &-display,
+        &-frame,
+        &-logo,
+        &-clicker,
+        &-postit
         {
-            text-decoration: none;
-            color : #AA0000;
-            &:visited
-            {
-                color : #880000;
-            }
-            &:hover
-            {
-                color : #CC0000;
-            }
+            position : absolute;
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-display
+        {
+            z-index  : 100;
+            top      : 89px;
+            left     : 117px;
+            @include transform-origin(0, 0);
+            @include scale($header-terminal-canvas-scale);
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-frame
+        {
+            z-index  : 200;
+            top      : 0;
+            left     : -$header-terminal-frame-left;
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-logo
+        {
+            z-index  : 300;
+            top      : 393px;
+            left     : 715px;
+            width    : 151px;
+            height   : 33px;
+            cursor   : pointer;
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-clicker
+        {
+            z-index  : 400;
+            top      : 85px;
+            left     : 110px;
+            width    : 525px;
+            height   : 360px;
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-postit
+        {
+            z-index        : 500;
+            width          : 140px;
+            top            : 165px;
+            left           : 738px;
+            font-size      : $header-terminal-postit-font-size;
+            font-family    : $header-terminal-postit-font-family;
+            @include rotate(-10.5deg);
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            // & > p > a
+            // {
+            //     text-decoration: none;
+            //     color : #AA0000;
+            //     &:visited
+            //     {
+            //         color : #880000;
+            //     }
+            //     &:hover
+            //     {
+            //         color : #CC0000;
+            //     }
+            // }
         }
     }
 }

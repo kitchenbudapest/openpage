@@ -1,6 +1,9 @@
 // INFO //
 // INFO //
 
+/* Include openpage modules */
+@import 'constants';
+
 /* Blocks naming reference:
 
     +---------------------+
@@ -38,25 +41,35 @@
     +---------------------+
 */
 
-// Rename files:
-//     func   => functions
-//     config => variables
-//
-// Refactor it as:
-//     COLORS:
-//          $BUTTER:;
-//          $CHOCOLATE:;
-//          $ORANGE:;
-//          $WHITE:;
-//
-//     VAR-COLORS:
-//         $header-top-color: $CHOCOLATE;
-//
-//     DIMENSIONS:
-//         $BORDER-RADIUS: 10px;
-//
-//     VAR-DIMENSIONS:
-//         $header-bg-radius: $BORDER-RADIUS;
+/*----- SECTIONS -------------------------------------------------------------*/
+/* Body */
+$body-min-width   : $ONE-PARAGRAPH-WIDTH;
+$body-font-weight : $NORMAL;
+$body-font-family : $SANS-SERIF;
+$body-font-size   : $BASE-TEXT;
+$body-line-height : $BASE-LINE-HEIGHT;
+
+/* Header */
+$header-terminal-width              : $TWO-PARAGRAPHS-WIDTH;
+$header-terminal-height             : $HEADER-IMG-HEIGHT;
+$header-terminal-canvas-scale       : $TERMINAL-SCREEN-SCALE;
+$header-terminal-postit-font-size   : 12pt;
+$header-terminal-postit-font-family : $CURSIVE;
+$header-terminal-frame-left         : ($HEADER-IMG-WIDTH - $TWO-PARAGRAPHS-WIDTH)/2;
+$header-gradient-colors             :
+(
+    (
+        stop  : 10%,
+        color : $COFFEE,
+    ),
+    (
+        stop  : 100%,
+        color : $CREAM,
+    ),
+);
+
+
+
 
 
 /*----- CONSTANTS ------------------------------------------------------------*/
@@ -94,17 +107,6 @@ $text-other-color : #F0761D;
 
 $header-color-10 : #433934;
 $header-color-20 : #FEF6DF;
-$header-gradient-colors:
-(
-    (
-        stop  : 10%,
-        color : $header-color-10,
-    ),
-    (
-        stop  : 100%,
-        color : $header-color-20,
-    ),
-);
 $footer-gradient-colors:
 (
     (
