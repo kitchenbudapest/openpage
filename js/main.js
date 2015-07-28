@@ -9,9 +9,8 @@ function main()
     'use strict';
 
     /* Get essential DOM elements */
-    var stat = document.getElementById('static'),
-        term = document.getElementById('terminal'),
-        exit = document.getElementById('terminal-post-it-exit');
+    var term = document.getElementById('header-terminal'),
+        exit = document.getElementById('header-terminal-post-it-exit');
 
     // var isOpen      = false,
     //     topMax      = 0,

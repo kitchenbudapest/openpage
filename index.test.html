@@ -2,13 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon"
               href="http://kitchenbudapest.github.io/openpage/favicon.ico"/>
         <title>Come in, We are OPEN!</title>
         <link rel="stylesheet"
-              href="css/reset.css">
-        <link rel="stylesheet"
               href="css/main.css">
+        <!-- Base -->
         <script src="js/bin.js"></script>
         <!-- Essential programs -->
         <script src="js/bin/doc.js"></script>
@@ -37,34 +38,385 @@
         <script src="js/main.js"></script>
     </head>
     <body>
-        <div id="main">
-            <img id="logo"
-                 alt="Kibu Hackathon"
-                 src="img/fake_logo.000.png">
-            <div id="static">
-                <h1>Home, Sweet Home!</h1>
-                <p>
-                    What will the smart home of the near future look like? What gadgets and features will become essential equipments of the most intimate spaces of our lives? Will it be a huge network of IoT devices? Will our nowadays accessories become smarter by combining them with other ones? What simple applications and creative solutions can make our homes even sweeter and more comfortable?
-                </p>
-                <br/>
-                <p>
-                    In this 24-hour-long hackathon, inspiring presentations, workshops and continuous mentoring will help you to bring the best out of your ideas!
-                </p>
-            </div>
-            <div id="terminal">
-                <div id="terminal-post-it">
-                    <div id="terminal-post-it-shadow">
+         <div>
+            <div id="header">
+                <div id="header-terminal">
+                    <div id="header-terminal-post-it">
+                        <p>
+                            - Type in "HELP" if you are stuck.
+                        </p>
+                        <br/>
+                        <p>
+                            - "MAN" shows what do the commands do :)
+                        </p>
+                        <!-- <a href="#" id="terminal-post-it-exit">click here</a>  -->
                     </div>
-                    <div id="terminal-post-it-paper">
-                        <h1>INSTRUCTIONS:</h1>
-                        <br/>
-                        <p>
-                            Type in "help" (without quotes) and press enter to get started. If you want to know what each command does type in "man" and then the name of the command.
-                        </p>
-                        <br/>
-                        <p>
-                            If you can't find what you are looking for, just type in "exit" or <a href="#" id="terminal-post-it-exit">click here</a> to get a plain text version of the site instead.
-                        </p>
+                </div>
+            </div>
+            <div id="logo">
+                <div id="logo-frame">
+                    <pre>
+                        <img id="logo-img"
+                             src="img/hackathon_logo.svg"
+                             alt="
+  ___________________________
+ / |   ____________   |      \
+|  |  / [u@h] $    \  |       |
+|  | |              | |       |
+|  | |              | |       |
+|   \ \____________/ /  VT100 |
+|    \______________/         |
+|_____________________________|
+  \_________________________/
+
+  [:] KIBU HACKATHON 015
+
+  ##########
+  ##      ##  KITCHEN
+  ##      ##  BUDAPEST
+  ##      ##  Powered by *T**
+  ##########">
+                    <pre>
+                </div>
+            </div>
+            <div id="info">
+                <div id="info-frame">
+                    <div class="paragraph-1">
+                        <div id="info-intro">
+                            <div class="info-intro-subtitle">
+                                Theme
+                            </div>
+                            <p id="info-intro-title">
+                                Home, Sweet Home
+                            </p>
+                            <p id="info-intro-text">
+                                What will the smart home of the near future look like? What gadgets and features will become essential equipments of the most intimate spaces of our lives? Will it be a huge network of IoT devices? Will our nowadays accessories become smarter by combining them with other ones? What simple applications and creative solutions can make our homes even sweeter and more comfortable?
+                            </p>
+                            <br/>
+                            <p id="info-intro-summary">
+                                In this 24-hour-long hackathon, inspiring presentations, workshops and continuous mentoring will help you to bring the best out of your ideas!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="paragraph-2">
+                        <div id="info-date">
+                            <div class="info-intro-subtitle">
+                                Date
+                            </div>
+                            <div id="info-date-box">
+                                <div id="info-date-box-arrow">
+                                    <div id="info-date-box-arrow-month">
+                                        september
+                                    </div>
+                                </div>
+                                <div id="info-date-box-numbers">
+                                    <div class="info-date-box-numbers-day">
+                                        <span id="info-date-box-numbers-day-from">
+                                            04
+                                        </span>
+                                        <span class="info-date-box-numbers-time">
+                                            18:00
+                                        </span>
+                                    </div>
+                                    <div class="info-date-box-numbers-day">
+                                        <span id="info-date-box-numbers-day-to">
+                                            05
+                                        </span>
+                                        <span class="info-date-box-numbers-time">
+                                            20:00
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="info-location">
+                            <span class="info-intro-subtitle">Location</span>
+                            <div>
+                                <p>
+                                    kitchen budapest
+                                </p>
+                                <p>
+                                    30. RÁDAY STR. Budapest, H-1092
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="detail">
+                <div id="detail-frame">
+                    <div id="detail-frame-apply">
+                        apply now!
+                    </div>
+                    <div class="paragraph-1">
+                        <div class="detail-frame-info">
+                            <div>
+                                For whom is it for?
+                            </div>
+                            <div>
+                                We are welcome all young creative developers, artists, designers and people with business curiosity who are eager to create something amazing in only 24 hours.
+                            </div>
+                        </div>
+                        <div class="detail-frame-info">
+                            <div>
+                                Capacity
+                            </div>
+                            <div>
+                                The event’s capacity is 36 people max (approx. 6 teams). If the registration is full put yourself on the waiting list, because there are always some people who sign off right before the event.
+                            </div>
+                        </div>
+                        <div class="detail-frame-info">
+                            <div>
+                                Registration fee
+                            </div>
+                            <div>
+                                The participation is FREE for everyone however, you need to register <a href="#">here</a>. Before you come, read the documentation <a href="#">here</a>.
+                            </div>
+                        </div>
+                        <div class="detail-frame-info">
+                            <div>
+                                Language
+                            </div>
+                            <div>
+                                Although the we will run the hackathon in Hungarian, prepare to switch to English anytime we feel like there’s a need for that.
+                            </div>
+                        </div>
+                        <div class="detail-frame-info">
+                            <div>
+                                What to bring?
+                            </div>
+                            <div>
+                                Your laptop and your maker/hacker/tinker tools if you have any. And preferably your geek friends. :)
+                            </div>
+                        </div>
+                        <div class="detail-frame-info">
+                            <div>
+                                Food
+                            </div>
+                            <div>
+                                Don’t worry, we’ll make sure you don’t hack hungry and besides the main meals, you have plenty supply of energy boosters and midnight snacks.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="paragraph-2 paragraph-2-spec">
+                        <div id="detail-frame-prizes">
+                            <div id="detail-frame-prizes-head">
+                                <img src="img/hackathon_prize_star.svg">
+                                <div id="detail-frame-prizes-head-title">
+                                    <span>the</span>
+                                    <br />
+                                    <span>prizes</span>
+                                </div>
+                            </div>
+                            <div id="detail-frame-prizes-info">
+                                <div class="detail-frame-prizes-info-text">
+                                    <div>
+                                        leap motion
+                                    </div>
+                                    <div>
+                                        3D Motion and Gesture Controller for every team member
+                                    </div>
+                                </div>
+                                <div class="detail-frame-prizes-info-text">
+                                    <div>
+                                        3 months
+                                        <br/>
+                                        mentorship
+                                    </div>
+                                    <div>
+                                        For the whole team by the experts of Kitchen Budapest
+                                    </div>
+                                </div>
+                                <div class="detail-frame-prizes-info-text">
+                                    <div>
+                                        lasertag
+                                    </div>
+                                    <div>
+                                        Escape room voucher for every team
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="detail-frame-schedule">
+                            <div id="detail-frame-schedule-head">
+                                <span>event</span>
+                                <br />
+                                <span>schedule</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing detail-frame-schedule-timing-spec">
+                                <span>18:00</span>
+                                <span>Registration</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>18:30</span>
+                                <span>Warm-up</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>19:15</span>
+                                <span>Technical workshop</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>20:00</span>
+                                <span>Hack through the night</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>23:30</span>
+                                <span>Late night dinner: pizza</span>
+                            </div>
+                            <div id="detail-frame-schedule-spec">
+                                work time
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>08:00</span>
+                                <span>Breakfast: cerials, ham and eggs</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>10:00</span>
+                                <span>Project presentation workshop</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>13:00</span>
+                                <span>Lunch</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>19:00</span>
+                                <span>Project pitches</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing detail-frame-schedule-timing-spec">
+                                <span>20:00</span>
+                                <span>Awards</span>
+                            </div>
+                            <div class="detail-frame-schedule-timing">
+                                <span>20:30</span>
+                                <span>After party</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="registration">
+                <div id="registration-frame">
+                    <div class="paragraph-1">
+                        <div id="registration-frame-title">
+                            registration
+                        </div>
+                        <div id="registration-frame-profession">
+                            <div id="registration-frame-profession-frame">
+                                <span>I am a:</span>
+                                <input id="registration-frame-profession-radio-1"
+                                       type="radio"
+                                       name="profession"
+                                       value="programmer" checked>
+                                <label for="registration-frame-profession-radio-1">
+                                    Programmer
+                                    <span></span>
+                                </label>
+                                <input id="registration-frame-profession-radio-2"
+                                       type="radio"
+                                       name="profession"
+                                       value="entrepreneur">
+                                <label for="registration-frame-profession-radio-2">
+                                    Entrepreneur
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="registration-frame-info">
+                            <p>
+                                Registration will close on 20th August at 8:00 PM EET.
+                            </p>
+                            <p>
+                                For more information, contact <span>Aliz Nagy</span>, our communication manager at: <a href="#">aliz.nagy@kitchenbudapest.hu</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="paragraph-2">
+                        <div id="registration-frame-data">
+                            <div id="registration-frame-data-name">
+                                <div>
+                                    Name<span>*</span>
+                                </div>
+                                <span>
+                                    <input id="registration-frame-data-name-input"
+                                           type="text"
+                                           name="name">
+                                </span>
+                            </div>
+                            <div id="registration-frame-data-mail">
+                                <div>
+                                    Email<span>*</span>
+                                </div>
+                                <span>
+                                    <input id="registration-frame-data-mail-input"
+                                           type="email"
+                                           name="email">
+                                </span>
+                            </div>
+                            <div id="registration-frame-data-lang">
+                                <div>
+                                    Programming languages<span>(optional)</span>
+                                </div>
+                                <div id="registration-frame-data-lang-frame">
+                                    <textarea id="registration-frame-data-lang-frame-input"
+                                              wrap="off"
+                                              placeholder="C, C++, Java, Python, Ruby, JavaScript...">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div id="registration-frame-data-send">
+                                <div>
+                                    I agree with the <a href="#">Terms &amp; Conditions</a>
+                                </div>
+                                <div id="registration-frame-data-send-button">
+                                    send
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <div id="footer-frame">
+                    <div class="paragraph-1">
+                        <div id="footer-frame-title">
+                            links
+                        </div>
+                        <div id="footer-frame-links">
+                            <p>
+                                Hackathon Documentation &amp; Framework
+                            </p>
+                            <p>
+                                Hackathon Terms &amp; Conditions
+                            </p>
+                            <p>
+                                Kibu's Central Repository
+                            </p>
+                            <p>
+                                Kibu's Website
+                            </p>
+                            <p>
+                                Raspberry Pi's Website
+                            </p>
+                        </div>
+                    </div>
+                    <div class="paragraph-2">
+                        <div id="footer-frame-info">
+                            <img src="img/hackathon_kibu_logo.svg"
+                                 alt="[] Kitchen Budapest">
+                            <p>
+                                Location:
+                            </p>
+                            <p>
+                                Ráday utca 30 (entrance from Biblia köz)
+                            </p>
+                            <p>
+                                1092 Budapest
+                            </p>
+                            <img src="img/hackathon_social_facebook.svg"
+                                 alt="(f)">
+                            <img src="img/hackathon_social_twitter.svg"
+                                 alt="(t)">
+                        </div>
                     </div>
                 </div>
             </div>

@@ -17,9 +17,11 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700);
 
 
+
 /*----------------------------------------------------------------------------*/
 /* Include Eric Meyer's reset 2.0 Global reset rules */
 @include global-reset();
+
 
 
 /*----------------------------------------------------------------------------*/
@@ -27,17 +29,20 @@ body
 {
     width       : 100%;
     height      : 100%;
-    font-weight : 400;
-    font-family : 'Source Sans Pro', sans-serif;
-}
+    min-width   : $body-min-width;
+    font-size   : $body-font-size;
+    font-weight : $body-font-weight;
+    font-family : $body-font-family;
+    line-height : $body-line-height;
 
 
-/*----------------------------------------------------------------------------*/
-#main
-{
-    display  : block;
-    position : relative;
-    width    : 100%;
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    & > div:first-of-type
+    {
+        display  : block;
+        position : relative;
+        width    : 100%;
+    }
 }
 
 

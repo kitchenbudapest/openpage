@@ -12,16 +12,16 @@ var g = g || {};
     {
         /* Create canvas */
         this._canvas     = document.createElement('canvas');
-        this._canvas.id  = 'terminal-display';
+        this._canvas.id  = 'header-terminal-display';
 
         /* Create image-frame */
         this._frame      = document.createElement('img');
         this._frame.src  = 'img/vt100_as_frame.002.001.png';
-        this._frame.id   = 'terminal-frame';
+        this._frame.id   = 'header-terminal-frame';
 
         /* Create logo-button */
         this._logo       = document.createElement('div');
-        this._logo.id    = 'terminal-logo';
+        this._logo.id    = 'header-terminal-logo';
 
         /* Create screen */
         this._screen = new g.scr.Screen({canvas               : this._canvas,
@@ -39,7 +39,7 @@ var g = g || {};
 
         /* Create canvas-button */
         this._clicker              = document.createElement('div');
-        this._clicker.id           = 'terminal-clicker';
+        this._clicker.id           = 'header-terminal-clicker';
 
         /* Create shell */
         this._shell  = new g.shell.Shell(this._screen,
@@ -52,11 +52,14 @@ var g = g || {};
     VT100.prototype.render = function (parent,
                                        listener)
     {
+        /* Get first element in parent */
+        var firstElement = parent.childNodes[0];
+
         /* Render elements into parent */
-        parent.appendChild(this._canvas);
-        parent.appendChild(this._frame);
-        parent.appendChild(this._logo);
-        parent.appendChild(this._clicker);
+        parent.insertBefore(this._canvas , firstElement);
+        parent.insertBefore(this._frame  , firstElement);
+        parent.insertBefore(this._logo   , firstElement);
+        parent.insertBefore(this._clicker, firstElement);
 
         /* Set events */
         this._logo.addEventListener('click', function ()
