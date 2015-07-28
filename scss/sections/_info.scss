@@ -13,174 +13,226 @@
 /*----------------------------------------------------------------------------*/
 #info
 {
-    display    : block;
-    position   : relative;
-    width      : 100%;
-    background : $header-color-20;
-    border-bottom : 10px solid $header-logo-separator-color;
-    @include box-sizing(border-box);
+    display       : table;
+    width         : 100%;
+    background    : $info-background;
+    border-bottom : $info-border-bottom-width
+                    solid
+                    $info-border-bottom-color;
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     &-frame
     {
         display  : table;
-        position : relative;
-        width    : $DESKTOP-WIDTH;
+        width    : $info-frame-width;
         margin   : 0 auto;
-        padding  : $info-intro-top-bottom-distance 0;
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-intro
-    {
-        display     : block;
-        position    : relative;
-        color       : $text-base-color;
-        line-height : 1.3;
-        text-align  : justify;
-        font-size   : $info-intro-font-size;
-        font-family : 'Source Sans Pro', sans-serif;
+        padding  : $info-frame-padding-top-bottom 0;
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-title
+        &-intro
         {
-            line-height    : 1;
-            font-size      : $info-intro-title-font-size;
-            font-weight    : 600;
-            text-transform : uppercase;
-            padding-bottom : $info-intro-title-bottom-distance;
-        }
-
-
-        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-summary
-        {
-            font-weight    : 700;
-        }
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-date
-    {
-        display    : table;
-        position   : relative;
-        margin     : 78px 0 40px;
-
-
-        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-box
-        {
-            position       : relative;
-            border-radius  : 10px;
-            width          : $paragraph-width;
-            background     : $info-date-background;
-            border         : 1px solid $info-date-border-color;
-            text-transform : uppercase;
-            font-weight    : 600;
-            @include box-sizing(border-box);
-            @include media-desktop-paragraph(right, $DESKTOP-WIDTH);
+            text-align  : justify;
+            line-height : $info-frame-intro-line-height;
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            &-arrow
+            &-title
             {
-                float              : left;
-                position           : relative;
-                margin             : 14px;
-                width              : 300px;
-                border             : 4px solid $info-date-border-color;
-                border-right-width : 0;
-                border-radius      : 5px 0 0 5px;
-                padding            : 10px;
+                text-transform : uppercase;
+                line-height    : $info-frame-intro-title-line-height;
+                font-size      : $info-frame-intro-title-font-size;
+                font-weight    : $info-frame-intro-title-font-weight;
+                padding-bottom : $info-frame-intro-title-padding-bottom;
+            }
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-summary
+            {
+                font-weight : $info-frame-intro-summary-font-weight;
+            }
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-date
+        {
+            display    : table;
+            margin     : $info-frame-date-margin-top
+                         0
+                         $info-frame-date-margin-bottom;
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-box
+            {
+                display        : table;
+                position       : relative;
+                width          : $info-frame-date-box-width;
+                background     : $info-frame-date-box-background;
+                border-radius  : $info-frame-date-box-border-radius;
+                border         : $info-frame-date-box-border-width
+                                 solid
+                                 $info-frame-date-box-border-color;
+                text-transform : uppercase;
+                font-weight    : $info-frame-date-box-font-weight;
                 @include box-sizing(border-box);
 
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                &::after
+                &-arrow
                 {
-                    position      : absolute;
-                    bottom        : -8px;
-                    right         : -3px;
-                    width         : 0;
-                    height        : 0;
-                    content       : '';
-                    border-top    : 6px solid transparent;
-                	border-bottom : 6px solid transparent;
-                	border-left   : 12px solid $info-date-border-color;
-                }
-
-
-                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                &-month
-                {
-                    margin    : 20px 0;
-                    color     : $text-other-color;
-                    font-size : 25pt;
+                    position           : relative;
+                    width              : $info-frame-date-box-arrow-width;
+                    margin             : $info-frame-date-box-arrow-margin;
+                    padding            : $info-frame-date-box-arrow-padding;
+                    border             : $info-frame-date-box-arrow-border-width
+                                         solid
+                                         $info-frame-date-box-arrow-border-color;
+                    border-right       : none;
+                    border-radius      : $info-frame-date-box-arrow-border-radius
+                                         0
+                                         0
+                                         $info-frame-date-box-arrow-border-radius;
+                    @include box-sizing(border-box);
 
 
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                     &::after
                     {
-                        position   : absolute;
-                        top        : 50%;
-                        right      : 0;
-                        content    : '';
-                        width      : 110px;
-                        border-top : 1px solid #DCAA7D;
+                        position      : absolute;
+                        bottom        : -8px;
+                        right         : -3px;
+                        width         : 0;
+                        height        : 0;
+                        content       : '';
+                        border-top    : $info-frame-date-box-arrow-tip-border-top-width
+                                        solid
+                                        transparent;
+                    	border-bottom : $info-frame-date-box-arrow-tip-border-bottom-width
+                                        solid
+                                        transparent;
+                    	border-left   : $info-frame-date-box-arrow-tip-border-left-width
+                                        solid
+                                        $info-frame-date-box-arrow-tip-border-color;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &-month
+                    {
+                        margin    : $info-frame-date-box-arrow-month-margin-top-bottom
+                                    0;
+                        color     : $info-frame-date-box-arrow-month-color;
+                        font-size : $info-frame-date-box-arrow-month-font-size;
+
+
+                        /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
+                        &::after
+                        {
+                            position   : absolute;
+                            top        : 50%;
+                            right      : 0;
+                            content    : '';
+                            width      : $info-frame-date-box-arrow-month-after-width;
+                            border-top : $info-frame-date-box-arrow-month-after-border-top-width
+                                         solid
+                                         $info-frame-date-box-arrow-month-after-border-top-color;
+                        }
                     }
                 }
-            }
 
 
-            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            &-numbers
-            {
-                position:relative;
-                display:block;
-                top:0;
-                float:right;
-                padding-top: 19px;
-
-
-                &-day-from
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &-numbers
                 {
-                    color: $text-other-color;
-                }
+                    position    : absolute;
+                    top         : $info-frame-date-box-numbers-top;
+                    right       : 0;
 
-                &-day-to
-                {
-                    color: $text-base-color;
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > div:first-of-type
+                    {
+                        margin-top  : -11px;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > div:last-of-type
+                    {
+                        margin-top  : -16px;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > div
+                    {
+                        margin-right: 14px;
+                        margin-left : -10px;
+                        line-height : $info-frame-date-box-numbers-day-line-height;
+                        font-size   : $info-frame-date-box-numbers-day-font-size;
+
+
+                        /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
+                        & > span:last-of-type
+                        {
+                            vertical-align : top;
+                            display        : inline-block;
+                            width          : 45px;
+                            font-size      : 10pt;
+                            border-bottom  : $info-frame-date-box-numbers-time-border-bottom-width
+                                             solid
+                                             $info-frame-date-box-numbers-time-border-bottom-color;
+                            text-align     : right;
+                            padding        : 11px 0 2px;
+                            margin-left    : -15px;
+                        }
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &-start
+                    {
+                        color: $info-frame-date-box-numbers-start-color;
+                    }
                 }
             }
         }
     }
+
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     &-location
     {
         display : table;
 
+
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         & > span:first-of-type
         {
+            display        : inline-block;
             vertical-align : top;
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &::after
             {
                 display        : inline-block;
                 position       : relative;
-                content        : '';
-                width          : 78px;
-                border-bottom  : 1px solid #D69C6C;
-                margin         : 0 20px;
                 vertical-align : middle;
+                content        : '';
+                width          : $info-frame-location-separator-width ;
+                margin         : 0
+                                 $info-frame-location-separator-margin-left-right;
+                border-bottom  : $info-frame-location-separator-border-bottom-width
+                                 solid
+                                 $info-frame-location-separator-border-bottom-color;
             }
         }
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         & > div:first-of-type
@@ -188,6 +240,7 @@
             display   : inline-block;
             color     : $text-base-color;
             font-size : 13.5pt;
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             & > p:first-of-type
@@ -206,40 +259,7 @@
 /*----------------------------------------------------------------------------*/
 .info-intro-subtitle
 {
-    line-height   : 1;
-    font-weight   : 300;
-    margin-bottom : 10px;
-}
-
-
-
-/*----------------------------------------------------------------------------*/
-.info-date-box-numbers
-{
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-day
-    {
-        // float     : right;
-        font-size : 50pt;
-        margin    : -16px 14px 0 -16px;
-        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        & *
-        {
-            vertical-align : top;
-        }
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-time
-    {
-        display        : inline-block;
-        width          : 45px;
-        font-size      : 10pt;
-        color          : $text-base-color;
-        border-bottom  : 1px solid #DCAA7D;
-        text-align     : right;
-        padding-top    : 11px;
-        margin-left    : -15px;
-    }
+    line-height   : $info-intro-subtitle-line-height;
+    font-weight   : $info-intro-subtitle-font-weight;
+    margin-bottom : $info-intro-subtitle-margin-bottom;
 }

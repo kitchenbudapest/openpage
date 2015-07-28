@@ -25,7 +25,8 @@ $TWO-PARAGRAPHS-WIDTH : 960px;
 /*----- DISTANCES ------------------------------------------------------------*/
 
 /*----- RADIUSES -------------------------------------------------------------*/
-$BOX-CORNER : 10px;
+$BOX-CORNER   : 10px;
+$SMALL-CORNER : 8px;
 
 /*----- SPECIALS -------------------------------------------------------------*/
 $TERMINAL-SCREEN-SCALE : 0.75;
@@ -43,10 +44,14 @@ $SEMI-BOLD   : 600;
 $BOLD        : 700;
 
 /*----- FONT SIZES -----------------------------------------------------------*/
-$MAIN-TITLE : 20pt;
-$SUB-TITLE  : 18pt;
-$BASE-TEXT  : 13pt;
+$EXTRA-TITLE : 50pt;
+$MAIN-TITLE  : 32pt;
+$SUB-TITLE   : 25pt;
+$BASE-TEXT   : 13pt;
+$MINI-TEXT   : 10pt;
 
 /*----- FONT SIZES -----------------------------------------------------------*/
+$NULL-LINE-HEIGHT : 1;
 $BASE-LINE-HEIGHT : 1.2;
+$BIG-LINE-HEIGHT  : 1.3;
 // $BASE-LETTER-SPACING

@@ -6,28 +6,25 @@
 
 /* Include openpage modules */
 @import '../config';
-@import '../utils/func';
 @import '../utils/mixins';
 
 
-$_paragraph-margin: 10px;
 /*----------------------------------------------------------------------------*/
 .paragraph-1,
 .paragraph-2
 {
-    left     : 0;
     position : relative;
+    left     : 0;
     width    : $paragraph-width;
+    margin   : $paragraph-margin;
+    @include box-sizing(border-box);
 }
 
 
 /*----------------------------------------------------------------------------*/
 .paragraph-1
 {
-    @include media-desktop-paragraph(left, $DESKTOP-WIDTH);
-    margin  : 10px;
-    padding : 0;
-    @include box-sizing(border-box);
+    @include media-desktop-paragraph(left, $paragraph-media-desktop-width);
 }
 
 
@@ -35,16 +32,14 @@ $_paragraph-margin: 10px;
 /*----------------------------------------------------------------------------*/
 .paragraph-2
 {
-    @include media-desktop-paragraph(right, $DESKTOP-WIDTH);
-    margin  : 10px;
-    padding : 0;
-    @include box-sizing(border-box);
+    @include media-desktop-paragraph(right, $paragraph-media-desktop-width);
 }
 
 
 /*----------------------------------------------------------------------------*/
 .paragraph-2-spec
 {
-    top : -170px;
-    margin-bottom: -170px;
+    $-shift: -170px;
+    top           : $-shift;
+    margin-bottom : $-shift;
 }

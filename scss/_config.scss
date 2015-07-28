@@ -41,15 +41,23 @@
     +---------------------+
 */
 
-/*----- SECTIONS -------------------------------------------------------------*/
-/* Body */
+
+/*----- BODY ---------------------------------------------------------------- */
 $body-min-width   : $ONE-PARAGRAPH-WIDTH;
+$body-color       : $CHOCOLATE;
 $body-font-weight : $NORMAL;
 $body-font-family : $SANS-SERIF;
 $body-font-size   : $BASE-TEXT;
 $body-line-height : $BASE-LINE-HEIGHT;
 
-/* Header */
+
+/*----- GENERIC --------------------------------------------------------------*/
+$paragraph-width               : $ONE-PARAGRAPH-WIDTH;
+$paragraph-margin              : 10px;
+$paragraph-media-desktop-width : $TWO-PARAGRAPHS-WIDTH;
+
+
+/*----- HEADER -------------------------------------------------------------- */
 $header-terminal-width              : $TWO-PARAGRAPHS-WIDTH;
 $header-terminal-height             : $HEADER-IMG-HEIGHT;
 $header-terminal-canvas-scale       : $TERMINAL-SCREEN-SCALE;
@@ -69,6 +77,87 @@ $header-gradient-colors             :
 );
 
 
+/*----- LOGO ---------------------------------------------------------------- */
+$logo-background                  : $CREAM;
+$logo-frame-width                 : $TWO-PARAGRAPHS-WIDTH;
+$logo-frame-border-bottom         : $ORANGE;
+$logo-frame-img-margin-top-bottom : 20px;
+
+
+/*----- INFO -----------------------------------------------------------------*/
+$info-background                                        : $CREAM;
+$info-border-bottom-width                               : 10px;
+$info-border-bottom-color                               : $ORANGE;
+$info-intro-subtitle-line-height                        : $NULL-LINE-HEIGHT;
+$info-intro-subtitle-font-weight                        : $LIGHT;
+$info-intro-subtitle-margin-bottom                      : 10px;
+
+
+$info-frame-width                                       : $TWO-PARAGRAPHS-WIDTH;
+$info-frame-padding-top-bottom                          : 50px;
+
+$info-frame-intro-line-height                           : $BIG-LINE-HEIGHT;
+$info-frame-intro-title-line-height                     : $NULL-LINE-HEIGHT;
+$info-frame-intro-title-font-size                       : $MAIN-TITLE;
+$info-frame-intro-title-font-weight                     : $SEMI-BOLD;
+$info-frame-intro-title-padding-bottom                  : 30px;
+$info-frame-intro-summary-font-weight                   : $BOLD;
+
+$info-frame-date-margin-top                             : 77px;
+$info-frame-date-margin-bottom                          : 40px;
+
+$info-frame-date-box-width                              : $ONE-PARAGRAPH-WIDTH;
+$info-frame-date-box-background                         : $BUTTER;
+$info-frame-date-box-font-weight                        : $SEMI-BOLD;
+$info-frame-date-box-border-width                       : 1px;
+$info-frame-date-box-border-color                       : $MUD;
+$info-frame-date-box-border-radius                      : $BOX-CORNER;
+
+$info-frame-date-box-arrow-margin                       : 14px;
+$info-frame-date-box-arrow-padding                      : 10px;
+$info-frame-date-box-arrow-width                        : 300px;
+$info-frame-date-box-arrow-border-width                 : 4px;
+$info-frame-date-box-arrow-border-color                 : $MUD;
+$info-frame-date-box-arrow-border-radius                : $SMALL-CORNER;
+
+$info-frame-date-box-arrow-tip-border-color             : $MUD;
+$info-frame-date-box-arrow-tip-border-top-width         : 6px;
+$info-frame-date-box-arrow-tip-border-bottom-width      : 6px;
+$info-frame-date-box-arrow-tip-border-left-width        : 12px;
+
+$info-frame-date-box-arrow-month-color                  : $ORANGE;
+$info-frame-date-box-arrow-month-font-size              : $SUB-TITLE;
+$info-frame-date-box-arrow-month-margin-top-bottom      : 20px;
+$info-frame-date-box-arrow-month-after-width            : 110px;
+$info-frame-date-box-arrow-month-after-border-top-color : $CARAMEL;
+$info-frame-date-box-arrow-month-after-border-top-width : 1px;
+
+$info-frame-date-box-numbers-top                        : 19px;
+$info-frame-date-box-numbers-start-color                : $ORANGE;
+$info-frame-date-box-numbers-day-font-size              : $EXTRA-TITLE;
+$info-frame-date-box-numbers-day-line-height            : $NULL-LINE-HEIGHT;
+$info-frame-date-box-numbers-time-border-bottom-color   : $CARAMEL;
+$info-frame-date-box-numbers-time-border-bottom-width   : 1px;
+
+$info-frame-location-separator-width                    : 78px;
+$info-frame-location-separator-margin-left-right        : 20px;
+$info-frame-location-separator-border-bottom-width      : 1px;
+$info-frame-location-separator-border-bottom-color      : $CARAMEL;
+// $info-frame-location
+
+
+
+/*----- DETAIL ---------------------------------------------------------------*/
+/*----- REGISTRATION ---------------------------------------------------------*/
+/*----- FOOTER ---------------------------------------------------------------*/
+
+
+
+
+
+
+
+
 
 
 
@@ -78,27 +167,6 @@ $HEADER-IMG-HEIGHT   : 731px;
 $DESKTOP-WIDTH       : 960px;
 $MOBILE-WIDTH        : 480px;
 $HEADER-CANVAS-SCALE : 0.75;
-
-
-
-/*----- FONT-SIZES -----------------------------------------------------------*/
-$info-intro-font-size       : 13pt;
-$info-intro-title-font-size : 32pt;
-
-
-
-/*----- DIMENSIONS -----------------------------------------------------------*/
-$header-height                    : 700px;
-$header-img-top-distance          : 15px;
-
-$logo-height                      : 150px;
-$logo-img-bottom-distance         : 28px;
-
-$paragraph-width                  : 445px;
-
-$info-intro-top-bottom-distance   : 50px;
-$info-intro-title-bottom-distance : 30px;
-
 
 
 /*----- COLORS ---------------------------------------------------------------*/
