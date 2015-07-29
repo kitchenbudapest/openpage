@@ -7,49 +7,69 @@
 /* Include openpage modules */
 @import '../config';
 @import '../utils/func';
-@import '../utils/mixins';
 
 
 /*----------------------------------------------------------------------------*/
 #detail
 {
     display    : table;
-    position   : relative;
     width      : 100%;
-    border-top : 4px solid $header-color-20;
+    border-top : $detail-border-top-width
+                 solid
+                 $detail-border-top-color;
     @include box-sizing(border-box);
     @include background-image(
         linear-gradient(to bottom,
                         process-gradient-def($detail-gradient-colors)));
 
+
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     &-frame
     {
-        display       : block;
-        position      : relative;
-        width         : $DESKTOP-WIDTH;
-        margin        : 0 auto;
+        display       : table;
+        width         : $detail-frame-desktop-width;
+        margin        : 0
+                        auto;
         @include box-sizing(border-box);
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        @media all and (max-width : $detail-frame-mobile-max-width)
+        {
+            width : $detail-frame-mobile-width;
+        }
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-apply
         {
-            display    : block;
-            position   : relative;
-            top        : -4px;
-            width      : 200px;
-            height     : 44px;
-            background : $header-logo-separator-color;
-            padding-top: 6px;
-            color : #FDF5DD;
-            font-size: 22pt;
-            margin-bottom : 75px;
-            text-align : center;
+            display        : table;
+            position       : relative;
+            top            : -$detail-border-top-width;
+            margin-bottom  : $detail-frame-apply-desktop-margin-bottom;
+            padding        : $detail-frame-apply-padding-top-bottom  - $detail-border-top-width
+                             $detail-frame-apply-padding-left-right
+                             $detail-frame-apply-padding-top-bottom;
+            background     : $detail-frame-apply-background;
+            color          : $detail-frame-apply-color;
+            line-height    : $detail-frame-apply-line-height;
+            font-size      : $detail-frame-apply-font-size;
+            text-align     : center;
             text-transform : uppercase;
-            border-bottom-left-radius  : 10px;
-            border-bottom-right-radius : 10px;
+            border-radius  : 0
+                             0
+                             $detail-frame-apply-border-bottom-left-right-radius
+                             $detail-frame-apply-border-bottom-left-right-radius;
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            @media all and (max-width : $detail-frame-mobile-max-width)
+            {
+                margin-left   : $detail-frame-apply-mobile-margin-left;
+                margin-bottom : $detail-frame-apply-mobile-margin-bottom;
+            }
         }
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-prizes
@@ -57,51 +77,62 @@
             position      : relative;
             display       : table;
             width         : 100%;
-            padding       : 29px 35px;
-            background    : #FDF5DD;
-            border        : 1px solid #D7C5AB;
-            border-radius : 10px;
+            padding       : $detail-frame-prizes-padding-top-bottom
+                            $detail-frame-prizes-padding-left-right;
+            background    : $detail-frame-prizes-background;
+            border        : $detail-frame-prizes-border-width
+                            solid
+                            $detail-frame-prizes-border-color;
+            border-radius : $detail-frame-prizes-border-radius;
             @include box-sizing(border-box);
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-head
             {
                 display        : table;
                 width          : 100%;
-                padding-bottom : 26px;
-                margin-bottom  : 24px;
-                border-bottom  : 3px solid #F0761D;
-                color          : #512417;
+                padding-bottom : $detail-frame-prizes-head-padding-bottom;
+                margin-bottom  : $detail-frame-prizes-head-margin-bottom;
+                border-bottom  : $detail-frame-prizes-head-border-bottom-width
+                                 solid
+                                 $detail-frame-prizes-head-border-bottom-color;
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &-title
                 {
                     display        : inline-block;
-                    line-height    : 0.90;
-                    letter-spacing : -2pt;
-                    margin-left    : 12px;
+                    line-height    : $detail-frame-prizes-head-title-line-height;
+                    letter-spacing : $detail-frame-prizes-head-title-letter-spacing;
+                    margin-left    : $detail-frame-prizes-head-title-margin-left;
                     text-transform : uppercase;
 
-                    & > span:first-child
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > span:first-of-type
                     {
-                        font-size   : 31pt;
-                        font-weight : 200;
+                        font-size   : $detail-frame-prizes-head-title-1stspan-font-size;
+                        font-weight : $detail-frame-prizes-head-title-1stspan-font-weight;
                     }
 
-                    & > span:last-child
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > span:last-of-type
                     {
-                        font-size   : 34.5pt;
-                        font-weight : 700;
+                        font-size   : $detail-frame-prizes-head-title-2ndspan-font-size;
+                        font-weight : $detail-frame-prizes-head-title-2ndspan-font-weight;
                     }
                 }
             }
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-info
             {
                 width         : 100%;
-                padding-left  : 65px;
-                padding-right : 25px;
+                padding-left  : $detail-frame-prizes-info-padding-left;
+                padding-right : $detail-frame-prizes-info-padding-right;
                 @include box-sizing(border-box);
             }
         }
@@ -109,58 +140,74 @@
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-schedule
         {
-            position : relative;
-            margin   : 40px 0 60px;
-            display  : table;
-            width    : 100%;
-            padding  : 29px 35px;
-            background: #F0761D;
-            border-radius: 10px;
+            display       : table;
+            position      : relative;
+            width         : 100%;
+            margin        : $detail-frame-schedule-margin-top
+                            0
+                            $detail-frame-schedule-margin-bottom;
+            padding       : $detail-frame-schedule-padding-top
+                            $detail-frame-schedule-padding-bottom;
+            background    : $detail-frame-schedule-background;
+            border-radius : $detail-frame-schedule-border-radius;
             @include box-sizing(border-box);
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-head
             {
-                width: 100%;
-                color: #FDF5DD;
-                text-transform: uppercase;
-                line-height: 0.90;
-                letter-spacing: -2pt;
-                border-bottom: 3px solid #FDF5DD;
+                width          : 100%;
+                color          : $detail-frame-schedule-head-color;
+                text-transform : uppercase;
+                line-height    : $detail-frame-schedule-head-line-height;
+                letter-spacing : $detail-frame-schedule-head-letter-spacing;
+                border-bottom  : $detail-frame-schedule-head-border-bottom-width
+                                 solid
+                                 $detail-frame-schedule-head-border-bottom-color;
+                padding-bottom : $detail-frame-schedule-head-padding-bottom;
+                margin-bottom  : $detail-frame-schedule-head-margin-bottom;
                 @include box-sizing(border-box);
-                padding-bottom: 26px;
-                margin-bottom: 38px;
 
-                & > span:first-child
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > span:first-of-type
                 {
-                    font-size : 31pt;
-                    font-weight: 200;
+                    font-size   : $detail-frame-schedule-head-1stspan-font-size;
+                    font-weight : $detail-frame-schedule-head-1stspan-font-weight;
                 }
 
-                & > span:last-child
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > span:last-of-type
                 {
-                    font-size : 34.5pt;
-                    font-weight: 700;
+                    font-size   : $detail-frame-schedule-head-2ndspan-font-size;
+                    font-weight : $detail-frame-schedule-head-2ndspan-font-weight;
                 }
             }
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-spec
             {
-                font-size: 14pt;
-                font-weight: 300;
-                padding: 12px 0 24px;
+                padding     : $detail-frame-schedule-spec-padding-top
+                              0
+                              $detail-frame-schedule-spec-padding-bottom;
+                font-size   : $detail-frame-schedule-spec-font-size;
+                font-weight : $detail-frame-schedule-spec-font-weight;
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &::before
                 {
-                    display:inline-block;
-                    position: relative;
-                    vertical-align: middle;
-                    width: 68px;
-                    content: '';
-                    border-bottom: 1px solid #512417;
-                    margin-right: 20px;
+                    display        : inline-block;
+                    position       : relative;
+                    width          : $detail-frame-schedule-spec-separator-width;
+                    content        : '';
+                    vertical-align : middle;
+                    margin-right   : $detail-frame-schedule-spec-separator-margin-right;
+                    border-bottom  : $detail-frame-schedule-spec-separator-border-bottom-width
+                                     solid
+                                     $detail-frame-schedule-spec-separator-border-bottom-color;
                 }
             }
         }
@@ -172,34 +219,37 @@
 /*----------------------------------------------------------------------------*/
 .detail-frame-info
 {
-    margin-bottom : 32px;
+    margin-bottom : $detail-frame-info-margin-bottom;
     text-align    : justify;
-    color         : $text-base-color;
-    font-family   : 'Source Serif Pro', serif;
-    line-height: 1.375;
-    font-size:12pt;
+    font-family   : $detail-frame-info-font-family;
+    line-height   : $detail-frame-info-line-height;
+    font-size     : $detail-frame-info-font-size;
+
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > div:first-child
     {
-        font-family    : 'Source Sans Pro', sans-serif;
+        margin-bottom  : $detail-frame-info-title-margin-bottom;
+        font-family    : $detail-frame-info-title-font-family;
+        font-size      : $detail-frame-info-title-font-size;
+        font-weight    : $detail-frame-info-title-font-weight;
         text-align     : left;
-        letter-spacing : -0.65pt;
-        line-height: 1;
-        font-size      : 24pt;
-        font-weight    : 600;
-        margin-bottom  : 19px;
+        line-height    : $detail-frame-info-title-line-height;
+        letter-spacing : $detail-frame-info-title-letter-spacing;
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &::after
         {
             display    : block;
             position   : relative;
-            bottom     : -8px;
             left       : 0;
+            bottom     : $detail-frame-info-title-underline-bottom;
+            width      : $detail-frame-info-title-underline-width;
             content    : '';
-            width      : 70px;
-            border-top : 1px solid $header-logo-separator-color;
+            border-top : $detail-frame-info-title-underline-border-top-width
+                         solid
+                         $detail-frame-info-title-underline-border-top-color;
         }
     }
 }
@@ -208,30 +258,31 @@
 /*----------------------------------------------------------------------------*/
 .detail-frame-prizes-info-text
 {
-    color:  #512417;
-    padding-bottom: 25px;
+    padding-bottom : $detail-frame-prizes-info-text-padding-bottom;
+
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > div:first-child
     {
-        color          : #F0812E;
-        font-size      : 18.5pt;
-        font-weight    : 600;
-        line-height    : 1.15;
+        padding-bottom : $detail-frame-prizes-info-text-title-padding-bottom;
+        color          : $detail-frame-prizes-info-text-title-color;
+        font-size      : $detail-frame-prizes-info-text-title-font-size;
+        font-weight    : $detail-frame-prizes-info-text-title-font-weight;
+        line-height    : $detail-frame-prizes-info-text-title-line-height;
         text-transform : uppercase;
-        padding-bottom : 5px;
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &::before
         {
             position   : relative;
             display    : block;
+            top        : $detail-frame-prizes-info-text-title-indicator-top;
+            left       : $detail-frame-prizes-info-text-title-indicator-left;
+            width      : $detail-frame-prizes-info-text-title-indicator-width;
+            height     : $detail-frame-prizes-info-text-title-indicator-width;
             content    : '';
-            top        : 20px;
-            left       : -38px;
-            width      : 12px;
-            height     : 12px;
-            background : #F0761D;
+            background : $detail-frame-prizes-info-text-title-indicator-background;
         }
     }
 }
@@ -240,16 +291,17 @@
 /*----------------------------------------------------------------------------*/
 .detail-frame-schedule-timing
 {
-    font-size   : 14pt;
-    color       : #512012;
-    font-weight: 700;
-    margin-bottom : 9px;
+    margin-bottom : $detail-frame-schedule-timing-margin-bottom;
+    font-size     : $detail-frame-schedule-timing-font-size;
+    font-weight   : $detail-frame-schedule-timing-font-weight;
 
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > span:first-child
     {
-        font-weight : 600;
-        color: #FDF5DD;
-        margin-right: 41px;
+        margin-right : $detail-frame-schedule-timing-time-margin-right;
+        font-weight  : $detail-frame-schedule-timing-time-font-weight;
+        color        : $detail-frame-schedule-timing-time-color;
     }
 }
 
@@ -257,13 +309,20 @@
 /*----------------------------------------------------------------------------*/
 .detail-frame-schedule-timing-spec
 {
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > span:first-child
     {
-        border-bottom: 1px solid #FDF5DD;
+        border-bottom : $detail-frame-schedule-timing-spec-time-border-bottom-width
+                        solid
+                        $detail-frame-schedule-timing-spec-time-border-bottom-color;
     }
 
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     & > span:last-child
     {
-        border-bottom: 1px solid #512012;
+        border-bottom : $detail-frame-schedule-timing-spec-text-border-bottom-width
+                        solid
+                        $detail-frame-schedule-timing-spec-text-border-bottom-color;
     }
 }

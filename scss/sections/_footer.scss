@@ -7,7 +7,6 @@
 /* Include openpage modules */
 @import '../config';
 @import '../utils/func';
-@import '../utils/mixins';
 
 
 /*----------------------------------------------------------------------------*/
@@ -16,85 +15,101 @@
     display    : table;
     position   : relative;
     width      : 100%;
-    height     : 784px;
-    border-top : 4px solid $header-color-20;
+    border-top : $footer-border-top-width
+                 solid
+                 $footer-border-top-color;
     @include box-sizing(border-box);
     @include background-image(
         linear-gradient(to bottom,
                         process-gradient-def($footer-gradient-colors)));
+
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     &-frame
     {
         display   : table;
         position  : relative;
-        width     : $DESKTOP-WIDTH;
-        margin    : 0 auto;
-        padding   : 60px 0;
-        color     : #FEF5DF;
-        font-size : 14pt;
+        width     : $footer-frame-desktop-width;
+        margin    : 0
+                    auto;
+        padding   : $footer-frame-padding-top-bottom
+                    0;
+        color     : $footer-frame-color;
+        font-size : $footer-frame-font-size;
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        @media all and (max-width : $footer-frame-mobile-max-width)
+        {
+            width : $footer-frame-mobile-width;
+        }
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-title
         {
             width          : 100%;
-            font-size      : 28pt;
-            font-weight    : 600;
-            letter-spacing : -1pt;
+            margin-bottom  : $footer-frame-title-margin-bottom ;
+            padding-bottom : $footer-frame-title-padding-bottom;
+            border-bottom  : $footer-frame-title-border-bottom-width
+                             solid
+                             $footer-frame-title-border-bottom-color;
+            font-size      : $footer-frame-title-font-size;
+            font-weight    : $footer-frame-title-font-weight;
+            letter-spacing : $footer-frame-title-letter-spacing;
             text-transform : uppercase;
-            border-bottom  : 1px solid #FEF5DF;
-            padding-bottom : 15px;
-            margin-bottom  : 35px;
         }
 
-        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-info
-        {
-            line-height: 1.2;
-
-            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > img:first-of-type
-            {
-                margin-top    : 6px;
-                margin-bottom : 30px;
-            }
-
-            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > p:first-of-type
-            {
-                color : $header-logo-separator-color;
-            }
-
-            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > p:last-of-type
-            {
-                margin-bottom : 28px;
-            }
-
-            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > img:last-of-type
-            {
-                margin-left : 12px;
-            }
-        }
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-links
         {
-            line-height: 1.2;
-
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             & > p::before
             {
                 display      : inline-block;
                 position     : relative;
+                bottom       : $footer-frame-links-indicator-bottom;
+                width        : $footer-frame-links-indicator-width;
+                height       : $footer-frame-links-indicator-width;
+                margin-left  : $footer-frame-links-indicator-margin-left;
+                margin-right : $footer-frame-links-indicator-margin-right;
                 content      : '';
-                width        : 4px;
-                height       : 4px;
-                background   : #FEF5DF;
-                margin-left  : 6px;
-                margin-right : 16px;
-                bottom       : 3px;
+                background   : $footer-frame-links-indicator-background;
+            }
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-info
+        {
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > img:first-of-type
+            {
+                margin-top    : $footer-frame-info-logo-desktop-margin-top;
+                margin-bottom : $footer-frame-info-logo-margin-bottom;
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                @media all and (max-width : $footer-frame-mobile-max-width)
+                {
+                    margin-top : $footer-frame-info-logo-mobile-margin-top;
+                }
+            }
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > p:first-of-type
+            {
+                color :$footer-frame-info-text-spec-color;
+            }
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > img:last-of-type
+            {
+                margin-top  : $footer-frame-info-social-margin-top;
+                margin-left : $footer-frame-info-social-margin-left;
             }
         }
     }

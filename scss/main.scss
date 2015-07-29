@@ -6,8 +6,6 @@
 
 /* Include openpage modules */
 @import 'config';
-@import 'utils/func';
-@import 'utils/mixins';
 
 
 /*----------------------------------------------------------------------------*/
@@ -35,6 +33,19 @@ body
     font-weight : $body-font-weight;
     font-family : $body-font-family;
     line-height : $body-line-height;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    & a,
+    & a:hover,
+    & a:visited
+    {
+        color           : $body-a-color;
+        border-bottom   : $body-a-border-bottom-width
+                          solid
+                          $body-a-color;
+        text-decoration : none;
+    }
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

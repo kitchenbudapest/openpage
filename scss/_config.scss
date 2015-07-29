@@ -7,57 +7,76 @@
 /* Blocks naming reference:
 
     +---------------------+
-    |  +---------------+  |====> header
+    |  +---------------+  |====>  header
     |  |               |  |
-    |  |               |=======> header-img
+    |  |               |=======>  header-img
     |  |               |  |
     |  +---------------+  |
     +---------------------+
-    |  +------+           |====> logo
-    |  |      |================> logo-img
+    |  +------+           |====>  logo
+    |  |      |================>  logo-img
     |  +------+           |
     +---------------------+
-    |                     |====> info
+    |  +------+ +------+  |====>  info
+    |  |      | |      |=======>  info-date
+    |  |      | +------+  |
+    |  |      |================>  info-intro
+    |  |      | +------+  |
+    |  |      | |      |=======>  info-location
     |  +------+ +------+  |
-    |  |      | |      |=======> info-date
+    |           +------+  |
+    +--+------+-|      |--+
+    |  |      |================>  detail-apply
+    |  +------+ |      |  |====>  detail
+    |  +------+ |      |  |
+    |  |      | |      |=======>  detail-prizes
     |  |      | +------+  |
-    |  |      |================> info-intro
+    |  |      |================>  detail-info
     |  |      | +------+  |
-    |  |      | |      |=======> info-location
+    |  |      | |      |=======>  detail-schedule
     |  +------+ +------+  |
     +---------------------+
-    |                     |====> detail
-    |  +------+ +------+  |
-    |  |      | |      |=======> detail-prizes
+    |  +------+ +------+  |====>  registartion
+    |  |      | |      |=======>  registration-name/mail/lang
     |  |      | +------+  |
-    |  |      |================> detail-info
+    |  |      |================>  registration-profession
     |  |      | +------+  |
-    |  |      | |      |=======> detail-schedule
+    |  |      | |      |=======>  registration-send
     |  +------+ +------+  |
     +---------------------+
-    |                     |====> registartion
-    +---------------------+
-    |                     |====> footer
+    |  +------+ +------+  |====>  footer
+    |  |      | |      |=======>  footer-links
+    |  |      | |      |  |
+    |  |      |================>  footer-info
+    |  |      | |      |  |
+    |  +------+ +------+  |
     +---------------------+
 */
 
+/*----- CALCULATED -----------------------------------------------------------*/
+$-MOBILE-WIDTH: $MEDIA-MOBILE-MARGIN*2 + $ONE-PARAGRAPH-WIDTH;
 
-/*----- BODY ---------------------------------------------------------------- */
-$body-min-width   : $ONE-PARAGRAPH-WIDTH;
-$body-color       : $CHOCOLATE;
-$body-font-weight : $NORMAL;
-$body-font-family : $SANS-SERIF;
-$body-font-size   : $BASE-TEXT;
-$body-line-height : $BASE-LINE-HEIGHT;
+
+/*----- BODY -----------------------------------------------------------------*/
+$body-min-width                  : $ONE-PARAGRAPH-WIDTH;
+$body-color                      : $CHOCOLATE;
+$body-font-weight                : $NORMAL;
+$body-font-family                : $SANS-SERIF;
+$body-font-size                  : $BASE-TEXT;
+$body-line-height                : $BASE-LINE-HEIGHT;
+$body-a-color                    : $ORANGE;
+$body-a-border-bottom-width      : 1px;
 
 
 /*----- GENERIC --------------------------------------------------------------*/
-$paragraph-width               : $ONE-PARAGRAPH-WIDTH;
-$paragraph-margin              : 10px;
-$paragraph-media-desktop-width : $TWO-PARAGRAPHS-WIDTH;
+$paragraph-width                          : $ONE-PARAGRAPH-WIDTH;
+$paragraph-media-desktop-width            : $TWO-PARAGRAPHS-WIDTH;
+$paragraph-media-mobile-width             : $TWO-PARAGRAPHS-WIDTH;
+$paragraph-media-mobile-margin-left-right : $MEDIA-MOBILE-MARGIN;
 
 
 /*----- HEADER -------------------------------------------------------------- */
+$header-media-mobile-max-width      : $TWO-PARAGRAPHS-WIDTH;
 $header-terminal-width              : $TWO-PARAGRAPHS-WIDTH;
 $header-terminal-height             : $HEADER-IMG-HEIGHT;
 $header-terminal-canvas-scale       : $TERMINAL-SCREEN-SCALE;
@@ -79,8 +98,11 @@ $header-gradient-colors             :
 
 /*----- LOGO ---------------------------------------------------------------- */
 $logo-background                  : $CREAM;
-$logo-frame-width                 : $TWO-PARAGRAPHS-WIDTH;
-$logo-frame-border-bottom         : $ORANGE;
+$logo-frame-mobile-max-width      : $TWO-PARAGRAPHS-WIDTH;
+$logo-frame-desktop-width         : $TWO-PARAGRAPHS-WIDTH;
+$logo-frame-mobile-width          : $-MOBILE-WIDTH;
+$logo-frame-border-bottom-color   : $ORANGE;
+$logo-frame-border-bottom-width   : $HAIRLINE;
 $logo-frame-img-margin-top-bottom : 20px;
 
 
@@ -92,9 +114,11 @@ $info-intro-subtitle-line-height                        : $NULL-LINE-HEIGHT;
 $info-intro-subtitle-font-weight                        : $LIGHT;
 $info-intro-subtitle-margin-bottom                      : 10px;
 
-
-$info-frame-width                                       : $TWO-PARAGRAPHS-WIDTH;
-$info-frame-padding-top-bottom                          : 50px;
+$info-frame-mobile-max-width                            : $TWO-PARAGRAPHS-WIDTH;
+$info-frame-desktop-width                               : $TWO-PARAGRAPHS-WIDTH;
+$info-frame-mobile-width                                : $-MOBILE-WIDTH;
+$info-frame-padding-top                                 : 50px;
+$info-frame-desktop-padding-bottom                      : 65px;
 
 $info-frame-intro-line-height                           : $BIG-LINE-HEIGHT;
 $info-frame-intro-title-line-height                     : $NULL-LINE-HEIGHT;
@@ -105,11 +129,12 @@ $info-frame-intro-summary-font-weight                   : $BOLD;
 
 $info-frame-date-margin-top                             : 77px;
 $info-frame-date-margin-bottom                          : 40px;
+$info-frame-date-media-mobile-max-width                 : $TWO-PARAGRAPHS-WIDTH;
 
 $info-frame-date-box-width                              : $ONE-PARAGRAPH-WIDTH;
 $info-frame-date-box-background                         : $BUTTER;
 $info-frame-date-box-font-weight                        : $SEMI-BOLD;
-$info-frame-date-box-border-width                       : 1px;
+$info-frame-date-box-border-width                       : $HAIRLINE;
 $info-frame-date-box-border-color                       : $MUD;
 $info-frame-date-box-border-radius                      : $BOX-CORNER;
 
@@ -130,7 +155,7 @@ $info-frame-date-box-arrow-month-font-size              : $SUB-TITLE;
 $info-frame-date-box-arrow-month-margin-top-bottom      : 20px;
 $info-frame-date-box-arrow-month-after-width            : 110px;
 $info-frame-date-box-arrow-month-after-border-top-color : $CARAMEL;
-$info-frame-date-box-arrow-month-after-border-top-width : 1px;
+$info-frame-date-box-arrow-month-after-border-top-width : $HAIRLINE;
 
 $info-frame-date-box-numbers-top                        : 19px;
 $info-frame-date-box-numbers-start-color                : $ORANGE;
@@ -141,74 +166,270 @@ $info-frame-date-box-numbers-time-border-bottom-width   : 1px;
 
 $info-frame-location-separator-width                    : 78px;
 $info-frame-location-separator-margin-left-right        : 20px;
-$info-frame-location-separator-border-bottom-width      : 1px;
+$info-frame-location-separator-border-bottom-width      : $HAIRLINE;
 $info-frame-location-separator-border-bottom-color      : $CARAMEL;
-// $info-frame-location
-
+$info-frame-location-name-font-weight                   : $SEMI-BOLD;
+$info-frame-location-name-font-size                     : 22pt;
+$info-frame-location-address-font-size                  : 13.5pt;
 
 
 /*----- DETAIL ---------------------------------------------------------------*/
-/*----- REGISTRATION ---------------------------------------------------------*/
-/*----- FOOTER ---------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-/*----- CONSTANTS ------------------------------------------------------------*/
-$HEADER-IMG-WIDTH    : 1300px;
-$HEADER-IMG-HEIGHT   : 731px;
-$DESKTOP-WIDTH       : 960px;
-$MOBILE-WIDTH        : 480px;
-$HEADER-CANVAS-SCALE : 0.75;
-
-
-/*----- COLORS ---------------------------------------------------------------*/
-$text-base-color  : #512417;
-$text-other-color : #F0761D;
-
-$header-color-10 : #433934;
-$header-color-20 : #FEF6DF;
-$footer-gradient-colors:
-(
-    (
-        stop  : 25%,
-        color : $header-color-10,
-    ),
-    (
-        stop  : 93%,
-        color : $header-color-20,
-    ),
-);
-$header-logo-separator-color : #EF7219;
-
-$info-date-background   : #F9EDD0;
-$info-date-border-color : #D7C5AB;
-
-$detail-color-10 : #E9DAB6;
-$detail-color-20 : #EDE3C5;
-$detail-gradient-colors:
+$detail-border-top-width                                    : 4px;
+$detail-border-top-color                                    : $CREAM;
+$detail-gradient-colors                                     :
 (
     (
         stop  : 0%,
-        color : $detail-color-10,
+        color : $PEANUT,
     ),
     (
         stop  : 5%,
-        color : $detail-color-20,
+        color : $CAPPUCCINO,
     ),
     (
         stop  : 95%,
-        color : $detail-color-20,
+        color : $CAPPUCCINO,
     ),
     (
         stop  : 100%,
-        color : $detail-color-10,
+        color : $PEANUT,
     ),
 );
+
+$detail-frame-mobile-max-width                              : $TWO-PARAGRAPHS-WIDTH;
+$detail-frame-desktop-width                                 : $TWO-PARAGRAPHS-WIDTH;
+$detail-frame-mobile-width                                  : $-MOBILE-WIDTH;
+
+$detail-frame-apply-padding-top-bottom                      : 10px;
+$detail-frame-apply-padding-left-right                      : 25px;
+$detail-frame-apply-line-height                             : $NULL-LINE-HEIGHT;
+$detail-frame-apply-color                                   : $CREAM;
+$detail-frame-apply-background                              : $ORANGE;
+$detail-frame-apply-font-size                               : 22pt;
+$detail-frame-apply-desktop-margin-bottom                   : 75px;
+$detail-frame-apply-mobile-margin-bottom                    : 35px;
+$detail-frame-apply-border-bottom-left-right-radius         : $BOX-CORNER;
+$detail-frame-apply-mobile-margin-left                      : $MEDIA-MOBILE-MARGIN;
+
+$detail-frame-prizes-padding-top-bottom                     : 29px;
+$detail-frame-prizes-padding-left-right                     : 35px;
+$detail-frame-prizes-background                             : $CREAM;
+$detail-frame-prizes-border-width                           : $HAIRLINE;
+$detail-frame-prizes-border-color                           : $MUD;
+$detail-frame-prizes-border-radius                          : 10px;
+
+$detail-frame-prizes-head-padding-bottom                    : 26px;
+$detail-frame-prizes-head-margin-bottom                     : 24px;
+$detail-frame-prizes-head-border-bottom-width               : 3px;
+$detail-frame-prizes-head-border-bottom-color               : $ORANGE;
+
+$detail-frame-prizes-head-title-line-height                 : 0.9;
+$detail-frame-prizes-head-title-letter-spacing              : -2pt;
+$detail-frame-prizes-head-title-margin-left                 : 12px;
+$detail-frame-prizes-head-title-1stspan-font-size           : 31pt;
+$detail-frame-prizes-head-title-1stspan-font-weight         : $EXTRA-LIGHT;
+$detail-frame-prizes-head-title-2ndspan-font-size           : 34.5pt;
+$detail-frame-prizes-head-title-2ndspan-font-weight         : $BOLD;
+
+$detail-frame-prizes-info-padding-left                      : 65px;
+$detail-frame-prizes-info-padding-right                     : 25px;
+
+$detail-frame-schedule-margin-top                           : 40px;
+$detail-frame-schedule-margin-bottom                        : 60px;
+$detail-frame-schedule-padding-top                          : 29px;
+$detail-frame-schedule-padding-bottom                       : 35px;
+$detail-frame-schedule-background                           : $ORANGE;
+$detail-frame-schedule-border-radius                        : $BOX-CORNER;
+
+$detail-frame-schedule-head-color                           : $CREAM;
+$detail-frame-schedule-head-line-height                     : 0.9;
+$detail-frame-schedule-head-letter-spacing                  : -2pt;
+$detail-frame-schedule-head-border-bottom-width             : 3px;
+$detail-frame-schedule-head-border-bottom-color             : $CREAM;
+$detail-frame-schedule-head-padding-bottom                  : 26px;
+$detail-frame-schedule-head-margin-bottom                   : 38px;
+$detail-frame-schedule-head-1stspan-font-size               : 31pt;
+$detail-frame-schedule-head-1stspan-font-weight             : $EXTRA-LIGHT;
+$detail-frame-schedule-head-2ndspan-font-size               : 34.5pt;
+$detail-frame-schedule-head-2ndspan-font-weight             : $BOLD;
+
+$detail-frame-schedule-spec-font-size                       : 14pt;
+$detail-frame-schedule-spec-font-weight                     : $LIGHT;
+$detail-frame-schedule-spec-padding-top                     : 12px;
+$detail-frame-schedule-spec-padding-bottom                  : 24px;
+
+$detail-frame-schedule-spec-separator-width                 : 68px;
+$detail-frame-schedule-spec-separator-margin-right          : 20px;
+$detail-frame-schedule-spec-separator-border-bottom-width   : $HAIRLINE;
+$detail-frame-schedule-spec-separator-border-bottom-color   : $CHOCOLATE;
+
+$detail-frame-info-margin-bottom                            : 32px;
+$detail-frame-info-font-family                              : $SERIF;
+$detail-frame-info-line-height                              : 1.375;
+$detail-frame-info-font-size                                : 12pt;
+
+$detail-frame-info-title-margin-bottom                      : 19px;
+$detail-frame-info-title-font-family                        : $SANS-SERIF;
+$detail-frame-info-title-font-size                          : 24pt;
+$detail-frame-info-title-font-weight                        : $SEMI-BOLD;
+$detail-frame-info-title-line-height                        : $NULL-LINE-HEIGHT;
+$detail-frame-info-title-letter-spacing                     : -0.65pt;
+$detail-frame-info-title-underline-bottom                   : -8px;
+$detail-frame-info-title-underline-width                    : 70px;
+$detail-frame-info-title-underline-border-top-width         : $HAIRLINE;
+$detail-frame-info-title-underline-border-top-color         : $ORANGE;
+
+$detail-frame-prizes-info-text-padding-bottom               : 25px;
+$detail-frame-prizes-info-text-title-padding-bottom         : 5px;
+$detail-frame-prizes-info-text-title-color                  : $ORANGE;
+$detail-frame-prizes-info-text-title-font-size              : 18.5pt;
+$detail-frame-prizes-info-text-title-font-weight            : $SEMI-BOLD;
+$detail-frame-prizes-info-text-title-line-height            : 1.15;
+$detail-frame-prizes-info-text-title-indicator-top          : 20px;
+$detail-frame-prizes-info-text-title-indicator-left         : -38px;
+$detail-frame-prizes-info-text-title-indicator-width        : 12px;
+$detail-frame-prizes-info-text-title-indicator-background   : $ORANGE;
+
+$detail-frame-schedule-timing-margin-bottom                 : 9px;
+$detail-frame-schedule-timing-font-size                     : 14pt;
+$detail-frame-schedule-timing-font-weight                   : $BOLD;
+$detail-frame-schedule-timing-time-margin-right             : 41px;
+$detail-frame-schedule-timing-time-font-weight              : $SEMI-BOLD;
+$detail-frame-schedule-timing-time-color                    : $CREAM;
+$detail-frame-schedule-timing-spec-time-border-bottom-width : $HAIRLINE;
+$detail-frame-schedule-timing-spec-time-border-bottom-color : $CREAM;
+$detail-frame-schedule-timing-spec-text-border-bottom-width : $HAIRLINE;
+$detail-frame-schedule-timing-spec-text-border-bottom-color : $CHOCOLATE;
+
+
+/*----- REGISTRATION ---------------------------------------------------------*/
+$registration-background                                        : $CREAM;
+$registration-border-bottom-width                               : 10px;
+$registration-border-bottom-color                               : $ORANGE;
+
+$registration-frame-padding-top-bottom                          : 60px;
+$registration-frame-mobile-max-width                            : $TWO-PARAGRAPHS-WIDTH;
+$registration-frame-desktop-width                               : $TWO-PARAGRAPHS-WIDTH;
+$registration-frame-mobile-width                                : $-MOBILE-WIDTH;
+
+$registration-frame-title-padding-bottom                        : 45px;
+$registration-frame-title-color                                 : $ORANGE;
+$registration-frame-title-font-weight                           : $SEMI-BOLD;
+$registration-frame-title-font-size                             : 26pt;
+$registration-frame-title-letter-spacing                        : -1pt;
+
+$registration-frame-profession-margin-bottom                    : 35px;
+$registration-frame-profession-background                       : $WHITE;
+$registration-frame-profession-border-radius                    : $BOX-CORNER;
+$registration-frame-profession-border-width                     : $HAIRLINE;
+$registration-frame-profession-border-color                     : $MUD;
+$registration-frame-profession-font-size                        : 15.5pt;
+
+$registration-frame-profession-frame-padding-top-bottom         : 30px;
+$registration-frame-profession-frame-padding-left-right         : 25px;
+
+$registration-frame-profession-frame-title-color                : $ORANGE;
+
+$registration-frame-profession-frame-arrow-height               : 15px;
+$registration-frame-profession-frame-arrow-border-width         : $HAIRLINE;
+$registration-frame-profession-frame-arrow-background           : $WHITE;
+$registration-frame-profession-frame-arrow-border-color         : $MUD;
+
+$registration-frame-profession-frame-label-margin-left          : 15px;
+
+$registration-frame-profession-frame-radio-margin-left          : 4px;
+$registration-frame-profession-frame-radio-margin-bottom        : -3px;
+$registration-frame-profession-frame-radio-width                : 16px;
+$registration-frame-profession-frame-radio-background           : $CREAM;
+$registration-frame-profession-frame-radio-border-width         : $HAIRLINE;
+$registration-frame-profession-frame-radio-border-color         : $MUD;
+$registration-frame-profession-frame-radio-checker-top          : 5px;
+$registration-frame-profession-frame-radio-checker-width        : 6px;
+$registration-frame-profession-frame-radio-checker-color        : $ORANGE;
+
+$registration-frame-info-p-margin-bottom                        : 26px;
+$registration-frame-info-bold-font-weight                        : $BOLD;
+
+$registration-frame-data-font-size                              : 15.5pt;
+$registration-frame-data-name-desktop-margin-top                : 80px;
+$registration-frame-data-name-mobile-margin-top                 : 15px;
+$registration-frame-data-name-margin-bottom                     : 14px;
+
+$registration-frame-data-mail-margin-bottom                     : 25px;
+
+$registration-frame-data-name-mail-spec-color                   : $ORANGE;
+$registration-frame-data-name-mail-input-padding-left           : 5px;
+
+$registration-frame-data-name-mail-lang-frame-border-width      : $HAIRLINE;
+$registration-frame-data-name-mail-lang-frame-border-color      : $MUD;
+$registration-frame-data-name-mail-lang-frame-border-radius     : $BOX-CORNER;
+$registration-frame-data-name-mail-lang-frame-background        : $WHITE;
+$registration-frame-data-name-mail-lang-frame-padding           : 7px;
+
+$registration-frame-data-name-mail-lang-frame-input-background  : $WHITE;
+$registration-frame-data-name-mail-lang-frame-input-color       : $MUD;
+$registration-frame-data-name-mail-lang-frame-input-font-weight : $EXTRA-LIGHT;
+$registration-frame-data-name-mail-lang-frame-input-font-size   : $BASE-TEXT;
+$registration-frame-data-name-mail-lang-frame-input-line-height : $BASE-LINE-HEIGHT;
+
+$registration-frame-data-lang-margin-bottom                     : 30px;
+$registration-frame-data-lang-label-margin-bottom               : 10px;
+$registration-frame-data-lang-label-spec-color                  : $ORANGE;
+$registration-frame-data-lang-label-spec-font-size              : $MINI-TEXT;
+$registration-frame-data-lang-label-frame-input-min-height      : 35px;
+$registration-frame-data-lang-label-frame-input-background      : $WHITE;
+
+$registration-frame-data-send-label-font-size                   : $BASE-TEXT;
+$registration-frame-data-send-button-background                 : $ORANGE;
+$registration-frame-data-send-button-padding-top-bottom         : 11px;
+$registration-frame-data-send-button-padding-left-right         : 48px;
+$registration-frame-data-send-button-border-radius              : $BOX-CORNER;
+$registration-frame-data-send-button-color                      : $CREAM;
+$registration-frame-data-send-button-font-size                  : 18pt;
+$registration-frame-data-send-button-font-weight                : $LIGHT;
+
+
+/*----- FOOTER ---------------------------------------------------------------*/
+$footer-border-top-width                   : 4px;
+$footer-border-top-color                   : $CREAM;
+$footer-gradient-colors                    :
+(
+    (
+        stop  : 25%,
+        color : $COFFEE,
+    ),
+    (
+        stop  : 93%,
+        color : $CREAM,
+    ),
+);
+
+$footer-frame-desktop-width                : $TWO-PARAGRAPHS-WIDTH;
+$footer-frame-mobile-max-width             : $TWO-PARAGRAPHS-WIDTH;
+$footer-frame-mobile-width                 : $-MOBILE-WIDTH;
+$footer-frame-padding-top-bottom           : 60px;
+$footer-frame-color                        : $CREAM;
+$footer-frame-font-size                    : 14pt;
+
+$footer-frame-title-margin-bottom          : 35px;
+$footer-frame-title-padding-bottom         : 15px;
+$footer-frame-title-border-bottom-width    : $HAIRLINE;
+$footer-frame-title-border-bottom-color    : $CREAM;
+$footer-frame-title-font-size              : 28pt;
+$footer-frame-title-font-weight            : $SEMI-BOLD;
+$footer-frame-title-letter-spacing         : -1pt;
+
+$footer-frame-links-indicator-bottom       : 3px;
+$footer-frame-links-indicator-width        : 4px;
+$footer-frame-links-indicator-margin-left  : 6px;
+$footer-frame-links-indicator-margin-right : 16px;
+$footer-frame-links-indicator-background   : $CREAM;
+
+$footer-frame-info-logo-desktop-margin-top : 6px;
+$footer-frame-info-logo-mobile-margin-top  : 45px;
+$footer-frame-info-logo-margin-bottom      : 30px;
+
+$footer-frame-info-text-spec-color         : $ORANGE;
+
+$footer-frame-info-social-margin-top       : 28px;
+$footer-frame-info-social-margin-left      : 12px;

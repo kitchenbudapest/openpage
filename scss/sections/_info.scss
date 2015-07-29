@@ -7,7 +7,6 @@
 /* Include openpage modules */
 @import '../config';
 @import '../utils/func';
-@import '../utils/mixins';
 
 
 /*----------------------------------------------------------------------------*/
@@ -25,9 +24,20 @@
     &-frame
     {
         display  : table;
-        width    : $info-frame-width;
-        margin   : 0 auto;
-        padding  : $info-frame-padding-top-bottom 0;
+        width    : $info-frame-desktop-width;
+        margin   : 0
+                   auto;
+        padding  : $info-frame-padding-top
+                   0
+                   $info-frame-desktop-padding-bottom;
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        @media all and (max-width : $info-frame-mobile-max-width)
+        {
+            width          : $info-frame-mobile-width;
+            padding-bottom : $info-frame-padding-top;
+        }
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -59,10 +69,18 @@
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-date
         {
-            display    : table;
-            margin     : $info-frame-date-margin-top
-                         0
-                         $info-frame-date-margin-bottom;
+            display : table;
+            margin  : $info-frame-date-margin-top
+                      0
+                      $info-frame-date-margin-bottom;
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            @media all and (max-width : $info-frame-date-media-mobile-max-width)
+            {
+                margin : $info-frame-date-margin-bottom
+                         0;
+            }
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -201,54 +219,52 @@
                 }
             }
         }
-    }
-
-
-    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    &-location
-    {
-        display : table;
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        & > span:first-of-type
+        &-location
         {
-            display        : inline-block;
-            vertical-align : top;
+            display : table;
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            &::after
+            & > span:first-of-type
             {
                 display        : inline-block;
-                position       : relative;
-                vertical-align : middle;
-                content        : '';
-                width          : $info-frame-location-separator-width ;
-                margin         : 0
-                                 $info-frame-location-separator-margin-left-right;
-                border-bottom  : $info-frame-location-separator-border-bottom-width
-                                 solid
-                                 $info-frame-location-separator-border-bottom-color;
+                vertical-align : top;
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                &::after
+                {
+                    display        : inline-block;
+                    vertical-align : middle;
+                    content        : '';
+                    width          : $info-frame-location-separator-width ;
+                    margin         : 0
+                                     $info-frame-location-separator-margin-left-right;
+                    border-bottom  : $info-frame-location-separator-border-bottom-width
+                                     solid
+                                     $info-frame-location-separator-border-bottom-color;
+                }
             }
-        }
-
-
-        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        & > div:first-of-type
-        {
-            display   : inline-block;
-            color     : $text-base-color;
-            font-size : 13.5pt;
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > p:first-of-type
+            & > div:first-of-type
             {
-                text-transform : uppercase;
-                font-size      : 22pt;
-                font-weight    : 600;
-                margin         : -6px 0 3px;
+                display   : inline-block;
+                font-size : $info-frame-location-address-font-size;
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > p:first-of-type
+                {
+                    text-transform : uppercase;
+                    font-size      : $info-frame-location-name-font-size;
+                    font-weight    : $info-frame-location-name-font-weight;
+                    margin         : -6px 0 3px;
+                }
             }
         }
     }

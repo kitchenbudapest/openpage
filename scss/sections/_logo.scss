@@ -20,16 +20,27 @@
     &-frame
     {
         display       : table;
-        width         : $logo-frame-width;
-        margin        : 0 auto;
-        border-bottom : 1px solid $logo-frame-border-bottom;
+        width         : $logo-frame-desktop-width;
+        margin        : 0
+                        auto;
+        border-bottom : $logo-frame-border-bottom-width
+                        solid
+                        $logo-frame-border-bottom-color;
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        @media all and (max-width : $logo-frame-mobile-max-width)
+        {
+            width : $logo-frame-mobile-width;
+        }
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-img
         {
             display : block;
-            margin  : $logo-frame-img-margin-top-bottom 0;
+            margin  : $logo-frame-img-margin-top-bottom
+                      0;
         }
     }
 }

@@ -7,7 +7,6 @@
 /* Include openpage modules */
 @import '../config';
 @import '../utils/func';
-@import '../utils/mixins';
 
 
 /*----------------------------------------------------------------------------*/
@@ -16,39 +15,56 @@
     display       : table;
     position      : relative;
     width         : 100%;
-    background    : $header-color-20;
-    border-bottom : 10px solid $header-logo-separator-color;
+    background    : $registration-background;
+    border-bottom : $registration-border-bottom-width
+                    solid
+                    $registration-border-bottom-color;
     @include box-sizing(border-box);
+
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     &-frame
     {
         display  : table;
         position : relative;
-        width    : $DESKTOP-WIDTH;
-        margin   : 0 auto;
-        padding  : 60px 0;
+        width    : $registration-frame-desktop-width;
+        margin   : 0
+                   auto;
+        padding  : $registration-frame-padding-top-bottom
+                   0;
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        @media all and (max-width : $registration-frame-mobile-max-width)
+        {
+            width : $registration-frame-mobile-width;
+        }
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-title
         {
-            color          : $header-logo-separator-color;
+            padding-bottom : $registration-frame-title-padding-bottom;
+            color          : $registration-frame-title-color;
             text-transform : uppercase;
-            font-weight    : 600;
-            font-size      : 26pt;
-            letter-spacing : -1pt;
-            padding-bottom : 45px;
+            font-weight    : $registration-frame-title-font-weight;
+            font-size      : $registration-frame-title-font-size;
+            letter-spacing : $registration-frame-title-letter-spacing;
         }
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-profession
         {
-            margin-bottom: 35px;
-            background: #FFFFFF;
-            border-radius : 10px;
-            border: 1px solid #D7C5AB;
-            font-size: 15.5pt;
+            margin-bottom : $registration-frame-profession-margin-bottom;
+            background    : $registration-frame-profession-background;
+            border-radius : $registration-frame-profession-border-radius;
+            border        : $registration-frame-profession-border-width
+                            solid
+                            $registration-frame-profession-border-color;
+            font-size     : $registration-frame-profession-font-size;
             @include box-sizing(border-box);
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-frame
@@ -58,14 +74,17 @@
                 left     : 0;
                 width    : 100%;
                 height   : 100%;
-                padding  : 30px 25px;
+                padding  : $registration-frame-profession-frame-padding-top-bottom
+                           $registration-frame-profession-frame-padding-left-right;
                 @include box-sizing(border-box);
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > span
                 {
-                    color : $header-logo-separator-color;
+                    color : $registration-frame-profession-frame-title-color;
                 }
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &::before,
@@ -77,70 +96,81 @@
                     height   : 0;
                     left     : 100%;
                     top      : 50%;
-                    border: solid transparent;
+                    border   : solid
+                               transparent;
+
 
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    @media all and (max-width: $DESKTOP-WIDTH)
+                    @media all and (max-width: $registration-frame-mobile-max-width)
                     {
                         display : none;
                     }
                 }
 
+
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &::before
                 {
-                    border-left-color : #D7C5AB;
-                    border-width      : 16px;
-                    margin-top        : -16px;
+                    border-left-color : $registration-frame-profession-frame-arrow-border-color;
+                    border-width      : ($registration-frame-profession-frame-arrow-height +
+                                         $registration-frame-profession-frame-arrow-border-width);
+                    margin-top        : -($registration-frame-profession-frame-arrow-height +
+                                          $registration-frame-profession-frame-arrow-border-width);
                 }
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &::after
                 {
-                    border-left-color : #FFFFFF;
-                    margin-left       : -1.05px;
-                    border-width      : 15px;
-                    margin-top        : -15px;
+                    border-left-color : $registration-frame-profession-frame-arrow-background;
+                    margin-left       : -$registration-frame-profession-frame-arrow-border-width;
+                    border-width      : $registration-frame-profession-frame-arrow-height;
+                    margin-top        : -$registration-frame-profession-frame-arrow-height;
                 }
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > input[type='radio']
                 {
                     display : none;
 
+
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                     & + label
                     {
-                        color       : #512417;
-                        margin-left : 15px;
+                        margin-left : $registration-frame-profession-frame-label-margin-left;
                     }
+
 
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                     & + label > span
                     {
                         display       : inline-block;
-                        margin-left   : 4px;
-                        margin-bottom : -3px;
                         width         : 16px;
                         height        : 16px;
+                        margin-left   : $registration-frame-profession-frame-radio-margin-left;
+                        margin-bottom : $registration-frame-profession-frame-radio-margin-bottom;
                         cursor        : pointer;
                         border-radius : 50%;
-                        background    : $header-color-20;
-                        border        : 1px solid #D7C5AB;
+                        background    : $registration-frame-profession-frame-radio-background;
+                        border        : $registration-frame-profession-frame-radio-border-width
+                                        solid
+                                        $registration-frame-profession-frame-radio-border-color;
                     }
+
 
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                     &:checked + label > span::after
                     {
                         display       : block;
                         position      : relative;
-                        top           : 5px;
-                        left          : 5px;
+                        top           : $registration-frame-profession-frame-radio-checker-top;
+                        left          : $registration-frame-profession-frame-radio-checker-top;
+                        width         : $registration-frame-profession-frame-radio-checker-width;
+                        height        : $registration-frame-profession-frame-radio-checker-width;
                         content       : '';
-                        width         : 6px;
-                        height        : 6px;
                         border-radius : 50%;
-                        background    : $header-logo-separator-color;
+                        background    : $registration-frame-profession-frame-radio-checker-color;
                     }
                 }
             }
@@ -149,37 +179,49 @@
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-info
         {
-            color     : #512417;
-            font-size : 13pt;
-
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             & > p
             {
-                margin-bottom: 26px;
+                margin-bottom: $registration-frame-info-p-margin-bottom;
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > span
                 {
-                    font-weight : 700;
+                    font-weight : $registration-frame-info-bold-font-weight;
                 }
             }
         }
 
+
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-data
         {
-            color     : #512417;
-            font-size : 15.5pt;
+            font-size : $registration-frame-data-font-size;
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-name
             {
-                margin: 80px 0 14px;
+                margin : $registration-frame-data-name-desktop-margin-top
+                         0
+                         $registration-frame-data-name-margin-bottom;
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                @media all and (max-width : $registration-frame-mobile-max-width)
+                {
+                    margin-top : $registration-frame-data-name-mobile-margin-top;
+                }
             }
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-mail
             {
-                margin-bottom: 25px;
+                margin-bottom: $registration-frame-data-mail-margin-bottom;
             }
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-name,
@@ -192,81 +234,103 @@
                     display : block;
                 }
 
+
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > div
                 {
                     float : left;
 
+
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                     & span:first-child
                     {
-                        color : $header-logo-separator-color;
+                        color : $registration-frame-data-name-mail-spec-color;
                     }
                 }
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > span
                 {
-                    padding-left : 5px;
+                    padding-left : $registration-frame-data-name-mail-input-padding-left;
                     overflow     : hidden;
                 }
             }
+
+
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-name,
             &-mail,
             &-lang-frame
             {
                 width         : 100%;
-                border-radius : 10px;
-                border        : 1px solid #D7C5AB;
-                background    : #FFFFFF;
-                padding       : 7px;
+                border-radius : $registration-frame-data-name-mail-lang-frame-border-radius;
+                border        : $registration-frame-data-name-mail-lang-frame-border-width
+                                solid
+                                $registration-frame-data-name-mail-lang-frame-border-color;
+                background    : $registration-frame-data-name-mail-lang-frame-background;
+                padding       : $registration-frame-data-name-mail-lang-frame-padding;
                 overflow      : hidden;
-                outline       : none;
                 @include box-sizing(border-box);
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & *,
+                & *:focus
+                {
+                    outline : none;
+                    border  : none;
+                    @include box-shadow(none);
+                }
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &-input
                 {
                     width       : 100%;
-                    border      : none;
-                    background  : #FFFFFF;
-                    color       : #D7C5AB;
-                    font-weight : 200;
-                    font-size   : 13pt;
                     padding     : 0;
-                    line-height : 1.2;
+                    border      : none;
+                    background  : $registration-frame-data-name-mail-lang-frame-input-background;
+                    color       : $registration-frame-data-name-mail-lang-frame-input-color;
+                    font-weight : $registration-frame-data-name-mail-lang-frame-input-font-weight;
+                    font-size   : $registration-frame-data-name-mail-lang-frame-input-font-size;
+                    line-height : $registration-frame-data-name-mail-lang-frame-input-line-height;
                 }
             }
+
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-lang
             {
-                margin-bottom : 30px;
+                margin-bottom : $registration-frame-data-lang-margin-bottom;
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > div:first-child
                 {
-                    margin-bottom: 10px;
+                    margin-bottom : $registration-frame-data-lang-label-margin-bottom;
 
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                     & > span:first-child
                     {
-                        color : $header-logo-separator-color;
-                        font-size: 10pt;
-                        vertical-align: super;
+                        color          : $registration-frame-data-lang-label-spec-color;
+                        font-size      : $registration-frame-data-lang-label-spec-font-size;
+                        vertical-align : super;
                     }
                 }
+
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &-frame-input
                 {
                     max-width     : 100%;
                     min-width     : 100%;
-                    min-height    : 35px;
+                    min-height    : $registration-frame-data-lang-label-frame-input-min-height;
+                    background    : $registration-frame-data-lang-label-frame-input-background;
                     resize        : vertical;
-                    outline       : none;
                     overflow      : hidden;
-                    background    : #FFFFFF;
+                    outline       : none;
                     @include box-sizing(border-box);
                 }
             }
@@ -282,24 +346,25 @@
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & div:first-child
                 {
-                    font-size : 13pt;
                     float     : left;
                     position  : absolute;
                     // HACK: Figure out how to align it vertically to the middle
                     top       : 30%;
+                    font-size : $registration-frame-data-send-label-font-size;
                 }
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &-button
                 {
-                    float : right;
-                    background     : $header-logo-separator-color;
-                    padding        : 11px 48px;
-                    border-radius  : 10px;
+                    float          : right;
+                    background     : $registration-frame-data-send-button-background;
+                    padding        : $registration-frame-data-send-button-padding-top-bottom
+                                     $registration-frame-data-send-button-padding-left-right;
+                    border-radius  : $registration-frame-data-send-button-border-radius;
                     text-transform : uppercase;
-                    color          : #FDF5DD;
-                    font-size      : 18pt;
-                    font-weight    : 300;
+                    color          : $registration-frame-data-send-button-color;
+                    font-size      : $registration-frame-data-send-button-font-size;
+                    font-weight    : $registration-frame-data-send-button-font-weight;
                 }
             }
         }

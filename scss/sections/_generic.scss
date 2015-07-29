@@ -6,25 +6,38 @@
 
 /* Include openpage modules */
 @import '../config';
-@import '../utils/mixins';
 
 
 /*----------------------------------------------------------------------------*/
 .paragraph-1,
 .paragraph-2
 {
-    position : relative;
-    left     : 0;
+    display  : table;
     width    : $paragraph-width;
-    margin   : $paragraph-margin;
+    margin   : 0;
     @include box-sizing(border-box);
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    @media all and (max-width : $paragraph-media-mobile-width)
+    {
+        margin  : 0
+                  $paragraph-media-mobile-margin-left-right ;
+    }
 }
 
 
 /*----------------------------------------------------------------------------*/
 .paragraph-1
 {
-    @include media-desktop-paragraph(left, $paragraph-media-desktop-width);
+    float : left;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    @media all and (max-width : $paragraph-media-mobile-width)
+    {
+        float : none;
+    }
 }
 
 
@@ -32,14 +45,29 @@
 /*----------------------------------------------------------------------------*/
 .paragraph-2
 {
-    @include media-desktop-paragraph(right, $paragraph-media-desktop-width);
+    float : right;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    @media all and (max-width : $paragraph-media-mobile-width)
+    {
+        float : none;
+    }
 }
 
 
 /*----------------------------------------------------------------------------*/
 .paragraph-2-spec
 {
-    $-shift: -170px;
+    $-shift       : -170px;
+    position      : relative;
     top           : $-shift;
     margin-bottom : $-shift;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    @media all and (max-width : $paragraph-media-mobile-width)
+    {
+        margin-top : 25px;
+    }
 }

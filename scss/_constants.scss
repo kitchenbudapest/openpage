@@ -2,16 +2,16 @@
 // INFO //
 
 /*----- COLORS ---------------------------------------------------------------*/
-$WHITE     : #FFFFFF; // clear white
-$CREAM     : #FEF6DF; // lightest brown
-$BUTTER    : #F9EDD0; // very light brown
-$CAPUCCINO : #EDE3C5; // light brown
-$PEANUT    : #E9DAB6; // slightly light brown
-$MUD       : #D7C5AB; // grayish brown
-$CARAMEL   : #DCAA7D; // midtone brown
-$CHOCOLATE : #512417; // dark brown
-$COFFEE    : #433934; // darkest brown
-$ORANGE    : #F0761D; // orange color
+$WHITE      : #FFFFFF; // clear white
+$CREAM      : #FEF6DF; // lightest brown
+$BUTTER     : #F9EDD0; // very light brown
+$CAPPUCCINO : #EDE3C5; // light brown
+$PEANUT     : #E9DAB6; // slightly light brown
+$MUD        : #D7C5AB; // grayish brown
+$CARAMEL    : #DCAA7D; // midtone brown
+$CHOCOLATE  : #512417; // dark brown
+$COFFEE     : #433934; // darkest brown
+$ORANGE     : #F0761D; // orange color
 
 /*----- DIMENSIONS -----------------------------------------------------------*/
 $HEADER-IMG-WIDTH     : 1300px;
@@ -21,6 +21,8 @@ $FOOTER-IMG-HEIGHT    : 0px;
 
 $ONE-PARAGRAPH-WIDTH  : 445px;
 $TWO-PARAGRAPHS-WIDTH : 960px;
+
+$MEDIA-MOBILE-MARGIN  : 10px;
 
 /*----- DISTANCES ------------------------------------------------------------*/
 
@@ -55,3 +57,6 @@ $NULL-LINE-HEIGHT : 1;
 $BASE-LINE-HEIGHT : 1.2;
 $BIG-LINE-HEIGHT  : 1.3;
 // $BASE-LETTER-SPACING
+
+/*----- BORDERS --------------------------------------------------------------*/
+$HAIRLINE : 1px;

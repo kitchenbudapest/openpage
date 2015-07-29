@@ -12,11 +12,18 @@
 /*----------------------------------------------------------------------------*/
 #header
 {
-    display  : table;
-    width    : 100%;
+    display : table;
+    width   : 100%;
     @include background-image(
         linear-gradient(to bottom,
                         process-gradient-def($header-gradient-colors)));
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    @media all and (max-width : $header-media-mobile-max-width)
+    {
+        display : none;
+    }
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
