@@ -58,7 +58,7 @@ $-MOBILE-WIDTH: $MEDIA-MOBILE-MARGIN*2 + $ONE-PARAGRAPH-WIDTH;
 
 
 /*----- BODY -----------------------------------------------------------------*/
-$body-min-width                  : $ONE-PARAGRAPH-WIDTH;
+$body-min-width                  : $-MOBILE-WIDTH;
 $body-color                      : $CHOCOLATE;
 $body-font-weight                : $NORMAL;
 $body-font-family                : $SANS-SERIF;
