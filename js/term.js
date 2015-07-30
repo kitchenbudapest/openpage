@@ -8,7 +8,8 @@ var g = g || {};
     'use strict';
 
     /*------------------------------------------------------------------------*/
-    function VT100(onExitCallback)
+    function VT100(onExitCallback,
+                   eventOwner)
     {
         /* Create canvas */
         this._canvas     = document.createElement('canvas');
@@ -41,11 +42,47 @@ var g = g || {};
         this._clicker              = document.createElement('div');
         this._clicker.id           = 'header-terminal-clicker';
 
+        /* Make clicker and event listener */
+        if (this._clicker.addEventListener)
+            this._clicker.addEventListener('click',
+                                           this.setEventListeners.bind(this),
+                                           false);
+        else
+            this._clicker.attachEvent('onclick',
+                                      this.setEventListeners.bind(this));
+
         /* Create shell */
         this._shell  = new g.shell.Shell(this._screen,
                                          this._clicker,
                                          onExitCallback);
+
+        /* Event focus */
+        this._hasFocus = true;
     }
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    VT100.prototype.setEventListeners = function ()
+    {
+        /* Only set event listeners when they do not exist */
+        if (!this._hasFocus)
+        {
+            this._shell.setEventListeners(this._eventOwner);
+            this._hasFocus = true;
+        }
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    VT100.prototype.delEventListeners = function ()
+    {
+        /* Only remove event listeners, when they exist */
+        if (this._hasFocus)
+        {
+            this._shell.delEventListeners(this._eventOwner);
+            this._hasFocus = false;
+        }
+    };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -66,9 +103,6 @@ var g = g || {};
         {
             window.open('https://en.wikipedia.org/wiki/VT100');
         });
-
-        /* Start running the shell */
-        this._shell.run(listener);
     };
 
 

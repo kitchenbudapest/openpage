@@ -286,7 +286,7 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype.run = function (element)
+    Shell.prototype.setEventListeners = function ()
     {
         /* Set event listeners */
         if (element.addEventListener)
@@ -298,6 +298,23 @@ var g = g || {};
         {
             element.attachEvent('onkeydown', this.onKeyDown.bind(this));
             element.attachEvent('onkeypress', this.onKeyPress.bind(this));
+        }
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype.delEventListeners = function ()
+    {
+        /* Delete event listeners */
+        if (element.removeEventListener)
+        {
+            element.removeEventListener('keydown', this.onKeyDown.bind(this), false);
+            element.removeEventListener('keypress', this.onKeyPress.bind(this), false);
+        }
+        else
+        {
+            element.detachEvent('onkeydown', this.onKeyDown.bind(this));
+            element.detachEvent('onkeypress', this.onKeyPress.bind(this));
         }
     };
 
@@ -358,7 +375,7 @@ var g = g || {};
                    locked, move back in history */
                 if (!this._reader &&
                     !this._locked)
-                    this._moveInHistory(-1);
+                        this._moveInHistory(-1);
                 break;
 
             case g.kb.code.Down:
@@ -366,7 +383,7 @@ var g = g || {};
                    move forward in history */
                 if (!this._reader &&
                     !this._locked)
-                    this._moveInHistory(+1);
+                        this._moveInHistory(+1);
                 break;
 
             default:

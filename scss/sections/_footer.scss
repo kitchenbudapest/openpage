@@ -21,27 +21,35 @@
     @include box-sizing(border-box);
     @include background-image(
         linear-gradient(to bottom,
-                        process-gradient-def($footer-gradient-colors)));
+                        process-gradient-def($footer-desktop-gradient-colors)));
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    @media all and (max-width : $footer-frame-mobile-max-width)
+    {
+        @include background-image(
+            linear-gradient(to bottom,
+                            process-gradient-def($footer-mobile-gradient-colors)));
+    }
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     &-frame
     {
-        display   : table;
-        position  : relative;
-        width     : $footer-frame-desktop-width;
-        margin    : 0
-                    auto;
-        padding   : $footer-frame-padding-top-bottom
-                    0;
-        color     : $footer-frame-color;
-        font-size : $footer-frame-font-size;
+        display     : table;
+        position    : relative;
+        width       : $footer-frame-desktop-width;
+        margin      : 0
+                      auto;
+        padding-top : $footer-frame-padding-top;
+        color       : $footer-frame-color;
+        font-size   : $footer-frame-font-size;
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         @media all and (max-width : $footer-frame-mobile-max-width)
         {
             width : $footer-frame-mobile-width;
+            padding-bottom : $footer-frame-padding-top;
         }
 
 
@@ -136,6 +144,22 @@
                 display     : inline-block;
                 margin-top  : $footer-frame-info-social-margin-top;
                 margin-left : $footer-frame-info-social-margin-left;
+            }
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        & > div:last-of-type
+        {
+            display      : table;
+            margin-left  : -$footer-frame-img-left;
+            margin-right : -$footer-frame-img-left;
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            @media all and (max-width : $footer-frame-mobile-max-width)
+            {
+                display : none;
             }
         }
     }

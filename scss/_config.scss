@@ -392,10 +392,10 @@ $registration-frame-data-send-button-font-weight                : $LIGHT;
 /*----- FOOTER ---------------------------------------------------------------*/
 $footer-border-top-width                   : 4px;
 $footer-border-top-color                   : $CREAM;
-$footer-gradient-colors                    :
+$footer-desktop-gradient-colors            :
 (
     (
-        stop  : 25%,
+        stop  : 20%,
         color : $COFFEE,
     ),
     (
@@ -403,11 +403,22 @@ $footer-gradient-colors                    :
         color : $CREAM,
     ),
 );
+$footer-mobile-gradient-colors             :
+(
+    (
+        stop  : 5%,
+        color : $COFFEE,
+    ),
+    (
+        stop  : 95%,
+        color : $MUD,
+    ),
+);
 
 $footer-frame-desktop-width                : $TWO-PARAGRAPHS-WIDTH;
 $footer-frame-mobile-max-width             : $TWO-PARAGRAPHS-WIDTH;
 $footer-frame-mobile-width                 : $-MOBILE-WIDTH;
-$footer-frame-padding-top-bottom           : 60px;
+$footer-frame-padding-top                  : 60px;
 $footer-frame-color                        : $CREAM;
 $footer-frame-font-size                    : 14pt;
 
@@ -434,3 +445,7 @@ $footer-frame-info-text-spec-color         : $ORANGE;
 
 $footer-frame-info-social-margin-top       : 28px;
 $footer-frame-info-social-margin-left      : 12px;
+
+$footer-frame-img-width                    : $FOOTER-IMG-WIDTH;
+$footer-frame-img-height                   : $FOOTER-IMG-HEIGHT;
+$footer-frame-img-left                     : ($FOOTER-IMG-WIDTH - $TWO-PARAGRAPHS-WIDTH)/2

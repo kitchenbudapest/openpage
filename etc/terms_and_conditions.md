@@ -79,8 +79,9 @@ Contest Rules
     5. Apart from prizes offered as part of the contest, no monetary
        compensation will be paid for any of your contest contributions.
 
-    6. If you would like to continue develop of your contribution, you are
-       obliged to connect us within a year from the contest.
+    6. For one whole year from the event, you are obliged to inform and contact
+       Kitchen Budapest in case you would like to further develop your project
+       which you created at the KIBU Hackathon.
 
 7. Kitchen Budapest is not responsible for contest entries not received due to
    lost, failed, delayed or interrupted connections or miscommunications, or
