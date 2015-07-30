@@ -65,7 +65,20 @@
         &-links
         {
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > p::before
+            & a,
+            & a:hover,
+            & a:visited
+            {
+                display : block;
+                margin  : none;
+                padding : none;
+                border  : none;
+                color   : $footer-frame-links-color;
+            }
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & a::before
             {
                 display      : inline-block;
                 position     : relative;
@@ -84,8 +97,20 @@
         &-info
         {
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > img:first-of-type
+            & a,
+            & a:hover,
+            & a:visited
             {
+                border  : none;
+                margin  : none;
+                padding : none;
+            }
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            & > a:first-of-type
+            {
+                display       : table;
                 margin-top    : $footer-frame-info-logo-desktop-margin-top;
                 margin-bottom : $footer-frame-info-logo-margin-bottom;
 
@@ -106,8 +131,9 @@
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > img:last-of-type
+            & > div:last-of-type > a:last-of-type
             {
+                display     : inline-block;
                 margin-top  : $footer-frame-info-social-margin-top;
                 margin-left : $footer-frame-info-social-margin-left;
             }
