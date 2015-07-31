@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport"
-              content="width=device-width, initial-scale=1">
+              content="width=device-width, initial-scale=0.5">
         <link rel="shortcut icon"
               href="http://kitchenbudapest.github.io/openpage/favicon.ico"/>
         <title>Come in, We are OPEN!</title>
@@ -11,6 +11,7 @@
               href="css/main.css">
         <!-- Base -->
         <script src="js/bin.js"></script>
+        <script src="js/register.js"></script>
         <!-- Essential programs -->
         <script src="js/bin/doc.js"></script>
         <script src="js/bin/apply.js"></script>
@@ -202,7 +203,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="paragraph-2 paragraph-2-spec">
+                    <div class="paragraph-2 paragraph-2-spec-1">
                         <div id="detail-frame-prizes">
                             <div id="detail-frame-prizes-head">
                                 <img src="img/hackathon_prize_star.svg"
@@ -306,22 +307,22 @@
                         <div id="registration-frame-title">
                             registration
                         </div>
-                        <div id="registration-frame-profession">
-                            <div id="registration-frame-profession-frame">
+                        <div id="registration-frame-role">
+                            <div id="registration-frame-role-frame">
                                 <span>I am a:</span>
-                                <input id="registration-frame-profession-radio-1"
+                                <input id="registration-frame-role-radio-1"
                                        type="radio"
-                                       name="profession"
+                                       name="registration-frame-role-radio"
                                        value="programmer" checked>
-                                <label for="registration-frame-profession-radio-1">
+                                <label for="registration-frame-role-radio-1">
                                     Programmer
                                     <span></span>
                                 </label>
-                                <input id="registration-frame-profession-radio-2"
+                                <input id="registration-frame-role-radio-2"
                                        type="radio"
-                                       name="profession"
+                                       name="registration-frame-role-radio"
                                        value="entrepreneur">
-                                <label for="registration-frame-profession-radio-2">
+                                <label for="registration-frame-role-radio-2">
                                     Entrepreneur
                                     <span></span>
                                 </label>
@@ -337,7 +338,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="paragraph-2">
+                    <div class="paragraph-2 paragraph-2-spec-2">
                         <div id="registration-frame-data">
                             <div id="registration-frame-data-name">
                                 <div>
@@ -378,6 +379,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div id="registration-frame-error">
                     </div>
                 </div>
             </div>

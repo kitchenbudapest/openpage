@@ -57,7 +57,7 @@
 
 
 /*----------------------------------------------------------------------------*/
-.paragraph-2-spec
+.paragraph-2-spec-1
 {
     $-shift       : -170px;
     position      : relative;
@@ -70,6 +70,25 @@
     {
         top           : 0;
         margin-top    : 0;
+        margin-bottom : 0;
+    }
+}
+
+
+/*----------------------------------------------------------------------------*/
+.paragraph-2-spec-2
+{
+    $-shift       : 80px;
+    position      : relative;
+    top           : $-shift;
+    margin-bottom : $-shift;
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    @media all and (max-width : $paragraph-media-mobile-width)
+    {
+        top           : 0;
+        margin-top    : 15px;
         margin-bottom : 0;
     }
 }

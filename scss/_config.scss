@@ -39,7 +39,7 @@
     |  +------+ +------+  |====>  registartion
     |  |      | |      |=======>  registration-name/mail/lang
     |  |      | +------+  |
-    |  |      |================>  registration-profession
+    |  |      |================>  registration-role
     |  |      | +------+  |
     |  |      | |      |=======>  registration-send
     |  +------+ +------+  |
@@ -318,41 +318,46 @@ $registration-frame-title-font-weight                           : $SEMI-BOLD;
 $registration-frame-title-font-size                             : 26pt;
 $registration-frame-title-letter-spacing                        : -1pt;
 
-$registration-frame-profession-margin-bottom                    : 35px;
-$registration-frame-profession-background                       : $WHITE;
-$registration-frame-profession-border-radius                    : $BOX-CORNER;
-$registration-frame-profession-border-width                     : $HAIRLINE;
-$registration-frame-profession-border-color                     : $MUD;
-$registration-frame-profession-font-size                        : 15.5pt;
+$registration-frame-error-mobile-margin-left                    : $MEDIA-MOBILE-MARGIN;
+$registration-frame-error-mobile-width                          : $ONE-PARAGRAPH-WIDTH;
+$registration-frame-error-frame-padding                         : 10px;
+$registration-frame-error-frame-margin-top                      : 30px;
+$registration-frame-error-frame-background                      : $CARAMEL;
+$registration-frame-error-frame-border-radius                   : $BOX-CORNER;
 
-$registration-frame-profession-frame-padding-top-bottom         : 30px;
-$registration-frame-profession-frame-padding-left-right         : 25px;
+$registration-frame-role-margin-bottom                          : 35px;
+$registration-frame-role-background                             : $WHITE;
+$registration-frame-role-border-radius                          : $BOX-CORNER;
+$registration-frame-role-border-width                           : $HAIRLINE;
+$registration-frame-role-border-color                           : $MUD;
+$registration-frame-role-font-size                              : 15.5pt;
 
-$registration-frame-profession-frame-title-color                : $ORANGE;
+$registration-frame-role-frame-padding-top-bottom               : 30px;
+$registration-frame-role-frame-padding-left-right               : 25px;
 
-$registration-frame-profession-frame-arrow-height               : 15px;
-$registration-frame-profession-frame-arrow-border-width         : $HAIRLINE;
-$registration-frame-profession-frame-arrow-background           : $WHITE;
-$registration-frame-profession-frame-arrow-border-color         : $MUD;
+$registration-frame-role-frame-title-color                      : $ORANGE;
 
-$registration-frame-profession-frame-label-margin-left          : 15px;
+$registration-frame-role-frame-arrow-height                     : 15px;
+$registration-frame-role-frame-arrow-border-width               : $HAIRLINE;
+$registration-frame-role-frame-arrow-background                 : $WHITE;
+$registration-frame-role-frame-arrow-border-color               : $MUD;
 
-$registration-frame-profession-frame-radio-margin-left          : 4px;
-$registration-frame-profession-frame-radio-margin-bottom        : -3px;
-$registration-frame-profession-frame-radio-width                : 16px;
-$registration-frame-profession-frame-radio-background           : $CREAM;
-$registration-frame-profession-frame-radio-border-width         : $HAIRLINE;
-$registration-frame-profession-frame-radio-border-color         : $MUD;
-$registration-frame-profession-frame-radio-checker-top          : 5px;
-$registration-frame-profession-frame-radio-checker-width        : 6px;
-$registration-frame-profession-frame-radio-checker-color        : $ORANGE;
+$registration-frame-role-frame-label-margin-left                : 15px;
+
+$registration-frame-role-frame-radio-margin-left                : 4px;
+$registration-frame-role-frame-radio-margin-bottom              : -3px;
+$registration-frame-role-frame-radio-width                      : 16px;
+$registration-frame-role-frame-radio-background                 : $CREAM;
+$registration-frame-role-frame-radio-border-width               : $HAIRLINE;
+$registration-frame-role-frame-radio-border-color               : $MUD;
+$registration-frame-role-frame-radio-checker-top                : 5px;
+$registration-frame-role-frame-radio-checker-width              : 6px;
+$registration-frame-role-frame-radio-checker-color              : $ORANGE;
 
 $registration-frame-info-p-margin-bottom                        : 26px;
-$registration-frame-info-bold-font-weight                        : $BOLD;
+$registration-frame-info-bold-font-weight                       : $BOLD;
 
 $registration-frame-data-font-size                              : 15.5pt;
-$registration-frame-data-name-desktop-margin-top                : 80px;
-$registration-frame-data-name-mobile-margin-top                 : 15px;
 $registration-frame-data-name-margin-bottom                     : 14px;
 
 $registration-frame-data-mail-margin-bottom                     : 25px;

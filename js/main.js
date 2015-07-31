@@ -58,6 +58,9 @@ function main()
        and bind all events it has to the window */
     // (new g.term.VT100(onExit)).render(term, window);
 
+    /* Create error-frame */
+    var frame = document.createElement('div');
+    frame.id  = 'registration-frame-data-error-frame';
 
     /* Create new terminal object */
     var term = new g.term.VT100(function ()
@@ -68,12 +71,18 @@ function main()
     /* Create new form object */
         form = new g.form.Form(
         {
-            role: document.getElementById('registration-frame-data-role'),
+            role:
+            [
+                document.getElementById('registration-frame-role-radio-1'),
+                document.getElementById('registration-frame-role-radio-2'),
+            ],
             name: document.getElementById('registration-frame-data-name-input'),
             mail: document.getElementById('registration-frame-data-mail-input'),
             lang: document.getElementById('registration-frame-data-lang-frame-input'),
         },
-        document.getElementById('registration-frame-data-send-button'));
+        document.getElementById('registration-frame-data-send-button'),
+        document.getElementById('registration-frame-data-error'),
+        frame);
 
     /* Store event listener remover callback */
     form.setOnSetEventListeners(term.delEventListeners.bind(term));

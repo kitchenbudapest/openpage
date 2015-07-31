@@ -19,7 +19,6 @@
     border-bottom : $registration-border-bottom-width
                     solid
                     $registration-border-bottom-color;
-    @include box-sizing(border-box);
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -54,15 +53,46 @@
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-profession
+        &-error
         {
-            margin-bottom : $registration-frame-profession-margin-bottom;
-            background    : $registration-frame-profession-background;
-            border-radius : $registration-frame-profession-border-radius;
-            border        : $registration-frame-profession-border-width
+            display : table;
+            clear   : both;
+            width   : 100%;
+            @include box-sizing(border-box);
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            @media all and (max-width : $registration-frame-mobile-max-width)
+            {
+                width       : $registration-frame-error-mobile-width;
+                margin-left : $registration-frame-error-mobile-margin-left;
+            }
+
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-frame
+            {
+                width          : 100%;
+                margin-top     : $registration-frame-error-frame-margin-top;
+                padding        : $registration-frame-error-frame-padding;
+                background     : $registration-frame-error-frame-background;
+                border-radius  : $registration-frame-error-frame-border-radius;
+                @include box-sizing(border-box);
+
+            }
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-role
+        {
+            margin-bottom : $registration-frame-role-margin-bottom;
+            background    : $registration-frame-role-background;
+            border-radius : $registration-frame-role-border-radius;
+            border        : $registration-frame-role-border-width
                             solid
-                            $registration-frame-profession-border-color;
-            font-size     : $registration-frame-profession-font-size;
+                            $registration-frame-role-border-color;
+            font-size     : $registration-frame-role-font-size;
             @include box-sizing(border-box);
 
 
@@ -74,15 +104,15 @@
                 left     : 0;
                 width    : 100%;
                 height   : 100%;
-                padding  : $registration-frame-profession-frame-padding-top-bottom
-                           $registration-frame-profession-frame-padding-left-right;
+                padding  : $registration-frame-role-frame-padding-top-bottom
+                           $registration-frame-role-frame-padding-left-right;
                 @include box-sizing(border-box);
 
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > span
                 {
-                    color : $registration-frame-profession-frame-title-color;
+                    color : $registration-frame-role-frame-title-color;
                 }
 
 
@@ -111,21 +141,21 @@
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &::before
                 {
-                    border-left-color : $registration-frame-profession-frame-arrow-border-color;
-                    border-width      : ($registration-frame-profession-frame-arrow-height +
-                                         $registration-frame-profession-frame-arrow-border-width);
-                    margin-top        : -($registration-frame-profession-frame-arrow-height +
-                                          $registration-frame-profession-frame-arrow-border-width);
+                    border-left-color : $registration-frame-role-frame-arrow-border-color;
+                    border-width      : ($registration-frame-role-frame-arrow-height +
+                                         $registration-frame-role-frame-arrow-border-width);
+                    margin-top        : -($registration-frame-role-frame-arrow-height +
+                                          $registration-frame-role-frame-arrow-border-width);
                 }
 
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &::after
                 {
-                    border-left-color : $registration-frame-profession-frame-arrow-background;
-                    margin-left       : -$registration-frame-profession-frame-arrow-border-width;
-                    border-width      : $registration-frame-profession-frame-arrow-height;
-                    margin-top        : -$registration-frame-profession-frame-arrow-height;
+                    border-left-color : $registration-frame-role-frame-arrow-background;
+                    margin-left       : -$registration-frame-role-frame-arrow-border-width;
+                    border-width      : $registration-frame-role-frame-arrow-height;
+                    margin-top        : -$registration-frame-role-frame-arrow-height;
                 }
 
 
@@ -138,7 +168,7 @@
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                     & + label
                     {
-                        margin-left : $registration-frame-profession-frame-label-margin-left;
+                        margin-left : $registration-frame-role-frame-label-margin-left;
                     }
 
 
@@ -148,14 +178,14 @@
                         display       : inline-block;
                         width         : 16px;
                         height        : 16px;
-                        margin-left   : $registration-frame-profession-frame-radio-margin-left;
-                        margin-bottom : $registration-frame-profession-frame-radio-margin-bottom;
+                        margin-left   : $registration-frame-role-frame-radio-margin-left;
+                        margin-bottom : $registration-frame-role-frame-radio-margin-bottom;
                         cursor        : pointer;
                         border-radius : 50%;
-                        background    : $registration-frame-profession-frame-radio-background;
-                        border        : $registration-frame-profession-frame-radio-border-width
+                        background    : $registration-frame-role-frame-radio-background;
+                        border        : $registration-frame-role-frame-radio-border-width
                                         solid
-                                        $registration-frame-profession-frame-radio-border-color;
+                                        $registration-frame-role-frame-radio-border-color;
                     }
 
 
@@ -164,13 +194,13 @@
                     {
                         display       : block;
                         position      : relative;
-                        top           : $registration-frame-profession-frame-radio-checker-top;
-                        left          : $registration-frame-profession-frame-radio-checker-top;
-                        width         : $registration-frame-profession-frame-radio-checker-width;
-                        height        : $registration-frame-profession-frame-radio-checker-width;
+                        top           : $registration-frame-role-frame-radio-checker-top;
+                        left          : $registration-frame-role-frame-radio-checker-top;
+                        width         : $registration-frame-role-frame-radio-checker-width;
+                        height        : $registration-frame-role-frame-radio-checker-width;
                         content       : '';
                         border-radius : 50%;
-                        background    : $registration-frame-profession-frame-radio-checker-color;
+                        background    : $registration-frame-role-frame-radio-checker-color;
                     }
                 }
             }
@@ -203,16 +233,7 @@
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-name
             {
-                margin : $registration-frame-data-name-desktop-margin-top
-                         0
-                         $registration-frame-data-name-margin-bottom;
-
-
-                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                @media all and (max-width : $registration-frame-mobile-max-width)
-                {
-                    margin-top : $registration-frame-data-name-mobile-margin-top;
-                }
+                margin-bottom : $registration-frame-data-name-margin-bottom;
             }
 
 

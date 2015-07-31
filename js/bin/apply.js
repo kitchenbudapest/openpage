@@ -24,19 +24,16 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function getLang(std, input)
     {
+        /* Collect last input */
         FORM.lang = input;
 
-        var cref   = 'apply' + (CREF++).toString();
-        var head   = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script');
-        script.src = 'http://devops.kibu.hu/hackatonForm' +
-                     '?name='     + FORM.name      +
-                     '&mail='     + FORM.mail      +
-                     '&lang='     + input          +
-                     '&callback=' + cref;
+        /* Lock I/O */
+        std.io.lock();
+        /* Report to user */
+        std.io.writeLine('Sending request...');
 
-        /* JSONP callback */
-        window[cref] = function (response)
+        /* Send registration */
+        g.register.register(FORM, function (response)
         {
             /* Report to user */
             std.io.writeLine('Data received, processing...');
@@ -44,7 +41,16 @@ var g = g || {};
 
             /* If there was an error */
             if (!response.response)
-                std.io.writeLine('Oups, an error occured: ' + response.message);
+            {
+                /* Print fields which have errors */
+                var keys = Object.keys(response.message);
+                std.io.writeLine('Oups, error(s) occured in ' +
+                                 keys.join(', ') + ':');
+
+                /* Print errors of the fields */
+                for (var i=0; i<keys.length; i++)
+                    std.io.writeLine(keys[i] + ': ' + response.message[keys[i]]);
+            }
             /* If everything went fine */
             else
                 std.io.writeLine("Thank you, we have received your "     +
@@ -53,19 +59,7 @@ var g = g || {};
 
             /* Release I/O */
             std.io.release();
-
-            /* Clean up */
-            head.removeChild(script);
-            delete window[cref];
-        };
-
-        /* Lock I/O */
-        std.io.lock();
-        /* Report to user */
-        std.io.writeLine('Sending request...');
-
-        /* Trigger event */
-        head.appendChild(script);
+        });
     }
 
 
@@ -90,13 +84,37 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
+    function getRole(std, input)
+    {
+        FORM.role = input;
+        switch (input)
+        {
+            case 'e':
+            case 'E':
+            case 'entrepreneur':
+            case 'Entrepreneur':
+            case 'ENTREPRENEUR':
+                FORM.role = 'entrepreneur';
+                break;
+
+            default:
+                FORM.role = 'programmer';
+        }
+
+        std.io.write('Your name: ');
+        std.io.setReader(getName);
+        return true;
+    }
+
+
+    /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
         FORM = {};
         std.io.writeLine('Please fill the following form ' +
                          'to apply to the kibu hackathon event!');
-        std.io.write('Your name: ');
-        std.io.setReader(getName);
+        std.io.write('Are you a programmer or entrepreneur? [P/e] ');
+        std.io.setReader(getRole);
     }
 
     /*------------------------------------------------------------------------*/

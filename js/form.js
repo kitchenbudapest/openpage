@@ -11,9 +11,15 @@ var g = g || {};
     var EVENTS = ['focus', 'click', /*'mousedown'*/];
 
     /*------------------------------------------------------------------------*/
-    function Form(inputs, send)
+    function Form(inputs,
+                  send,
+                  error,
+                  errorFrame)
     {
-        this._inputs = inputs;
+        /* Store static values */
+        this._inputs     = inputs;
+        this._error      = error;
+        this._errorFrame = errorFrame;
 
         /* Set click event to send */
         if (send.addEventListener)
@@ -52,13 +58,21 @@ var g = g || {};
         for (i=0; i<keys.length; i++)
         {
             input = inputs[keys[i]];
-            if (input)
-                if (input[std])
-                    for (j=0; j<EVENTS.length; j++)
-                        input[std](EVENTS[j], callback, false);
-                else
-                    for (j=0; j<EVENTS.length; j++)
-                        input[alt]('on' + EVENTS[j], callback);
+            try
+            {
+                if (input)
+                    if (input[std])
+                        for (j=0; j<EVENTS.length; j++)
+                            input[std](EVENTS[j], callback, false);
+                    else
+                        for (j=0; j<EVENTS.length; j++)
+                            input[alt]('on' + EVENTS[j], callback);
+            }
+            catch (exception)
+            {
+                if (!(exception instanceof TypeError))
+                    throw exception;
+            }
         }
     };
 
@@ -85,22 +99,51 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Form.prototype._onResponse = function (response)
+    {
+        console.log(response);
+    };
+
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Form.prototype._onError = function (messages)
+    {
+
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Form.prototype._onSendClicked = function ()
     {
-        var key,
+        var i,
+            j,
+            key,
+            input,
             values = {},
             inputs = this._inputs,
             keys   = Object.keys(inputs);
 
         /* Collect current values */
-        for (var i=0; i<keys.length; i++)
+        for (i=0; i<keys.length; i++)
         {
-            key = keys[i];
-            values[key] = inputs[key].value;
+            key   = keys[i];
+            input = inputs[key];
+            if (input instanceof Array)
+            {
+                for (j=0; j<input.length; j++)
+                    if (input[j].checked)
+                    {
+                        values[key] = input[j].value;
+                        break;
+                    }
+            }
+            else
+                values[key] = input.value;
         }
 
         /* Send values to the server */
-        console.log(values);
+        g.register.register(values, this._onResponse.bind(this));
     };
 
 
