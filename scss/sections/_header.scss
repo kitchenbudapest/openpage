@@ -39,8 +39,18 @@
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        & a,
+        & a:hover,
+        & a:visited
+        {
+            border : none;
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-display,
         &-frame,
+        &-apply,
         &-logo,
         &-clicker,
         &-postit
@@ -70,9 +80,21 @@
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-apply
+        {
+            z-index       : 300;
+            top           : 83px;
+            left          : 733px;
+            width         : 74px;
+            height        : 73px;
+            border-radius : 50%;
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-logo
         {
-            z-index  : 300;
+            z-index  : 400;
             top      : 393px;
             left     : 715px;
             width    : 151px;
@@ -84,7 +106,7 @@
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-clicker
         {
-            z-index  : 400;
+            z-index  : 500;
             top      : 85px;
             left     : 110px;
             width    : 525px;
@@ -95,7 +117,7 @@
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-postit
         {
-            z-index        : 500;
+            z-index        : 600;
             width          : 140px;
             top            : 165px;
             left           : 738px;

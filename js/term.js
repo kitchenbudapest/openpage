@@ -15,15 +15,6 @@ var g = g || {};
         this._canvas     = document.createElement('canvas');
         this._canvas.id  = 'header-terminal-display';
 
-        /* Create image-frame */
-        this._frame      = document.createElement('img');
-        this._frame.src  = 'img/vt100_as_frame.002.001.png';
-        this._frame.id   = 'header-terminal-frame';
-
-        /* Create logo-button */
-        this._logo       = document.createElement('div');
-        this._logo.id    = 'header-terminal-logo';
-
         /* Create screen */
         this._screen = new g.scr.Screen({canvas               : this._canvas,
                                          fontFace             : g.font.VT220,
@@ -42,7 +33,7 @@ var g = g || {};
         this._clicker              = document.createElement('div');
         this._clicker.id           = 'header-terminal-clicker';
 
-        /* Make clicker and event listener */
+        /* Add event listener to it */
         if (this._clicker.addEventListener)
             this._clicker.addEventListener('click',
                                            this.setEventListeners.bind(this),
@@ -55,9 +46,11 @@ var g = g || {};
         this._shell  = new g.shell.Shell(this._screen,
                                          this._clicker,
                                          onExitCallback);
+        this._shell.boundEventCallbacks();
 
         /* Event focus */
-        this._hasFocus = true;
+        this._hasFocus   = false;
+        this._eventOwner = eventOwner;
     }
 
 
@@ -94,15 +87,7 @@ var g = g || {};
 
         /* Render elements into parent */
         parent.insertBefore(this._canvas , firstElement);
-        parent.insertBefore(this._frame  , firstElement);
-        parent.insertBefore(this._logo   , firstElement);
         parent.insertBefore(this._clicker, firstElement);
-
-        /* Set events */
-        this._logo.addEventListener('click', function ()
-        {
-            window.open('https://en.wikipedia.org/wiki/VT100');
-        });
     };
 
 

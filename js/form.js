@@ -27,6 +27,9 @@ var g = g || {};
     Form.prototype._manageEventListeners = function (add,
                                                      callback)
     {
+        var std,
+            alt;
+
         /* If adding event handlers */
         if (add)
         {
@@ -43,6 +46,7 @@ var g = g || {};
         /* Manage event handlers on all inputs */
         var i,
             j,
+            input,
             inputs = this._inputs,
             keys   = Object.keys(inputs);
         for (i=0; i<keys.length; i++)
@@ -62,26 +66,26 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Form.prototype.setEventListeners = function ()
     {
-        this._manageEventListeners(true, this._onDelEventListeners);
+        this._manageEventListeners(true, this._onSetEventListeners);
     };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Form.prototype.delEventListeners = function ()
     {
-        this._manageEventListeners(false);
+        // pass
     };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Form.prototype.setEventListenerDeleterCallback = function (callback)
+    Form.prototype.setOnSetEventListeners= function (callback)
     {
-        this._onDelEventListeners = callback;
+        this._onSetEventListeners = callback;
     };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    VT100.prototype._onSendClicked = function ()
+    Form.prototype._onSendClicked = function ()
     {
         var key,
             values = {},

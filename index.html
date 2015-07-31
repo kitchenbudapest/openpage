@@ -35,9 +35,28 @@
         <script src="js/min/main.min.js"></script>
     </head>
     <body>
-         <div>
+        <div>
             <div id="header">
                 <div id="header-terminal">
+                    <img id="header-terminal-frame"
+                         src="img/vt100_as_frame.002.001.png"
+                         alt="
+  ___________________________
+ / |   ____________   |      \
+|  |  / [u@h] $    \  |       |
+|  | |              | |       |
+|  | |              | |       |
+|   \ \____________/ /  VT100 |
+|    \______________/         |
+|_____________________________|
+  \_________________________/">
+                    <a id="header-terminal-logo"
+                       href="https://en.wikipedia.org/wiki/VT100"
+                       target="_blank">
+                    </a>
+                    <a id="header-terminal-apply"
+                       href="#registration">
+                    </a>
                     <div id="header-terminal-postit">
                         <p>
                             - Type in "HELP" if you are stuck.
@@ -55,24 +74,7 @@
                     <div class="paragraph-1">
                         <img id="logo-frame-img"
                              src="img/hackathon_logo.svg"
-                             alt="
-  ___________________________
- / |   ____________   |      \
-|  |  / [u@h] $    \  |       |
-|  | |              | |       |
-|  | |              | |       |
-|   \ \____________/ /  VT100 |
-|    \______________/         |
-|_____________________________|
-  \_________________________/
-
-  [:] KIBU HACKATHON 015
-
-  ##########
-  ##      ##  KITCHEN
-  ##      ##  BUDAPEST
-  ##      ##  Powered by *T**
-  ##########">
+                             alt="[:] KIBU HACKATHON 015">
                     </div>
                 </div>
             </div>
@@ -142,9 +144,10 @@
             </div>
             <div id="detail">
                 <div id="detail-frame">
-                    <div id="detail-frame-apply">
+                    <a id="detail-frame-apply"
+                       href="#registration">
                         apply here!
-                    </div>
+                    </a>
                     <div class="paragraph-1">
                         <div class="detail-frame-info">
                             <div>
@@ -358,14 +361,13 @@
                                 </div>
                                 <div id="registration-frame-data-lang-frame">
                                     <textarea id="registration-frame-data-lang-frame-input"
-                                              wrap="off"
-                                              placeholder="C, C++, Java, Python, Ruby, JavaScript...">
+                                              wrap="off">
                                     </textarea>
                                 </div>
                             </div>
                             <div id="registration-frame-data-send">
                                 <div>
-                                    I agree with the <a href="etc/terms_and_conditions.md" target="_blank">Terms &amp; Conditions</a>
+                                    I agree with the <a href="https://github.com/kitchenbudapest/openpage/blob/gh-pages/etc/terms_and_conditions.md" target="_blank">Terms &amp; Conditions</a>
                                 </div>
                                 <div id="registration-frame-data-send-button">
                                     send
@@ -386,7 +388,7 @@
                                target="_blank">
                                 Hackathon Documentation &amp; Framework
                             </a>
-                            <a href="etc/terms_and_conditions.md"
+                            <a href="https://github.com/kitchenbudapest/openpage/blob/gh-pages/etc/terms_and_conditions.md"
                                target="_blank">
                                 Hackathon Terms &amp; Conditions
                             </a>
@@ -409,7 +411,12 @@
                             <a href="http://kibu.hu"
                                target="_blank">
                                 <img src="img/hackathon_kibu_logo.svg"
-                                     alt="[] Kitchen Budapest">
+                                     alt="
+##########
+##      ##  KITCHEN
+##      ##  BUDAPEST
+##      ##  Powered by *T**
+##########">
                             </a>
                             <p>
                                 Location:
@@ -433,6 +440,10 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <img src="img/vt100_keyboard.001.001.png"
+                             alt="QWERTY">
                     </div>
                 </div>
             </div>

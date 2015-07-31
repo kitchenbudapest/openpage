@@ -286,35 +286,43 @@ var g = g || {};
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype.setEventListeners = function ()
+    Shell.prototype.boundEventCallbacks = function ()
+    {
+        this.onKeyDown  = this.onKeyDown.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
+    };
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    Shell.prototype.setEventListeners = function (element)
     {
         /* Set event listeners */
         if (element.addEventListener)
         {
-            element.addEventListener('keydown', this.onKeyDown.bind(this), false);
-            element.addEventListener('keypress', this.onKeyPress.bind(this), false);
+            element.addEventListener('keydown', this.onKeyDown, false);
+            element.addEventListener('keypress', this.onKeyPress, false);
         }
         else
         {
-            element.attachEvent('onkeydown', this.onKeyDown.bind(this));
-            element.attachEvent('onkeypress', this.onKeyPress.bind(this));
+            element.attachEvent('onkeydown', this.onKeyDown);
+            element.attachEvent('onkeypress', this.onKeyPress);
         }
     };
 
 
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    Shell.prototype.delEventListeners = function ()
+    Shell.prototype.delEventListeners = function (element)
     {
         /* Delete event listeners */
         if (element.removeEventListener)
         {
-            element.removeEventListener('keydown', this.onKeyDown.bind(this), false);
-            element.removeEventListener('keypress', this.onKeyPress.bind(this), false);
+            element.removeEventListener('keydown', this.onKeyDown, false);
+            element.removeEventListener('keypress', this.onKeyPress, false);
         }
         else
         {
-            element.detachEvent('onkeydown', this.onKeyDown.bind(this));
-            element.detachEvent('onkeypress', this.onKeyPress.bind(this));
+            element.detachEvent('onkeydown', this.onKeyDown);
+            element.detachEvent('onkeypress', this.onKeyPress);
         }
     };
 
