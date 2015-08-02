@@ -11,61 +11,48 @@ function main()
     /* Get essential DOM elements */
     var exit = document.getElementById('header-terminal-post-it-exit');
 
-
-    // var isOpen      = false,
-    //     topMax      = 0,
-    //     topStep     = 5,
-    //     opacityMax  = 1.0,
-    //     opacityStep = 0.0;
-
-    // /* Create animation function */
-    // function moveAndFade()
-    // {
-    //     var top = term.offsetTop;
-    //     if (top >= topMax)
-    //     {
-    //         isOpen = true;
-    //         return;
-    //     }
-
-    //     term.style.top     = (top + topStep).toString() + 'px';
-    //     stat.style.opacity = (parseFloat(stat.style.opacity) + opacityStep).toString();
-
-    //     /* Move on to the next frame */
-    //     window.requestAnimationFrame(moveAndFade);
-    // }
-
-    // /* Create exit callback function for terminal */
-    // function onExit(event)
-    // {
-    //     if (!isOpen)
-    //     {
-    //         stat.style.display = 'block';
-    //         stat.style.opacity = '0.0';
-
-    //         topMax = stat.offsetTop + stat.offsetHeight;
-    //         opacityStep = opacityMax/(topMax/topStep);
-
-    //         /* Start animation */
-    //         window.requestAnimationFrame(moveAndFade);
-    //     }
-    // }
-
-    // /* Assign exit callback to the post-it element */
-    // exit.addEventListener('click', onExit);
-
-    /* Create terminal and render it to its div
-       and bind all events it has to the window */
-    // (new g.term.VT100(onExit)).render(term, window);
-
     /* Create error-frame */
     var frame = document.createElement('div');
-    frame.id  = 'registration-frame-data-error-frame';
+    frame.id  = 'registration-frame-error-frame';
 
     /* Create new terminal object */
-    var term = new g.term.VT100(function ()
+    var term = new g.term.VT100(function (std, argv)
         {
-            console.log('exit...');
+            /* TODO: separate exit command into exit.js, write a proper MAN
+                     page for it, document all the jumping possibilities */
+            var location;
+            switch (argv[0])
+            {
+                case 'join':
+                case 'apply':
+                case 'register':
+                case 'application':
+                case 'registration':
+                    location = 'registration';
+                    break;
+
+                case 'info':
+                case 'information':
+                    location = 'info';
+                    break;
+
+                case 'more':
+                case 'detail':
+                case 'details':
+                    location = 'detail';
+                    break;
+
+                case 'data':
+                case 'links':
+                case 'location':
+                    location = 'links';
+                    break;
+
+                default:
+                    location = 'logo';
+                    break;
+            }
+            window.location.hash = location;
         },
         window),
     /* Create new form object */
@@ -80,9 +67,18 @@ function main()
             mail: document.getElementById('registration-frame-data-mail-input'),
             lang: document.getElementById('registration-frame-data-lang-frame-input'),
         },
+        {
+            name : document.getElementById('registration-frame-data-name'),
+            mail : document.getElementById('registration-frame-data-mail'),
+            lang : document.getElementById('registration-frame-data-lang-frame'),
+        },
         document.getElementById('registration-frame-data-send-button'),
-        document.getElementById('registration-frame-data-error'),
-        frame);
+        document.getElementById('registration-frame-error'),
+        frame,
+        {
+            basic : 'registration-basic',
+            error : 'registration-error',
+        });
 
     /* Store event listener remover callback */
     form.setOnSetEventListeners(term.delEventListeners.bind(term));

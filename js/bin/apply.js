@@ -8,7 +8,7 @@ var g = g || {};
     'use strict';
 
     var FORM,
-        CREF = 0,
+        PROG = 'programmer',
         NAME = 'apply',
         DESC = 'apply to the hackathon event';
 
@@ -22,11 +22,8 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
-    function getLang(std, input)
+    function sendForm(std)
     {
-        /* Collect last input */
-        FORM.lang = input;
-
         /* Lock I/O */
         std.io.lock();
         /* Report to user */
@@ -42,20 +39,29 @@ var g = g || {};
             /* If there was an error */
             if (!response.response)
             {
+                var message = response.message;
+
+                /* If message is not an object */
+                if (!(message instanceof Object))
+                    /* Make it an object */
+                    message = {server: message};
+
                 /* Print fields which have errors */
-                var keys = Object.keys(response.message);
+                var keys = Object.keys(message);
                 std.io.writeLine('Oups, error(s) occured in ' +
                                  keys.join(', ') + ':');
 
                 /* Print errors of the fields */
                 for (var i=0; i<keys.length; i++)
-                    std.io.writeLine(keys[i] + ': ' + response.message[keys[i]]);
+                    std.io.writeLine(keys[i] + ': ' + message[keys[i]]);
             }
             /* If everything went fine */
             else
-                std.io.writeLine("Thank you, we have received your "     +
-                                 "application! If you are a developer, " +
-                                 "don't forget to type in: 'doc'");
+            {
+                std.io.writeLine('Thank you, we have received your application!');
+                if (FORM.role === PROG)
+                    std.io.writeLine('Do not forget to type in: `doc`!');
+            }
 
             /* Release I/O */
             std.io.release();
@@ -64,12 +70,29 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
+    function getLang(std, input)
+    {
+        /* Collect last input */
+        FORM.lang = input;
+        sendForm(std);
+    }
+
+
+    /*------------------------------------------------------------------------*/
     function getMail(std, input)
     {
         FORM.mail = input;
-        std.io.write('Programming languages you are good at (optional): ');
-        std.io.setReader(getLang);
-        return true;
+
+        /* If user is a programmer */
+        if (FORM.role === PROG)
+        {
+            std.io.write('Programming languages you are good at (optional): ');
+            std.io.setReader(getLang);
+            return true;
+        }
+
+        /* If user is other */
+        sendForm(std);
     }
 
 
@@ -113,7 +136,7 @@ var g = g || {};
         FORM = {};
         std.io.writeLine('Please fill the following form ' +
                          'to apply to the kibu hackathon event!');
-        std.io.write('Are you a programmer or entrepreneur? [P/e] ');
+        std.io.write('Which role fits you: programmer or entrepreneur? [P/e] ');
         std.io.setReader(getRole);
     }
 

@@ -59,6 +59,7 @@ $-MOBILE-WIDTH: $MEDIA-MOBILE-MARGIN*2 + $ONE-PARAGRAPH-WIDTH;
 
 /*----- BODY -----------------------------------------------------------------*/
 $body-min-width                  : $-MOBILE-WIDTH;
+$body-max-width                  : $FOOTER-IMG-WIDTH;
 $body-color                      : $CHOCOLATE;
 $body-font-weight                : $NORMAL;
 $body-font-family                : $SANS-SERIF;
@@ -307,6 +308,13 @@ $registration-background                                        : $CREAM;
 $registration-border-bottom-width                               : 10px;
 $registration-border-bottom-color                               : $ORANGE;
 
+$registration-basic-background                                  : $WHITE;
+$registration-basic-border-color                                : $MUD;
+$registration-basic-border-width                                : $HAIRLINE;
+$registration-error-background                                  : $PEACH;
+$registration-error-border-color                                : $ORANGE;
+$registration-error-border-width                                : $HAIRLINE;
+
 $registration-frame-padding-top-bottom                          : 60px;
 $registration-frame-mobile-max-width                            : $TWO-PARAGRAPHS-WIDTH;
 $registration-frame-desktop-width                               : $TWO-PARAGRAPHS-WIDTH;
@@ -320,10 +328,19 @@ $registration-frame-title-letter-spacing                        : -1pt;
 
 $registration-frame-error-mobile-margin-left                    : $MEDIA-MOBILE-MARGIN;
 $registration-frame-error-mobile-width                          : $ONE-PARAGRAPH-WIDTH;
-$registration-frame-error-frame-padding                         : 10px;
+
+$registration-frame-error-frame-padding                         : 20px;
 $registration-frame-error-frame-margin-top                      : 30px;
-$registration-frame-error-frame-background                      : $CARAMEL;
+$registration-frame-error-frame-background                      : $PEACH;
 $registration-frame-error-frame-border-radius                   : $BOX-CORNER;
+$registration-frame-error-frame-title-margin-bottom             : 10px;
+
+$registration-frame-error-frame-title-color                     : $ORANGE;
+$registration-frame-error-frame-title-font-size                 : 20pt;
+$registration-frame-error-frame-title-font-weight               : $SEMI-BOLD;
+$registration-frame-error-frame-message-margin-bottom           : 5px;
+$registration-frame-error-frame-message-name-color              : $CARAMEL;
+$registration-frame-error-frame-message-name-font-weight        : $BOLD;
 
 $registration-frame-role-margin-bottom                          : 35px;
 $registration-frame-role-background                             : $WHITE;
@@ -365,24 +382,19 @@ $registration-frame-data-mail-margin-bottom                     : 25px;
 $registration-frame-data-name-mail-spec-color                   : $ORANGE;
 $registration-frame-data-name-mail-input-padding-left           : 5px;
 
-$registration-frame-data-name-mail-lang-frame-border-width      : $HAIRLINE;
-$registration-frame-data-name-mail-lang-frame-border-color      : $MUD;
 $registration-frame-data-name-mail-lang-frame-border-radius     : $BOX-CORNER;
-$registration-frame-data-name-mail-lang-frame-background        : $WHITE;
 $registration-frame-data-name-mail-lang-frame-padding           : 7px;
 
-$registration-frame-data-name-mail-lang-frame-input-background  : $WHITE;
-$registration-frame-data-name-mail-lang-frame-input-color       : $MUD;
 $registration-frame-data-name-mail-lang-frame-input-font-weight : $EXTRA-LIGHT;
 $registration-frame-data-name-mail-lang-frame-input-font-size   : $BASE-TEXT;
 $registration-frame-data-name-mail-lang-frame-input-line-height : $BASE-LINE-HEIGHT;
+$registration-frame-data-name-mail-lang-frame-input-placeholder-color : $MUD;
 
 $registration-frame-data-lang-margin-bottom                     : 30px;
 $registration-frame-data-lang-label-margin-bottom               : 10px;
 $registration-frame-data-lang-label-spec-color                  : $ORANGE;
 $registration-frame-data-lang-label-spec-font-size              : $MINI-TEXT;
 $registration-frame-data-lang-label-frame-input-min-height      : 35px;
-$registration-frame-data-lang-label-frame-input-background      : $WHITE;
 
 $registration-frame-data-send-label-font-size                   : $BASE-TEXT;
 $registration-frame-data-send-button-background                 : $ORANGE;

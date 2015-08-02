@@ -79,6 +79,42 @@
                 border-radius  : $registration-frame-error-frame-border-radius;
                 @include box-sizing(border-box);
 
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > p:first-of-type
+                {
+                    margin-bottom  : $registration-frame-error-frame-title-margin-bottom;
+                    color          : $registration-frame-error-frame-title-color;
+                    text-transform : uppercase;
+                    font-size      : $registration-frame-error-frame-title-font-size;
+                    font-weight    : $registration-frame-error-frame-title-font-weight;
+                }
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > div
+                {
+                    margin-bottom : $registration-frame-error-frame-message-margin-bottom;
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > p:first-of-type
+                    {
+                        display     : inline-block;
+                        width       : 70px;
+                        clear       : both;
+                        font-weight : $registration-frame-error-frame-message-name-font-weight;
+                        color       : $registration-frame-error-frame-message-name-color;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > p:last-of-type
+                    {
+                        display : inline-block;
+                        clear   : both;
+                    }
+                }
             }
         }
 
@@ -260,13 +296,7 @@
                 & > div
                 {
                     float : left;
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    & span:first-child
-                    {
-                        color : $registration-frame-data-name-mail-spec-color;
-                    }
+                    color : $registration-frame-data-name-mail-spec-color;
                 }
 
 
@@ -286,10 +316,6 @@
             {
                 width         : 100%;
                 border-radius : $registration-frame-data-name-mail-lang-frame-border-radius;
-                border        : $registration-frame-data-name-mail-lang-frame-border-width
-                                solid
-                                $registration-frame-data-name-mail-lang-frame-border-color;
-                background    : $registration-frame-data-name-mail-lang-frame-background;
                 padding       : $registration-frame-data-name-mail-lang-frame-padding;
                 overflow      : hidden;
                 @include box-sizing(border-box);
@@ -311,11 +337,37 @@
                     width       : 100%;
                     padding     : 0;
                     border      : none;
-                    background  : $registration-frame-data-name-mail-lang-frame-input-background;
-                    color       : $registration-frame-data-name-mail-lang-frame-input-color;
                     font-weight : $registration-frame-data-name-mail-lang-frame-input-font-weight;
                     font-size   : $registration-frame-data-name-mail-lang-frame-input-font-size;
                     line-height : $registration-frame-data-name-mail-lang-frame-input-line-height;
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &::-webkit-input-placeholder
+                    {
+                        color: $registration-frame-data-name-mail-lang-frame-input-placeholder-color;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &:-moz-placeholder
+                    {
+                        color: $registration-frame-data-name-mail-lang-frame-input-placeholder-color;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &::-moz-placeholder
+                    {
+                        color: $registration-frame-data-name-mail-lang-frame-input-placeholder-color;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &:-ms-input-placeholder
+                    {
+                        color: $registration-frame-data-name-mail-lang-frame-input-placeholder-color;
+                    }
                 }
             }
 
@@ -348,10 +400,10 @@
                     max-width     : 100%;
                     min-width     : 100%;
                     min-height    : $registration-frame-data-lang-label-frame-input-min-height;
-                    background    : $registration-frame-data-lang-label-frame-input-background;
                     resize        : vertical;
                     overflow      : hidden;
                     outline       : none;
+                    word-wrap     : break-word;
                     @include box-sizing(border-box);
                 }
             }
@@ -389,5 +441,30 @@
                 }
             }
         }
+    }
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+.registration
+{
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-basic
+    {
+        background : $registration-basic-background;
+        border     : $registration-basic-border-color
+                     solid
+                     $registration-basic-border-width;
+    }
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-error
+    {
+        background : $registration-error-background;
+        border     : $registration-error-border-color
+                     solid
+                     $registration-error-border-width;
     }
 }

@@ -269,9 +269,11 @@ var g = g || {};
             }).bind(this),
         },
         [
+            'jmp',
             'EXIT',
             'Exit',
             'skip',
+            'jump',
             'quit',
             'close',
             'break',
