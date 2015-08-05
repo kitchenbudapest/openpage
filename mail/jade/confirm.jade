@@ -1,0 +1,168 @@
+//- INFO //
+//- INFO //
+
+//- Convert image to base64:
+//-     $ base64 <file-name>.png > <file-name>.b64
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+-
+    var dims   =
+    {
+        page :
+        {
+            width : "500px",
+        },
+        border :
+        {
+            hairline : "1px",
+        },
+    },
+    colors =
+    {
+        orange    : "#F0761D",
+        cream     : "#FEF6DF",
+        chocolate : "#512417",
+        ground    : "#685D55",
+    };
+
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+mixin separator(color, height)
+    tr
+        td
+        td(width   = dims.page.width
+           height  = height
+           bgcolor = color)
+        td
+
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+doctype html
+html(lang = 'en')
+
+    head
+        title Kibu Hackthon 2015 | Confirmation
+        style
+            include ../css/confirm.css
+             
+    body
+        font(face  = "sans-serif"
+             color = colors.chocolate)
+            table(width       = "100%"
+                  cellpadding = "0"
+                  cellspacing = "0")
+                
+                // header  
+                tr
+                    td
+                        // header-frame
+                        table(width       = "100%"
+                              cellpadding = "0"
+                              cellspacing = "0"
+                              background  = "../../img/gradient_mail.png")
+                            tr(height = "50px")
+                            tr
+                                td
+                                td(width = dims.page.width)
+                                    table(width       = "100%"
+                                          cellpadding = "0"
+                                          cellspacing = "0")
+                                        tr
+                                            td(width = "15px")
+                                            td
+                                                include ../../img/hackathon_mail_logo.svg
+                                            td
+                                            td
+                                                | <img src="data:image/png;base64,
+                                                include ../../img/vt100_mail.b64
+                                                | "/>
+                                td
+                // body        
+                tr
+                    td
+                        // body-frame
+                        table(width       = "100%"
+                              cellpadding = "0"
+                              cellspacing = "0"
+                              bgcolor     = colors.cream)
+                            tr(height = "30px")
+                            tr
+                                td
+                                td(width = dims.page.width)
+                                   font(color = colors.orange
+                                        size  = "7")
+                                        | Welcome
+                                td
+                            tr(height = "10px")
+                            +separator(colors.orange,
+                                       dims.border.hairline)
+                            tr(height = "50px")
+                            tr
+                                td
+                                td(width = dims.page.width)
+                                    p Hi <?=$variable?>!
+                                    br
+                                    p
+                                        | Welcome on board of KIBU Hackathon!
+                                    p
+                                        | We got your registration. You are in!
+                                        | You can find all the essential
+                                        | information about the event here. 
+                                    br
+                                    p
+                                        | If you have any additional questions
+                                        | or for some reasons you&#39;ll be
+                                        | unable to attend, please let us know
+                                        | by sending an email to us.
+                                    br
+                                    p
+                                        | Looking forward to seeing you on 2nd
+                                        | Oct at 6pm!
+                                    br
+                                    p
+                                        | Cheers,
+                                    br
+                                    p Kibu Hackathon Team
+                                    p
+                                        a(href   = "www.hackathon.kibu.hu"
+                                          target = "_blank")
+                                            | www.hackathon.kibu.hu
+                                    br
+                                    p
+                                        | PS.: If you have further question,
+                                        | feel free to drop&nbsp;
+                                        a(href   = "mailto:aliz.nagy@kitchenbudapest.hu"
+                                          target = "_blank")
+                                            | Aliz
+                                        | &nbsp;a line!
+                                td
+                            tr(height="85px")
+                // footer
+                tr
+                    td
+                        // footer-frame
+                        table(width       = "100%"
+                              cellpadding = "0"
+                              cellspacing = "0"
+                              bgcolor     = "#433934")
+                            tr(height="50px")
+                            tr
+                                td
+                                td(width = dims.page.width)
+                                    table(width="100%")
+                                        tr
+                                            td
+                                                include ../../img/hackathon_kibu_logo.svg
+                                            td
+                                            td
+                                                include ../../img/hackathon_social_facebook.svg
+                                            td(width="14px")
+                                                include ../../img/hackathon_social_twitter.svg
+                                td
+                            tr(height = "50px")
+                            +separator(colors.ground,
+                                       dims.border.hairline)
+                            tr(height = "65px")
