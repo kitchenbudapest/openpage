@@ -57,12 +57,17 @@
 
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+mixin padding
+    td(width = "20px")
+    
 mixin separator(color, height)
     tr
         td
+        +padding
         td(width   = dims.page.width
            height  = height
            bgcolor = color)
+        +padding
         td
 
 mixin indicator
@@ -72,6 +77,7 @@ mixin indicator
             height = "3px"
             src    = images.dot.orange)
     | &nbsp;&nbsp;
+    
 
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -90,7 +96,6 @@ html(lang = 'en')
                   border      = "0"
                   cellpadding = "0"
                   cellspacing = "0")
-                
                 // header  
                 tr
                     td
@@ -103,9 +108,11 @@ html(lang = 'en')
                             tr(height = "50px")
                             tr
                                 td
+                                +padding
                                 td(width = dims.page.width)
                                     img(src = prefix + 'logo_graphics.png'
                                         alt = "[:] Kibu Hackathon 015'")
+                                +padding
                                 td
                 // body        
                 tr
@@ -119,10 +126,12 @@ html(lang = 'en')
                             tr(height = "30px")
                             tr
                                 td
+                                +padding
                                 td(width = dims.page.width)
                                    font(color = colors.orange
                                         size  = "7")
                                         | Welcome
+                                +padding
                                 td
                             tr(height = "10px")
                             +separator(colors.orange,
@@ -130,6 +139,7 @@ html(lang = 'en')
                             tr(height = "50px")
                             tr
                                 td
+                                +padding
                                 td(width = dims.page.width)
                                     p
                                         b Hi <?=$variable?>!
@@ -171,6 +181,7 @@ html(lang = 'en')
                                             font(color = colors.orange)
                                                 | Aliz
                                         | &nbsp;a line!
+                                +padding
                                 td
                             tr(height="85px")
                 // footer
@@ -185,23 +196,28 @@ html(lang = 'en')
                             tr(height="50px")
                             tr
                                 td
+                                +padding
                                 td(width = dims.page.width)
                                     table(width="100%")
                                         tr
                                             td
                                                 a(href   = "http://kibu.hu"
                                                   target = "_blank")
-                                                  img(src = prefix + 'kibu_logo.png')
+                                                  img(src = prefix + 'kibu_logo.png'
+                                                      alt = "[] Kitchen Budapest")
                                             td
                                             td(width = "35px")
                                                 a(href   = "https://www.facebook.com/kitchenbudapest"
                                                   target = "_blank")
-                                                    img(src = prefix + 'social_facebook.png')
+                                                    img(src = prefix + 'social_facebook.png'
+                                                        alt = "(f)")
                                             td(width = "14px")
                                             td(width = "35px")
                                                 a(href   = "https://twitter.com/kibu"
                                                   target = "_blank")
-                                                    img(src = prefix + 'social_twitter.png')
+                                                    img(src = prefix + 'social_twitter.png'
+                                                        alt = "(t)")
+                                +padding
                                 td
                             tr(height = "50px")
                             +separator(colors.ground,
@@ -209,6 +225,7 @@ html(lang = 'en')
                             tr(height = "30px")
                             tr
                                 td
+                                +padding
                                 td(width = dims.page.width
                                    align = "center")
                                     p
@@ -242,5 +259,6 @@ html(lang = 'en')
                                             font(color = colors.sand
                                                  size  = "2")
                                                 | Raspberry Pi's Website
+                                +padding
                                 td
                             tr(height = "65px")
