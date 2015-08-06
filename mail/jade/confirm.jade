@@ -10,7 +10,7 @@
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 -
     var prefix = 'https://raw.githubusercontent.com/kitchenbudapest/' +
-                 'openpage/gh-pages/mail/img/',
+                 'openpage/gh-pages/mail/img/hackathon_mail_',
     dims   =
     {
         page :
@@ -99,19 +99,13 @@ html(lang = 'en')
                               border      = "0"
                               cellpadding = "0"
                               cellspacing = "0"
-                              background  = prefix + 'gradient_mail.png')
+                              background  = prefix + 'gradient.png')
                             tr(height = "50px")
                             tr
                                 td
                                 td(width = dims.page.width)
-                                    table(width       = "100%"
-                                          cellpadding = "0"
-                                          cellspacing = "0")
-                                        tr
-                                            td(style = "vertical-align: middle")
-                                                img(src = prefix + 'hackathon_mail_logo.svg')
-                                            td(rowspan = "3")
-                                                img(src = prefix + 'vt100_mail.png')
+                                    img(src = prefix + 'logo_graphics.png'
+                                        alt = "[:] Kibu Hackathon 015'")
                                 td
                 // body        
                 tr
@@ -186,7 +180,8 @@ html(lang = 'en')
                         table(width       = "100%"
                               border      = "0"
                               cellpadding = "0"
-                              cellspacing = "0")
+                              cellspacing = "0"
+                              bgcolor     = colors.coffee)
                             tr(height="50px")
                             tr
                                 td
@@ -196,17 +191,17 @@ html(lang = 'en')
                                             td
                                                 a(href   = "http://kibu.hu"
                                                   target = "_blank")
-                                                  img(src = prefix + 'hackathon_kibu_logo_mail.svg')
+                                                  img(src = prefix + 'kibu_logo.png')
                                             td
                                             td(width = "35px")
                                                 a(href   = "https://www.facebook.com/kitchenbudapest"
                                                   target = "_blank")
-                                                    img(src = prefix + 'hackathon_social_facebook_mail.svg')
+                                                    img(src = prefix + 'social_facebook.png')
                                             td(width = "14px")
                                             td(width = "35px")
                                                 a(href   = "https://twitter.com/kibu"
                                                   target = "_blank")
-                                                    img(src = prefix + 'hackathon_social_twitter_mail.svg')
+                                                    img(src = prefix + 'social_twitter.png')
                                 td
                             tr(height = "50px")
                             +separator(colors.ground,
