@@ -108,70 +108,73 @@ $logo-frame-img-margin-top-bottom : 20px;
 
 
 /*----- INFO -----------------------------------------------------------------*/
-$info-background                                        : $CREAM;
-$info-border-bottom-width                               : 10px;
-$info-border-bottom-color                               : $ORANGE;
-$info-intro-subtitle-line-height                        : $NULL-LINE-HEIGHT;
-$info-intro-subtitle-font-weight                        : $LIGHT;
-$info-intro-subtitle-margin-bottom                      : 10px;
+$info-background                                            : $CREAM;
+$info-border-bottom-width                                   : 10px;
+$info-border-bottom-color                                   : $ORANGE;
+$info-intro-subtitle-line-height                            : $NULL-LINE-HEIGHT;
+$info-intro-subtitle-font-weight                            : $LIGHT;
+$info-intro-subtitle-margin-bottom                          : 10px;
 
-$info-frame-mobile-max-width                            : $TWO-PARAGRAPHS-WIDTH;
-$info-frame-desktop-width                               : $TWO-PARAGRAPHS-WIDTH;
-$info-frame-mobile-width                                : $-MOBILE-WIDTH;
-$info-frame-padding-top                                 : 50px;
-$info-frame-desktop-padding-bottom                      : 65px;
+$info-frame-mobile-max-width                                : $TWO-PARAGRAPHS-WIDTH;
+$info-frame-desktop-width                                   : $TWO-PARAGRAPHS-WIDTH;
+$info-frame-mobile-width                                    : $-MOBILE-WIDTH;
+$info-frame-padding-top                                     : 50px;
+$info-frame-desktop-padding-bottom                          : 65px;
 
-$info-frame-intro-line-height                           : $BIG-LINE-HEIGHT;
-$info-frame-intro-title-line-height                     : $NULL-LINE-HEIGHT;
-$info-frame-intro-title-font-size                       : $MAIN-TITLE;
-$info-frame-intro-title-font-weight                     : $SEMI-BOLD;
-$info-frame-intro-title-padding-bottom                  : 30px;
-$info-frame-intro-summary-font-weight                   : $BOLD;
+$info-frame-intro-line-height                               : $BIG-LINE-HEIGHT;
+$info-frame-intro-title-line-height                         : $NULL-LINE-HEIGHT;
+$info-frame-intro-title-font-size                           : $MAIN-TITLE;
+$info-frame-intro-title-font-weight                         : $SEMI-BOLD;
+$info-frame-intro-title-padding-bottom                      : 30px;
+$info-frame-intro-summary-font-weight                       : $BOLD;
 
-$info-frame-date-margin-top                             : 77px;
-$info-frame-date-margin-bottom                          : 40px;
-$info-frame-date-media-mobile-max-width                 : $TWO-PARAGRAPHS-WIDTH;
+$info-frame-info-margin-top                                 : 77px;
+$info-frame-info-margin-bottom                              : 40px;
+$info-frame-info-media-mobile-max-width                     : $TWO-PARAGRAPHS-WIDTH;
 
-$info-frame-date-box-width                              : $ONE-PARAGRAPH-WIDTH;
-$info-frame-date-box-background                         : $BUTTER;
-$info-frame-date-box-font-weight                        : $SEMI-BOLD;
-$info-frame-date-box-border-width                       : $HAIRLINE;
-$info-frame-date-box-border-color                       : $MUD;
-$info-frame-date-box-border-radius                      : $BOX-CORNER;
+$info-frame-info-box-width                                  : $ONE-PARAGRAPH-WIDTH;
+$info-frame-info-box-background                             : $BUTTER;
+$info-frame-info-box-font-weight                            : $SEMI-BOLD;
+$info-frame-info-box-border-width                           : $HAIRLINE;
+$info-frame-info-box-border-color                           : $MUD;
+$info-frame-info-box-border-radius                          : $BOX-CORNER;
 
-$info-frame-date-box-arrow-margin                       : 14px;
-$info-frame-date-box-arrow-padding                      : 10px;
-$info-frame-date-box-arrow-width                        : 300px;
-$info-frame-date-box-arrow-border-width                 : 4px;
-$info-frame-date-box-arrow-border-color                 : $MUD;
-$info-frame-date-box-arrow-border-radius                : $SMALL-CORNER;
+$info-frame-info-box-arrow-margin                           : 14px;
+$info-frame-info-box-arrow-padding                          : 10px;
+$info-frame-info-box-arrow-width                            : 300px;
 
-$info-frame-date-box-arrow-tip-border-color             : $MUD;
-$info-frame-date-box-arrow-tip-border-top-width         : 6px;
-$info-frame-date-box-arrow-tip-border-bottom-width      : 6px;
-$info-frame-date-box-arrow-tip-border-left-width        : 12px;
+$info-frame-info-box-arrow-updown-border-width              : 4px;
+$info-frame-info-box-arrow-updown-border-color              : $MUD;
+$info-frame-info-box-arrow-updown-border-radius             : $SMALL-CORNER;
+$info-frame-info-box-arrow-updown-line-height               : 1;
 
-$info-frame-date-box-arrow-month-color                  : $ORANGE;
-$info-frame-date-box-arrow-month-font-size              : $SUB-TITLE;
-$info-frame-date-box-arrow-month-margin-top-bottom      : 20px;
-$info-frame-date-box-arrow-month-after-width            : 110px;
-$info-frame-date-box-arrow-month-after-border-top-color : $CARAMEL;
-$info-frame-date-box-arrow-month-after-border-top-width : $HAIRLINE;
+$info-frame-info-box-arrow-updown-location-font-size        : 11.5pt;
+$info-frame-info-box-arrow-updown-location-font-weight      : $NORMAL;
 
-$info-frame-date-box-numbers-top                        : 19px;
-$info-frame-date-box-numbers-start-color                : $ORANGE;
-$info-frame-date-box-numbers-day-font-size              : $EXTRA-TITLE;
-$info-frame-date-box-numbers-day-line-height            : $NULL-LINE-HEIGHT;
-$info-frame-date-box-numbers-time-border-bottom-color   : $CARAMEL;
-$info-frame-date-box-numbers-time-border-bottom-width   : 1px;
+$info-frame-info-box-arrow-updown-month-color               : $ORANGE;
+$info-frame-info-box-arrow-updown-month-font-size           : $SUB-TITLE;
 
-$info-frame-location-separator-width                    : 78px;
-$info-frame-location-separator-margin-left-right        : 20px;
-$info-frame-location-separator-border-bottom-width      : $HAIRLINE;
-$info-frame-location-separator-border-bottom-color      : $CARAMEL;
-$info-frame-location-name-font-weight                   : $SEMI-BOLD;
-$info-frame-location-name-font-size                     : 22pt;
-$info-frame-location-address-font-size                  : 13.5pt;
+$info-frame-info-box-arrow-updown-place-font-size           : $BOLD;
+$info-frame-info-box-arrow-updown-place-font-weight         : 11pt;
+
+$info-frame-info-box-arrow-updown-address-font-size         : 9.5pt;
+$info-frame-info-box-arrow-updown-address-font-weight       : $NORMAL;
+
+$info-frame-info-box-arrow-updown-tip-border-color          : $MUD;
+$info-frame-info-box-arrow-updown-tip-border-top-width      : 6px;
+$info-frame-info-box-arrow-updown-tip-border-bottom-width   : 6px;
+$info-frame-info-box-arrow-updown-tip-border-right-width    : 12px;
+
+$info-frame-info-box-arrow-updown-day-font-size             : 40pt;
+$info-frame-info-box-arrow-updown-day-line-height           : $NULL-LINE-HEIGHT;
+$info-frame-info-box-arrow-updown-day-start-color           : $ORANGE;
+
+$info-frame-info-box-arrow-updown-time-border-bottom-width  : $HAIRLINE;
+$info-frame-info-box-arrow-updown-time-border-bottom-color  : $CARAMEL;
+
+$info-frame-info-box-arrow-updown-daytime-before-width      : 110px;
+$info-frame-info-box-arrow-updown-daytime-before-border-top-width : $HAIRLINE;
+$info-frame-info-box-arrow-updown-daytime-before-border-top-color : $CARAMEL;
 
 
 /*----- DETAIL ---------------------------------------------------------------*/

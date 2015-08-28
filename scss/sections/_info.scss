@@ -67,18 +67,18 @@
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-date
+        &-info
         {
             display : table;
-            margin  : $info-frame-date-margin-top
+            margin  : $info-frame-info-margin-top
                       0
-                      $info-frame-date-margin-bottom;
+                      $info-frame-info-margin-bottom;
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            @media all and (max-width : $info-frame-date-media-mobile-max-width)
+            @media all and (max-width : $info-frame-info-media-mobile-max-width)
             {
-                margin : $info-frame-date-margin-bottom
+                margin : $info-frame-info-margin-bottom
                          0;
             }
 
@@ -88,182 +88,206 @@
             {
                 display        : table;
                 position       : relative;
-                width          : $info-frame-date-box-width;
-                background     : $info-frame-date-box-background;
-                border-radius  : $info-frame-date-box-border-radius;
-                border         : $info-frame-date-box-border-width
+                width          : $info-frame-info-box-width;
+                background     : $info-frame-info-box-background;
+                border-radius  : $info-frame-info-box-border-radius;
+                border         : $info-frame-info-box-border-width
                                  solid
-                                 $info-frame-date-box-border-color;
+                                 $info-frame-info-box-border-color;
                 text-transform : uppercase;
-                font-weight    : $info-frame-date-box-font-weight;
+                font-weight    : $info-frame-info-box-font-weight;
                 @include box-sizing(border-box);
 
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 &-arrow
                 {
-                    position           : relative;
-                    width              : $info-frame-date-box-arrow-width;
-                    margin             : $info-frame-date-box-arrow-margin;
-                    padding            : $info-frame-date-box-arrow-padding;
-                    border             : $info-frame-date-box-arrow-border-width
-                                         solid
-                                         $info-frame-date-box-arrow-border-color;
-                    border-right       : none;
-                    border-radius      : $info-frame-date-box-arrow-border-radius
-                                         0
-                                         0
-                                         $info-frame-date-box-arrow-border-radius;
+                    margin : $info-frame-info-box-arrow-margin;
                     @include box-sizing(border-box);
 
 
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    &::after
+                    &-up,
+                    &-down
                     {
-                        position      : absolute;
-                        bottom        : -8px;
-                        right         : -3px;
-                        width         : 0;
-                        height        : 0;
-                        content       : '';
-                        border-top    : $info-frame-date-box-arrow-tip-border-top-width
-                                        solid
-                                        transparent;
-                    	border-bottom : $info-frame-date-box-arrow-tip-border-bottom-width
-                                        solid
-                                        transparent;
-                    	border-left   : $info-frame-date-box-arrow-tip-border-left-width
-                                        solid
-                                        $info-frame-date-box-arrow-tip-border-color;
-                    }
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    &-month
-                    {
-                        margin    : $info-frame-date-box-arrow-month-margin-top-bottom
-                                    0;
-                        color     : $info-frame-date-box-arrow-month-color;
-                        font-size : $info-frame-date-box-arrow-month-font-size;
-
-
-                        /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
-                        &::after
-                        {
-                            position   : absolute;
-                            top        : 50%;
-                            right      : 0;
-                            content    : '';
-                            width      : $info-frame-date-box-arrow-month-after-width;
-                            border-top : $info-frame-date-box-arrow-month-after-border-top-width
+                        position       : relative;
+                        padding-top    : 15px;
+                        padding-bottom : 15px;
+                        border         : $info-frame-info-box-arrow-updown-border-width
                                          solid
-                                         $info-frame-date-box-arrow-month-after-border-top-color;
-                        }
-                    }
-                }
-
-
-                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                &-numbers
-                {
-                    position    : absolute;
-                    top         : $info-frame-date-box-numbers-top;
-                    right       : 0;
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    & > div:first-of-type
-                    {
-                        margin-top  : -11px;
-                    }
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    & > div:last-of-type
-                    {
-                        margin-top  : -16px;
-                    }
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    & > div
-                    {
-                        margin-right: 14px;
-                        margin-left : -10px;
-                        line-height : $info-frame-date-box-numbers-day-line-height;
-                        font-size   : $info-frame-date-box-numbers-day-font-size;
+                                         $info-frame-info-box-arrow-updown-border-color;
+                        @include box-sizing(border-box);
 
 
                         /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
-                        & > span:last-of-type
+                        /* Locations */
+                        & > div:first-of-type
                         {
-                            vertical-align : top;
-                            display        : inline-block;
-                            width          : 45px;
-                            font-size      : 10pt;
-                            border-bottom  : $info-frame-date-box-numbers-time-border-bottom-width
-                                             solid
-                                             $info-frame-date-box-numbers-time-border-bottom-color;
-                            text-align     : right;
-                            padding        : 11px 0 2px;
-                            margin-left    : -15px;
+                            display     : table;
+                            line-height : $info-frame-info-box-arrow-updown-line-height;
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            /* Location */
+                            & > p:nth-child(1)
+                            {
+                                text-transform : uppercase;
+                                font-size      : $info-frame-info-box-arrow-updown-location-font-size;
+                                font-weight    : $info-frame-info-box-arrow-updown-location-font-weight;
+                            }
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            /* Month */
+                            & > p:nth-child(2)
+                            {
+                                color     : $info-frame-info-box-arrow-updown-month-color;
+                                font-size : $info-frame-info-box-arrow-updown-month-font-size;
+                            }
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            /* Place */
+                            & > p:nth-child(3)
+                            {
+                                text-transform : uppercase;
+                                font-size      : $info-frame-info-box-arrow-updown-place-font-size;
+                                font-weight    : $info-frame-info-box-arrow-updown-place-font-weight;
+                            }
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            /* Address */
+                            & > p:nth-child(4)
+                            {
+                                text-transform : none;
+                                font-size      : $info-frame-info-box-arrow-updown-address-font-size;
+                                font-weight    : $info-frame-info-box-arrow-updown-address-font-weight;
+                            }
                         }
+
+
+                        /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
+                        /* Date-time */
+                        & > div:last-of-type
+                        {
+                            position      : absolute;
+                            top           : 5px;
+                            right         : 0;
+                            padding-right : $info-frame-info-box-arrow-padding;
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            & > p
+                            {
+                                /*- - - - - - - - - - - - - - - - - - - - - - */
+                                /* Day */
+                                & > span:first-of-type
+                                {
+                                    font-size   : $info-frame-info-box-arrow-updown-day-font-size;
+                                    line-height : $info-frame-info-box-arrow-updown-day-line-height;
+                                }
+
+
+                                /*- - - - - - - - - - - - - - - - - - - - - - */
+                                /* Time */
+                                & > span:last-of-type
+                                {
+                                    vertical-align : top;
+                                    display        : inline-block;
+                                    width          : 45px;
+                                    font-size      : 10pt;
+                                    border-bottom  : $info-frame-info-box-arrow-updown-time-border-bottom-width
+                                                     solid
+                                                     $info-frame-info-box-arrow-updown-time-border-bottom-color;
+                                    text-align     : right;
+                                    padding        : 8px 0 2px;
+                                    margin-left    : 8px;
+                                }
+                            }
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            /* Decoration line */
+                            &::before
+                            {
+                                content    : '';
+                                position   : absolute;
+                                top        : 45%;
+                                left       : -($info-frame-info-box-arrow-updown-daytime-before-width + 10px);
+                                width      : $info-frame-info-box-arrow-updown-daytime-before-width;
+                                border-top : $info-frame-info-box-arrow-updown-daytime-before-border-top-width
+                                             solid
+                                             $info-frame-info-box-arrow-updown-daytime-before-border-top-color;
+                            }
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            /* Start date-time */
+                            & > p:first-of-type
+                            {
+                                color : $info-frame-info-box-arrow-updown-day-start-color;
+                            }
+
+
+                            /*- - - - - - - - - - - - - - - - - - - - - - - - */
+                            /* Stop date-time */
+                            & > p:last-of-type
+                            {
+                                position : relative;
+                                top      : -10px;
+                            }
+                        }
+                    }
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &-up
+                    {
+                        padding-left  : 14px;
+                        margin-right  : $info-frame-info-box-arrow-updown-border-radius;
+                        border-radius : $info-frame-info-box-arrow-updown-border-radius
+                                        0
+                                        0
+                                        $info-frame-info-box-arrow-updown-border-radius;
+                        border-right  : none;
                     }
 
 
                     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    &-start
+                    &-down
                     {
-                        color: $info-frame-date-box-numbers-start-color;
+                        padding-left  : 10px;
+                        top           : -$info-frame-info-box-arrow-updown-border-width;
+                        margin-left   : $info-frame-info-box-arrow-updown-border-radius;
+                        margin-bottom : (($info-frame-info-box-arrow-updown-tip-border-right-width -
+                                          $info-frame-info-box-arrow-updown-border-width)/2)*-1;
+                        border-radius : 0
+                                        $info-frame-info-box-arrow-updown-border-radius
+                                        $info-frame-info-box-arrow-updown-border-radius
+                                        0;
+                        border-left   : none;
+
+
+                        /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
+                        &::before
+                        {
+                            position      : absolute;
+                            bottom        : -8px;
+                            left          : -3px;
+                            width         : 0;
+                            height        : 0;
+                            content       : '';
+                            border-top    : $info-frame-info-box-arrow-updown-tip-border-top-width
+                                            solid
+                                            transparent;
+                        	border-bottom : $info-frame-info-box-arrow-updown-tip-border-bottom-width
+                                            solid
+                                            transparent;
+                        	border-right  : $info-frame-info-box-arrow-updown-tip-border-right-width
+                                            solid
+                                            $info-frame-info-box-arrow-updown-tip-border-color;
+                        }
                     }
-                }
-            }
-        }
-
-
-        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-location
-        {
-            display : table;
-
-
-            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > span:first-of-type
-            {
-                display        : inline-block;
-                vertical-align : top;
-
-
-                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                &::after
-                {
-                    display        : inline-block;
-                    vertical-align : middle;
-                    content        : '';
-                    width          : $info-frame-location-separator-width ;
-                    margin         : 0
-                                     $info-frame-location-separator-margin-left-right;
-                    border-bottom  : $info-frame-location-separator-border-bottom-width
-                                     solid
-                                     $info-frame-location-separator-border-bottom-color;
-                }
-            }
-
-
-            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > div:first-of-type
-            {
-                display   : inline-block;
-                font-size : $info-frame-location-address-font-size;
-
-
-                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                & > p:first-of-type
-                {
-                    text-transform : uppercase;
-                    font-size      : $info-frame-location-name-font-size;
-                    font-weight    : $info-frame-location-name-font-weight;
-                    margin         : -6px 0 3px;
                 }
             }
         }

@@ -27,7 +27,9 @@
         [''    , 'form'],
         [''    , 'main'],
     ];
-    
+
+    // TODO: ** js string escape **
+    //       escapes should be escaped!
     var img_alt_vt100 =
     '  ___________________________  ' +
     ' / |   ____________   |      \ ' +
@@ -38,7 +40,7 @@
     '|    \______________/         |' +
     '|_____________________________|' +
     '  \_________________________/  ';
-    
+
     var img_alt_kibu =
     '##########                  ' +
     '##      ##  KITCHEN         ' +
@@ -64,7 +66,7 @@ html(lang='en')
         else
             each source in sources
                 script(src='js/' + source[0] + source[1] + '.js')
-                
+
     body
         div
             div(id='header')
@@ -113,23 +115,37 @@ html(lang='en')
                                 | will help you to bring the best out of your ideas!
                     div(class='paragraph-2')
                         div(id='info-frame-date')
-                            div(class='info-intro-subtitle') Date
-                            div(id='info-frame-date-box')
-                                div(id='info-frame-date-box-arrow')
-                                    div(id='info-frame-date-box-arrow-month')
-                                        | september
-                                div(id='info-frame-date-box-numbers')
-                                    div
-                                        span(id='info-frame-date-box-numbers-start') 04
-                                        span 18:00
-                                    div
-                                        span(id='info-frame-date-box-numbers-stop') 05
-                                        span 20:00
-                        div(id='info-frame-location')
-                            span(class='info-intro-subtitle') Location
-                            div
-                                p kitchen budapest
-                                p 30. RÁDAY STR. Budapest, H-1092
+                            div(class='info-intro-subtitle') Dates &amp; Locations
+
+                            div(id='info-frame-info-box')
+                                div(id='info-frame-info-box-arrow')
+                                    div(id='info-frame-info-box-arrow-up')
+                                        div
+                                            p budapest
+                                            p october
+                                            p kitchen budapest
+                                            p 30. RÁDAY STR. Budapest, H-1092
+                                        div
+                                            p
+                                                span 02
+                                                span 18:00
+                                            p
+                                                span 03
+                                                span 20:00
+
+                                    div(id='info-frame-info-box-arrow-down')
+                                        div
+                                            p szeged
+                                            p october
+                                            p SZTE GTK
+                                            p 1. KÁLVÁRIA SGT. Szeged, H-6722
+                                        div
+                                            p
+                                                span 09
+                                                span 18:00
+                                            p
+                                                span 10
+                                                span 20:00
             div(id='detail')
                 a(class='anchor'
                   name='detail')
@@ -211,7 +227,7 @@ html(lang='en')
                                 span event
                                 br/
                                 span schedule
-                            div(class = 'detail-frame-schedule-timing ' + 
+                            div(class = 'detail-frame-schedule-timing ' +
                                         'detail-frame-schedule-timing-spec')
                                 span 18:00
                                 span Registration
