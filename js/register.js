@@ -26,6 +26,7 @@ var g = g || {};
                          '&city='     + inputs.city +
                          '&mail='     + inputs.mail +
                          '&lang='     + inputs.lang +
+                         '&from='     + inputs.from +
                          '&callback=' + cref;
 
             /* Set JSONP callback */

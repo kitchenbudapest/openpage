@@ -150,7 +150,7 @@ var g = g || {};
                 break;
         }
 
-        std.io.write('Which location do you choos Budapest or Szeged? [B/s] ');
+        std.io.write('Which location do you choose Budapest or Szeged? [B/s] ');
         std.io.setReader(getCity);
         return true;
     }
@@ -175,7 +175,7 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-        FORM = {};
+        FORM = {from: 'term'};
         std.io.write('By registering through the next form, you accept the '  +
                      'terms and conditions of the hackathon. Do you want to ' +
                      'read it first? [Y/n] ');

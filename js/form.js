@@ -263,7 +263,7 @@ var g = g || {};
             j,
             key,
             input,
-            values = {},
+            values = {from: 'form'},
             inputs = this._inputs,
             keys   = Object.keys(inputs);
 
