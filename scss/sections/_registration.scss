@@ -120,9 +120,10 @@
 
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-        &-role
+        &-role,
+        &-city
         {
-            margin-bottom : $registration-frame-role-margin-bottom;
+
             background    : $registration-frame-role-background;
             border-radius : $registration-frame-role-border-radius;
             border        : $registration-frame-role-border-width
@@ -140,16 +141,103 @@
                 left     : 0;
                 width    : 100%;
                 height   : 100%;
-                padding  : $registration-frame-role-frame-padding-top-bottom
-                           $registration-frame-role-frame-padding-left-right;
+                display:table;
                 @include box-sizing(border-box);
 
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
                 & > span
                 {
+                    float : left;
                     color : $registration-frame-role-frame-title-color;
                 }
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > div
+                {
+                    position : relative;
+                    float    : right;
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > label:first-of-type
+                    {
+                        position : absolute;
+                        right    : 215px;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > label:last-of-type
+                    {
+                        position : absolute;
+                        right    : 60px;
+                    }
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    & > input[type='radio']
+                    {
+                        display : none;
+
+
+                        /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
+                        & + label > span
+                        {
+                            display       : block;
+                            position      : absolute;
+                            top           : 5px;
+                            right         : -24px;
+                            width         : 16px;
+                            height        : 16px;
+                            margin-left   : $registration-frame-role-frame-radio-margin-left;
+                            margin-bottom : $registration-frame-role-frame-radio-margin-bottom;
+                            cursor        : pointer;
+                            border-radius : 50%;
+                            background    : $registration-frame-role-frame-radio-background;
+                            border        : $registration-frame-role-frame-radio-border-width
+                                            solid
+                                            $registration-frame-role-frame-radio-border-color;
+                        }
+
+
+                        /*- - - - - - - - - - - - - - - - - - - - - - - - - - */
+                        &:checked + label > span::after
+                        {
+                            display       : block;
+                            position      : relative;
+                            top           : $registration-frame-role-frame-radio-checker-top;
+                            left          : $registration-frame-role-frame-radio-checker-top;
+                            width         : $registration-frame-role-frame-radio-checker-width;
+                            height        : $registration-frame-role-frame-radio-checker-width;
+                            content       : '';
+                            border-radius : 50%;
+                            background    : $registration-frame-role-frame-radio-checker-color;
+                        }
+                    }
+                }
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > label:nth-of-type(2)
+                {
+                    margin-left: 50px;
+                }
+            }
+        }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-role
+        {
+            margin-bottom : 20px;
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-frame
+            {
+                padding  : $registration-frame-role-frame-padding-top-bottom
+                           $registration-frame-role-frame-padding-left-right;
 
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -193,54 +281,23 @@
                     border-width      : $registration-frame-role-frame-arrow-height;
                     margin-top        : -$registration-frame-role-frame-arrow-height;
                 }
-
-
-                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                & > input[type='radio']
-                {
-                    display : none;
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    & + label
-                    {
-                        margin-left : $registration-frame-role-frame-label-margin-left;
-                    }
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    & + label > span
-                    {
-                        display       : inline-block;
-                        width         : 16px;
-                        height        : 16px;
-                        margin-left   : $registration-frame-role-frame-radio-margin-left;
-                        margin-bottom : $registration-frame-role-frame-radio-margin-bottom;
-                        cursor        : pointer;
-                        border-radius : 50%;
-                        background    : $registration-frame-role-frame-radio-background;
-                        border        : $registration-frame-role-frame-radio-border-width
-                                        solid
-                                        $registration-frame-role-frame-radio-border-color;
-                    }
-
-
-                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-                    &:checked + label > span::after
-                    {
-                        display       : block;
-                        position      : relative;
-                        top           : $registration-frame-role-frame-radio-checker-top;
-                        left          : $registration-frame-role-frame-radio-checker-top;
-                        width         : $registration-frame-role-frame-radio-checker-width;
-                        height        : $registration-frame-role-frame-radio-checker-width;
-                        content       : '';
-                        border-radius : 50%;
-                        background    : $registration-frame-role-frame-radio-checker-color;
-                    }
-                }
             }
         }
+
+
+        /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+        &-city
+        {
+            margin-bottom : $registration-frame-role-margin-bottom;
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-frame
+            {
+                padding : 7px
+                          $registration-frame-role-frame-padding-left-right;
+            }
+        }
+
 
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-info

@@ -63,6 +63,11 @@ function main()
                 document.getElementById('registration-frame-role-radio-1'),
                 document.getElementById('registration-frame-role-radio-2'),
             ],
+            city:
+            [
+                document.getElementById('registration-frame-city-radio-1'),
+                document.getElementById('registration-frame-city-radio-2'),
+            ],
             name: document.getElementById('registration-frame-data-name-input'),
             mail: document.getElementById('registration-frame-data-mail-input'),
             lang: document.getElementById('registration-frame-data-lang-frame-input'),

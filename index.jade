@@ -114,9 +114,8 @@ html(lang='en')
                                 | presentations, workshops and continuous mentoring
                                 | will help you to bring the best out of your ideas!
                     div(class='paragraph-2')
-                        div(id='info-frame-date')
+                        div(id='info-frame-info')
                             div(class='info-intro-subtitle') Dates &amp; Locations
-
                             div(id='info-frame-info-box')
                                 div(id='info-frame-info-box-arrow')
                                     div(id='info-frame-info-box-arrow-up')
@@ -132,7 +131,6 @@ html(lang='en')
                                             p
                                                 span 03
                                                 span 20:00
-
                                     div(id='info-frame-info-box-arrow-down')
                                         div
                                             p szeged
@@ -173,9 +171,9 @@ html(lang='en')
                             div Registration fee
                             div
                                 | The participation is FREE for everyone however,
-                                | you need to register
+                                | you need to register&nbsp;
                                 a(href='#registration') here
-                                | . Before you come, read the documentation
+                                | . Before you come, read the documentation&nbsp;
                                 a(href='https://github.com/kitchenbudapest/hackathon') here
                                 | .
                         div(class='detail-frame-info')
@@ -273,28 +271,48 @@ html(lang='en')
                             | registration
                         div(id='registration-frame-role')
                             div(id='registration-frame-role-frame')
-                                span I am a:
-                                input(id    = 'registration-frame-role-radio-1'
-                                      type  = 'radio'
-                                      name  = 'registration-frame-role-radio'
-                                      value = 'programmer'
-                                      checked)
-                                label(for='registration-frame-role-radio-1')
-                                    | Programmer
-                                    span
-                                input(id    = 'registration-frame-role-radio-2'
-                                      type  = 'radio'
-                                      name  = 'registration-frame-role-radio'
-                                      value = 'entrepreneur')
-                                label(for='registration-frame-role-radio-2')
-                                    | Entrepreneur
-                                    span
+                                span I&rsquo;m a:
+                                div
+                                    input(id    = 'registration-frame-role-radio-1'
+                                          type  = 'radio'
+                                          name  = 'registration-frame-role-radio'
+                                          value = 'programmer'
+                                          checked)
+                                    label(for='registration-frame-role-radio-1')
+                                        | Programmer
+                                        span
+                                    input(id    = 'registration-frame-role-radio-2'
+                                          type  = 'radio'
+                                          name  = 'registration-frame-role-radio'
+                                          value = 'entrepreneur')
+                                    label(for='registration-frame-role-radio-2')
+                                        | Entrepreneur
+                                        span
+                        div(id='registration-frame-city')
+                            div(id='registration-frame-city-frame')
+                                span Location:
+                                div
+                                    input(id    = 'registration-frame-city-radio-1'
+                                          type  = 'radio'
+                                          name  = 'registration-frame-city'
+                                          value = 'budapest'
+                                          checked)
+                                    label(for='registration-frame-city-radio-1')
+                                        | Budapest
+                                        span
+                                    input(id    = 'registration-frame-city-radio-2'
+                                          type  = 'radio'
+                                          name  = 'registration-frame-city'
+                                          value = 'szeged')
+                                    label(for='registration-frame-city-radio-2')
+                                        | Szeged
+                                        span
                         div(id='registration-frame-info')
                             p Registration will close on 20th August at 8:00 PM EET.
                             p
                                 | For more information, contact
                                 span Aliz Nagy
-                                | , our communication manager at:
+                                | , our communication manager at:&nbsp;
                                 a(href   = 'mailto:aliz.nagy@kitchenbudapest.hu?' +
                                            'subject=Kibu+Hackathon+2015'
                                   target = '_blank')
@@ -329,7 +347,7 @@ html(lang='en')
                                                            'Bash, ...')
                             div(id='registration-frame-data-send')
                                 div
-                                    | I agree with the
+                                    | I agree with the&nbsp;
                                     a(href   = 'https://github.com/kitchenbudapest/' +
                                                'openpage/blob/gh-pages/etc/'         +
                                                'terms_and_conditions.md'

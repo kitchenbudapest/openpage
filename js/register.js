@@ -23,6 +23,7 @@ var g = g || {};
             script.src = 'http://devops.kibu.hu/hackatonForm' +
                          '?name='     + inputs.name +
                          '&role='     + inputs.role +
+                         '&city='     + inputs.city +
                          '&mail='     + inputs.mail +
                          '&lang='     + inputs.lang +
                          '&callback=' + cref;
