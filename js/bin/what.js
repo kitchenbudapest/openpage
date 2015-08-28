@@ -33,7 +33,7 @@ var g = g || {};
                          'introduced in August 1978 by Digital ' +
                          'Equipment Corporation (DEC).');
         std.io.writeLine('...');
-        std.io.writeLine('Do you want to read more about it [Y/n]?');
+        std.io.write('Do you want to read more about it? [Y/n] ');
         std.io.setReader(visitWikipedia);
     }
 

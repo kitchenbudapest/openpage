@@ -107,9 +107,34 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
+    function getCity(std, input)
+    {
+        switch (input)
+        {
+            case 's':
+            case 'S':
+            case 'sz':
+            case 'Sz':
+            case 'SZ':
+            case 'szeged':
+            case 'Szeged':
+            case 'SZEGED':
+                FORM.city = 'szeged';
+                break;
+
+            default:
+                FORM.city = 'budapest';
+                break;
+        }
+        std.io.write('Your name: ');
+        std.io.setReader(getName);
+        return true;
+    }
+
+
+    /*------------------------------------------------------------------------*/
     function getRole(std, input)
     {
-        FORM.role = input;
         switch (input)
         {
             case 'e':
@@ -122,10 +147,27 @@ var g = g || {};
 
             default:
                 FORM.role = 'programmer';
+                break;
         }
 
-        std.io.write('Your name: ');
-        std.io.setReader(getName);
+        std.io.write('Which location do you choos Budapest or Szeged? [B/s] ');
+        std.io.setReader(getCity);
+        return true;
+    }
+
+
+    /*------------------------------------------------------------------------*/
+    function getTerm(std, input)
+    {
+        if (std.lib.yesOrNo(input))
+            std.lib.openPopUp('https://github.com/kitchenbudapest/' +
+                              'openpage/blob/gh-pages/etc/'         +
+                              'terms_and_conditions.md');
+        std.io.writeLine('Please fill the following form ' +
+                         'to apply to the kibu hackathon event!');
+        std.io.writeLine('');
+        std.io.write('Which role fits you: programmer or entrepreneur? [P/e] ');
+        std.io.setReader(getRole);
         return true;
     }
 
@@ -134,11 +176,13 @@ var g = g || {};
     function main(std, argv)
     {
         FORM = {};
-        std.io.writeLine('Please fill the following form ' +
-                         'to apply to the kibu hackathon event!');
-        std.io.write('Which role fits you: programmer or entrepreneur? [P/e] ');
-        std.io.setReader(getRole);
+        std.io.write('By registering through the next form, you accept the '  +
+                     'terms and conditions of the hackathon. Do you want to ' +
+                     'read it first? [Y/n] ');
+        std.io.setReader(getTerm);
+        return true;
     }
+
 
     /*------------------------------------------------------------------------*/
     /* Export program */

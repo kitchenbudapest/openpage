@@ -35,7 +35,7 @@ var g = g || {};
                          'designers, artists and specialists in '  +
                          'different fields of technology.');
         std.io.writeLine('...');
-        std.io.writeLine("Do you want to visit Kibu's site [Y/n]?");
+        std.io.write("Do you want to visit Kibu's site? [Y/n] ");
         std.io.setReader(visitKibuSite);
     }
 

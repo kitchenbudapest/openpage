@@ -160,6 +160,7 @@ var g = g || {};
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     Screen.prototype.write = function (text)
     {
+        text  = text || '';
         var i = 0,
             line,
             length,

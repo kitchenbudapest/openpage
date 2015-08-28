@@ -21,9 +21,11 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-        std.io.writeLine('At this very moment, the prize itself is '   +
-                         'kind of a surprise even for us.. but hey, '  +
-                         'you can trust our taste, it will be awesome! :)');
+        std.io.writeLine('* Raspberry Pi 2B');
+        std.io.writeLine('* DeviceHub premium account');
+        std.io.writeLine('* Laser-tag adventure');
+        std.io.writeLine('* Kibu mentorship and financial support for ' +
+                         'further development of the project');
     }
 
 

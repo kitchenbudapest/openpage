@@ -28,7 +28,7 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-        std.io.writeLine('Do you want to fork this project on GitHub [Y/n]?');
+        std.io.write('Do you want to fork this project on GitHub? [Y/n] ');
         std.io.setReader(forkThis);
     }
 

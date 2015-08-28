@@ -35,7 +35,7 @@ var g = g || {};
                          'and an easy to use framework, to make ' +
                          'hacking even more fun.');
         std.io.writeLine('...');
-        std.io.writeLine('Do you want to visit the repo [Y/n]?');
+        std.io.write('Do you want to visit the repo? [Y/n] ');
         std.io.setReader(visitHackathonRepo);
     }
 

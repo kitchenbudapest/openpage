@@ -34,7 +34,7 @@ var g = g || {};
                          'Source projects. It even has its own '   +
                          'repository, hosted on GitHub.');
         std.io.writeLine('...');
-        std.io.writeLine("Do you want to visit Kibu's repo [Y/n]?");
+        std.io.write("Do you want to visit Kibu's repo? [Y/n] ");
         std.io.setReader(visitKibuRepo);
     }
 

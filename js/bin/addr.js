@@ -19,6 +19,14 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
+    function visitOtherMap(std, input)
+    {
+        if (std.lib.yesOrNo(input))
+            std.lib.openPopUp('#');
+    }
+
+
+    /*------------------------------------------------------------------------*/
     function visitKibuMap(std, input)
     {
         if (std.lib.yesOrNo(input))
@@ -27,15 +35,43 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
+    function printAddress(std, input)
+    {
+        switch (input)
+        {
+            case 's':
+            case 'S':
+            case 'sz':
+            case 'Sz':
+            case 'SZ':
+            case 'szeged':
+            case 'Szeged':
+            case 'SZEGED':
+                std.io.writeLine('...');
+                std.io.write('Do you want to see it on a map? [Y/n] ');
+                std.io.setReader(visitOtherMap);
+                break;
+
+            default:
+                std.io.writeLine('==> Kitchen Budapest');
+                std.io.writeLine('==> Raday utca 30');
+                std.io.writeLine('==> Budapest, 1092');
+                std.io.writeLine('...');
+                std.io.write('Do you want to see it on a map? [Y/n] ');
+                std.io.setReader(visitKibuMap);
+                break;
+        }
+        return true;
+    }
+
+
+    /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
-        std.io.writeLine('The hackathon will be at Kibu:');
-        std.io.writeLine('==> Kitchen Budapest');
-        std.io.writeLine('==> Raday utca 30');
-        std.io.writeLine('==> Budapest, 1092');
-        std.io.writeLine('...');
-        std.io.writeLine('Do you want to see it on a map [Y/n]?');
-        std.io.setReader(visitKibuMap);
+        std.io.write('There will be two hackathon events, one at '  +
+                     'Budapest and one at Szeged. Which address are ' +
+                     'you looking for? [B/s] ');
+        std.io.setReader(printAddress);
     }
 
 

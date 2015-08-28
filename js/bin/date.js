@@ -19,12 +19,37 @@ var g = g || {};
 
 
     /*------------------------------------------------------------------------*/
+    function getCity(std, input)
+    {
+        std.io.writeLine('The hackathon will be 24 hours long:');
+        switch (input)
+        {
+            case 's':
+            case 'S':
+            case 'sz':
+            case 'Sz':
+            case 'SZ':
+            case 'szeged':
+            case 'Szeged':
+            case 'SZEGED':
+                std.io.writeLine('...');
+                break;
+
+            default:
+                std.io.writeLine('Starts on Friday, 2nd October at 6:00PM');
+                std.io.writeLine('Ends on Saturday, 3st October at 8:00PM');
+                break;
+        }
+    }
+
+
+    /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
                        /* 0123456789012345678901234567890123456789 */
-        std.io.writeLine('The hackathon will be 24 hours long:');
-        std.io.writeLine('Starts on Friday, 31th July at 6:00PM');
-        std.io.writeLine('Ends on Saturday, 1st August at 8:00PM');
+        std.io.write('Which event are you interested in: ' +
+                     'Budapest or Szeged? [B/s] ');
+        std.io.setReader(getCity);
     }
 
 
