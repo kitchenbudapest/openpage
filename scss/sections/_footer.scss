@@ -139,11 +139,28 @@
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-            & > div:last-of-type > a:last-of-type
+            & > div:last-of-type
             {
-                display     : inline-block;
-                margin-top  : $footer-frame-info-social-margin-top;
-                margin-left : $footer-frame-info-social-margin-left;
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > a:not(:first-of-type)
+                {
+                    display     : inline-block;
+                    margin-top  : $footer-frame-info-social-margin-top;
+                }
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > a:nth-child(2)
+                {
+                    margin-left : $footer-frame-info-social-margin-left;
+                }
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > a:nth-child(n+3)
+                {
+                    margin-left : $footer-frame-info-logo-margin-left;
+                }
             }
         }
 
