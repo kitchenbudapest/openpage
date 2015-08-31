@@ -144,43 +144,46 @@ html(lang = 'en')
                                     p
                                         b Hi <?=$variable?>!
                                     br
+                                    p Welcome on board of Kibu Hackathon 2015!
+                                    br/
                                     p
-                                        | Welcome on board of KIBU Hackathon!
                                         | We got your registration. You are in!
                                         | You can find all the essential
-                                        | information about the event here.
-                                    br
+                                        | information about the event&nbsp;
+                                        a(href   = 'http://hackathon.kibu.hu'
+                                          target = '_blank')
+                                            font(color = colors.orange)
+                                                | here
+                                        |.
+                                    br/
                                     p
                                         | If you have any additional questions
-                                        | or for some reasons you&#39;ll be
+                                        | or for some reasons you&lsquo;ll be
                                         | unable to attend, please let us know
-                                        | by sending an email to us.
-                                    br
+                                        | by sending us an&nbsp;
+                                        a(href   = 'mailto:hello@kitchenbudapest.hu?' +
+                                                   'subject=Kibu+Hackathon+2015'
+                                          target = '_blank')
+                                              font(color = colors.orange)
+                                                  | email
+                                        |.
+                                    br/
                                     p
-                                        | Looking forward to seeing you on 2nd
-                                        | Oct at 6pm!
-                                    br
+                                        | Looking forward to seeing you on 2
+                                        sup nd
+                                        | October at 6:00 PM!
+                                    br/
                                     p
                                         i Cheers,
-                                    br
+                                    br/
                                     p
                                         b Kibu Hackathon Team
                                     p
                                         font(color = colors.orange)
-                                            a(href   = "www.hackathon.kibu.hu"
+                                            a(href   = "http://www.hackathon.kibu.hu"
                                               target = "_blank")
                                                 font(color = colors.orange)
                                                     | www.hackathon.kibu.hu
-                                    br
-                                    p
-                                        b PS.:
-                                        | &nbsp;If you have further questions,
-                                        | feel free to drop&nbsp;
-                                        a(href   = "mailto:aliz.nagy@kitchenbudapest.hu"
-                                          target = "_blank")
-                                            font(color = colors.orange)
-                                                | Aliz
-                                        | &nbsp;a line!
                                 +padding
                                 td
                             tr(height="85px")
@@ -203,8 +206,29 @@ html(lang = 'en')
                                             td
                                                 a(href   = "http://kibu.hu"
                                                   target = "_blank")
-                                                  img(src = prefix + 'kibu_logo.png'
-                                                      alt = "[] Kitchen Budapest")
+                                                    img(src = prefix + 'kibu_logo.png'
+                                                        alt = "[] Kitchen Budapest")
+                                            td
+                                            td(width = '47px')
+                                                a(href   = 'http://www.telekom.hu'
+                                                  target = '_blank')
+                                                    img(src = prefix + 'telekom_logo.png'
+                                                        alt = '*T**')
+                                            td
+                                            td(width = '78px')
+                                                a(href   = 'https://www.hubraum.com'
+                                                  target = '_blank')
+                                                    img(src = prefix + 'hubraum_logo.png'
+                                                        alt = 'hub:raum')
+                                            td
+                                            td(width = '138px')
+                                                a(href   = 'https://www.devicehub.net/'     +
+                                                           '?utm_source=Google'             +
+                                                           '&amp;utm_medium=KIBU%20website' +
+                                                           '&amp;utm_campaign=KIBU%20hackathon'
+                                                      target = '_blank')
+                                                    img(src = prefix + 'devicehub_logo.png'
+                                                        alt = 'DeviceHub')
                                             td
                                             td(width = "35px")
                                                 a(href   = "https://www.facebook.com/kitchenbudapest"
@@ -235,7 +259,9 @@ html(lang = 'en')
                                                  size  = "2")
                                                 | Hackathon Documentation &amp; Framework
                                         +indicator
-                                        a(href="https://github.com/kitchenbudapest/openpage/blob/gh-pages/etc/terms_and_conditions.md"
+                                        a(href='https://github.com/kitchenbudapest/' +
+                                               'openpage/blob/gh-pages/etc/'         +
+                                               'terms_and_conditions.md'
                                           target="_blank")
                                             font(color = colors.sand
                                                  size  = "2")
