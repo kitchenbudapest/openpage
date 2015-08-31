@@ -1,0 +1,14 @@
+Hi <?=$userName?>!
+
+Welcome on board of Kibu Hackathon 2015!
+
+We got your registration. You are in! You can find all the essential information about the event on the landing page (http://hackathon.kibu.hu)
+
+If you have any additional questions or for some reasons you'll be unable to attend, please let us know by sending us an email (hello@kitchenbudapest.hu?).
+
+Looking forward to seeing you on <?=$dateDayNumber?><?=$dateDaySuffix?> October at <?=$dateTimeNumber?>:00 <?=$dateTimeSuffix?> <?=$locPrefix?> <?=$locPlace?>!
+
+Cheers,
+
+Kibu Hackathon Team
+http://www.hackathon.kibu.hu

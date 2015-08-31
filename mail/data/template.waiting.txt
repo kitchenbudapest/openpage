@@ -1,0 +1,16 @@
+Hi <?=$userName?>!
+
+Welcome on board of Kibu Hackathon 2015!
+
+We've got you on the waiting list for the Kibu Hackathon. Currently, we are full, all the places are taken, but don't worry. There's always some openings before the event. We will inform you as soon as somebody signs off and you can take his or her seat.
+
+In the meantime, watch the video (https://vimeo.com/129540589) of our previous hackathon as a little warmup. :)
+
+If you have any additional questions, please let us know by sending an email (hello@kitchenbudapest.hu).
+
+Hoping to see you too on <?=$dateDayNumber?><?=$dateDaySuffix?> &nbsp;October at <?=$dateTimeNumber?>:00 <?=$dateTimeSuffix?> <?=$locPrefix?> <?=$locPlace?>!
+
+Cheers,
+
+Kibu Hackathon Team
+http://www.hackathon.kibu.hu
