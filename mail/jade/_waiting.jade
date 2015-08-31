@@ -1,0 +1,61 @@
+//- INFO //
+//- INFO //
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+tr
+    td
+    +padding
+    td(width = dims.page.width)
+        p
+            b Hi <?=$userName?>!
+        br
+        p Welcome on board of Kibu Hackathon 2015!
+        br/
+        
+        p
+            | We&lsquo;ve got you on the waiting list for the KIBU Hackathon.
+            | Currently, we are full, all the places are taken, but don&lsquo;t
+            | worry. There&lsquo;s always some openings before the event. We
+            | will inform you as soon as somebody signs off and you can take his
+            | or her seat.
+        br/
+        p
+            | In the meantime, watch the&nbsp;
+            a(href   = 'https://vimeo.com/129540589'
+              target = '_blank')
+                font(color = colors.orange)
+                    | video
+            | &nbsp;of our previous hackathon as a little warmup. :)
+        br/
+        p
+            | If you have any additional questions, please let us know by
+            | sending an&nbsp;
+            a(href   = 'mailto:hello@kitchenbudapest.hu?' +
+                       'subject=Kibu+Hackathon+2015'
+              target = '_blank')
+                  font(color = colors.orange)
+                      | email
+            |.
+        br/
+        p
+            | Hoping to see you too on
+            | <?=$dateDayNumber?>
+            sup <?=$dateDaySuffix?>
+            | &nbsp;October at <?=$dateTimeNumber?>:00
+            | <?=$dateTimeSuffix?> <?=$locPrefix?>
+            | <?=$locPlace?>!
+        br/
+        p
+            i Cheers,
+        br/
+        p
+            b Kibu Hackathon Team
+        p
+            font(color = colors.orange)
+                a(href   = "http://www.hackathon.kibu.hu"
+                  target = "_blank")
+                    font(color = colors.orange)
+                        | www.hackathon.kibu.hu
+    +padding
+    td

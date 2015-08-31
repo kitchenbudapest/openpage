@@ -115,55 +115,18 @@ html(lang = 'en')
                             +separator(colors.orange,
                                        dims.border.hairline)
                             tr(height = "50px")
-                            tr
-                                td
-                                +padding
-                                td(width = dims.page.width)
-                                    p
-                                        b Hi <?=$variable?>!
-                                    br
-                                    p Welcome on board of Kibu Hackathon 2015!
-                                    br/
-                                    p
-                                        | We got your registration. You are in!
-                                        | You can find all the essential
-                                        | information about the event&nbsp;
-                                        a(href   = 'http://hackathon.kibu.hu'
-                                          target = '_blank')
-                                            font(color = colors.orange)
-                                                | here
-                                        |.
-                                    br/
-                                    p
-                                        | If you have any additional questions
-                                        | or for some reasons you&lsquo;ll be
-                                        | unable to attend, please let us know
-                                        | by sending us an&nbsp;
-                                        a(href   = 'mailto:hello@kitchenbudapest.hu?' +
-                                                   'subject=Kibu+Hackathon+2015'
-                                          target = '_blank')
-                                              font(color = colors.orange)
-                                                  | email
-                                        |.
-                                    br/
-                                    p
-                                        | Looking forward to seeing you on 2
-                                        sup nd
-                                        | October at 6:00 PM!
-                                    br/
-                                    p
-                                        i Cheers,
-                                    br/
-                                    p
-                                        b Kibu Hackathon Team
-                                    p
-                                        font(color = colors.orange)
-                                            a(href   = "http://www.hackathon.kibu.hu"
-                                              target = "_blank")
-                                                font(color = colors.orange)
-                                                    | www.hackathon.kibu.hu
-                                +padding
-                                td
+                            
+                            //- Insert mail text
+                            if TEMPLATE === 'confirm'
+                                include _confirm
+                            else if TEMPLATE === 'waiting'
+                                include _waiting
+                            else if TEMPLATE === 'reminder'
+                                include _reminder
+                            else
+                                font(color='#FF0000')
+                                    h1 INVALID TEMPLATE VARIABLE
+                                
                             tr(height="85px")
                 // footer
                 tr

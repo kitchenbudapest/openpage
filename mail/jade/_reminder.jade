@@ -1,0 +1,58 @@
+//- INFO //
+//- INFO //
+
+
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+tr
+    td
+    +padding
+    td(width = dims.page.width)
+        p
+            b Hi <?=$userName?>!
+        br
+        p Welcome on board of Kibu Hackathon 2015!
+        br/
+        p
+            | It&lsquo;s only a few days and you&lsquo;ll be hancing the hack
+            | out of a Raspberry Pi with some other cool guys! Our &ldquo;Home,
+            | Smart Home&rdquo; is waiting for you. If you&lsquo;ve missed going
+            | through it, you can still find all the essential information about
+            | the event&nbsp;
+            a(href   = 'http://hackathon.kibu.hu'
+              target = '_blank')
+                font(color = colors.orange)
+                    | here
+            |.
+        br/
+        p
+            | If you have any additional questions or for some reasons&nbsp;
+            b you&lsquo;ll be unable to attend&nbsp;
+            | , please let us know by sending an&nbsp;
+            a(href   = 'mailto:hello@kitchenbudapest.hu?' +
+                       'subject=Kibu+Hackathon+2015'
+              target = '_blank')
+                  font(color = colors.orange)
+                      | email
+            |.
+        br/
+        p
+            | Looking forward to seeing you on
+            | <?=$dateDayNumber?>
+            sup <?=$dateDaySuffix?>
+            | &nbsp;October at <?=$dateTimeNumber?>:00
+            | <?=$dateTimeSuffix?> <?=$locPrefix?>
+            | <?=$locPlace?>!
+        br/
+        p
+            i Cheers,
+        br/
+        p
+            b Kibu Hackathon Team
+        p
+            font(color = colors.orange)
+                a(href   = "http://www.hackathon.kibu.hu"
+                  target = "_blank")
+                    font(color = colors.orange)
+                        | www.hackathon.kibu.hu
+    +padding
+    td
