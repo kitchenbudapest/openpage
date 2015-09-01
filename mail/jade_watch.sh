@@ -7,19 +7,20 @@ TEMPLATE=jade/template.jade;
 bg_proc1='-1';
 bg_proc2='-1';
 bg_proc3='-1';
+bg_proc4='-1';
 counter=0;
-proc_max=2;
 
 #------------------------------------------------------------------------------#
 exiting()
 {
     counter=$((counter+1));
-    if [ $counter -ge $proc_max ];
+    if [ $counter -ge 2 ];
     then
         printf "\n";
         printf "Exited background process: ${bg_proc1}\n";
         printf "Exited background process: ${bg_proc2}\n";
         printf "Exited background process: ${bg_proc3}\n";
+        printf "Exited background process: ${bg_proc4}\n";
     fi;
 }
 
@@ -41,6 +42,11 @@ keyboard_interrupt()
     then
         kill $bg_proc3;
     fi;
+
+    if [ $bg_proc4 -ne -1 ];
+    then
+        kill $bg_proc4;
+    fi;
     exiting;
 }
 
@@ -61,6 +67,10 @@ printf "'Waiting Mail' compiling process forked in background: ${bg_proc2}\n"
 jade -O '{"TEMPLATE": "reminder"}' -w $TEMPLATE -o html -E reminder.html &
 bg_proc3=$!
 printf "'Reminder Mail' compiling process forked in background: ${bg_proc3}\n"
+
+jade -O '{"TEMPLATE": "kibuers"}' -w $TEMPLATE -o html -E kibuers.html &
+bg_proc4=$!
+printf "'Kibuers Mail' compiling process forked in background: ${bg_proc4}\n"
 
 wait;
 exit;

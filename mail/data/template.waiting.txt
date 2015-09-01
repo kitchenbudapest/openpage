@@ -13,4 +13,4 @@ Hoping to see you too on <?=$dateDayNumber?><?=$dateDaySuffix?> &nbsp;October at
 Cheers,
 
 Kibu Hackathon Team
-http://www.hackathon.kibu.hu
+http://hackathon.kibu.hu

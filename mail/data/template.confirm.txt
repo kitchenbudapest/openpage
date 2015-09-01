@@ -11,4 +11,4 @@ Looking forward to seeing you on <?=$dateDayNumber?><?=$dateDaySuffix?> October 
 Cheers,
 
 Kibu Hackathon Team
-http://www.hackathon.kibu.hu
+http://hackathon.kibu.hu
