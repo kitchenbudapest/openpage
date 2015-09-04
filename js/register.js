@@ -21,12 +21,12 @@ var g = g || {};
             var head   = document.getElementsByTagName('head')[0];
             var script = document.createElement('script');
             script.src = 'http://devops.kibu.hu/hackatonForm' +
-                         '?name='     + inputs.name +
-                         '&role='     + inputs.role +
-                         '&city='     + inputs.city +
-                         '&mail='     + inputs.mail +
-                         '&lang='     + inputs.lang +
-                         '&from='     + inputs.from +
+                         '?name='     + encodeURIComponent(inputs.name) +
+                         '&role='     + encodeURIComponent(inputs.role) +
+                         '&city='     + encodeURIComponent(inputs.city) +
+                         '&mail='     + encodeURIComponent(inputs.mail) +
+                         '&lang='     + encodeURIComponent(inputs.lang) +
+                         '&from='     + encodeURIComponent(inputs.from) +
                          '&callback=' + cref;
 
             /* Set JSONP callback */

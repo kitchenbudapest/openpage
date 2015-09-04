@@ -37,7 +37,7 @@
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 mixin padding
     td(width = "20px")
-    
+
 mixin separator(color, height)
     tr
         td
@@ -63,10 +63,11 @@ doctype html
 html(lang = 'en')
 
     head
+        meta(charset='utf-8')
         title Kibu Hackthon 2015 | Confirmation
         style
             include ../css/tinyreset.css
-             
+
     body(bgcolor = colors.coffee)
         font(face  = "sans-serif"
              color = colors.chocolate)
@@ -74,7 +75,7 @@ html(lang = 'en')
                   border      = "0"
                   cellpadding = "0"
                   cellspacing = "0")
-                // header  
+                // header
                 tr
                     td
                         // header-frame
@@ -92,7 +93,7 @@ html(lang = 'en')
                                         alt = "[:] Kibu Hackathon 015'")
                                 +padding
                                 td
-                // body        
+                // body
                 tr
                     td
                         // body-frame
@@ -115,7 +116,7 @@ html(lang = 'en')
                             +separator(colors.orange,
                                        dims.border.hairline)
                             tr(height = "50px")
-                            
+
                             //- Insert mail text
                             if TEMPLATE === 'confirm'
                                 include _confirm
@@ -128,7 +129,7 @@ html(lang = 'en')
                             else
                                 font(color='#FF0000')
                                     h1 INVALID TEMPLATE VARIABLE
-                                
+
                             tr(height="85px")
                 // footer
                 tr
