@@ -248,47 +248,87 @@ html(lang='en')
                                     div laser tag adventure
                                     div For every member of the team
                         div(id='detail-frame-schedule')
-                            div(id='detail-frame-schedule-head')
-                                span event
-                                br/
-                                span schedule
-                            div(class = 'detail-frame-schedule-timing ' +
-                                        'detail-frame-schedule-timing-spec')
-                                span 18:00
-                                span Registration
-                            div(class='detail-frame-schedule-timing')
-                                span 18:30
-                                span Warm-up
-                            div(class='detail-frame-schedule-timing')
-                                span 19:15
-                                span Technical workshop
-                            div(class='detail-frame-schedule-timing')
-                                span 20:00
-                                span Hack through the night
-                            div(class='detail-frame-schedule-timing')
-                                span 23:30
-                                span Late night dinner: pizza
-                            div(id='detail-frame-schedule-spec')
-                                | work time
-                            div(class='detail-frame-schedule-timing')
-                                span 08:00
-                                span Breakfast: cerials, ham and eggs
-                            div(class='detail-frame-schedule-timing')
-                                span 10:00
-                                span Project presentation workshop
-                            div(class='detail-frame-schedule-timing')
-                                span 13:00
-                                span Lunch
-                            div(class='detail-frame-schedule-timing')
-                                span 19:00
-                                span Project pitches
-                            div(class='detail-frame-schedule-timing ' +
-                                      'detail-frame-schedule-timing-spec')
-                                span 20:00
-                                span Awards
-                            div(class='detail-frame-schedule-timing')
-                                span 20:30
-                                span After party
+                                div(id='detail-frame-schedule-head')
+                                    span event
+                                    br/
+                                    span schedule
+                                div(id='detail-frame-schedule-switch')
+                                    span(id='detail-switch-budapest'
+                                         class='detail-frame-switch-selected')
+                                            | Budapest
+                                    span(id='detail-switch-szeged'
+                                         class='detail-frame-switch-deselected')
+                                            | Szeged
+                                div(id='detail-budapest')
+                                    div(class = 'detail-frame-schedule-timing ' +
+                                                'detail-frame-schedule-timing-spec')
+                                        span 18:00
+                                        span Registration
+                                    div(class='detail-frame-schedule-timing')
+                                        span 18:30
+                                        span Warm-up
+                                    div(class='detail-frame-schedule-timing')
+                                        span 19:15
+                                        span Technical workshop
+                                    div(class='detail-frame-schedule-timing')
+                                        span 20:00
+                                        span Hack through the night
+                                    div(class='detail-frame-schedule-timing')
+                                        span 23:30
+                                        span Late night dinner: pizza
+                                    div(id='detail-frame-schedule-spec')
+                                        | work time
+                                    div(class='detail-frame-schedule-timing')
+                                        span 08:00
+                                        span Breakfast: cerials, ham and eggs
+                                    div(class='detail-frame-schedule-timing')
+                                        span 10:00
+                                        span Project presentation workshop
+                                    div(class='detail-frame-schedule-timing')
+                                        span 13:00
+                                        span Lunch
+                                    div(class='detail-frame-schedule-timing')
+                                        span 19:00
+                                        span Project pitches
+                                    div(class='detail-frame-schedule-timing ' +
+                                              'detail-frame-schedule-timing-spec')
+                                        span 20:00
+                                        span Awards
+                                    div(class='detail-frame-schedule-timing')
+                                        span 20:30
+                                        span After party
+                                div(id='detail-szeged')
+                                    div(class='detail-frame-schedule-timing ' +
+                                              'detail-frame-schedule-timing-spec')
+                                        span 09:30
+                                        span Registration
+                                    div(class='detail-frame-schedule-timing')
+                                        span 10:00
+                                        span Warm-up
+                                    div(class='detail-frame-schedule-timing')
+                                        span 11:15
+                                        span Technical workshop
+                                    div(class='detail-frame-schedule-timing')
+                                        span 12:00
+                                        span Lunch
+                                    div(class='detail-frame-schedule-timing')
+                                        span 13:00
+                                        span Hack through the day
+                                    div(class='detail-frame-schedule-timing')
+                                        span 20:00
+                                        span Dinner: pizza
+                                    div(id='detail-frame-schedule-spec')
+                                        | work time
+                                    div(class='detail-frame-schedule-timing')
+                                        span 08:00
+                                        span Breakfast: cerials, sandwiches
+                                    div(class='detail-frame-schedule-timing')
+                                        span 10:00
+                                        span Project presentation workshop
+                                    div(class='detail-frame-schedule-timing ' +
+                                              'detail-frame-schedule-timing-spec')
+                                        span 11:00
+                                        span Awards
             div(id='registration')
                 a(class = 'anchor'
                   name  = 'registration')

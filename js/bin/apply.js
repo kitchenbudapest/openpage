@@ -86,7 +86,9 @@ var g = g || {};
         /* If user is a programmer */
         if (FORM.role === PROG)
         {
-            std.io.write('Programming languages you are good at (optional): ');
+                           /* 0123456789012345678901234567890123456789 */
+            std.io.writeLine('Programming languages you are good at');
+            std.io.write('(optional): ');
             std.io.setReader(getLang);
             return true;
         }
@@ -176,9 +178,11 @@ var g = g || {};
     function main(std, argv)
     {
         FORM = {from: 'term'};
-        std.io.write('By registering through the next form, you accept the '  +
-                     'terms and conditions of the hackathon. Do you want to ' +
-                     'read it first? [Y/n] ');
+                       /* 0123456789012345678901234567890123456789 */
+        std.io.writeLine('By registering through the next form,');
+        std.io.writeLine('you accept the terms and conditions of');
+        std.io.writeLine('the hackathon.');
+        std.io.write('Do you want to read it first? [Y/n] ');
         std.io.setReader(getTerm);
         return true;
     }

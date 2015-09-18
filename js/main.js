@@ -97,4 +97,35 @@ function main()
 
     /* Message indicating, that all initializations are done */
     console.log('[ OKAY ] Terminal VT100 is up and running');
+
+    /* Get DOM objects */
+    var scheduleSzeged         = document.getElementById('detail-szeged'),
+        scheduleBudapest       = document.getElementById('detail-budapest'),
+        scheduleSwitchSzeged   = document.getElementById('detail-switch-szeged'),
+        scheduleSwitchBudapest = document.getElementById('detail-switch-budapest'),
+        selected   = 'detail-frame-switch-selected',
+        deselected = 'detail-frame-switch-deselected';
+
+    /* Set initial state */
+    scheduleSzeged.style.display = 'none';
+
+    /* Set switch  callbacks */
+    scheduleSwitchBudapest.addEventListener('click', function ()
+    {
+        scheduleSwitchSzeged.classList.remove(selected);
+        scheduleSwitchSzeged.classList.add(deselected);
+        scheduleSwitchBudapest.classList.remove(deselected);
+        scheduleSwitchBudapest.classList.add(selected);
+        scheduleSzeged.style.display   = 'none';
+        scheduleBudapest.style.display = 'block';
+    });
+    scheduleSwitchSzeged.addEventListener('click', function ()
+    {
+        scheduleSwitchBudapest.classList.remove(selected);
+        scheduleSwitchBudapest.classList.add(deselected);
+        scheduleSwitchSzeged.classList.remove(deselected);
+        scheduleSwitchSzeged.classList.add(selected);
+        scheduleBudapest.style.display = 'none';
+        scheduleSzeged.style.display   = 'block';
+    });
 }

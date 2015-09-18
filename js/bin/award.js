@@ -21,11 +21,12 @@ var g = g || {};
     /*------------------------------------------------------------------------*/
     function main(std, argv)
     {
+                       /* 0123456789012345678901234567890123456789 */
         std.io.writeLine('* Raspberry Pi 2B');
         std.io.writeLine('* DeviceHub premium account');
         std.io.writeLine('* Laser-tag adventure');
-        std.io.writeLine('* Kibu mentorship and financial support for ' +
-                         'further development of the project');
+        std.io.writeLine('* Kibu mentorship and financial support');
+        std.io.writeLine('  for further development of the project');
     }
 
 

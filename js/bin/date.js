@@ -32,12 +32,17 @@ var g = g || {};
             case 'szeged':
             case 'Szeged':
             case 'SZEGED':
-                std.io.writeLine('...');
+                std.io.writeLine('Starts on Saturday:');
+                std.io.writeLine('    10th October at 9:30AM');
+                std.io.writeLine('Ends on Sunday:');
+                std.io.writeLine('    11th October at 9:30AM');
                 break;
 
             default:
-                std.io.writeLine('Starts on Friday, 2nd October at 6:00PM');
-                std.io.writeLine('Ends on Saturday, 3st October at 8:00PM');
+                std.io.writeLine('Starts on Friday:');
+                std.io.writeLine('    2nd October at 6:00PM');
+                std.io.writeLine('Ends on Saturday:');
+                std.io.writeLine('    3st October at 8:00PM');
                 break;
         }
     }
@@ -47,8 +52,8 @@ var g = g || {};
     function main(std, argv)
     {
                        /* 0123456789012345678901234567890123456789 */
-        std.io.write('Which event are you interested in: ' +
-                     'Budapest or Szeged? [B/s] ');
+        std.io.writeLine('Which event are you interested in:');
+        std.io.write('Budapest or Szeged? [B/s] ');
         std.io.setReader(getCity);
     }
 

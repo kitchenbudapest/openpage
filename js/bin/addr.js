@@ -22,7 +22,8 @@ var g = g || {};
     function visitOtherMap(std, input)
     {
         if (std.lib.yesOrNo(input))
-            std.lib.openPopUp('#');
+            std.lib.openPopUp('https://www.google.hu/maps/place/Faculty+of+' +
+                              'Economics+and+Business+Administration,+Szeged');
     }
 
 
@@ -47,6 +48,11 @@ var g = g || {};
             case 'szeged':
             case 'Szeged':
             case 'SZEGED':
+                std.io.writeLine('==> Faculty of Economics and');
+                std.io.writeLine('    Business Administration of');
+                std.io.writeLine('    University of Szeged');
+                std.io.writeLine('==> Kalvaria sgt. 1.');
+                std.io.writeLine('==> H-6722 Szeged');
                 std.io.writeLine('...');
                 std.io.write('Do you want to see it on a map? [Y/n] ');
                 std.io.setReader(visitOtherMap);
@@ -84,6 +90,7 @@ var g = g || {};
         desc : DESC,
     },
     [
+        'loc',
         'address',
         'location',
     ]);

@@ -138,6 +138,7 @@
             }
         }
 
+
         /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
         &-schedule
         {
@@ -166,7 +167,7 @@
                                  solid
                                  $detail-frame-schedule-head-border-bottom-color;
                 padding-bottom : $detail-frame-schedule-head-padding-bottom;
-                margin-bottom  : $detail-frame-schedule-head-margin-bottom;
+                margin-bottom  : 5px;
                 @include box-sizing(border-box);
 
 
@@ -188,8 +189,42 @@
 
 
             /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+            &-switch
+            {
+                color          : $detail-frame-schedule-head-color;
+                padding-bottom : 7px;
+                margin-bottom  : $detail-frame-schedule-head-margin-bottom;
+                border-bottom  : $HAIRLINE
+                                 solid
+                                 #F6B075;
+
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                & > span
+                {
+                    margin-right : 7px;
+                    cursor       : pointer;
+
+
+                    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+                    &::before
+                    {
+                        display      : inline-block;
+                        position     : relative;
+                        bottom       : $footer-frame-links-indicator-bottom;
+                        width        : $footer-frame-links-indicator-width;
+                        height       : $footer-frame-links-indicator-width;
+                        margin-right : 7px;
+                        content      : '';
+                        background   : $footer-frame-links-indicator-background;
+                    }
+                }
+            }
+
+            /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
             &-spec
             {
+                margin-left : 12px;
                 padding     : $detail-frame-schedule-spec-padding-top
                               0
                               $detail-frame-schedule-spec-padding-bottom;
@@ -212,6 +247,27 @@
                 }
             }
         }
+    }
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+.detail-frame-switch
+{
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-selected
+    {
+        font-weight : $BOLD;
+        opacity     : 1.0;
+    }
+
+
+    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    &-deselected
+    {
+        font-weight : $NORMAL;
+        opacity     : 0.7;
     }
 }
 
@@ -292,6 +348,7 @@
 /*----------------------------------------------------------------------------*/
 .detail-frame-schedule-timing
 {
+    margin-left   : 12px;
     margin-bottom : $detail-frame-schedule-timing-margin-bottom;
     font-size     : $detail-frame-schedule-timing-font-size;
     font-weight   : $detail-frame-schedule-timing-font-weight;
