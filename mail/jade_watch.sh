@@ -56,19 +56,31 @@ trap keyboard_interrupt SIGINT SIGTERM EXIT;
 printf "Start watching ${TEMPLATE} for changes:";
 printf "\n";
 
-jade -O '{"TEMPLATE": "confirm"}' -w $TEMPLATE -o html -E confirm.html &
+jade -O '{"TEMPLATE": "confirm", "TITLE": "Confirmation"}'                     \
+     -w $TEMPLATE                                                              \
+     -o html                                                                   \
+     -E confirm.html &
 bg_proc1=$!
 printf "'Confirmation Mail' compiling process forked in background: ${bg_proc1}\n"
 
-jade -O '{"TEMPLATE": "waiting"}' -w $TEMPLATE -o html -E waiting.html &
+jade -O '{"TEMPLATE": "waiting", "TITLE": "Waiting List"}'                     \
+     -w $TEMPLATE                                                              \
+     -o html                                                                   \
+     -E waiting.html &
 bg_proc2=$!
 printf "'Waiting Mail' compiling process forked in background: ${bg_proc2}\n"
 
-jade -O '{"TEMPLATE": "reminder"}' -w $TEMPLATE -o html -E reminder.html &
+jade -O '{"TEMPLATE": "reminder", "TITLE": "Reminder"}'                        \
+     -w $TEMPLATE                                                              \
+     -o html                                                                   \
+     -E reminder.html &
 bg_proc3=$!
 printf "'Reminder Mail' compiling process forked in background: ${bg_proc3}\n"
 
-jade -O '{"TEMPLATE": "kibuers"}' -w $TEMPLATE -o html -E kibuers.html &
+jade -O '{"TEMPLATE": "kibuers", "TITLE": "Kibu Alumni"}'                      \
+     -w $TEMPLATE                                                              \
+     -o html                                                                   \
+     -E kibuers.html &
 bg_proc4=$!
 printf "'Kibuers Mail' compiling process forked in background: ${bg_proc4}\n"
 
