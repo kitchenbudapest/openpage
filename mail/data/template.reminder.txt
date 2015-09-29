@@ -2,7 +2,7 @@ Hi <?=$userName?>!
 
 Welcome on board of Kibu Hackathon 2015!
 
-It's only a few days and you'll be hancing the hack out of a Raspberry Pi and Arduino boards with some other cool guys! Our "Home, Smart Home" is waiting for you. If you've missed going through it, you can still find all the essential information about the event on the landing page (http://hackathon.kibu.hu)
+It's only a few days and you'll be hancing the hack out of the Raspberry Pi and Arduino boards with some other cool guys! Our "Home, Smart Home" is waiting for you. If you've missed going through it, you can still find all the essential information about the event on the landing page (http://hackathon.kibu.hu)
 
 If you have any additional questions or for some reasons&nbsp; you'll be unable to attend, please let us know by sending an email (hello@kitchenbudapest.hu?).
 
